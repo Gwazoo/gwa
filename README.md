@@ -1,5 +1,3 @@
 # gwa
 
-
-git test
-TEST
+Source code for gwazoo.com
