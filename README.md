@@ -16,19 +16,19 @@
 │   │   ├── ...
 │   │
 │   ├── js
-│	│   ├── app.js
-│	│   ├── controllers.js
-│	│   ├── services.js
+│   │   ├── app.js
+│   │   ├── controllers.js
+│   │   ├── services.js
 │   │
 │   ├── templates
-│	│   ├── dashboard.html
+│   │   ├── dashboard.html
 │   │
 │   ├── server
-│	│   ├── controls
-│	│  	│   ├── userControl.js
-│   │	│   │
-│	│   ├── models
-│	│	│   ├── userModel.js
+│   ├── controls
+│   │   │   ├── userControl.js
+│   │   │   │
+│   │   ├── models
+│   │   │   ├── userModel.js
 ```
 
 
