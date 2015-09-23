@@ -31,7 +31,8 @@
 │   │   │   ├── userModel.js
 ```
 
-
+## Resources
+We will be using [Taiga Project Management Software](https://tree.taiga.io/) for our timeline, kanban boards, issues, and wiki.
 
 
 
