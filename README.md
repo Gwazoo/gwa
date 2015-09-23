@@ -3,6 +3,8 @@
 ## File Structure
 ```
 ├── .gitignore
+├── gulpfile.js
+├── package.json
 ├── README.md
 ├── server.js
 ├── public
@@ -10,6 +12,7 @@
 │   ├── css
 │   │   ├── main.css
 │   │   ├── reset.css
+│   │   ├── 404.css
 │   │   
 │   ├── img
 │   │   ├── logo.png
