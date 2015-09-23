@@ -5,7 +5,7 @@
 ├── .gitignore
 ├── README.md
 ├── server.js
-├── public/
+├── public
 │   ├── index.html
 │   ├── css
 │   │   ├── main.css
@@ -24,9 +24,9 @@
 │   │   ├── dashboard.html
 │   │
 │   ├── server
-│   ├── controls
+│   │   ├── controls
 │   │   │   ├── userControl.js
-│   │   │   │
+│   │   │   
 │   │   ├── models
 │   │   │   ├── userModel.js
 ```
