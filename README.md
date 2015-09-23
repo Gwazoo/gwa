@@ -34,6 +34,6 @@
 ## Resources
 We will be using [Taiga Project Management Software](https://tree.taiga.io/) for our timeline, kanban boards, issues, and wiki.
 
-
-
-
+## Stack
+We will be running [Node](https://nodejs.org/en/) / [Express](http://expressjs.com/) on the server (see the Taiga wiki for more information and resources).
+We will be using [Sass](http://sass-lang.com/) and [Angular](https://angularjs.org/) on the front-end.
