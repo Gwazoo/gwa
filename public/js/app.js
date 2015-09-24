@@ -1,16 +1,29 @@
 'use strict';
-angular.module('gwazoo', ['gwazoo.contollers', 'gwazoo.services'])
+angular.module('gwazoo', ['ngRoute', 'gwazoo.contollers', 'gwazoo.services'])
 
 .config(function($routProvider) {
 	$routProvider
 		.when('/', {
-			templateUrl: './templets/home.html',
+			templateUrl: './templates/home.html',
 			controller: 'HomeCtrl'
 		})
-		.when({
-			
+		.when('/product/:sku', {
+			templateUrl: './templates/productDetails.html',
+			controller: 'ProductCtrl'
+		})
+		.when('/category/:slug', {
+			templateUrl: './templates/categoryProducts.html',
+			controller: 'CategoryCtrl'
+		})
+		.when('/account', {
+			templateUrl: './templates/dashboard.html',
+			controller: 'DashboardCtrl'
+		})
+		.when('/sign-up', {
+			templateUrl: './templates/signup.html',
+			controller: 'SignupCtrl'
 		})
 		.otherwise({
 			redirectTo: '/'
 		});
-})
+});
