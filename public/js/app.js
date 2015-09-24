@@ -1,8 +1,8 @@
 'use strict';
 angular.module('gwazoo', ['ngRoute', 'gwazoo.contollers', 'gwazoo.services'])
 
-.config(function($routProvider) {
-	$routProvider
+.config(function($routeProvider) {
+	$routeProvider
 		.when('/', {
 			templateUrl: './templates/home.html',
 			controller: 'HomeCtrl'
