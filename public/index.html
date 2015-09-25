@@ -28,7 +28,7 @@
 </head>
 <body>
 <!-- NAV -->
-<!-- 	<header class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<header class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<nav  class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar-collapse-1">
@@ -40,15 +40,38 @@
 				<a class="navbar-brand" href="#"><img src="/img/logo.png" alt="Gwazoo"></a>
 			</div>
 			<div class="collapse navbar-collapse" id="main-navbar-collapse-1">
-				<ul class="nav navbar-nav navbar-left">
-					<li></li>
+				<ul class="nav navbar-nav nav-pills navbar-left">
+					<li role="presentaion" class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+							shop <span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="category/{{category.slug}}">Automotive & Industrial</a></li>
+							<li><a href="category/{{category.slug}}">Sports & Outdoors</a></li>
+							<li><a href="category/{{category.slug}}">Beauty</a></li>
+							<li><a href="category/{{category.slug}}">Books & Audible</a></li>
+							<li><a href="category/{{category.slug}}">Clothes, Shoes & Jewelry</a></li>
+							<li><a href="category/{{category.slug}}">Electronics & Computers</a></li>
+							<li><a href="category/{{category.slug}}">Office & School Supplies</a></li>
+							<li><a href="category/{{category.slug}}">Health & Grocery</a></li>
+							<li><a href="category/{{category.slug}}">Home & Garden</a></li>
+							<li><a href="category/{{category.slug}}">Movies, Music & Games</a></li>
+							<li><a href="category/{{category.slug}}">Toys, Kids & Baby</a></li>
+							<li><a href="category/{{category.slug}}">Other</a></li>
+						</ul>
+					</li>
+					<li><a href="category/{{category.slug}}">beauty</a></li>
+					<li><a href="category/{{category.slug}}">health</a></li>
+					<li><a href="category/{{category.slug}}">electronics</a></li>
+					<li><a href="category/{{category.slug}}">sporting</a></li>
+					<li><a href="category/{{category.slug}}">games</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li></li>
 				</ul>
 			</div>
 		</nav>
-	</header> -->
+	</header>
 	<container class="container" ng-view>
 		{{test}}
 	</container>
