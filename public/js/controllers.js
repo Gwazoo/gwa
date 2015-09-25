@@ -1,5 +1,5 @@
 'use strict';
-angular.module('gwazoo.contollers', [])
+angular.module('gwazoo.controllers', [])
 
 .controller('MainCtrl', function($scope) {
 	$scope.test = 'main controller';

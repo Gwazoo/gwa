@@ -1,23 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="gwazoo">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<base href="/">
 
 	<title></title>
 
 <!-- CSS -->
 	<link rel="stylesheet" href="/css/reset.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="/css/main.css">
+	<!-- <link rel="stylesheet" href="/css/main.css"> -->
 
 <!-- FAVICON -->
 
 
 <!-- JS -->
 	<script src="libs/jquery/dist/jquery.min.js"></script>
-	<script src="libs/boostrap/dist/js/bootstrap.min.js"></script>
+	<script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="libs/angular/angular.js"></script>
 	<script src="libs/angular-route/angular-route.min.js"></script>
 	<script src="js/app.js"></script>
@@ -25,9 +26,9 @@
 	<script src="js/services.js"></script>
 
 </head>
-<body ng-app="gwazoo">
+<body>
 <!-- NAV -->
-	<header class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<!-- 	<header class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<nav  class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar-collapse-1">
@@ -47,11 +48,11 @@
 				</ul>
 			</div>
 		</nav>
-	</header>
+	</header> -->
 	<container class="container" ng-view>
 		{{test}}
 	</container>
-	<footer class="container">
+	<!-- <footer class="container">
 		<div class="row">
 			<div class="col-md-4">
 				<a href="#"><i class="fa fa-facebook"></i></a>
@@ -89,6 +90,6 @@
 				<p>Copyright &copy; 2015 GWAZOO All Rights Reserved</p>
 			</div>
 		</div>
-	</footer>
+	</footer> -->
 </body>
 </html>
