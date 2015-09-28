@@ -6,7 +6,6 @@ var Express = require('express'),
 	LocalStrategy = require('passport-local').Strategy,
 	// Bcrypt = require('bcrypt'),
 	Connect = require('connect'),
-	Rewrite = require('express-rewrite'),
 	Q = require('q');//,
 	// R = require('rethink');
 
@@ -18,11 +17,14 @@ var app = Express();
 
 
 // MIDDLEWARE
-app.use(Rewrite);
-// app.use(server.router);
+
 app.use('/', Express.static(__dirname + '/public'));
 
-app.get('/#/*', Rewrite.rewrite('/*'));
+app.all('/*', function(req, res, next) {
+    res.sendFile('index.html', { root: __dirname + "/public"});
+});
+
+app.listen(8080);
 
 // app.use(BodyParser.json());
 // app.use(Session({secret: 'gwazooTeam', saveUninitialized: true, resave: true}));

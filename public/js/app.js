@@ -15,19 +15,16 @@ angular.module('gwazoo', ['ngRoute', 'gwazoo.controllers', 'gwazoo.services'])
 			templateUrl: './templates/dashboard.html',
 			controller: 'DashboardCtrl'
 		})
-		.when('/category/:slug', {
+		.when('/category/:slug/', {
 			templateUrl: './templates/categoryProducts.html',
 			controller: 'CategoryCtrl'
 		})
-		.when('/product/:sku', {
+		.when('/product/:sku/', {
 			templateUrl: './templates/productDetails.html',
 			controller: 'ProductCtrl'
 		})
 		.otherwise({
 			redirectTo: '/'
 		});
-	$locationProvider.html5Mode({
-		enabled: true,
-		requireBase: false
-	});
+	$locationProvider.html5Mode(true);
 });
