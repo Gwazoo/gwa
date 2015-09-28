@@ -26,8 +26,8 @@ angular.module('gwazoo', ['ngRoute', 'gwazoo.controllers', 'gwazoo.services'])
 		.otherwise({
 			redirectTo: '/'
 		});
-	$locationProvider.html5Mode({
-		enabled: true,
-		requireBase: false
-	});
+	// $locationProvider.html5Mode({
+	// 	enabled: true,
+	// 	requireBase: false
+	// });
 });
