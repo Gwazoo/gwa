@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 	<!-- <link rel="stylesheet" href="/css/main.css"> -->
+	<link rel="stylesheet" href="/css/brain.css">
 
 <!-- FAVICON -->
 
@@ -67,7 +68,9 @@
 					<li><a href="category/{{category.slug}}">games</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li></li>
+					<li ng-show="user"><p class="navbar-text"><strong>welcome,</strong>{{user.userName}}</p></li>
+					<li ng-show="user"><a href="/api/logout">logout</a></li>
+					<li ng-show="!user"><a href="">login</a></li>
 				</ul>
 			</div>
 		</nav>

@@ -16,6 +16,13 @@ var Express = require('express'),
 
 var app = Express();
 
+var isAuthed = function(req, res, next) {
+	if(!req.isAuthenticated()) {
+		return res.status(403).end();
+	}
+	return next();
+};
+
 
 // MIDDLEWARE ============================================
 app.use(Express.static(__dirname + '/public'));
@@ -25,13 +32,30 @@ app.use(Session({secret: 'gwazooTeam', saveUninitialized: true, resave: true}));
 app.use(Passport.initialize());
 app.use(Passport.session());
 
+app.use(function(req, res, next){
+	var err = req.session.error,
+		msg = req.session.notice,
+		success = req.session.success;
+
+	delete req.session.error;
+	delete req.session.success;
+	delete req.session.notice;
+
+	if (err) res.locals.error = err;
+	if (msg) res.locals.notice = msg;
+	if (success) res.locals.success = success;
+
+	next();
+});
+
 
 // AUTHENTICATION ========================================
 Passport.use(new  LocalStrategy({
-	usernameField: 'email',
+	usernameField: 'userName',
+	emailField: 'email',
 	passwordField: 'password'
-}, function(username, password, done) {
-	User.findOne({ email: username }).exec().then(function(user) {
+}, function(email, password, done) {
+	User.findOne({ email: email }).exec().then(function(user) {
 		if(!user) {
 			return done(null, false);
 		}
@@ -85,5 +109,7 @@ app.get('/api/logout', function(req, res) {
 
 
 // CONNECTIONS ===========================================
-
+var port = process.env.PORT || 8080;
+app.listen(port);
+console.log('listening on ' + port + '!');
 
