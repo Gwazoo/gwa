@@ -66,6 +66,8 @@ Passport.deserializeUser(function(obj, done) {
 app.post('/api/auth', Passport.authenticate('local'), function(req, res) {
 	return res.status(200).end();
 });
+
+// ALL USERS
 app.post('/api/register', function(req, res) {
 	var newUser = new User(req.body);
 	newUser.save(function(err, user) {
@@ -75,8 +77,10 @@ app.post('/api/register', function(req, res) {
 		return res.json(user);
 	});
 });
+app.get('/api/profile/:id', isAuthed/*, userControl.profile*/);
+app.put('/api/profile/:id', isAuthed/*, userControl.profile*/);
+app.delete('/api/profile/:id', isAuthed/*, userControl.profile*/);
 
-// ALL USERS
 app.get('/api/currentUser', function(req, res) {
 	res.status(200).json(req.user);
 });
@@ -90,12 +94,8 @@ app.get('/api/category/:slug'/*, categoryControl*/);
 app.get('/api/product/:sku'/*, productControl*/);
 
 // VENDOR ACCESS
-app.post('/api/category/:slug', isAuthed/*, categoryControl*/);
-app.post('/api/product/:sku', isAuthed/*, productControl*/);
-
-// MEMBER ACCESS
-app.get('/api/profile', isAuthed/*, userControl.profile*/);
-app.post('/api/updateUser', isAuthed/*, userControl.profile*/);
+// app.post('/api/category/:slug', isAuthed, categoryControl);
+// app.post('/api/product/:sku', isAuthed, productControl);
 
 
 // CONNECTIONS ===========================================
