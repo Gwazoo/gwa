@@ -19,6 +19,7 @@ angular.module('gwazoo.controllers', [])
 
 .controller('CategoryCtrl', function($scope, $rootScope) {
 	$scope.test = 'category controller';
+	$scope.test2 = 'search result ctrl same as category ctrl';
 })
 
 .controller('ProductCtrl', function($scope, $rootScope) {

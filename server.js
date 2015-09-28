@@ -34,22 +34,6 @@ app.use(Session({secret: 'gwazooTeam', saveUninitialized: true, resave: true}));
 app.use(Passport.initialize());
 app.use(Passport.session());
 
-app.use(function(req, res, next){
-	var err = req.session.error,
-		msg = req.session.notice,
-		success = req.session.success;
-
-	delete req.session.error;
-	delete req.session.success;
-	delete req.session.notice;
-
-	if (err) res.locals.error = err;
-	if (msg) res.locals.notice = msg;
-	if (success) res.locals.success = success;
-
-	next();
-});
-
 
 // AUTHENTICATION ========================================
 Passport.use(new  LocalStrategy({
@@ -92,8 +76,7 @@ app.post('/api/register', function(req, res) {
 	});
 });
 
-// app.get('/api/profile', userControl.profile);
-
+// ALL USERS
 app.get('/api/currentUser', function(req, res) {
 	res.status(200).json(req.user);
 });
@@ -103,11 +86,16 @@ app.get('/api/logout', function(req, res) {
 	res.redirect('/');
 });
 
-// VENDOR ACCESS
+app.get('/api/category/:slug'/*, categoryControl*/);
+app.get('/api/product/:sku'/*, productControl*/);
 
+// VENDOR ACCESS
+app.post('/api/category/:slug', isAuthed/*, categoryControl*/);
+app.post('/api/product/:sku', isAuthed/*, productControl*/);
 
 // MEMBER ACCESS
-
+app.get('/api/profile', isAuthed/*, userControl.profile*/);
+app.post('/api/updateUser', isAuthed/*, userControl.profile*/);
 
 
 // CONNECTIONS ===========================================
