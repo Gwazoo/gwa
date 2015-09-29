@@ -1,4 +1,4 @@
-var think = require('thinky')({
-	authKey: ,
+// var think = require('thinky')({
+// 	// authKey: ,
 	
-});
+// });
