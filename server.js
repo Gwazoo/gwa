@@ -22,7 +22,6 @@ var isAuthed = function(req, res, next) {
 	return next();
 };
 
-
 // MIDDLEWARE ============================================
 app.get('/api/test', Api.getAll);
 
@@ -36,20 +35,6 @@ app.use(Session({secret: 'gwazooTeam', saveUninitialized: true, resave: true}));
 
 app.use(Passport.initialize());
 app.use(Passport.session());
-
-
-
-// r.connect({host: 'localhost', port: 28015, auth_key: ''}, function(err, connection) {
-//    if (err) throw err;
-//    var test = r.db('gwazoo').table('users').run(connection, function (err, cursor){
-//    	if (err) {
-//    		throw err;
-//    	} else {
-//    		cursor.each(console.log);
-//    	}
-//    });
-// });
-
 
 // AUTHENTICATION ========================================
 Passport.use(new  LocalStrategy(
@@ -78,7 +63,6 @@ Passport.deserializeUser(function(id, done) {
 		done(null, user);
 	});
 });
-
 
 // ENDPOINTS =============================================
 // AUTHENTICATION
