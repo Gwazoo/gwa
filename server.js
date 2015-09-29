@@ -6,8 +6,8 @@ var Express = require('express'),
 	LocalStrategy = require('passport-local').Strategy,
 	// Bcrypt = require('bcrypt'),
 	Connect = require('connect'),
-	Q = require('q');//,
-	// R = require('rethink');
+	Q = require('q'),
+	Api = require('./server/controls/apiControl');
 
 // var userControl = require('./server/controls/userControl'),
 // 	productControl = require('./server/controls/productControl'),
@@ -24,15 +24,31 @@ var isAuthed = function(req, res, next) {
 
 
 // MIDDLEWARE ============================================
+app.get('/api/test', Api.getAll);
+
 app.use('/', Express.static(__dirname + '/public'));
 app.all('/*', function(req, res, next) {
 	res.sendFile('index.html', { root: __dirname + "/public"});
 });
+
 app.use(BodyParser.json());
 app.use(Session({secret: 'gwazooTeam', saveUninitialized: true, resave: true}));
 
 app.use(Passport.initialize());
 app.use(Passport.session());
+
+
+
+// r.connect({host: 'localhost', port: 28015, auth_key: ''}, function(err, connection) {
+//    if (err) throw err;
+//    var test = r.db('gwazoo').table('users').run(connection, function (err, cursor){
+//    	if (err) {
+//    		throw err;
+//    	} else {
+//    		cursor.each(console.log);
+//    	}
+//    });
+// });
 
 
 // AUTHENTICATION ========================================
@@ -99,7 +115,7 @@ app.get('/api/product/:sku'/*, productControl*/);
 
 
 // CONNECTIONS ===========================================
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 1337;
 app.listen(port);
 console.log('listening on ' + port + '!');
 
