@@ -1,11 +1,18 @@
 'use strict';
-var thinky = require('./../util/thinky.js'),
-	type = Thinky.type;
+var BCrypt = require('bcrypt-nodejs'),
+	thinky = require('./server/util/thinky');
+
+var type = thinky.type;
 
 var User = thinky.createModel('User', {
 	id: type.string(),
-	name: type.string(),
-
+	name: [{
+		first: type.string(),
+		last: type.string()
+	}],
+	userName: type.string().min(5).required(),
+	email: type.string().email().required(),
+	password: type.string().alphanum().min(6).required()
 })
-	BCrypt = require('bcrypt-nodejs')
 
+module.exports = User;

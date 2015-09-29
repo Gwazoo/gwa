@@ -6,15 +6,14 @@ var Express = require('express'),
 	LocalStrategy = require('passport-local').Strategy,
 	Bcrypt = require('bcrypt-nodejs'),
 	Connect = require('connect'),
-	Thinky = require('thinky'),
-	R = require('rethinkdb');
+	Thinkio = require('thinky'),
+	r = require('rethinkdb');
 
-var userControl = require('./server/controls/userControl');//,
-// 	productControl = require('./server/controls/productControl'),
-// 	categoryControl = require('./server/controls/categoryControl');
-var User = {
+var think = require('./server/util/thinky');
 
-}
+// var User = {
+
+// }
 var app = Express();
 
 var isAuthed = function(req, res, next) {
@@ -26,6 +25,7 @@ var isAuthed = function(req, res, next) {
 
 
 // MIDDLEWARE ============================================
+app.get('/api/profile/:id', /*isAuthed,*/ think.getAll);
 app.use('/', Express.static(__dirname + '/public'));
 app.all('/*', function(req, res, next) {
 	res.sendFile('index.html', { root: __dirname + "/public"});
@@ -82,9 +82,9 @@ app.post('/api/register', function(req, res) {
 		return res.json(user);
 	});
 });
-app.get('/api/profile/:id', isAuthed, userControl.profile);
-app.put('/api/profile/:id', isAuthed, userControl.profile);
-app.delete('/api/profile/:id', isAuthed, userControl.profile);
+
+// app.put('/api/profile/:id', isAuthed, userControl.profile);
+// app.delete('/api/profile/:id', isAuthed, userControl.profile);
 
 app.get('/api/currentUser', function(req, res) {
 	res.status(200).json(req.user);
