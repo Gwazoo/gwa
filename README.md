@@ -25,13 +25,14 @@
 │   │
 │   ├── templates
 │   │   ├── dashboard.html
-│   │
-│   ├── server
-│   │   ├── controls
-│   │   │   ├── userControl.js
-│   │   │   
-│   │   ├── models
-│   │   │   ├── userModel.js
+│   
+├── server
+│   ├── controls
+│   │   ├── userControl.js
+│   │   ├── apiControl.js
+│   │   
+│   ├── models
+│   │   ├── userModel.js
 ```
 
 ## Resources
