@@ -9,6 +9,7 @@
   "author": "Gwazoo Team",
   "license": "",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.14.0",
     "connect": "^3.4.0",
     "express": "^4.13.3",
@@ -32,6 +33,7 @@
     "passport-local": "^1.0.0",
     "protractor": "^2.2.0",
     "q": "^1.4.1",
-    "rethinkdb": "^2.1.1"
+    "rethinkdb": "^2.1.1",
+    "thinky": "^2.1.8"
   }
 }

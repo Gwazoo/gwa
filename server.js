@@ -4,15 +4,17 @@ var Express = require('express'),
 	BodyParser = require('body-parser'),
 	Passport = require('passport'),
 	LocalStrategy = require('passport-local').Strategy,
-	// Bcrypt = require('bcrypt'),
+	Bcrypt = require('bcrypt-nodejs'),
 	Connect = require('connect'),
-	Q = require('q');//,
-	// R = require('rethink');
+	Thinky = require('thinky'),
+	R = require('rethinkdb');
 
-// var userControl = require('./server/controls/userControl'),
+var userControl = require('./server/controls/userControl');//,
 // 	productControl = require('./server/controls/productControl'),
 // 	categoryControl = require('./server/controls/categoryControl');
+var User = {
 
+}
 var app = Express();
 
 var isAuthed = function(req, res, next) {
@@ -36,28 +38,31 @@ app.use(Passport.session());
 
 
 // AUTHENTICATION ========================================
-Passport.use(new  LocalStrategy({
-	usernameField: 'userName',
-	emailField: 'email',
-	passwordField: 'password'
-}, function(email, password, done) {
-	User.findOne({ email: email }).exec().then(function(user) {
-		if(!user) {
-			return done(null, false);
-		}
-		user.comparePassword(password).then(function(isMatch) {
-			if(!isMatch) {
-				return done(null, false);
+Passport.use(new  LocalStrategy(
+	function(username, password, cb) {
+		R.users.findByUsername(username, function(err, user) {
+			if(err) {
+				return cb(err);
 			}
-			return done(null, user);
+			if(!user) {
+				return cb(null, false);
+			}
+			if(user.password != password) {
+				return cb(null, user);
+			}
+			return cb(null, user);
 		});
-	});
-}));
+	}));
 Passport.serializeUser(function(user, done) {
-	done(null, user);
+	done(null, user.id);
 });
-Passport.deserializeUser(function(obj, done) {
-	done(null, obj);
+Passport.deserializeUser(function(id, done) {
+	R.users.findById(id, function(err, user) {
+		if(err) {
+			return done(err);
+		}
+		done(null, user);
+	});
 });
 
 
@@ -77,9 +82,9 @@ app.post('/api/register', function(req, res) {
 		return res.json(user);
 	});
 });
-app.get('/api/profile/:id', isAuthed/*, userControl.profile*/);
-app.put('/api/profile/:id', isAuthed/*, userControl.profile*/);
-app.delete('/api/profile/:id', isAuthed/*, userControl.profile*/);
+app.get('/api/profile/:id', isAuthed, userControl.profile);
+app.put('/api/profile/:id', isAuthed, userControl.profile);
+app.delete('/api/profile/:id', isAuthed, userControl.profile);
 
 app.get('/api/currentUser', function(req, res) {
 	res.status(200).json(req.user);
