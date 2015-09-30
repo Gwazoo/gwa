@@ -12,21 +12,21 @@ module.exports = {
 		r.connect(thinky._config, function (err, connection) {
 			if (err) handleError(err, connection);
 			r.table('users').run(connection, function (err, cursor){
-			   	if (err) handleError(err, connection);
-		   		cursor.toArray(function (err, result) {
-		   			if (err) handleError(err, connection);
-		   			res.send(JSON.stringify(result, null, 2));
-		   		});
+				if (err) handleError(err, connection);
+				cursor.toArray(function (err, result) {
+					if (err) handleError(err, connection);
+					res.send(JSON.stringify(result, null, 2));
+				});
 			});
 		});
 	},
 	create : function(req, res) {
-	    console.log("req.body", JSON.stringify(req.body));  //debug
-	    var formData = req.body;
+		console.log("req.body", JSON.stringify(req.body));  //debug
+		var formData = req.body;
 
-	    r.connect(thinky._config, function (err, connection) {
-	    	if (err) handleError(err, connection);
-		    r.table('users').insert(formData)
+		r.connect(thinky._config, function (err, connection) {
+			if (err) handleError(err, connection);
+			r.table('users').insert(formData)
 			.run(connection, function(err, result) {
 				if (err) handleError(err, connection);
 				res.send(JSON.stringify({status: 'User Added'}));
@@ -34,7 +34,7 @@ module.exports = {
 		});
 	},
 	read : function(req, res) {
-	    console.log("req.body", JSON.stringify(req.body));  //debug
+		console.log("req.body", JSON.stringify(req.body));  //debug
 	 //    var formData = req.body;
 
 	 //    r.connect(thinky._config, function (err, connection) {
@@ -47,13 +47,13 @@ module.exports = {
 		// });
 	},
 	delete : function(req, res) {
-	    console.log("req.body", JSON.stringify(req.body.id));  //debug
-	    var userId = req.body.id;
+		console.log("req.body", JSON.stringify(req.body.id));  //debug
+		var userId = req.body.id;
 
-	    r.connect(thinky._config, function (err, connection) {
-	    	if (err) handleError(err, connection);
-		    r.table('users').get(userId).delete()
-		    .run(connection, function(err, result) {
+		r.connect(thinky._config, function (err, connection) {
+			if (err) handleError(err, connection);
+			r.table('users').get(userId).delete()
+			.run(connection, function(err, result) {
 				if (err) handleError(err, connection);
 				if (result.deleted == 1){
 					res.send(JSON.stringify({status: 'User Deleted'}));
