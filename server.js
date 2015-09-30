@@ -11,9 +11,6 @@ var Thinky = require('./server/util/thinky'),
 	Api = require('./server/controls/apiControl'),
 	User = require('./server/controls/userControl');
 
-// var User = {
-
-// }
 var app = Express();
 
 var isAuthed = function(req, res, next) {
@@ -24,14 +21,13 @@ var isAuthed = function(req, res, next) {
 };
 
 // MIDDLEWARE ============================================
-app.get('/api/test'/*, Api.getAll*/);
+app.use(BodyParser.urlencoded({extended:true}));
+app.get('/api', Api.findAll);  //debug
+app.post('/api/create', Api.create);
+app.get('/api/read', Api.read);
+app.delete('/api/delete', Api.delete);
 
-app.use('/', Express.static(__dirname + '/public'));
-app.all('/*', function(req, res, next) {
-	res.sendFile('index.html', { root: __dirname + "/public"});
-});
-
-app.use(BodyParser.json());
+// app.use(BodyParser.json());
 app.use(Session({secret: 'gwazooTeam', saveUninitialized: true, resave: true}));
 
 app.use(Passport.initialize());
@@ -93,6 +89,10 @@ app.get('/api/product/:sku'/*, productControl*/);
 // app.post('/api/category/:slug', isAuthed, categoryControl);
 // app.post('/api/product/:sku', isAuthed, productControl);
 
+app.use('/', Express.static(__dirname + '/public'));
+app.all('/*', function(req, res, next) {
+	res.sendFile('index.html', { root: __dirname + "/public"});
+});
 
 // CONNECTIONS ===========================================
 var port = process.env.PORT || 1337;
