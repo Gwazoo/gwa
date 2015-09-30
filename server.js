@@ -5,10 +5,11 @@ var Express = require('express'),
 	Passport = require('passport'),
 	LocalStrategy = require('passport-local').Strategy,
 	Bcrypt = require('bcrypt-nodejs'),
-	Connect = require('connect'),
-	Api = require('./server/controls/apiControl');
+	Connect = require('connect');
 
-var think = require('./server/util/thinky');
+var Thinky = require('./server/util/thinky'),
+	Api = require('./server/controls/apiControl'),
+	User = require('./server/controls/userControl');
 
 // var User = {
 
@@ -23,7 +24,7 @@ var isAuthed = function(req, res, next) {
 };
 
 // MIDDLEWARE ============================================
-app.get('/api/test', Api.getAll);
+app.get('/api/test'/*, Api.getAll*/);
 
 app.use('/', Express.static(__dirname + '/public'));
 app.all('/*', function(req, res, next) {
@@ -71,15 +72,7 @@ app.post('/api/auth', Passport.authenticate('local'), function(req, res) {
 });
 
 // ALL USERS
-app.post('/api/register', function(req, res) {
-	var newUser = new User(req.body);
-	newUser.save(function(err, user) {
-		if(err) {
-			return res.status(500).end();
-		}
-		return res.json(user);
-	});
-});
+app.post('/api/register', User.create);
 
 // app.put('/api/profile/:id', isAuthed, userControl.profile);
 // app.delete('/api/profile/:id', isAuthed, userControl.profile);

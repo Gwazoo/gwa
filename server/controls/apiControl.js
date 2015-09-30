@@ -8,11 +8,11 @@ module.exports = {
 		r.connect(thinky._config, function(err, connection) {
 			if (err) throw err;
 			var test = r.table('users').run(connection, function (err, cursor){
-			   	if (err) throw err;
-		   		cursor.toArray(function (err, result) {
-		   			if (err) throw err;
-		   			res.send(JSON.stringify(result, null, 2));
-		   		});
+				if (err) throw err;
+				cursor.toArray(function (err, result) {
+					if (err) throw err;
+					res.send(JSON.stringify(result, null, 2));
+				});
 			});
 		});
 	}
