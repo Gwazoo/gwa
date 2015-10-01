@@ -4,9 +4,9 @@ var Express = require('express'),
 	BodyParser = require('body-parser'),
 	Passport = require('passport'),
 	LocalStrategy = require('passport-local').Strategy,
-	Bcrypt = require('bcrypt-nodejs'),
 	Connect = require('connect'),
-	Api = require('./server/controls/apiControl');
+	Api = require('./server/controls/apiControl'),
+	R = require('rethinkdb');
 
 var think = require('./server/util/thinky');
 
@@ -15,58 +15,39 @@ var think = require('./server/util/thinky');
 // }
 var app = Express();
 
-var isAuthed = function(req, res, next) {
-	if(!req.isAuthenticated()) {
-		return res.status(403).end();
-	}
-	return next();
-};
-
 // MIDDLEWARE ============================================
 app.use(BodyParser.urlencoded({extended:true}));
-app.get('/api', Api.findAll);  //debug
-app.post('/api/create', Api.create);
-app.get('/api/read', Api.read);
-app.delete('/api/delete', Api.delete);
 
-// app.use(BodyParser.json());
 app.use(Session({secret: 'gwazooTeam', saveUninitialized: true, resave: true}));
 
 app.use(Passport.initialize());
 app.use(Passport.session());
+// app.use('/api/authorize',Api.createConnection);
+app.get('/api', Api.isAuthed, Api.findAll);  //debug
+app.post('/api/create', Api.isAuthed, Api.create);
+app.get('/api/read', Api.isAuthed, Api.read);
+app.delete('/api/delete', Api.isAuthed, Api.delete);
+// app.post('/api/authorize', Api.authorize);
+// app.use('/api/authorize', Api.closeConnection);
+
+// app.use(BodyParser.json());
 
 // AUTHENTICATION ========================================
 Passport.use(new  LocalStrategy(
 	function(username, password, cb) {
-		R.users.findByUsername(username, function(err, user) {
-			if(err) {
-				return cb(err);
-			}
-			if(!user) {
-				return cb(null, false);
-			}
-			if(user.password != password) {
-				return cb(null, user);
-			}
-			return cb(null, user);
-		});
+		Api.authorize(username, password, cb);
 	}));
 Passport.serializeUser(function(user, done) {
 	done(null, user.id);
 });
 Passport.deserializeUser(function(id, done) {
-	R.users.findById(id, function(err, user) {
-		if(err) {
-			return done(err);
-		}
-		done(null, user);
-	});
+	Api.read(id, done);
 });
 
 // ENDPOINTS =============================================
 // AUTHENTICATION
 app.post('/api/auth', Passport.authenticate('local'), function(req, res) {
-	return res.status(200).end();
+	return res.status(200).send(JSON.stringify({status: 'User Authenticated!'}));
 });
 
 // ALL USERS
