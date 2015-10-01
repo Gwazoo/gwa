@@ -33,6 +33,9 @@
 │   │   
 │   ├── models
 │   │   ├── userModel.js
+│   │
+│   ├── util
+│   │   ├── thinky.js
 ```
 
 ## Resources
