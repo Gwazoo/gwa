@@ -33,15 +33,19 @@ Passport.deserializeUser(function(id, done) {
 
 // ENDPOINTS =============================================
 // AUTHENTICATION
-app.post('/api/auth', Passport.authenticate('local'), function(req, res) {
+app.post('/api/auth', Passport.authenticate('local'), function(req, res) {  //signup url
 	return res.status(200).json({status: 'User Authenticated!'});
 });
 
 // USER API
 app.get('/api', Api.isAuthed, Api.getAll);  //DEBUG METHOD ONLY
-app.post('/api/create', Api.create);  //I need to automatically auth new users
+app.post('/api/create', Api.create);
 app.get('/api/read', Api.isAuthed, Api.read);
 app.delete('/api/delete', Api.isAuthed, Api.delete);
+app.get('/api/logout', function(req, res) {
+	req.logout();
+	res.redirect('/');
+});
 
 // app.post('/api/register', User.create);
 // app.put('/api/profile/:id', isAuthed, userControl.profile);
@@ -49,11 +53,6 @@ app.delete('/api/delete', Api.isAuthed, Api.delete);
 
 app.get('/api/currentUser', function(req, res) {
 	res.status(200).json(req.user);
-});
-
-app.get('/api/logout', function(req, res) {
-	req.logout();
-	res.redirect('/');
 });
 
 app.get('/api/category/:slug'/*, categoryControl*/);
