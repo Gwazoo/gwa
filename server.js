@@ -1,39 +1,28 @@
 'use strict';
-var Express = require('express'),
-	Session = require('express-session'),
-	BodyParser = require('body-parser'),
-	Passport = require('passport'),
-	LocalStrategy = require('passport-local').Strategy,
-	Connect = require('connect'),
-	Api = require('./server/controls/apiControl'),
-	R = require('rethinkdb');
-
-var Thinky = require('./server/util/thinky'),
-	Api = require('./server/controls/apiControl'),
-	User = require('./server/controls/userControl');
+var Express        = require('express');
+var Session        = require('express-session');
+var	BodyParser     = require('body-parser');
+var	Passport       = require('passport');
+var	LocalStrategy  = require('passport-local').Strategy;
+var	Connect        = require('connect');
+var	Api            = require('./server/controls/apiControl');
+var	R              = require('rethinkdb');
+var Thinky         = require('./server/util/thinky');
+var	Api            = require('./server/controls/apiControl');
+var	User           = require('./server/controls/userControl');
 
 var app = Express();
 
 // MIDDLEWARE ============================================
 app.use(BodyParser.urlencoded({extended:true}));
 
+// AUTHENTICATION ========================================
 app.use(Session({secret: 'gwazooTeam', saveUninitialized: true, resave: true}));
 app.use(Passport.initialize());
 app.use(Passport.session());
-// app.use('/api/authorize',Api.createConnection);
-app.get('/api', Api.isAuthed, Api.findAll);  //debug
-app.post('/api/create', Api.isAuthed, Api.create);
-app.get('/api/read', Api.isAuthed, Api.read);
-app.delete('/api/delete', Api.isAuthed, Api.delete);
-// app.post('/api/authorize', Api.authorize);
-// app.use('/api/authorize', Api.closeConnection);
-
-// app.use(BodyParser.json());
-
-// AUTHENTICATION ========================================
 Passport.use(new  LocalStrategy(
-	function(username, password, cb) {
-		Api.authorize(username, password, cb);
+	function(username, password, done) {
+		Api.authorize(username, password, done);
 	}));
 Passport.serializeUser(function(user, done) {
 	done(null, user.id);
@@ -45,12 +34,16 @@ Passport.deserializeUser(function(id, done) {
 // ENDPOINTS =============================================
 // AUTHENTICATION
 app.post('/api/auth', Passport.authenticate('local'), function(req, res) {
-	return res.status(200).send(JSON.stringify({status: 'User Authenticated!'}));
+	return res.status(200).json({status: 'User Authenticated!'});
 });
 
-// ALL USERS
-app.post('/api/register', User.create);
+// USER API
+app.get('/api', Api.isAuthed, Api.getAll);  //DEBUG METHOD ONLY
+app.post('/api/create', Api.create);  //I need to automatically auth new users
+app.get('/api/read', Api.isAuthed, Api.read);
+app.delete('/api/delete', Api.isAuthed, Api.delete);
 
+// app.post('/api/register', User.create);
 // app.put('/api/profile/:id', isAuthed, userControl.profile);
 // app.delete('/api/profile/:id', isAuthed, userControl.profile);
 
