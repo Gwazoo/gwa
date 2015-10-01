@@ -1,7 +1,7 @@
 var util = require('../util/thinky')
 var thinky = require('thinky')(util.config);
 var r = require('rethinkdb');
-var bcrypt = require('bcrypt');
+// var bcrypt = require('bcrypt');
 
 module.exports = {
     /*

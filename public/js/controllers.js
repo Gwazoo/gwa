@@ -2,12 +2,8 @@
 angular.module('gwazoo.controllers', [])
 
 .controller('MainCtrl', function($scope, Account) {
-	$scope.login = function() {
-		Account.login($scope.email, $scope.password);
-	}
-
-	$scope.register = function() {
-		Account.register($scope.user);
+	$scope.login = function(userLogin) {
+		Account.login(userLogin);
 	}
 })
 
@@ -16,7 +12,10 @@ angular.module('gwazoo.controllers', [])
 })
 
 .controller('SignupCtrl', function($scope, $rootScope, Account) {
-	$scope.test = 'sign-up controller';
+	$scope.register = function(userData) {
+		console.log(userData);
+		Account.register(userData);
+	}
 })
 
 .controller('DashboardCtrl', function($scope, $rootScope) {

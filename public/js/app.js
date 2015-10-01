@@ -7,7 +7,11 @@ angular.module('gwazoo', ['ngRoute', /*'ngMaterial',*/ 'gwazoo.controllers', 'gw
 			templateUrl: './templates/home.html',
 			controller: 'HomeCtrl'
 		})
-		.when('/sign-up', {
+		.when('/test', {
+			templateUrl: './templates/index.html',
+			controller: 'HomeCtrl'
+		})
+		.when('/register', {
 			templateUrl: './templates/signup.html',
 			controller: 'SignupCtrl'
 		})
