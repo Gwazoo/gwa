@@ -1,3 +1,64 @@
-<h1>SIGN-UP</h1>
+<div class="container">
+	<section>
+		<h1>REGISTER & MAKE MONEY</h1>
+		<form class="form-horizontal" name="user_form">
+			<div class="form-group">
+				<label for="registerUserName" class="col-md-2 control-label">User Name</label>
+				<div class="col-md-10">
+					<input type="text" class="form-control" id="registerUserName" ng-model="user.userName" placeholder="User Name">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="registerFirstName" class="col-md-2 control-label">First Name</label>
+				<div class="col-md-10">
+					<input type="text" class="form-control" id="registerFirstName" ng-model="user.firstName" placeholder="First Name">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="registerFirstName" class="col-md-2 control-label">Last Name</label>
+				<div class="col-md-10">
+					<input type="text" class="form-control" id="registerFirstName" ng-model="user.lastName" placeholder="Last Name">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="registerEmail" class="col-md-2 control-label">Email</label>
+				<div class="col-md-10">
+					<input type="email" class="form-control" id="registerEmail" ng-model="user.email" placeholder="Email Address">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="registerPassword" class="col-md-2 control-label">Password</label>
+				<div class="col-md-10">
+					<input type="password" class="form-control" id="registerPassword" ng-model="user.password" placeholder="Password">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="row">
+					<label class="col-md-2 control-label">Account Type</label>
+					<div class="col-md-2">
+						<label class="radio-inline">
+							<input type="radio" name="userType" ng-model="user.type" value="member" checked>Member
+						</label>
+					</div>
+					<div class="col-md-2">
+						<label class="radio-inline">
+							<input type="radio" name="userType" ng-model="user.type" value="vendor">Vendor
+						</label>
+					</div>
+				</div>
+			</div>
+		</form>
+		<div class="row">
+			<div class="col-md-6">
+				<button class="btn btn-danger btn-sm btn-block" ng-click="cancel()">Cancel</button>
+			</div>
+			<div class="col-md-6">
+				<button class="btn btn-success btn-sm btn-block" ng-click="register(user)">Register</button>
+			</div>
+		</div>
+	</section>
 
-{{test}}
+	<section>
+		
+	</section>
+</div>

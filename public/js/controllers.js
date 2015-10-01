@@ -1,15 +1,21 @@
 'use strict';
 angular.module('gwazoo.controllers', [])
 
-.controller('MainCtrl', function($scope) {
-	$scope.test = 'main controller';
+.controller('MainCtrl', function($scope, Account) {
+	$scope.login = function() {
+		Account.login($scope.email, $scope.password);
+	}
+
+	$scope.register = function() {
+		Account.register($scope.user);
+	}
 })
 
 .controller('HomeCtrl', function($scope, $rootScope, Account) {
 	$scope.test = 'home controller';
 })
 
-.controller('SignupCtrl', function($scope, $rootScope) {
+.controller('SignupCtrl', function($scope, $rootScope, Account) {
 	$scope.test = 'sign-up controller';
 })
 
