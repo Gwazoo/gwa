@@ -1,5 +1,5 @@
 'use strict';
-angular.module('gwazoo', ['ngRoute', 'gwazoo.controllers', 'gwazoo.services'])
+angular.module('gwazoo', ['ngRoute', /*'ngMaterial',*/ 'gwazoo.controllers', 'gwazoo.services'])
 
 .config(function($routeProvider, $locationProvider) {
 	$routeProvider
@@ -7,7 +7,11 @@ angular.module('gwazoo', ['ngRoute', 'gwazoo.controllers', 'gwazoo.services'])
 			templateUrl: './templates/home.html',
 			controller: 'HomeCtrl'
 		})
-		.when('/sign-up', {
+		.when('/test', {
+			templateUrl: './templates/index.html',
+			controller: 'HomeCtrl'
+		})
+		.when('/register', {
 			templateUrl: './templates/signup.html',
 			controller: 'SignupCtrl'
 		})

@@ -3,6 +3,7 @@
 ## File Structure
 ```
 ├── .gitignore
+├── .bowerrc
 ├── gulpfile.js
 ├── package.json
 ├── README.md
@@ -33,6 +34,9 @@
 │   │   
 │   ├── models
 │   │   ├── userModel.js
+│   │
+│   ├── util
+│   │   ├── thinky.js
 ```
 
 ## Resources

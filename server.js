@@ -1,85 +1,58 @@
 'use strict';
-var Express = require('express'),
-	Session = require('express-session'),
-	BodyParser = require('body-parser'),
-	Passport = require('passport'),
-	LocalStrategy = require('passport-local').Strategy,
-	Bcrypt = require('bcrypt-nodejs'),
-	Connect = require('connect');
-
-var Thinky = require('./server/util/thinky'),
-	Api = require('./server/controls/apiControl'),
-	User = require('./server/controls/userControl');
+var Express        = require('express');
+var Session        = require('express-session');
+var	BodyParser     = require('body-parser');
+var	Passport       = require('passport');
+var	LocalStrategy  = require('passport-local').Strategy;
+var	Connect        = require('connect');
+var	Api            = require('./server/controls/apiControl');
+var	R              = require('rethinkdb');
+var Thinky         = require('./server/util/thinky');
+var	Api            = require('./server/controls/apiControl');
+var	User           = require('./server/controls/userControl');
 
 var app = Express();
 
-var isAuthed = function(req, res, next) {
-	if(!req.isAuthenticated()) {
-		return res.status(403).end();
-	}
-	return next();
-};
-
 // MIDDLEWARE ============================================
 app.use(BodyParser.urlencoded({extended:true}));
-app.get('/api', Api.findAll);  //debug
-app.post('/api/create', Api.create);
-app.get('/api/read', Api.read);
-app.delete('/api/delete', Api.delete);
-
-// app.use(BodyParser.json());
-app.use(Session({secret: 'gwazooTeam', saveUninitialized: true, resave: true}));
-
-app.use(Passport.initialize());
-app.use(Passport.session());
 
 // AUTHENTICATION ========================================
+app.use(Session({secret: 'gwazooTeam', saveUninitialized: true, resave: true}));
+app.use(Passport.initialize());
+app.use(Passport.session());
 Passport.use(new  LocalStrategy(
-	function(username, password, cb) {
-		R.users.findByUsername(username, function(err, user) {
-			if(err) {
-				return cb(err);
-			}
-			if(!user) {
-				return cb(null, false);
-			}
-			if(user.password != password) {
-				return cb(null, user);
-			}
-			return cb(null, user);
-		});
+	function(username, password, done) {
+		Api.authorize(username, password, done);
 	}));
 Passport.serializeUser(function(user, done) {
 	done(null, user.id);
 });
 Passport.deserializeUser(function(id, done) {
-	R.users.findById(id, function(err, user) {
-		if(err) {
-			return done(err);
-		}
-		done(null, user);
-	});
+	Api.read(id, done);
 });
 
 // ENDPOINTS =============================================
 // AUTHENTICATION
-app.post('/api/auth', Passport.authenticate('local'), function(req, res) {
-	return res.status(200).end();
+app.post('/api/auth', Passport.authenticate('local'), function(req, res) {  //signup url
+	return res.status(200).json({status: 'User Authenticated!'});
 });
 
-// ALL USERS
-app.post('/api/register', User.create);
+// USER API
+app.get('/api', Api.isAuthed, Api.getAll);  //DEBUG METHOD ONLY
+app.post('/api/create', Api.create);
+app.get('/api/read', Api.isAuthed, Api.read);
+app.delete('/api/delete', Api.isAuthed, Api.delete);
+app.get('/api/logout', function(req, res) {
+	req.logout();
+	res.redirect('/');
+});
 
+// app.post('/api/register', User.create);
 // app.put('/api/profile/:id', isAuthed, userControl.profile);
 // app.delete('/api/profile/:id', isAuthed, userControl.profile);
 
 app.get('/api/currentUser', function(req, res) {
 	res.status(200).json(req.user);
-});
-
-app.get('/api/logout', function(req, res) {
-	req.logout();
-	res.redirect('/');
 });
 
 app.get('/api/category/:slug'/*, categoryControl*/);
