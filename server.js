@@ -8,18 +8,16 @@ var Express = require('express'),
 	Api = require('./server/controls/apiControl'),
 	R = require('rethinkdb');
 
-var think = require('./server/util/thinky');
+var Thinky = require('./server/util/thinky'),
+	Api = require('./server/controls/apiControl'),
+	User = require('./server/controls/userControl');
 
-// var User = {
-
-// }
 var app = Express();
 
 // MIDDLEWARE ============================================
 app.use(BodyParser.urlencoded({extended:true}));
 
 app.use(Session({secret: 'gwazooTeam', saveUninitialized: true, resave: true}));
-
 app.use(Passport.initialize());
 app.use(Passport.session());
 // app.use('/api/authorize',Api.createConnection);
@@ -51,15 +49,7 @@ app.post('/api/auth', Passport.authenticate('local'), function(req, res) {
 });
 
 // ALL USERS
-app.post('/api/register', function(req, res) {
-	var newUser = new User(req.body);
-	newUser.save(function(err, user) {
-		if(err) {
-			return res.status(500).end();
-		}
-		return res.json(user);
-	});
-});
+app.post('/api/register', User.create);
 
 // app.put('/api/profile/:id', isAuthed, userControl.profile);
 // app.delete('/api/profile/:id', isAuthed, userControl.profile);
