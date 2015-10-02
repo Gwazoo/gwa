@@ -4,7 +4,7 @@
   "description": "gwazoo.com",
   "main": "js/app.js",
   "scripts": {
-    "start": "nodemon"
+    "start": "nodemon server.js"
   },
   "author": "Gwazoo Team",
   "license": "",
