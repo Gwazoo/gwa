@@ -53,12 +53,13 @@ module.exports = {
 	    // console.log(formData);
 	    r.connect(thinky._config, function (err, connection) {  //connect to db
 	    	if (err) throw err;
-	    	bcrypt.hash(formData.password, null, null, function (err, hash) {  //hash password
+	    	var salt = bcrypt.genSaltSync(12);
+	    	bcrypt.hash(formData.password, salt, null, function (err, hash) {  //hash password
 	    		if (err) throw err;
 	    		formData.password = hash;  //overwrite form data password with hash
     		    r.table('users').insert(formData)  //save updated form data to db
     			.run(connection, function(err, result) {
-    				if (true) { return res.status(500).send("Error Message:"); }
+    				if (err) { return res.status(500).send("Error Message:"); }
     				else {
 	    				console.log("User Created.");
 	    				var user = { 
