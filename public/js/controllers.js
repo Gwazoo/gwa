@@ -11,9 +11,16 @@ angular.module('gwazoo.controllers', [])
 	$scope.test = 'home controller';
 })
 
-.controller('SignupCtrl', function($scope, $rootScope, Account) {
+.controller('SignupCtrl', function($scope, $rootScope, $location, Account) {
+	$scope.userResult = {};
 	$scope.register = function(userData) {
-		Account.register(userData);
+		Account.register(userData)
+		.then(function (result) {
+			$scope.userResult = result;
+			$location.path("/account");
+		}).catch(function (err) {
+			$scope.userResult = err;
+		});
 	}
 })
 

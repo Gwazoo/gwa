@@ -16,6 +16,7 @@ var app = Express();
 // MIDDLEWARE ============================================
 app.use(BodyParser.json());
 app.use(BodyParser.urlencoded({extended:true}));
+app.use('/', Express.static(__dirname + '/public')); 
 
 // AUTHENTICATION ========================================
 app.use(Session({secret: 'gwazooTeam', saveUninitialized: true, resave: true}));
@@ -63,7 +64,12 @@ app.get('/api/product/:sku'/*, productControl*/);
 // app.post('/api/category/:slug', isAuthed, categoryControl);
 // app.post('/api/product/:sku', isAuthed, productControl);
 
-app.use('/', Express.static(__dirname + '/public'));
+// PROTECTED ROUTES ======================================
+app.all('/account', Api.isAuthed, function(req, res, next) {
+	res.sendFile('index.html', { root: __dirname + "/public"});
+});
+
+// OPEN ROUTES ==========================================
 app.all('/*', function(req, res, next) {
 	res.sendFile('index.html', { root: __dirname + "/public"});
 });

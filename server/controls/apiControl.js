@@ -48,27 +48,28 @@ module.exports = {
 	*	Express reponse object
 	* @returns {Obj} JSON with status message.
 	*/
-	create : function (req, res, next) {
+	create : function (req, res) {
 	    var formData = req.body;  //save form data
 	    // console.log(formData);
 	    r.connect(thinky._config, function (err, connection) {  //connect to db
 	    	if (err) throw err;
-	    	bcrypt.hash(formData.password, null, null, function (err, hash) {  //hash password
+	    	var salt = bcrypt.genSaltSync(12);
+	    	bcrypt.hash(formData.password, salt, null, function (err, hash) {  //hash password
 	    		if (err) throw err;
 	    		formData.password = hash;  //overwrite form data password with hash
     		    r.table('users').insert(formData)  //save updated form data to db
     			.run(connection, function(err, result) {
-    				if (err) throw err;
-    				console.log("User Created.");
-    				var user = { 
-    					id: result.generated_keys[0]  //save id returned from db
-    				};
-    	// 			req.login(user, function(err) {  //create Passport session for new user
-					// if (err) throw err;
-					// });
-    				passport.authenticate('local')(req, res, function () {
-                		res.redirect('/account');
-            		})
+    				if (err) { return res.status(500).send("Error Message:"); }
+    				else {
+	    				console.log("User Created.");
+	    				var user = { 
+	    					id: result.generated_keys[0]  //save id returned from db
+	    				};
+	    				req.login(user, function(err) {  //create Passport session for new user
+							if (err) { return res.status(500).send("Error Message:", err); }
+						});
+						return res.json(result);
+					}
     			});
 	    	});
 		});
