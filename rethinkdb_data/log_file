@@ -36,3 +36,17 @@
 2015-09-30T17:34:17.627348000 140.251980s notice: All client connections closed.
 2015-09-30T17:34:17.627356000 140.251988s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
 2015-09-30T17:34:17.632685000 140.257317s notice: Storage engine shut down.
+2015-10-01T16:58:32.146019000 0.429890s notice: Running rethinkdb 2.1.4 (CLANG 7.0.0 (clang-700.0.72))...
+2015-10-01T16:58:32.151655000 0.435521s notice: Running on Darwin 14.5.0 x86_64
+2015-10-01T16:58:32.151721000 0.435585s notice: Loading data from directory /Users/sky/Desktop/Websites/gwa/rethinkdb_data
+2015-10-01T16:58:32.190391000 0.474255s info: Automatically using cache size of 100 MB
+2015-10-01T16:58:32.190400000 0.474264s warn: Cache size does not leave much memory for server and query overhead (available memory: 772 MB).
+2015-10-01T16:58:32.190405000 0.474268s warn: Cache size is very low and may impact performance.
+2015-10-01T16:58:32.190905000 0.474769s notice: Listening for intracluster connections on port 29015
+2015-10-01T16:58:32.211320000 0.495184s notice: Listening for client driver connections on port 28015
+2015-10-01T16:58:32.211478000 0.495342s notice: Listening for administrative HTTP connections on port 8080
+2015-10-01T16:58:32.211480000 0.495343s notice: Listening on addresses: 127.0.0.1, ::1
+2015-10-01T16:58:32.211480001 0.495344s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2015-10-01T16:58:32.211534000 0.495398s notice: Server ready, "Skylers_MacBook_Pro_local_x2q" 999a1e47-7ca2-44ef-986d-a4ac86a09869
+2015-10-01T16:58:33.301147000 1.585010s info: Table bbc4a379-7b4e-4bbb-8cde-4773121ee27c: Starting a new Raft election for term 3.
+2015-10-01T16:58:33.328029000 1.611892s info: Table bbc4a379-7b4e-4bbb-8cde-4773121ee27c: This server is Raft leader for term 3. Latest log index is 6.

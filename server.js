@@ -14,6 +14,7 @@ var	User           = require('./server/controls/userControl');
 var app = Express();
 
 // MIDDLEWARE ============================================
+app.use(BodyParser.json());
 app.use(BodyParser.urlencoded({extended:true}));
 
 // AUTHENTICATION ========================================
@@ -38,7 +39,7 @@ app.post('/api/auth', Passport.authenticate('local'), function(req, res) {  //si
 });
 
 // USER API
-app.get('/api', Api.isAuthed, Api.getAll);  //DEBUG METHOD ONLY
+app.get('/api', /*Api.isAuthed,*/ Api.getAll);  //DEBUG METHOD ONLY
 app.post('/api/create', Api.create);
 app.get('/api/read', Api.isAuthed, Api.read);
 app.delete('/api/delete', Api.isAuthed, Api.delete);

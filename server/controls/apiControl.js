@@ -1,7 +1,7 @@
 var util = require('../util/thinky')
 var thinky = require('thinky')(util.config);
 var r = require('rethinkdb');
-// var bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt');
 
 module.exports = {
     /*
@@ -48,9 +48,9 @@ module.exports = {
 	*	Express reponse object
 	* @returns {Obj} JSON with status message.
 	*/
-	create : function (req, res) {
+	create : function (req, res, next) {
 	    var formData = req.body;  //save form data
-
+	    // console.log(formData);
 	    r.connect(thinky._config, function (err, connection) {  //connect to db
 	    	if (err) throw err;
 	    	bcrypt.hash(formData.password, 12, function (err, hash) {  //hash password
@@ -63,10 +63,12 @@ module.exports = {
     				var user = { 
     					id: result.generated_keys[0]  //save id returned from db
     				};
-    				req.login(user, function(err) {  //create Passport session for new user
-					if (err) throw err;
-    				res.send(JSON.stringify({status: 'User Created!'}));  //status
-					});
+    	// 			req.login(user, function(err) {  //create Passport session for new user
+					// if (err) throw err;
+					// });
+    				passport.authenticate('local')(req, res, function () {
+                		res.redirect('/account');
+            		})
     			});
 	    	});
 		});

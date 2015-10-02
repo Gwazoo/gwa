@@ -16,15 +16,21 @@ angular.module('gwazoo.services', [])
 	};
 
 	this.register = function(userData) {
-		var deferred = $q.defer();
-		console.log(userData);
-		$http.post('/api/create', userData).then(function(res) {
+		// var deferred = $q.defer();
+		// console.log(userData);
+		$http({
+			method: 'POST',
+			url: '/api/create', 
+			data: userData
+		}).success(function(res) {
+			console.log("Res:",res);
 			user = res;
-			deferred.resolve(res);
-		}).catch(function(err) {
-			deferred.reject(err);
+			// deferred.resolve(res);
+		}).error(function(err) {
+			console.log("Err:",err);
+			// deferred.reject(err);
 		});
-		return deferred.promise;
+		// return deferred.promise;
 	};
 })
 

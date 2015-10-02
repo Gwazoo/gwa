@@ -1,6 +1,6 @@
 module.exports = {
 	config: {
-		host: "localhost",
+		host: "gwazoo.com",
 		port: 28015,
 		authKey: "test",
 		db: "gwazoo"

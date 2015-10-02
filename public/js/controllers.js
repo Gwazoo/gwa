@@ -13,7 +13,6 @@ angular.module('gwazoo.controllers', [])
 
 .controller('SignupCtrl', function($scope, $rootScope, Account) {
 	$scope.register = function(userData) {
-		console.log(userData);
 		Account.register(userData);
 	}
 })

@@ -5,10 +5,10 @@ var util = require('./../util/thinky'),
 
 
 var User = thinky.createModel('users', {
-	id: type.string(),
+	// id: type.string(),
 	firstName: type.string(),
 	lastName: type.string(),
-	userName: type.string().min(5).max(25).required(),
+	username: type.string().min(5).max(25).required(),
 	email: type.string().email().required(),
 	password: type.string().alphanum().min(6).required()
 });
