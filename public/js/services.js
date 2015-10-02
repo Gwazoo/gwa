@@ -6,7 +6,7 @@ angular.module('gwazoo.services', [])
 
 	this.login = function(userLogin) {
 		var deferred = $q.defer();
-		$http.post('/api', userLogin).then(function(res) {
+		$http.post('/api/auth', userLogin).then(function(res) {
 			user = res;
 			deferred.resolve(res);
 		}).catch(function(err) {
