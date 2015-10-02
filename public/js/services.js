@@ -6,10 +6,16 @@ angular.module('gwazoo.services', [])
 
 	this.login = function(userLogin) {
 		var deferred = $q.defer();
-		$http.post('/api', userLogin).then(function(res) {
+		$http({
+			method: 'POST',
+			url: '/api/auth', 
+			data: userLogin
+		}).success(function(res) {
+			console.log("Res:", res);
 			user = res;
-			deferred.resolve(res);
-		}).catch(function(err) {
+			deferred.resolve(user);
+		}).error(function(err) {
+			console.log(err);
 			deferred.reject(err);
 		});
 		return deferred.promise;
@@ -22,11 +28,26 @@ angular.module('gwazoo.services', [])
 			url: '/api/create', 
 			data: userData
 		}).success(function(res) {
-			console.log("Res:",res);
+			console.log("Res:", res);
 			user = res;
 			deferred.resolve(user);
 		}).error(function(err) {
-			console.log("Err:",err);
+			console.log(err);
+			deferred.reject(err);
+		});
+		return deferred.promise;
+	};
+
+	this.checkUsername = function(username) {
+		var deferred = $q.defer();
+		$http({
+			method: 'POST',
+			url: '/api/username', 
+			data: username
+		}).success(function(res) {
+			user = res;
+			deferred.resolve(user);
+		}).error(function(err) {
 			deferred.reject(err);
 		});
 		return deferred.promise;

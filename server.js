@@ -27,10 +27,10 @@ Passport.use(new  LocalStrategy(
 		Api.authorize(username, password, done);
 	}));
 Passport.serializeUser(function(user, done) {
-	done(null, user.id);
+	done(null, user.username);
 });
-Passport.deserializeUser(function(id, done) {
-	Api.read(id, done);
+Passport.deserializeUser(function(username, done) {
+	Api.read(username, done);
 });
 
 // ENDPOINTS =============================================
@@ -42,7 +42,8 @@ app.post('/api/auth', Passport.authenticate('local'), function(req, res) {  //si
 // USER API
 app.get('/api', /*Api.isAuthed,*/ Api.getAll);  //DEBUG METHOD ONLY
 app.post('/api/create', Api.create);
-app.get('/api/read', Api.isAuthed, Api.read);
+app.post('/api/username', Api.username);
+app.get('/api/read', Api.read);
 app.delete('/api/delete', Api.isAuthed, Api.delete);
 app.get('/api/logout', function(req, res) {
 	req.logout();

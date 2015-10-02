@@ -163,18 +163,19 @@
 	</footer>
 
 <!-- LOGIN MODAL -->
-	<!-- <div id="loginModal" class="modal fade">
+	<div id="loginModal" class="modal fade" ng-controller="LoginCtrl">
 		<div class="modal-dialog modal-md">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h3>User Login</h3>
 				</div>
+				{{ test }}
 				<div class="modal-body">
 					<form class="form-horizontal" name="loginUser_form">
 						<div class="form-group">
-							<label for="registerEmail" class="col-md-2 control-label">Email</label>
+							<label for="registerUsername" class="col-md-2 control-label">Username</label>
 							<div class="col-md-10">
-								<input type="email" class="form-control" id="registerEmail" name="email" ng-model="user.email" placeholder="Email Address">
+								<input type="username" class="form-control" id="registerUsername" name="username" ng-model="user.username" placeholder="Username">
 							</div>
 						</div>
 						<div class="form-group">
@@ -197,6 +198,6 @@
 				</div>
 			</div>
 		</div>
-	</div> -->
+	</div>
 </body>
 </html>

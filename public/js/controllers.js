@@ -2,8 +2,19 @@
 angular.module('gwazoo.controllers', [])
 
 .controller('MainCtrl', function($scope, Account) {
-	$scope.login = function(userLogin) {
-		Account.login(userLogin);
+	
+})
+
+.controller('LoginCtrl', function($scope, $location, Account) {
+	$scope.login = function (userLogin) {
+		Account.login(userLogin)
+		.then(function (result){
+			$scope.user.username = "";
+			$scope.user.password = "";
+			$location.path("/account");
+		}).catch(function (err){
+
+		});
 	}
 })
 
@@ -13,15 +24,27 @@ angular.module('gwazoo.controllers', [])
 
 .controller('SignupCtrl', function($scope, $rootScope, $location, Account) {
 	$scope.userResult = {};
-	$scope.register = function(userData) {
+	$scope.register = function (userData) {
 		Account.register(userData)
 		.then(function (result) {
-			$scope.userResult = result;
+			$scope.userResult = result;  //DEBUG
 			$location.path("/account");
 		}).catch(function (err) {
-			$scope.userResult = err;
+			$scope.userResult = err;  //DEBUG
 		});
-	}
+	};
+
+	$scope.checkUsername = function(username) {
+		var user = {
+			username: username
+		}
+		Account.checkUsername(user)
+		.then(function (result) {
+			$scope.check = result;  //DEBUG
+		}).catch(function (err) {
+			$scope.check = err;  //DEBUG
+		});
+	};
 })
 
 .controller('DashboardCtrl', function($scope, $rootScope) {

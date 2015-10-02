@@ -59,11 +59,11 @@ module.exports = {
 	    		formData.password = hash;  //overwrite form data password with hash
     		    r.table('users').insert(formData)  //save updated form data to db
     			.run(connection, function(err, result) {
-    				if (err) { return res.status(500).send("Error Message:"); }
+    				if (err) { return res.status(500).send("Error Message:", err); }
     				else {
 	    				console.log("User Created.");
 	    				var user = { 
-	    					id: result.generated_keys[0]  //save id returned from db
+	    					username: formData.username  //save username returned from db
 	    				};
 	    				req.login(user, function(err) {  //create Passport session for new user
 							if (err) { return res.status(500).send("Error Message:", err); }
@@ -75,20 +75,44 @@ module.exports = {
 		});
 	},
 	/*
-	* @param {String} id
-	*	ID passed in from Passport user object
+	* @param {String} username
+	*	username passed in from Passport user object
 	* @param {Function} done
 	*	Passport callback
 	* @returns {Function} Passport callback with user object
 	*/
-	read : function (id, done) {
+	read : function (username, done) {
 		console.log("Deserializing...");
 	    r.connect(thinky._config, function (err, connection) {  //connect to db
 	     	if (err) throw err;
-		    r.table('users').get(id)  //check if user exists by getting with id
+		    r.table('users').get(username)  //check if user exists by getting with username
 			.run(connection, function(err, user) {
 				if (err) { return done(err); }
 				{ return done(null, user); }  //is success, return callback with user object
+		 	});
+		});
+	},
+	/*
+	* @param {Obj} req
+	*	Express request object with username attached
+	* @param {Obj} res
+	*	Express reponse object
+	* @returns {Obj} res with availability message
+	*/
+	username : function (req, res) {
+		console.log("Checking username...", req.body.username);
+	    r.connect(thinky._config, function (err, connection) {  //connect to db
+	     	if (err) throw err;
+		    r.table('users').get(req.body.username)  //check if user exists by getting with username
+			.run(connection, function(err, result) {
+				if (err) { return done(err); }
+				else if (result == null) {
+					console.log("Username available");
+					return res.status(200).send("Username is available!");
+				} else {
+					console.log("Username taken");
+					return res.status(200).send("Username is already taken!");
+				}
 		 	});
 		});
 	},
@@ -102,7 +126,7 @@ module.exports = {
 	delete : function (req, res) {
 	    r.connect(thinky._config, function (err, connection) {  //connect to db
 	    	if (err) throw err;
-		    r.table('users').get(req.user.id).delete()  //delete user by PASSPORT USER ID
+		    r.table('users').get(req.user.username).delete()  //delete user by PASSPORT USER USERNAME
 		    .run(connection, function(err, result) {
 				if (err) throw err;
 				console.log('User Deleted');
