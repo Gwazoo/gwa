@@ -1,0 +1,18 @@
+{
+  "name": "gwazoo",
+  "version": "1.0.0",
+  "description": "gwazoo.com",
+  "main": "js/app.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "author": "Gwazoo Team",
+  "license": "",
+  "dependencies": {
+    "angular": "~1.4.6",
+    "angular-bootstrap": "~0.13.4",
+    "angular-route": "~1.4.6",
+    "bootstrap": "~3.3.5",
+    "jquery": "~2.1.4"
+  }
+}
