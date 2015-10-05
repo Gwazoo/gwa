@@ -5,7 +5,6 @@ angular.module('gwazoo.controllers', [])
 	$scope.user = Account.returnUser();
 	$scope.$on('updateUser', function() {
 		$scope.user = Account.returnUser();
-		// console.log($scope.user);
 	});
 	$scope.logout = function() {
 		Account.logout();
@@ -14,11 +13,10 @@ angular.module('gwazoo.controllers', [])
 	$scope.login = function(userLogin) {
 		// console.log(userLogin);
 		Account.login(userLogin)
-		.then(function (result){
-			console.log("you got me babe", result);
+		.then(function () {
 			$scope.user.username = '';
 			$scope.user.password = '';
-		}).catch(function (err){
+		}).catch(function (err) {
 			$scope.user.password = '';
 		});
 	};
@@ -29,28 +27,18 @@ angular.module('gwazoo.controllers', [])
 	};
 })
 
-.controller('LoginCtrl', function($scope, $location, Account) {
-
-})
-
 .controller('HomeCtrl', function($scope, $rootScope, Account) {
 	$scope.test = 'home controller';
 })
 
-.controller('SignupCtrl', function($scope, $rootScope, $location, Account) {
-	$scope.userResult = {};
-	$scope.register = function (userData) {
-		Account.register(userData)
-		.then(function (user) {
-			// user object with following properties:
-			// "added"    = boolean - whether user was successfully added
-			// "message"  = string - status message
-			// "dbRes"     = obj or null - response from db
-			$scope.user = user;  //DEBUG
-			console.log(user);
-			if (user.added) $location.path("/account");
+.controller('SignupCtrl', function($scope, $rootScope, Account) {
+	$scope.register = function (formData) {
+		$scope.user.result = "Creating new user...";
+		Account.register(formData)
+		.then(function (result) {
+			$scope.user.result = result.message;
 		}).catch(function (err) {
-			$scope.userResult = err;  //DEBUG
+
 		});
 	};
 

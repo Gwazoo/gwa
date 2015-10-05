@@ -66,6 +66,7 @@ module.exports = {
  	    				if (err) { return res.status(500).send("Error Message:", err); }
  	    				else {
  		    				console.log("User Created.");
+ 		    				delete userObj.password;
  		    				var user = { 
  		    					username: userObj.username  //save username returned from db
  		    				};
@@ -75,9 +76,8 @@ module.exports = {
  							return res.json(
  								{
  									added: true,
- 									message: "New user created",
- 									dbRes: result,
- 									firstName: userObj.firstName
+ 									message: "A new user was successfully created!",
+ 									user: userObj
  								});
  						}
  	    			});
@@ -86,11 +86,11 @@ module.exports = {
         }
         catch(err) {  //if the user does not validate
         	console.log("Failed validation:", err.message);
-            res.json(  //this response will be handled by controllers.js
+            return res.json(  //this response will be handled by controllers.js
             	{
             		added: false,
-            		message: "The user was not validated.",
-            		dbRes: null
+            		message: "The user was not validated. " + err.message,
+            		user: null
             	}); 
         }
 	},
