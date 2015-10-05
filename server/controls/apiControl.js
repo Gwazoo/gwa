@@ -2,6 +2,7 @@ var util = require('../util/thinky')
 var thinky = require('thinky')(util.config);
 var r = require('rethinkdb');
 var bcrypt = require('bcrypt-nodejs');
+var userModel = require('./../models/userModel.js');
 
 module.exports = {
     /*
@@ -36,7 +37,8 @@ module.exports = {
 			   	if (err) throw err;
 		   		cursor.toArray(function (err, result) {
 		   			if (err) throw err;
-		   			res.send(JSON.stringify(result, null, 2));
+		   			// res.send(JSON.stringify(result, null, 2));
+		   			res.json(result)
 		   		});
 			});
 		});
@@ -49,30 +51,47 @@ module.exports = {
 	* @returns {Obj} JSON with status message.
 	*/
 	create : function (req, res) {
-	    var formData = req.body;  //save form data
-	    // console.log(formData);
-	    r.connect(thinky._config, function (err, connection) {  //connect to db
-	    	if (err) throw err;
-	    	var salt = bcrypt.genSaltSync(12);
-	    	bcrypt.hash(formData.password, salt, null, function (err, hash) {  //hash password
-	    		if (err) throw err;
-	    		formData.password = hash;  //overwrite form data password with hash
-    		    r.table('users').insert(formData)  //save updated form data to db
-    			.run(connection, function(err, result) {
-    				if (err) { return res.status(500).send("Error Message:", err); }
-    				else {
-	    				console.log("User Created.");
-	    				var user = { 
-	    					username: formData.username  //save username returned from db
-	    				};
-	    				req.login(user, function(err) {  //create Passport session for new user
-							if (err) { return res.status(500).send("Error Message:", err); }
-						});
-						return res.json(result);
-					}
-    			});
-	    	});
-		});
+	    var userObj = new userModel(req.body);  //create new user object
+
+        try{  //attempt to validate the new user
+            userObj.validate();  //validate the user object using the model
+ 		    r.connect(thinky._config, function (err, connection) {  //connect to db
+ 		    	if (err) throw err;
+ 		    	var salt = bcrypt.genSaltSync(12);
+ 		    	bcrypt.hash(userObj.password, salt, null, function (err, hash) {  //hash password
+ 		    		if (err) throw err;
+ 		    		userObj.password = hash;  //overwrite form data password with hash
+ 	    		    r.table('users').insert(userObj)  //save updated form data to db
+ 	    			.run(connection, function(err, result) {
+ 	    				if (err) { return res.status(500).send("Error Message:", err); }
+ 	    				else {
+ 		    				console.log("User Created.");
+ 		    				var user = { 
+ 		    					username: userObj.username  //save username returned from db
+ 		    				};
+ 		    				req.login(user, function(err) {  //create Passport session for new user
+ 								if (err) { return res.status(500).send("Error Message:", err); }
+ 							});
+ 							return res.json(
+ 								{
+ 									added: true,
+ 									message: "New user created",
+ 									dbRes: result
+ 								});
+ 						}
+ 	    			});
+ 		    	});
+ 			});
+        }
+        catch(err) {  //if the user does not validate
+        	console.log("Failed validation:", err.message);
+            res.json(  //this response will be handled by controllers.js
+            	{
+            		added: false,
+            		message: "The user was not validated.",
+            		dbRes: null
+            	}); 
+        }
 	},
 	/*
 	* @param {String} username

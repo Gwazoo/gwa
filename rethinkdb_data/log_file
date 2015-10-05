@@ -50,3 +50,20 @@
 2015-10-01T16:58:32.211534000 0.495398s notice: Server ready, "Skylers_MacBook_Pro_local_x2q" 999a1e47-7ca2-44ef-986d-a4ac86a09869
 2015-10-01T16:58:33.301147000 1.585010s info: Table bbc4a379-7b4e-4bbb-8cde-4773121ee27c: Starting a new Raft election for term 3.
 2015-10-01T16:58:33.328029000 1.611892s info: Table bbc4a379-7b4e-4bbb-8cde-4773121ee27c: This server is Raft leader for term 3. Latest log index is 6.
+2015-10-04T09:41:23.102920000 0.013367s notice: Running rethinkdb 2.1.4 (CLANG 7.0.0 (clang-700.0.72))...
+2015-10-04T09:41:23.108937000 0.019382s notice: Running on Darwin 14.5.0 x86_64
+2015-10-04T09:41:23.108973000 0.019416s notice: Loading data from directory /Users/sky/Desktop/Websites/gwa/rethinkdb_data
+2015-10-04T09:41:23.142280000 0.052723s info: Automatically using cache size of 2216 MB
+2015-10-04T09:41:23.142998000 0.053441s notice: Listening for intracluster connections on port 29015
+2015-10-04T09:41:23.163495000 0.073939s notice: Listening for client driver connections on port 28015
+2015-10-04T09:41:23.163899000 0.074342s notice: Listening for administrative HTTP connections on port 8080
+2015-10-04T09:41:23.163904000 0.074347s notice: Listening on addresses: 127.0.0.1, ::1
+2015-10-04T09:41:23.163905000 0.074348s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2015-10-04T09:41:23.163906000 0.074349s notice: Server ready, "Skylers_MacBook_Pro_local_x2q" 999a1e47-7ca2-44ef-986d-a4ac86a09869
+2015-10-04T09:41:24.170326000 1.080770s info: Table bbc4a379-7b4e-4bbb-8cde-4773121ee27c: Starting a new Raft election for term 4.
+2015-10-04T09:41:24.191911000 1.102354s info: Table bbc4a379-7b4e-4bbb-8cde-4773121ee27c: This server is Raft leader for term 4. Latest log index is 9.
+2015-10-04T23:45:01.613442000 13540.555025s notice: Server got SIGINT from pid 254, uid 501; shutting down...
+2015-10-04T23:45:01.615803000 13540.557385s notice: Shutting down client connections...
+2015-10-04T23:45:01.617138000 13540.558720s notice: All client connections closed.
+2015-10-04T23:45:01.617148000 13540.558730s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2015-10-04T23:45:01.631652000 13540.573234s notice: Storage engine shut down.

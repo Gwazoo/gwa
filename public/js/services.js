@@ -36,7 +36,7 @@ angular.module('gwazoo.services', [])
 			// $location.path('/').replace();
 			deferred.resolve(user);
 		}).error(function(err) {
-			console.log(err);
+			console.log("Err", err);
 			deferred.reject(err);
 		});
 		return deferred.promise;

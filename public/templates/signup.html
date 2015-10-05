@@ -5,7 +5,7 @@
 			<div class="form-group">
 				<label for="registerUserName" class="col-md-2 control-label">Username</label>
 				<div class="col-md-10">
-					<input type="text" class="form-control" id="registerUserName" name="username" ng-model="user.username"
+					<input type="text" class="form-control" id="registerUserName" name="username" ng-model="user.username" ng-model-options="{ debounce : 500 }"
         ng-change="checkUsername(user.username)" placeholder="User Name">
 				</div>
 				<!--PLACEHOLDER ALERT-->

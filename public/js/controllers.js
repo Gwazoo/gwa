@@ -41,9 +41,14 @@ angular.module('gwazoo.controllers', [])
 	$scope.userResult = {};
 	$scope.register = function (userData) {
 		Account.register(userData)
-		.then(function (result) {
-			$scope.userResult = result;  //DEBUG
-			$location.path('/account');
+		.then(function (user) {
+			// user object with following properties:
+			// "added"    = boolean - whether user was successfully added
+			// "message"  = string - status message
+			// "dbRes"     = obj or null - response from db
+			$scope.userResult = user;  //DEBUG
+			console.log(user);
+			if (user.added) $location.path("/account");
 		}).catch(function (err) {
 			$scope.userResult = err;  //DEBUG
 		});
@@ -52,7 +57,7 @@ angular.module('gwazoo.controllers', [])
 	$scope.checkUsername = function(username) {
 		var user = {
 			username: username
-		}
+		};
 		Account.checkUsername(user)
 		.then(function (result) {
 			$scope.check = result;  //DEBUG
