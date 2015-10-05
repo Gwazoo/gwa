@@ -32,7 +32,7 @@ angular.module('gwazoo.services', [])
 			user = res;
 			deferred.resolve(user);
 		}).error(function(err) {
-			console.log(err);
+			console.log("Err", err);
 			deferred.reject(err);
 		});
 		return deferred.promise;

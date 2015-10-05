@@ -10,7 +10,7 @@ var User = thinky.createModel('users', {
 	lastName: type.string(),
 	username: type.string().min(5).max(25).required(),
 	email: type.string().email().required(),
-	password: type.string().alphanum().min(6).required()
+	password: type.string().min(8).required()
 });
 
 // var user = new User({
