@@ -33,90 +33,82 @@
 <body ng-controller="MainCtrl">
 <!-- HEADER -->
 	<header class="header">
-		<div class="top-bar">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-6 col-xs-2">
-						<a class="navbar-brand" href="/"><img src="/img/logo.png" alt="Gwazoo"></a>
-					</div>
-					<div class="col-sm-6 col-xs-8">
-						<div class="search">
-							<form role="form" class="form-inline">
-								<div class="form-group">
-									<label class="sr-only" for="searchBar">Gwazoo Search</label>
-									<div class="input-group">
-										<input type="text" class="form-control" id="searchBar" autocomplete="on" placeholder="Search Gwazoo...">
-										<div type="submit" class="input-group-addon btn btn-sm"><i class="fa fa-search fa-2x"></i></div>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-					<div class="col-sm-4 col-ex-2">
-						<ul class="pull-right">
-							<li role="presentaion" class="dropdown pull-left">
-								<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-									My Account <span class="caret"></span>
-								</a>
-								<ul class="dropdown-menu">
-									<li><a href="">Your Account</a></li>
-									<li><a href="">Orders</a></li>
-									<li><a href="">Your Wishlist</a></li>
-									<li><a href="">Account Settings</a></li>
-									<li><a href="/api/logout">Logout</a></li>
-								</ul>
-							</li>
-							<i class="fa fa-minus fa-2x fa-rotate-90"></i>
-							<li class="pull-right">
-								<a href="#"><i class="fa fa-shopping-cart"></i> Cart </a>
-							</li>
-						</ul>
-						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false">
-							<span class="sr-only">Toggle Navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-					</div>
+		<nav class="nav navbar wrap">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false">
+						<span class="sr-only">Toggle Navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="/"><img src="/img/logo.png" alt="Gwazoo"></a>
 				</div>
-			</div>
-		</div>
-		<nav  class="navbar wrap">
-			<div class="row collapse navbar-collapse">
-				<ul class="nav navbar-nav nav-pills navbar-left">
-					<li role="presentaion" class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-							shop <span class="caret"></span>
-						</a>
-						<ul class="dropdown-menu">
-							<li><a href="category/{{category.slug}}">Automotive & Industrial</a></li>
-							<li><a href="category/{{category.slug}}">Sports & Outdoors</a></li>
-							<li><a href="category/{{category.slug}}">Beauty</a></li>
-							<li><a href="category/{{category.slug}}">Books & Audible</a></li>
-							<li><a href="category/{{category.slug}}">Clothes, Shoes & Jewelry</a></li>
-							<li><a href="category/{{category.slug}}">Electronics & Computers</a></li>
-							<li><a href="category/{{category.slug}}">Office & School Supplies</a></li>
-							<li><a href="category/{{category.slug}}">Health & Grocery</a></li>
-							<li><a href="category/{{category.slug}}">Home & Garden</a></li>
-							<li><a href="category/{{category.slug}}">Movies, Music & Games</a></li>
-							<li><a href="category/{{category.slug}}">Toys, Kids & Baby</a></li>
-							<li><a href="category/{{category.slug}}">Other</a></li>
-						</ul>
-					</li>
-					<li><a href="/category/{{category.slug}}">beauty</a></li>
-					<li><a href="category/{{category.slug}}">health</a></li>
-					<li><a href="category/{{category.slug}}">electronics</a></li>
-					<li><a href="category/{{category.slug}}">sporting</a></li>
-					<li><a href="category/{{category.slug}}">games</a></li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li ng-show="user"><p class="navbar-text"><strong>welcome, </strong>{{user.firstName}}</p></li>
-					<li ng-show="user"><a href="account">account</a></li>
-					<li ng-show="user" ng-click="logout()"><a href="">logout</a></li>
-					<li ng-show="!user" data-toggle="modal" data-target="#loginModal"><a href="">login</a></li>
-					<li ng-show="!user"><a href="register">register</a></li>
-				</ul>
-			</div>
+
+				<div class="collapse navbar-collapse">
+					<ul class="navbar-nav">
+						<li class="dropdown">
+							<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">shop <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="category/{{category.slug}}">Automotive & Industrial</a></li>
+								<li><a href="category/{{category.slug}}">Sports & Outdoors</a></li>
+								<li><a href="category/{{category.slug}}">Beauty</a></li>
+								<li><a href="category/{{category.slug}}">Books & Audible</a></li>
+								<li><a href="category/{{category.slug}}">Clothes, Shoes & Jewelry</a></li>
+								<li><a href="category/{{category.slug}}">Electronics & Computers</a></li>
+								<li><a href="category/{{category.slug}}">Office & School Supplies</a></li>
+								<li><a href="category/{{category.slug}}">Health & Grocery</a></li>
+								<li><a href="category/{{category.slug}}">Home & Garden</a></li>
+								<li><a href="category/{{category.slug}}">Movies, Music & Games</a></li>
+								<li><a href="category/{{category.slug}}">Toys, Kids & Baby</a></li>
+								<li><a href="category/{{category.slug}}">Other</a></li>
+							</ul>
+						</li>
+						<li><a href="/category/{{category.slug}}">beauty</a></li>
+						<li><a href="category/{{category.slug}}">health</a></li>
+						<li><a href="category/{{category.slug}}">electronics</a></li>
+						<li><a href="category/{{category.slug}}">sporting</a></li>
+						<li><a href="category/{{category.slug}}">games</a></li>
+					</ul>
+					<div class="search">
+						<form role="form" class="form-inline">
+							<div class="form-group">
+								<label class="sr-only" for="searchBar">Gwazoo Search</label>
+								<div class="input-group">
+									<input type="text" class="form-control" id="searchBar" autocomplete="on" placeholder="Search Gwazoo...">
+									<div type="submit" class="input-group-addon btn btn-sm"><i class="fa fa-search fa-2x"></i></div>
+								</div>
+							</div>
+						</form>
+					</div>
+					
+					<ul class="navbar-nav navbar-right">
+						<li ng-show="user"><p class="navbar-text"><strong>welcome, </strong>{{user.firstName}}</p></li>
+						<li ng-show="user"><a href="account">account</a></li>
+						<li ng-show="user" ng-click="logout()"><a href="">logout</a></li>
+						<li ng-show="!user" data-toggle="modal" data-target="#loginModal"><a href="">login</a></li>
+						<li ng-show="!user"><a href="register">register</a></li>
+					</ul>
+
+					<ul class="">
+						<li role="presentaion" class="dropdown pull-left">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+								My Account <span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="">Your Account</a></li>
+								<li><a href="">Orders</a></li>
+								<li><a href="">Your Wishlist</a></li>
+								<li><a href="">Account Settings</a></li>
+								<li><a href="/api/logout">Logout</a></li>
+							</ul>
+						</li>
+						<i class="fa fa-minus fa-2x fa-rotate-90"></i>
+						<li class="pull-right">
+							<a href="#"><i class="fa fa-shopping-cart"></i> Cart </a>
+						</li>
+					</ul>
+
 		</nav>
 	</header>
 	<container ng-view>
@@ -169,7 +161,7 @@
 				<div class="modal-header">
 					<h3>User Login</h3>
 				</div>
-				<form class="form-horizontal" ng-submit="login(user)">
+				<form class="form-horizontal">
 					<div class="modal-body">
 						<div class="form-group">
 							<label for="registerUsername" class="col-md-2 control-label">Username</label>
@@ -190,7 +182,7 @@
 								<button data-dismiss="modal" class="btn btn-danger btn-sm btn-block" ng-click="cancel()">Cancel</button>
 							</div>
 							<div class="col-md-6">
-								<button data-dismiss="modal" type="submit" class="btn btn-success btn-sm btn-block">Login</button>
+								<button data-dismiss="modal" type="submit" class="btn btn-success btn-sm btn-block" ng-click="login(user)">Login</button>
 							</div>
 						</div>
 					</div>
