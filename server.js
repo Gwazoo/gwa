@@ -36,7 +36,7 @@ Passport.deserializeUser(function(username, done) {
 // ENDPOINTS =============================================
 // AUTHENTICATION
 app.post('/api/auth', Passport.authenticate('local'), function(req, res) {  //signup url
-	return res.status(200).json({status: 'User Authenticated!'});
+	return res.status(200).json(req.user);
 });
 
 // USER API
