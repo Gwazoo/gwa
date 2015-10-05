@@ -1,21 +1,36 @@
 'use strict';
 angular.module('gwazoo.controllers', [])
 
-.controller('MainCtrl', function($scope) {
-	$scope.test = "Hello World!";
+.controller('MainCtrl', function($scope, Account) {
+	$scope.user = Account.returnUser();
+	$scope.$on('updateUser', function() {
+		$scope.user = Account.returnUser();
+		console.log($scope.user);
+	});
+	$scope.logout = function() {
+		Account.logout();
+	};
+
+	$scope.login = function(userLogin) {
+		console.log(userLogin);
+		Account.login(userLogin)
+		.then(function (result){
+			console.log(result);
+			$scope.user.username = '';
+			$scope.user.password = '';
+		}).catch(function (err){
+			$scope.user.password = '';
+		});
+	};
+
+	$scope.cancel = function() {
+		$scope.user.username = '';
+		$scope.user.password = '';
+	};
 })
 
 .controller('LoginCtrl', function($scope, $location, Account) {
-	$scope.login = function (userLogin) {
-		Account.login(userLogin)
-		.then(function (result){
-			$scope.user.username = "";
-			$scope.user.password = "";
-			$location.path("/account");
-		}).catch(function (err){
 
-		});
-	}
 })
 
 .controller('HomeCtrl', function($scope, $rootScope, Account) {
