@@ -15,7 +15,7 @@ angular.module('gwazoo.controllers', [])
 		// console.log(userLogin);
 		Account.login(userLogin)
 		.then(function (result){
-			// console.log(result);
+			console.log("you got me babe", result);
 			$scope.user.username = '';
 			$scope.user.password = '';
 		}).catch(function (err){
@@ -46,7 +46,7 @@ angular.module('gwazoo.controllers', [])
 			// "added"    = boolean - whether user was successfully added
 			// "message"  = string - status message
 			// "dbRes"     = obj or null - response from db
-			$scope.userResult = user;  //DEBUG
+			$scope.user = user;  //DEBUG
 			console.log(user);
 			if (user.added) $location.path("/account");
 		}).catch(function (err) {

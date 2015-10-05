@@ -1,5 +1,66 @@
 <div class="container">
-	<h1>DASHBOARD</h1>
-
-	{{test}}
+	<section class="page-header">
+		<h1>VENDORS CAN ADD A PRODUCT</h1>
+		<h2>pretty awesome</h2>
+	</section>
+	<section>
+		<form class="form-horizontal">
+			<div class="form-group">
+				<label for="registerProductName" class="col-md-2 control-label">Product Name</label>
+				<div class="col-md-10">
+					<input type="text" class="form-control" id="registerProductName" name="productname" ng-model="item.name" placeholder="User Name">
+				</div>
+				<!--PLACEHOLDER ALERT-->
+				<p style="padding-top:10px;">{{ check }}</p>
+				<!--END PLACEHOLDER-->
+			</div>
+			<div class="form-group">
+				<label for="registerDescription" class="col-md-2 control-label">Description</label>
+				<div class="col-md-10">
+					<textarea class="form-control" id="registerDescription" name="description" ng-model="item.description" placeholder="Description" rows="5"></textarea>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="registerPrice" class="col-md-2 control-label">Price</label>
+				<div class="col-md-10">
+					<input type="text" class="form-control" id="registerPrice" name="price" ng-model="item.price" placeholder="Price">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="registerSalePrice" class="col-md-2 control-label">Sale Price</label>
+				<div class="col-md-10">
+					<input type="text" class="form-control" id="registerSalePrice" name="salePrice" ng-model="item.salePrice" placeholder="Sale Price">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="registerImage" class="col-md-2 control-label">Images</label>
+				<div class="col-md-10">
+					<input type="file" class="btn btn-default btn-sm" id="registerImage" name="image" ng-model="item.image" placeholder="add image">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="row">
+					<label class="col-md-2 control-label">Account Type</label>
+					<div class="col-md-2">
+						<label class="radio-inline">
+							<input type="radio" name="userType" name="type" ng-model="item.type" value="member" checked>Member
+						</label>
+					</div>
+					<div class="col-md-2">
+						<label class="radio-inline">
+							<input type="radio" name="userType" name="type" ng-model="item.type" value="vendor">Vendor
+						</label>
+					</div>
+				</div>
+			</div>
+		</form>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="btn btn-sm btn-block btn-danger" ng-click="cancel()">Cancel</div>
+			</div>
+			<div class="col-md-6">
+				<div class="btn btn-sm btn-block btn-success" ng-click="register(item)">Register</div>
+			</div>
+		</div>
+	</section>
 </div>

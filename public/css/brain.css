@@ -1,3 +1,27 @@
-.navbar-header {
-  width: 10%;
+@font-face {
+	font-family: 'Ubuntu Condensed', sans-serif;
+	src:url(../font/Amble-Regular-webfont.ttf) format('truetype');
+}
+body {
+	font-family: 'Ubuntu Condensed', sans-serif;
+	background:white;
+}
+.container {
+	width: 85%;
+}
+.container-fluid {
+	width: 85%;
+}
+.navbar-default .navbar-brand {
+	width: 100px;
+}
+/*.navbar-brand {
+	height: 100px;
+}*/
+.navbar-brand > img {
+	width: 100%;
+}
+
+textarea {
+	resize: none;
 }

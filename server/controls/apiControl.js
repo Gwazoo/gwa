@@ -76,7 +76,8 @@ module.exports = {
  								{
  									added: true,
  									message: "New user created",
- 									dbRes: result
+ 									dbRes: result,
+ 									firstName: userObj.firstName
  								});
  						}
  	    			});
