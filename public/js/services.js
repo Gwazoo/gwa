@@ -49,8 +49,8 @@ angular.module('gwazoo.services', [])
 			url: '/api/username', 
 			data: username
 		}).success(function(res) {
-			user = res;
-			deferred.resolve(user);
+			var username = res;
+			deferred.resolve(username);
 		}).error(function(err) {
 			deferred.reject(err);
 		});

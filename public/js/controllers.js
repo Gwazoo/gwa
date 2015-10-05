@@ -5,17 +5,17 @@ angular.module('gwazoo.controllers', [])
 	$scope.user = Account.returnUser();
 	$scope.$on('updateUser', function() {
 		$scope.user = Account.returnUser();
-		console.log($scope.user);
+		// console.log($scope.user);
 	});
 	$scope.logout = function() {
 		Account.logout();
 	};
 
 	$scope.login = function(userLogin) {
-		console.log(userLogin);
+		// console.log(userLogin);
 		Account.login(userLogin)
 		.then(function (result){
-			console.log(result);
+			// console.log(result);
 			$scope.user.username = '';
 			$scope.user.password = '';
 		}).catch(function (err){
