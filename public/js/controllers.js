@@ -1,8 +1,8 @@
 'use strict';
 angular.module('gwazoo.controllers', [])
 
-.controller('MainCtrl', function($scope, Account) {
-	
+.controller('MainCtrl', function($scope) {
+	$scope.test = "Hello World!";
 })
 
 .controller('LoginCtrl', function($scope, $location, Account) {
