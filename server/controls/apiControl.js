@@ -1,8 +1,8 @@
-var util = require('../util/thinky')
-var thinky = require('thinky')(util.config);
-var r = require('rethinkdb');
-var bcrypt = require('bcrypt-nodejs');
-var userModel = require('./../models/userModel.js');
+var util 		= require('../util/thinky');
+var thinky 		= require('thinky')(util.config);
+var r 			= require('rethinkdb');
+var bcrypt 		= require('bcrypt-nodejs');
+var userModel 	= require('./../models/userModel.js');
 
 module.exports = {
     /*
@@ -226,4 +226,7 @@ module.exports = {
 
 		res.json(cartCookie);
 	}
+	// addProduct : function (req, res) {
+		
+	// }
 };

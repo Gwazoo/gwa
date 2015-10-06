@@ -3,51 +3,52 @@
 		<h1>VENDORS CAN ADD A PRODUCT</h1>
 		<h2>pretty awesome</h2>
 	</section>
-	<section>
+	<section flow-init>
 		<form class="form-horizontal">
 			<div class="form-group">
-				<label for="registerProductName" class="col-md-2 control-label">Product Name</label>
-				<div class="col-md-10">
-					<input type="text" class="form-control" id="registerProductName" name="productname" ng-model="item.name" placeholder="User Name">
-				</div>
-				<!--PLACEHOLDER ALERT-->
-				<p style="padding-top:10px;">{{ check }}</p>
-				<!--END PLACEHOLDER-->
-			</div>
-			<div class="form-group">
-				<label for="registerDescription" class="col-md-2 control-label">Description</label>
-				<div class="col-md-10">
-					<textarea class="form-control" id="registerDescription" name="description" ng-model="item.description" placeholder="Description" rows="5"></textarea>
+				<label for="registerProductName" class="col-md-2 col-xs-3 control-label">Product Name</label>
+				<div class="col-md-10 col-xs-9">
+					<input type="text" class="form-control" id="itemName" name="productname" ng-model="prod.name" placeholder="Product Name">
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="registerPrice" class="col-md-2 control-label">Price</label>
-				<div class="col-md-10">
-					<input type="text" class="form-control" id="registerPrice" name="price" ng-model="item.price" placeholder="Price">
+				<label for="registerDescription" class="col-md-2 col-xs-3 control-label">Description</label>
+				<div class="col-md-10 col-xs-9">
+					<textarea class="form-control" id="itemDescription" name="description" ng-model="prod.description" placeholder="Description" rows="5"></textarea>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="registerSalePrice" class="col-md-2 control-label">Sale Price</label>
-				<div class="col-md-10">
-					<input type="text" class="form-control" id="registerSalePrice" name="salePrice" ng-model="item.salePrice" placeholder="Sale Price">
+				<label for="registerPrice" class="col-md-2 col-xs-3 control-label">Price</label>
+				<div class="col-md-10 col-xs-9">
+					<input type="text" class="form-control" id="itemPrice" name="price" ng-model="prod.price" placeholder="Price">
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="registerImage" class="col-md-2 control-label">Images</label>
-				<span class="col-md-2 file-input btn btn-primary btn-file">
-					Upload an Image<input type="file" multiple id="registerImage" name="image" ng-model="item.image">
+				<label for="registerSalePrice" class="col-md-2 col-xs-3 control-label">Sale Price</label>
+				<div class="col-md-10 col-xs-9">
+					<input type="text" class="form-control" id="itemSalePrice" name="salePrice" ng-model="prod.salePrice" placeholder="Sale Price">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="registerImage" class="col-md-2 col-xs-3 control-label">Images</label>
+				<span class="col-md-2 col-xs-5 file-input btn btn-primary btn-file">
+					Upload an Image<input type="file" multiple id="itemImages" name="image" ng-model="prod.images">
 				</span>
+				<p class="col-md-4">Only PNG or JPG files allowed.</p>
 			</div>
 		</form>
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-3 col-md-offset-3 col-xs-6">
 				<div class="btn btn-sm btn-block btn-danger" ng-click="cancel()">Cancel</div>
 			</div>
-			<div class="col-md-6">
-				<div class="btn btn-sm btn-block btn-success" ng-click="register(item)">Register</div>
+			<div class="col-md-3 col-xs-6">
+				<div class="btn btn-sm btn-block btn-success" ng-click="addProduct(prod)">Add Product</div>
 			</div>
 		</div>
 	</section>
+		<div class="row">
+			
+		</div>
 	<section>
 	</section>
 </div>

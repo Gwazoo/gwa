@@ -22,9 +22,12 @@
 	<script src="/libs/angular/angular.js"></script>
 	<script src="/libs/angular-route/angular-route.min.js"></script>
 	<script src="/libs/angular-local-storage/dist/angular-local-storage.min.js"></script>
+	<script src="/libs/ng-flow/dist/ng-flow-standalone.min.js"></script>
+	<script src="/libs/flow.js/dist/flow.min.js"></script>
+	<script src="/libs/ng-flow/dist/ng-flow.min.js"></script> <!--
 	<script src="/js/jquery.openCarousel.js"></script>
 	<script src="/js/easing.js"></script>
-	<script src="/js/move-top.js"></script>
+	<script src="/js/move-top.js"></script> -->
 	<script src="/js/app.js"></script>
 	<script src="/js/controllers.js"></script>
 	<script src="/js/services.js"></script>
@@ -82,22 +85,19 @@
 						</div>
 					</form>
 					<ul class="nav navbar-nav navbar-right">
-						<li ng-show="user"><p class="navbar-text">Welcome, {{user.firstName}}</p></li>
 						<li ng-show="!user" data-toggle="modal" data-target="#loginModal"><a href="">Login</a></li>
 						<li ng-show="!user"><a href="register">register</a></li>
 						<li ng-show="user"><a href="#"><i class="fa fa-shopping-cart"></i> Cart</a></li>
 						<li ng-show="user" class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <span class="caret"></span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user.firstName}}'s Account <span class="caret"></span></a>
 							<ul class="dropdown-menu"> 
-								<li><a href="/account">{{user.firstName}}'s Account</a></li>
+								<li><a href="/account">Account Settings</a></li>
 								<li role="separator" class="divider"></li>
-								<li><a href="">Orders</a></li>
+								<li><a href="/account/past-orders/:id">Orders</a></li>
 								<li role="separator" class="divider"></li>
 								<li><a href="">Your Wishlist</a></li>
 								<li role="separator" class="divider"></li>
-								<li><a href="">Account Settings</a></li>
-								<li role="separator" class="divider"></li>
-								<li ng-show="user" ng-click="logout()"><a href="">Logout</a></li>
+								<li ng-click="logout()"><a href="">Logout</a></li>
 							</ul>
 						</li>
 					</ul>

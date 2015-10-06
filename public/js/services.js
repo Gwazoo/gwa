@@ -10,13 +10,13 @@ angular.module('gwazoo.services', [])
 			method: 'POST',
 			url: '/api/auth', 
 			data: userLogin
-		}).success(function(res) {
+		}).success(function (res) {
 			console.log("Res:", res);
 			user = res;
 			$rootScope.$broadcast('updateUser');
 			$location.path('/account').replace();
 			deferred.resolve(user);
-		}).error(function(err) {
+		}).error(function (err) {
 			console.log(err);
 			deferred.reject(err);
 		});
@@ -37,7 +37,7 @@ angular.module('gwazoo.services', [])
 			method: 'POST',
 			url: '/api/create', 
 			data: formData
-		}).success(function(res) {
+		}).success(function (res) {
 			if (res.added) {
 				user = res.user;
 				$location.path('/account').replace();
@@ -46,7 +46,7 @@ angular.module('gwazoo.services', [])
 			} else {
 				deferred.resolve(res.message);
 			}
-		}).error(function(err) {
+		}).error(function (err) {
 			console.log("Err", err);
 			deferred.reject(err);
 		});
@@ -59,10 +59,10 @@ angular.module('gwazoo.services', [])
 			method: 'POST',
 			url: '/api/username', 
 			data: username
-		}).success(function(res) {
+		}).success(function (res) {
 			var username = res;
 			deferred.resolve(username);
-		}).error(function(err) {
+		}).error(function (err) {
 			deferred.reject(err);
 		});
 		return deferred.promise;
@@ -79,14 +79,14 @@ angular.module('gwazoo.services', [])
 
 	this.returnUser = function() {
 		return user;
-	}
+	};
 
 	this.logout = function() {
 		var deferred = $q.defer();
 		$http({
 			method: 'GET',
 			url: 'api/logout'
-		}).success(function(res) {
+		}).success(function (res) {
 			user = '';
 			$rootScope.$broadcast('updateUser');
 			$location.path('/').replace();
@@ -96,3 +96,21 @@ angular.module('gwazoo.services', [])
 	};
 })
 
+.service('Products', function($q, $http, $rootScope) {
+	this.addProduct = function (productInfo) {
+		var deferred = $q.defer();
+		$http({
+			method: 'POST',
+			url: 'api/product',
+			data: productInfo
+		}).success(function (res) {
+			console.log('product Added:', res);
+			deferred.resolve(res.data);
+		});
+		return deferred.promise;
+	};
+
+	this.getProduct = function() {
+
+	}
+})

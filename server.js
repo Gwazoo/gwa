@@ -5,7 +5,6 @@ var	BodyParser     = require('body-parser');
 var	Passport       = require('passport');
 var	LocalStrategy  = require('passport-local').Strategy;
 var	Connect        = require('connect');
-var	Api            = require('./server/controls/apiControl');
 var	R              = require('rethinkdb');
 var Thinky         = require('./server/util/thinky');
 var	Api            = require('./server/controls/apiControl');
@@ -65,15 +64,15 @@ app.get('/api/category/:slug'/*, categoryControl*/);
 app.get('/api/product/:sku'/*, productControl*/);
 
 // VENDOR ACCESS
-// app.post('/api/category/:slug', isAuthed, categoryControl);
-// app.post('/api/product/:sku', isAuthed, productControl);
+// app.post('/api/category/:slug', Api.isAuthed, Api.categoryControl);
+// app.post('/api/product', Api.isAuthed, Api.addProduct);
 
 // PROTECTED ROUTES ======================================
 app.all('/account', Api.isAuthed, function(req, res, next) {
 	res.sendFile('index.html', { root: __dirname + "/public"});
 });
 
-// OPEN ROUTES ==========================================
+// OPEN ROUTES ===========================================
 app.all('/*', function(req, res, next) {
 	res.sendFile('index.html', { root: __dirname + "/public"});
 });

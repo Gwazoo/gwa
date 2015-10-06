@@ -1,5 +1,5 @@
 'use strict';
-angular.module('gwazoo', ['ngRoute', /*'ngMaterial',*/ 'gwazoo.controllers', 'gwazoo.services', 'LocalStorageModule'])
+angular.module('gwazoo', ['ngRoute', /*'ngMaterial',*/ 'gwazoo.controllers', 'gwazoo.services', 'LocalStorageModule', 'flow'])
 
 .config(function($routeProvider, $locationProvider) {
 	$routeProvider

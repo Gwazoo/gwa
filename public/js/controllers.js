@@ -68,7 +68,7 @@ angular.module('gwazoo.controllers', [])
 })
 
 .controller('HomeCtrl', function($scope, $rootScope, Account) {
-	$scope.test = 'home controller';
+	$scope.test = 'Home Controller is Awesome';
 })
 
 .controller('SignupCtrl', function($scope, $rootScope, $location, Account) {
@@ -101,8 +101,20 @@ angular.module('gwazoo.controllers', [])
 	};
 })
 
-.controller('DashboardCtrl', function($scope, $rootScope) {
-	$scope.test = 'dashboard controller';
+.controller('DashboardCtrl', function($scope, $rootScope, Products) {
+	$scope.addProduct = function (productInfo) {
+		console.log($scope.prod);
+		Products.addProduct(productInfo)
+		.then(function () {
+			$scope.prod.name = '';
+			$scope.prod.description = '';
+			$scope.prod.price = '';
+			$scope.prod.salePrice = '';
+			$scope.prod.images = '';
+		}).catch(function (err) {
+
+		});
+	};
 })
 
 .controller('CategoryCtrl', function($scope, $rootScope) {
@@ -110,6 +122,6 @@ angular.module('gwazoo.controllers', [])
 	$scope.test2 = 'search result ctrl same as category ctrl';
 })
 
-.controller('ProductCtrl', function($scope, $rootScope) {
+.controller('ProductCtrl', function($scope, $rootScope, Products) {
 	$scope.test = 'product controller';
 })
