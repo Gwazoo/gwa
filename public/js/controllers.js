@@ -1,21 +1,25 @@
 'use strict';
 angular.module('gwazoo.controllers', [])
 
-.controller('MainCtrl', function($scope, Account, localStorageService) {
+.controller('MainCtrl', function($scope, Account, Cookies) {
 	$scope.user = Account.returnUser();
 	$scope.$on('updateUser', function() {
 		$scope.user = Account.returnUser();
 	});
 	$scope.logout = function() {
-		$scope.user.data = '';
-		$scope.clearCookies();
 		Account.logout();
 	};
 
 	$scope.login = function(userLogin) {
 		// console.log(userLogin);
 		Account.login(userLogin)
-		.then(function () {
+		.then(function (user) {
+			var options = {
+				type: 'session',
+				user: user
+			}
+			Cookies.setCookies(options);
+			// Cookies.getCookies(options);
 			$scope.user.username = '';
 			$scope.user.password = '';
 		}).catch(function (err) {
@@ -28,43 +32,18 @@ angular.module('gwazoo.controllers', [])
 		$scope.user.password = '';
 	};
 
-	var count = 0;
-	var cart = {
-		username: null,
-		items: []
-	};
-
-	$scope.setCookies = function () {
-		var item = {};
-		item.id = count;
-		item.quantity = Math.floor(Math.random() * 10)
-		if ($scope.user.data) {
-			cart.username = $scope.user.data.username;
-		}		
-		cart.items.push(item);
-		JSON.stringify(cart);
-		console.log(cart);
-		localStorageService.cookie.set("Cart", cart);
-		count++;
+	$scope.setCookies = function (options) {
+		Cookies.setCookies(options);
 	}
-
+	$scope.getCookies = function (options) {
+		Cookies.getCookies(options);
+	}
 	$scope.clearCookies = function () {
-		localStorageService.cookie.clearAll();
-		cart = {
-			username: null,
-			items: []
-		}
+		Cookies.clearCookies();
 	}
-
-	$scope.getCookies = function () {
-		if ($scope.user.data) {
-			cart.username = $scope.user.data.username;
-			localStorageService.cookie.set("Cart", cart);
-		}
-		var cartCookie = localStorageService.cookie.get("Cart");
-		console.log(cartCookie);
+	$scope.cartOptions = {
+		type: 'cart'
 	}
-
 })
 
 .controller('HomeCtrl', function($scope, $rootScope, Account) {

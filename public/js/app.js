@@ -36,9 +36,8 @@ angular.module('gwazoo', ['ngRoute', /*'ngMaterial',*/ 'gwazoo.controllers', 'gw
 		});
 	$locationProvider.html5Mode(true);
 })
-
-.config(function(localStorageServiceProvider) {
+.config(function (localStorageServiceProvider) {
 	localStorageServiceProvider
 	.setPrefix('gwazoo')
-	.setStorageCookie(30, '/');
-})
+	.setStorageCookie('session', '/');
+});

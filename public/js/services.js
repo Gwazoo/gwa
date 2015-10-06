@@ -10,9 +10,7 @@ angular.module('gwazoo.services', [])
 			method: 'POST',
 			url: '/api/auth', 
 			data: userLogin
-		}).success(function(res) {
-			console.log("Res:", res);
-			user = res;
+		}).success(function(user) {
 			$rootScope.$broadcast('updateUser');
 			$location.path('/account').replace();
 			deferred.resolve(user);
@@ -94,5 +92,44 @@ angular.module('gwazoo.services', [])
 		});
 		return deferred.promise;
 	};
+})
+
+.service('Cookies', function(localStorageService) {
+	var count = 0;
+	var cart = {
+		items: []
+	};
+
+	this.setCookies = function (options) {
+		if (options.type == 'session') {
+			localStorageService.cookie.set("Session", options.user);
+		} else if (options.type == 'cart') {
+			var item = {};
+			item.id = count;
+			item.quantity = Math.floor(Math.random() * 10)	
+			cart.items.push(item);
+			JSON.stringify(cart);
+			console.log(cart);
+			localStorageService.cookie.set("Cart", cart, 30);
+			count++;
+		}
+	}
+
+	this.clearCookies = function () {
+		localStorageService.cookie.clearAll();
+		cart = {
+			items: []
+		}
+	}
+
+	this.getCookies = function (options) {
+		if (options.type == 'session') {
+			console.log(localStorageService.cookie.get("Session"));
+		} else if (options.type == 'cart') {
+			console.log(localStorageService.cookie.get("Cart"));
+		}
+	}
+
+
 })
 
