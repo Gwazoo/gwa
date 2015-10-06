@@ -21,9 +21,9 @@ var User = thinky.createModel("users", {
 	}],
 	type: type.string(), // This is probably going to be an ID to a user types table
 	isActive: type.boolean(), // So we can disable users
-	createdDate: type.date().default(r.now()), // When the account was created
-	modifiedDate: type.date().default(r.now()), // When the account was modified
-	lastActivityDate: type.date().default(r.now()) // Last time they logged in
+	createdDate: type.date(), // When the account was created
+	modifiedDate: type.date(), // When the account was modified
+	lastActivityDate: type.date() // Last time they logged in
 });
 
 module.exports = User;

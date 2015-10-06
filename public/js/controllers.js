@@ -7,6 +7,8 @@ angular.module('gwazoo.controllers', [])
 		$scope.user = Account.returnUser();
 	});
 	$scope.logout = function() {
+		$scope.user.data = '';
+		$scope.clearCookies();
 		Account.logout();
 	};
 
@@ -27,27 +29,40 @@ angular.module('gwazoo.controllers', [])
 	};
 
 	var count = 0;
-	var cart = [];
+	var cart = {
+		username: null,
+		items: []
+	};
 
-	$scope.set = function () {
+	$scope.setCookies = function () {
 		var item = {};
 		item.id = count;
 		item.quantity = Math.floor(Math.random() * 10)
-		cart.push(item);
+		if ($scope.user.data) {
+			cart.username = $scope.user.data.username;
+		}		
+		cart.items.push(item);
 		JSON.stringify(cart);
 		console.log(cart);
 		localStorageService.cookie.set("Cart", cart);
 		count++;
 	}
 
-	$scope.clear = function () {
+	$scope.clearCookies = function () {
 		localStorageService.cookie.clearAll();
-		localStorageService.clearAll();
+		cart = {
+			username: null,
+			items: []
+		}
 	}
 
-	$scope.get = function () {
-		var testy = localStorageService.cookie.get("Cart");
-		console.log(testy);
+	$scope.getCookies = function () {
+		if ($scope.user.data) {
+			cart.username = $scope.user.data.username;
+			localStorageService.cookie.set("Cart", cart);
+		}
+		var cartCookie = localStorageService.cookie.get("Cart");
+		console.log(cartCookie);
 	}
 
 })

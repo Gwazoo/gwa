@@ -59,7 +59,7 @@ module.exports = {
  		    	if (err) throw err;
  		    	var salt = bcrypt.genSaltSync(12);
  		    	bcrypt.hash(userObj.password, salt, null, function (err, hash) {  //hash password
- 		    		if (err) throw err;
+ 		    		if (err) res.status(500).send(err);
  		    		userObj.password = hash;  //overwrite form data password with hash
  	    		    r.table('users').insert(userObj)  //save updated form data to db
  	    			.run(connection, function(err, result) {
@@ -199,13 +199,29 @@ module.exports = {
 		});
 	},
 	cart : function (req, res) {
+		// console.log(req.user);
+		// req.session.cookie.username = req.user.username;
+		// console.log("req.session:", req.session.cookie);
+
 		var cartCookie = JSON.parse(req.cookies['gwazoo.Cart']);
+		// cartCookie.username = req.user.username;
+		console.log(cartCookie);
+
 		// console.log(req.user);
 
 		// cartCookie = cartCookie[0]; target specific indices
 		// ========== OR ============
 		// cartCookie.forEach(function (item) {
 		// 	console.log(item);
+		// });
+		// r.connect(thinky._config, function (err, connection) {  //connect to db
+		// 	if (err) throw err;
+		// 	r.table('session').get(req.user.username)  //check if user exists by getting with username
+		// 	.run(connection, function(err, user) {
+		// 		if (err) { return done(err); }
+		// 		delete user.password;
+		// 		{ return done(null, user); }  //is success, return callback with user object
+		//  	});
 		// });
 
 		res.json(cartCookie);
