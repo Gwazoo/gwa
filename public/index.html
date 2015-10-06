@@ -100,10 +100,6 @@
 								<li ng-show="user" ng-click="logout()"><a href="">Logout</a></li>
 							</ul>
 						</li>
-						<i class="fa fa-minus fa-2x fa-rotate-90"></i>
-						<li class="pull-right">
-							<a href="/api/cart"><i class="fa fa-shopping-cart"></i> Cart </a>
-						</li>
 					</ul>
 				</div><!-- /.navbar-collapse -->
 			</div><!-- /.container-fluid -->
@@ -112,11 +108,11 @@
 
 	</header>
 	<!-- TEMPORARY HACKINESS -->
-	<a href="#" ng-click="set()">Add To Cart</a>
+	<a href="#" ng-click="setCookies()">Add To Cart</a>
 	<br>
-	<a href="#" ng-click="clear()">Clear Cart</a>
+	<a href="#" ng-click="clearCookies()">Clear Cart</a>
 	<br>
-	<a href="#" ng-click="get()">Get Cart</a>
+	<a href="#" ng-click="getCookies()">Get Cart</a>
 
 	<container ng-view>
 		
