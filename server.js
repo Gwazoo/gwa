@@ -10,10 +10,12 @@ var	R              = require('rethinkdb');
 var Thinky         = require('./server/util/thinky');
 var	Api            = require('./server/controls/apiControl');
 var	User           = require('./server/controls/userControl');
+var CookieParser   = require('cookie-parser');
 
 var app = Express();
 
 // MIDDLEWARE ============================================
+app.use(CookieParser());
 app.use(BodyParser.json());
 app.use(BodyParser.urlencoded({extended:true}));
 app.use('/', Express.static(__dirname + '/public')); 
@@ -49,6 +51,7 @@ app.get('/api/logout', function(req, res) {
 	req.logout();
 	res.redirect('/');
 });
+app.get('/api/cart', Api.cart);
 
 // app.post('/api/register', User.create);
 // app.put('/api/profile/:id', isAuthed, userControl.profile);

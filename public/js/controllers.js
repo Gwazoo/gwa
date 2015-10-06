@@ -1,7 +1,7 @@
 'use strict';
 angular.module('gwazoo.controllers', [])
 
-.controller('MainCtrl', function($scope, Account) {
+.controller('MainCtrl', function($scope, Account, localStorageService) {
 	$scope.user = Account.returnUser();
 	$scope.$on('updateUser', function() {
 		$scope.user = Account.returnUser();
@@ -25,6 +25,31 @@ angular.module('gwazoo.controllers', [])
 		$scope.user.username = '';
 		$scope.user.password = '';
 	};
+
+	var count = 0;
+	var cart = [];
+
+	$scope.set = function () {
+		var item = {};
+		item.id = count;
+		item.quantity = Math.floor(Math.random() * 10)
+		cart.push(item);
+		JSON.stringify(cart);
+		console.log(cart);
+		localStorageService.cookie.set("Cart", cart);
+		count++;
+	}
+
+	$scope.clear = function () {
+		localStorageService.cookie.clearAll();
+		localStorageService.clearAll();
+	}
+
+	$scope.get = function () {
+		var testy = localStorageService.cookie.get("Cart");
+		console.log(testy);
+	}
+
 })
 
 .controller('HomeCtrl', function($scope, $rootScope, Account) {
@@ -33,10 +58,10 @@ angular.module('gwazoo.controllers', [])
 
 .controller('SignupCtrl', function($scope, $rootScope, Account) {
 	$scope.register = function (formData) {
-		$scope.user.result = "Creating new user...";
-		Account.register(formData)
-		.then(function (result) {
-			$scope.user.result = result.message;
+		$scope.result = "Creating new user...";
+		Account.register(formData)  //services.js => server.js => apiControl.js (create)
+		.then(function (resultMessage) {
+			$scope.user.result = resultMessage;
 		}).catch(function (err) {
 
 		});

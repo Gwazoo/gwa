@@ -21,6 +21,7 @@
 	<script src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="/libs/angular/angular.js"></script>
 	<script src="/libs/angular-route/angular-route.min.js"></script>
+	<script src="/libs/angular-local-storage/dist/angular-local-storage.min.js"></script>
 	<script src="/js/jquery.openCarousel.js"></script>
 	<script src="/js/easing.js"></script>
 	<script src="/js/move-top.js"></script>
@@ -105,11 +106,18 @@
 						</li>
 						<i class="fa fa-minus fa-2x fa-rotate-90"></i>
 						<li class="pull-right">
-							<a href="#"><i class="fa fa-shopping-cart"></i> Cart </a>
+							<a href="/api/cart"><i class="fa fa-shopping-cart"></i> Cart </a>
 						</li>
 					</ul>
 		</nav>
 	</header>
+	<!-- TEMPORARY HACKINESS -->
+	<a href="#" ng-click="set()">Add To Cart</a>
+	<br>
+	<a href="#" ng-click="clear()">Clear Cart</a>
+	<br>
+	<a href="#" ng-click="get()">Get Cart</a>
+
 	<container ng-view>
 		
 	</container>

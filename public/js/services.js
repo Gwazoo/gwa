@@ -23,6 +23,14 @@ angular.module('gwazoo.services', [])
 		return deferred.promise;
 	};
 
+	/*
+	* @param {Obj} formData
+	*	Object containing all the info from form
+	* @returns {Obj} res
+	*   "added"    => boolean - whether user was successfully added
+	*	"message"  => string - status message
+	*	"user"     => obj or null - response from db
+	*/
 	this.register = function(formData) {
 		var deferred = $q.defer();
 		$http({
@@ -30,17 +38,13 @@ angular.module('gwazoo.services', [])
 			url: '/api/create', 
 			data: formData
 		}).success(function(res) {
-			// res returns object with following properties:
-			// "added"    = boolean - whether user was successfully added
-			// "message"  = string - status message
-			// "user"     = obj or null - response from db
 			if (res.added) {
 				user = res.user;
 				$location.path('/account').replace();
 				$rootScope.$broadcast('updateUser');
-				deferred.resolve(res);
+				deferred.resolve(res.message);
 			} else {
-				deferred.resolve(res);
+				deferred.resolve(res.message);
 			}
 		}).error(function(err) {
 			console.log("Err", err);

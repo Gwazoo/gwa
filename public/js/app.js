@@ -1,5 +1,5 @@
 'use strict';
-angular.module('gwazoo', ['ngRoute', /*'ngMaterial',*/ 'gwazoo.controllers', 'gwazoo.services'])
+angular.module('gwazoo', ['ngRoute', /*'ngMaterial',*/ 'gwazoo.controllers', 'gwazoo.services', 'LocalStorageModule'])
 
 .config(function($routeProvider, $locationProvider) {
 	$routeProvider
@@ -35,4 +35,9 @@ angular.module('gwazoo', ['ngRoute', /*'ngMaterial',*/ 'gwazoo.controllers', 'gw
 			redirectTo: '/'
 		});
 	$locationProvider.html5Mode(true);
+})
+.config(function (localStorageServiceProvider) {
+	localStorageServiceProvider
+	.setPrefix('gwazoo')
+	.setStorageCookie(30, '/');
 });

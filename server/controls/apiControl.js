@@ -73,7 +73,7 @@ module.exports = {
  		    				req.login(user, function(err) {  //create Passport session for new user
  								if (err) { return res.status(500).send("Error Message:", err); }
  							});
- 							return res.json(
+ 							return res.json(  //res will be handled by services.js
  								{
  									added: true,
  									message: "A new user was successfully created!",
@@ -86,7 +86,7 @@ module.exports = {
         }
         catch(err) {  //if the user does not validate
         	console.log("Failed validation:", err.message);
-            return res.json(  //this response will be handled by controllers.js
+            return res.json(  //this response will be handled by services.js
             	{
             		added: false,
             		message: "The user was not validated. " + err.message,
@@ -108,6 +108,7 @@ module.exports = {
 		    r.table('users').get(username)  //check if user exists by getting with username
 			.run(connection, function(err, user) {
 				if (err) { return done(err); }
+				delete user.password;
 				{ return done(null, user); }  //is success, return callback with user object
 		 	});
 		});
@@ -180,7 +181,10 @@ module.exports = {
 							//compare user-submitted password with hash, returns boolean isMatch
 							if (isMatch) {
 								console.log("Authenticated!");
-								{ return done(null, result[0]); }  //Success! Return user object
+								var user = result[0];
+								delete user.password;
+								console.log(user);
+								{ return done(null, user); }  //Success! Return user object
 							} else {
 								console.log("Incorrect Password!");
 								{ return done(null, false, {message: 'ERROR: Password Did Not Match!'}); }
@@ -193,5 +197,17 @@ module.exports = {
 				});
 			});
 		});
+	},
+	cart : function (req, res) {
+		var cartCookie = JSON.parse(req.cookies['gwazoo.Cart']);
+		// console.log(req.user);
+
+		// cartCookie = cartCookie[0]; target specific indices
+		// ========== OR ============
+		// cartCookie.forEach(function (item) {
+		// 	console.log(item);
+		// });
+
+		res.json(cartCookie);
 	}
 };
