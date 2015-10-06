@@ -103,9 +103,9 @@ module.exports = {
 	*/
 	read : function (username, done) {
 		console.log("Deserializing...");
-	    r.connect(thinky._config, function (err, connection) {  //connect to db
-	     	if (err) throw err;
-		    r.table('users').get(username)  //check if user exists by getting with username
+		r.connect(thinky._config, function (err, connection) {  //connect to db
+			if (err) throw err;
+			r.table('users').get(username)  //check if user exists by getting with username
 			.run(connection, function(err, user) {
 				if (err) { return done(err); }
 				delete user.password;

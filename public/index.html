@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="/css/reset.css">
 	<link rel="stylesheet" href="/libs/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="/css/style.css" media="all"/>
+	<!-- <link rel="stylesheet" href="/css/style.css" media="all"/> -->
 	<link rel="stylesheet" href="/css/brain.css">
 
 <!-- FAVICON -->
@@ -34,35 +34,37 @@
 <body ng-controller="MainCtrl">
 <!-- HEADER -->
 	<header class="header">
-		<nav class="nav navbar wrap">
+		<nav class="navbar navbar-default">
 			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false">
-						<span class="sr-only">Toggle Navigation</span>
+					<a class="navbar-brand img-responsive center-block" href="/"><img src="/img/logo.png" alt="Gwazoo"></a>
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="/"><img src="/img/logo.png" alt="Gwazoo"></a>
 				</div>
 
-				<div class="collapse navbar-collapse">
-					<ul class="navbar-nav">
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="navbar-collapse-1">
+					<ul class="nav navbar-nav">
 						<li class="dropdown">
-							<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">shop <span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li><a href="category/{{category.slug}}">Automotive & Industrial</a></li>
-								<li><a href="category/{{category.slug}}">Sports & Outdoors</a></li>
-								<li><a href="category/{{category.slug}}">Beauty</a></li>
-								<li><a href="category/{{category.slug}}">Books & Audible</a></li>
-								<li><a href="category/{{category.slug}}">Clothes, Shoes & Jewelry</a></li>
-								<li><a href="category/{{category.slug}}">Electronics & Computers</a></li>
-								<li><a href="category/{{category.slug}}">Office & School Supplies</a></li>
-								<li><a href="category/{{category.slug}}">Health & Grocery</a></li>
-								<li><a href="category/{{category.slug}}">Home & Garden</a></li>
-								<li><a href="category/{{category.slug}}">Movies, Music & Games</a></li>
-								<li><a href="category/{{category.slug}}">Toys, Kids & Baby</a></li>
-								<li><a href="category/{{category.slug}}">Other</a></li>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shop <span class="caret"></span></a>
+							<ul class="dropdown-menu">  <!-- NG_REPEAT THROUGHT THESE? -->
+								<li><a href="/category/{{category.slug}}">Automotive & Industrial</a></li>
+								<li><a href="/category/{{category.slug}}">Sports & Outdoors</a></li>
+								<li><a href="/category/{{category.slug}}">Beauty</a></li>
+								<li><a href="/category/{{category.slug}}">Books & Audible</a></li>
+								<li><a href="/category/{{category.slug}}">Clothes, Shoes & Jewelry</a></li>
+								<li><a href="/category/{{category.slug}}">Electronics & Computers</a></li>
+								<li><a href="/category/{{category.slug}}">Office & School Supplies</a></li>
+								<li><a href="/category/{{category.slug}}">Health & Grocery</a></li>
+								<li><a href="/category/{{category.slug}}">Home & Garden</a></li>
+								<li><a href="/category/{{category.slug}}">Movies, Music & Games</a></li>
+								<li><a href="/category/{{category.slug}}">Toys, Kids & Baby</a></li>
+								<li><a href="/category/{{category.slug}}">Other</a></li>
 							</ul>
 						</li>
 						<li><a href="/category/{{category.slug}}">beauty</a></li>
@@ -71,37 +73,31 @@
 						<li><a href="category/{{category.slug}}">sporting</a></li>
 						<li><a href="category/{{category.slug}}">games</a></li>
 					</ul>
-					<div class="search">
-						<form role="form" class="form-inline">
-							<div class="form-group">
-								<label class="sr-only" for="searchBar">Gwazoo Search</label>
-								<div class="input-group">
-									<input type="text" class="form-control" id="searchBar" autocomplete="on" placeholder="Search Gwazoo...">
-									<div type="submit" class="input-group-addon btn btn-sm"><i class="fa fa-search fa-2x"></i></div>
-								</div>
+					<form role="form" class="navbar-form navbar-left">
+						<div class="form-group">
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="Search Gwazoo...">
+								<span class="input-group-btn" type="button"><button class="btn btn-primary" type="button"><i class=" fa fa-search"></i></button></span>
 							</div>
-						</form>
-					</div>
-					
-					<ul class="navbar-nav navbar-right">
-						<li ng-show="user"><p class="navbar-text"><strong>welcome, </strong>{{user.firstName}}</p></li>
-						<li ng-show="user"><a href="account">account</a></li>
-						<li ng-show="user" ng-click="logout()"><a href="">logout</a></li>
-						<li ng-show="!user" data-toggle="modal" data-target="#loginModal"><a href="">login</a></li>
+						</div>
+					</form>
+					<ul class="nav navbar-nav navbar-right">
+						<li ng-show="user"><p class="navbar-text">Welcome, {{user.firstName}}</p></li>
+						<li ng-show="!user" data-toggle="modal" data-target="#loginModal"><a href="">Login</a></li>
 						<li ng-show="!user"><a href="register">register</a></li>
-					</ul>
-
-					<ul class="">
-						<li role="presentaion" class="dropdown pull-left">
-							<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-								My Account <span class="caret"></span>
-							</a>
-							<ul class="dropdown-menu">
-								<li><a href="">Your Account</a></li>
+						<li ng-show="user"><a href="#"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+						<li ng-show="user" class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <span class="caret"></span></a>
+							<ul class="dropdown-menu"> 
+								<li><a href="/account">{{user.firstName}}'s Account</a></li>
+								<li role="separator" class="divider"></li>
 								<li><a href="">Orders</a></li>
+								<li role="separator" class="divider"></li>
 								<li><a href="">Your Wishlist</a></li>
+								<li role="separator" class="divider"></li>
 								<li><a href="">Account Settings</a></li>
-								<li><a href="/api/logout">Logout</a></li>
+								<li role="separator" class="divider"></li>
+								<li ng-show="user" ng-click="logout()"><a href="">Logout</a></li>
 							</ul>
 						</li>
 						<i class="fa fa-minus fa-2x fa-rotate-90"></i>
@@ -109,7 +105,11 @@
 							<a href="/api/cart"><i class="fa fa-shopping-cart"></i> Cart </a>
 						</li>
 					</ul>
+				</div><!-- /.navbar-collapse -->
+			</div><!-- /.container-fluid -->
 		</nav>
+
+
 	</header>
 	<!-- TEMPORARY HACKINESS -->
 	<a href="#" ng-click="set()">Add To Cart</a>

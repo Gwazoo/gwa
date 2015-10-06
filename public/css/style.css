@@ -23,8 +23,8 @@ nav.horizontal ul li{	display: inline-block;}/* horizontal menu */
 img{max-width:100%;}
 /*end reset*/
 @font-face {
-    font-family: 'Ubuntu Condensed', sans-serif;
-    src:url(../font/Amble-Regular-webfont.ttf) format('truetype');
+	font-family: 'Ubuntu Condensed', sans-serif;
+	src:url(../font/Amble-Regular-webfont.ttf) format('truetype');
 }
 body {
 	font-family: 'Ubuntu Condensed', sans-serif;
@@ -160,12 +160,22 @@ body {
     width:95%;
     background:url("../images/nav-icon.png") no-repeat 98% center;
 }
-.nav {
-    list-style: none;
-     *zoom: 1;
-     background:white;
-     border-bottom:1px solid gray;
-     border-top:1px solid gray;
+.navbar-default {
+	list-style: none;
+	*zoom: 1;
+	background:white;
+	border-bottom:1px solid gray;
+	border-top:1px solid gray;
+	border-radius: 0;
+}
+.container-fluid {
+	width: 80%;
+}
+.navbar-brand {
+	padding: 6px 15px;
+}
+.navbar-brand>img {
+	max-width: 140px;
 }
 .nav:before,
 .nav:after {
@@ -271,6 +281,12 @@ body {
     font-size:15px;
 	color:#525252;
 	padding:6px;
+}
+.input-group-lg>.form-control, .input-group-lg>.input-group-addon, .input-group-lg>.input-group-btn>.btn {
+	padding: 0px 16px;
+}
+.navbar-text {
+	margin-bottom: 17px;
 }
 
 @media screen and (max-width: 768px) {
@@ -1184,20 +1200,23 @@ body {
 	display:inline;
 }
 .your-review input[type="text"],.your-review textarea{
-		    padding:8px;
-			display:block;
-			width:50%;
-			border:1px solid #E0E0E0;
-			background:none;
-			outline:none;
-			color:#222;
-			font-size:1em;
-			font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;
-			-webkit-appearance:none;
+    padding:8px;
+	display:block;
+	width:50%;
+	border:1px solid #E0E0E0;
+	background:none;
+	outline:none;
+	color:#222;
+	font-size:1em;
+	font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;
+	-webkit-appearance:none;
 }
 .your-review textarea{
-		resize:none;
-		height:120px;		
+	resize:none;
+	height:120px;		
+}
+textarea.form-control {
+	resize: none;
 }
 .your-review input[type="submit"]{
     font-size:1em;

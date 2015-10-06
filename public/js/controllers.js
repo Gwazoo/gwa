@@ -11,7 +11,7 @@ angular.module('gwazoo.controllers', [])
 	};
 
 	$scope.login = function(userLogin) {
-		console.log(userLogin);
+		// console.log(userLogin);
 		Account.login(userLogin)
 		.then(function () {
 			$scope.user.username = '';
