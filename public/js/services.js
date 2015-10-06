@@ -10,14 +10,14 @@ angular.module('gwazoo.services', [])
 			method: 'POST',
 			url: '/api/auth', 
 			data: userLogin
-		}).then(function(res) {
-			// console.log("Res:", res);
+		}).success(function(res) {
+			console.log("Res:", res);
 			user = res;
 			$rootScope.$broadcast('updateUser');
 			$location.path('/account').replace();
 			deferred.resolve(user);
-		}).catch(function(err) {
-			// console.log(err);
+		}).error(function(err) {
+			console.log(err);
 			deferred.reject(err);
 		});
 		return deferred.promise;
@@ -86,12 +86,13 @@ angular.module('gwazoo.services', [])
 		$http({
 			method: 'GET',
 			url: 'api/logout'
-		}).then(function(res) {
+		}).success(function(res) {
 			user = '';
 			$rootScope.$broadcast('updateUser');
 			$location.path('/').replace();
-			deferred.resolve(res);
+			deferred.resolve(user);
 		});
 		return deferred.promise;
 	};
 })
+

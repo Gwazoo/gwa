@@ -56,12 +56,18 @@ angular.module('gwazoo.controllers', [])
 	$scope.test = 'home controller';
 })
 
-.controller('SignupCtrl', function($scope, $rootScope, Account) {
-	$scope.register = function (formData) {
-		$scope.result = "Creating new user...";
-		Account.register(formData)  //services.js => server.js => apiControl.js (create)
-		.then(function (resultMessage) {
-			$scope.user.result = resultMessage;
+.controller('SignupCtrl', function($scope, $rootScope, $location, Account) {
+	$scope.userResult = {};
+	$scope.register = function (userData) {
+		Account.register(userData)
+		.then(function (user) {
+			// user object with following properties:
+			// "added"    = boolean - whether user was successfully added
+			// "message"  = string - status message
+			// "dbRes"     = obj or null - response from db
+			$scope.userResult = user;  //DEBUG
+			console.log(user);
+			if (user.added) $location.path("/account");
 		}).catch(function (err) {
 
 		});

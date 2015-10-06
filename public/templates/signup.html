@@ -1,13 +1,15 @@
 <div class="container">
 	<section class="page-header">
 		<h1>REGISTER & MAKE MONEY</h1>
+		<h2>$$$$$$$$$$$$$$$$$$$$$</h2>
 	</section>
 	<section>
 		<form class="form-horizontal">
 			<div class="form-group">
 				<label for="registerUserName" class="col-md-2 control-label">Username</label>
 				<div class="col-md-10">
-					<input type="text" class="form-control" id="registerUserName" name="username" ng-model="user.username" ng-model-options="{ debounce : 500 }" ng-change="checkUsername(user.username)" placeholder="User Name">
+					<input type="text" class="form-control" id="registerUserName" name="username" ng-model="user.username" ng-model-options="{ debounce : 500 }"
+        ng-change="checkUsername(user.username)" placeholder="User Name">
 				</div>
 				<!--PLACEHOLDER ALERT-->
 				<p style="padding-top:10px;">{{ check }}</p>
@@ -20,9 +22,9 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="registerLastName" class="col-md-2 control-label">Last Name</label>
+				<label for="registerFirstName" class="col-md-2 control-label">Last Name</label>
 				<div class="col-md-10">
-					<input type="text" class="form-control" id="registerLastName" name="lastName" ng-model="user.lastName" placeholder="Last Name">
+					<input type="text" class="form-control" id="registerFirstName" name="lastName" ng-model="user.lastName" placeholder="Last Name">
 				</div>
 			</div>
 			<div class="form-group">
@@ -60,11 +62,9 @@
 			<div class="col-md-6">
 				<div class="btn btn-sm btn-block btn-success" ng-click="register(user)">Register</div>
 			</div>
-			<div>{{ result }}</div>
 		</div>
 	</section>
 
 	<section>
-		
 	</section>
 </div>
