@@ -10,13 +10,15 @@ angular.module('gwazoo.services', [])
 			method: 'POST',
 			url: '/api/auth', 
 			data: userLogin
-		}).success(function (res) {
-			// console.log("Res:", res);
-			user = res;
+		}).success(function(user) {
+			var resObj = {
+				loggedIn: true,
+				message: "User was successfully logged in.",
+				user: user
+			}
 			$rootScope.$broadcast('updateUser');
-			$location.path('/account').replace();
-			deferred.resolve(user);
-		}).error(function (err) {
+			deferred.resolve(resObj);
+		}).error(function(err) {
 			console.log(err);
 			deferred.reject(err);
 		});
@@ -37,14 +39,14 @@ angular.module('gwazoo.services', [])
 			method: 'POST',
 			url: '/api/create', 
 			data: formData
-		}).success(function (res) {
-			if (res.added) {
-				user = res.user;
+		}).success(function(resObj) {
+			if (resObj.added) {
+				user = resObj.user;
 				$location.path('/account').replace();
 				$rootScope.$broadcast('updateUser');
-				deferred.resolve(res.message);
+				deferred.resolve(resObj.message);
 			} else {
-				deferred.resolve(res.message);
+				deferred.resolve(resObj.message);
 			}
 		}).error(function (err) {
 			console.log("Err", err);
@@ -106,11 +108,76 @@ angular.module('gwazoo.services', [])
 		}).success(function (res) {
 			console.log('product Added:', res);
 			deferred.resolve(res.data);
-		});
+		})
 		return deferred.promise;
 	};
-
+	
 	this.getProduct = function() {
 
 	}
 })
+
+.service('Cookies', function($q, $http, localStorageService) {
+	var count = 0;
+	var cart = {
+		products: []
+	};
+
+	this.createSession = function (sessionData) {
+		localStorageService.cookie.set("Session", sessionData);
+	}
+
+	this.addToCart = function () {
+		var item = {};
+		item.id = count;
+		item.quantity = Math.floor(Math.random() * 10)	
+		cart.products.push(item);
+		JSON.stringify(cart);
+		console.log(cart);
+		localStorageService.cookie.set("Cart", cart, 30);
+		count++;
+	}
+
+	this.clearAllCookies = function () {
+		localStorageService.cookie.clearAll();
+		cart = {
+			products: []
+		}
+	}
+
+	this.removeCookie = function (cookieId) {
+		localStorageService.cookie.remove(cookieId);
+	}
+
+	this.getSession = function () {
+		console.log(localStorageService.cookie.get("Session"));
+		return localStorageService.cookie.get("Session");
+	}
+
+	this.getCart = function () {
+		console.log(localStorageService.cookie.get("Cart"));
+		return localStorageService.cookie.get("Cart");
+	}
+
+	this.saveCartToDb = function(cartData) {
+		var deferred = $q.defer();
+		$http({
+			method: 'POST',
+			url: '/api/cart', 
+			data: cartData
+		}).success(function(resObj) {
+			// {
+			// 	added: false,
+			// 	message: "Previous session found.",
+			// 	result: result
+			// }
+			console.log("services.js:", resObj);
+			deferred.resolve(resObj);
+		}).error(function(err) {
+			console.log(err);
+			deferred.reject(err);
+		});
+		return deferred.promise;
+	};
+})
+

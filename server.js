@@ -50,7 +50,7 @@ app.get('/api/logout', function(req, res) {
 	req.logout();
 	res.redirect('/');
 });
-app.get('/api/cart', Api.cart);
+app.post('/api/cart', Api.cart);
 
 // app.post('/api/register', User.create);
 // app.put('/api/profile/:id', isAuthed, userControl.profile);
