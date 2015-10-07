@@ -204,13 +204,38 @@ module.exports = {
 			products: req.body.products
 		}
 
+		// //How to use getCart using callback
+		// getCart(req, res, sessionData.username, function(err, cart){
+		// 	if (err) {
+		// 		return res.status(500).send("Error: DB connection error.");
+		// 	}
+		// 	//TODO: Manipulate cart data i.e. call other function and pass cart
+		// 	//res.json(cart);
+		// });
+
+		// //How to use addToCart using callback
+		// var product = req.body.product;
+		// addToCart(req, res, sessionData.username, product, function(err, result){
+		// 	if (err) {
+		// 		return res.status(500).send("Error: DB connection error.");
+		// 	}
+		// 	//TODO: Handle result obj i.e. res.send(...)
+		// });
+
+
+		
 		checkSession(req, res, sessionData);
 	}
 };
 
+
+
+////////////////////////////////////////
+//HELPER FUNCTIONS
+
 function checkSession(req, res, sessionData) {
 	r.connect(thinky._config, function (err, connection) {  //connect to db
-		if (err) throw err;
+		if (err) { return res.status(500).send("Error: DB connection error."); }
 		//check if session exists
 		r.table('sessions').get(sessionData.username)
 		.run(connection, function(err, result) {
@@ -224,9 +249,40 @@ function checkSession(req, res, sessionData) {
 	});
 }
 
+function getCart (req, res, username, callback) {
+	console.log("Getting Cart...");
+	r.connect(thinky._config, function (err, connection) {  //connect to db
+		if (err) { return res.status(500).send("Error: DB connection error."); }
+		r.table('sessions').get(username)
+		.run(connection, function(err, result) {
+			if (err) { 
+				return callback(err);
+			} else {
+				callback(null, result);
+			}
+		});
+	});
+}
+
+function addToCart (req, res, username, product, callback) {
+	console.log("Adding To Cart...");
+	r.connect(thinky._config, function (err, connection) {  //connect to db
+		if (err) { return res.status(500).send("Error: DB connection error."); }
+		r.table('sessions').get(username)('products').append(product)
+		.run(connection, function(err, result) {
+			if (err) { 
+				return callback(err);
+			} else {
+				callback(null, result);
+			}
+		});
+	});
+}
+
 function mergeCarts(req, res, username, productsArray) {
 	console.log("Merging Carts...");
 	r.connect(thinky._config, function (err, connection) {  //connect to db
+		if (err) throw err;
 		r.table('sessions').get(username).update({
 			products: r.table('sessions').get(username)('products').setUnion(productsArray)
 		},{
@@ -236,7 +292,7 @@ function mergeCarts(req, res, username, productsArray) {
 			if (err) res.status(500).send("Error: Database failed to connect.");
 			else {
 				console.log("result:", result);
-				return res.json({
+				return res.json({  //success
 					added: false,
 					message: "Successfully merged carts.",
 					result: result
@@ -248,12 +304,13 @@ function mergeCarts(req, res, username, productsArray) {
 
 function saveSession(req, res, sessionData) {
 	r.connect(thinky._config, function (err, connection) {  //connect to db
+		if (err) throw err;
 		r.table('sessions').insert(sessionData)  
 		.run(connection, function(err, result) {
 			if (err) {
 				return res.status(500).send("Error: Session not created.");
-			} else if (result.inserted) {  //success
-				return res.json({
+			} else if (result.inserted) {  
+				return res.json({  //success
 					added: true,
 					message: "Session was added to the database.",
 					result: result
