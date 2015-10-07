@@ -10,7 +10,7 @@ angular.module('gwazoo.services', [])
 			method: 'POST',
 			url: '/api/user/auth', 
 			data: userLogin
-		}).then(function(user) {
+		}).success(function(user) {
 			var resObj = {
 				loggedIn: true,
 				message: "User was successfully logged in.",
@@ -18,7 +18,7 @@ angular.module('gwazoo.services', [])
 			}
 			// $rootScope.$broadcast('updateUser');
 			deferred.resolve(resObj);
-		}, function(err) {
+		}).error(function(err) {
 			console.log(err);
 			deferred.reject(err);
 		});
