@@ -1,11 +1,11 @@
 var Express        = require('express');
-var	Api            = require('../controls/apiControl');
+var	UserApi        = require('../controls/userControl');
 var	Passport       = require('passport');
 
 var userRouter = Express.Router();
 
 //path => /api/user
-userRouter.get('/', /*Api.isAuthed,*/ Api.getAll);  //DEBUG METHOD ONLY
+userRouter.get('/', /*Api.isAuthed,*/ UserApi.getAll);  //DEBUG METHOD ONLY
 
 
 userRouter.post('/auth', Passport.authenticate('local'), function(req, res) {  //signup url
@@ -13,16 +13,16 @@ userRouter.post('/auth', Passport.authenticate('local'), function(req, res) {  /
 });
 
 
-userRouter.post('/create', Api.create);
+userRouter.post('/create', UserApi.create);
 
 
-userRouter.post('/username', Api.username);
+userRouter.post('/username', UserApi.username);
 
 
-userRouter.get('/read', Api.read);
+userRouter.get('/read', UserApi.read);
 
 
-userRouter.delete('/delete', Api.isAuthed, Api.delete);
+userRouter.delete('/delete', UserApi.isAuthed, UserApi.delete);
 
 
 userRouter.get('/logout', function(req, res) {

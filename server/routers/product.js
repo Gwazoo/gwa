@@ -1,5 +1,5 @@
 var Express        = require('express');
-var	Api            = require('../controls/apiControl');
+var	Api            = require('../controls/userControl');
 
 var productRouter = Express.Router();
 

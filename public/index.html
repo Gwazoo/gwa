@@ -169,6 +169,11 @@
 								<input type="password" class="form-control" name="password" ng-model="user.password" placeholder="Password"/>
 							</div>
 						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<span class="error bg-danger">{{error}}</span>
+							</div>
+						</div>
 					</div>
 					<div class="modal-footer">
 						<div class="row">
@@ -176,7 +181,7 @@
 								<button data-dismiss="modal" class="btn btn-danger btn-sm btn-block" ng-click="cancel()">Cancel</button>
 							</div>
 							<div class="col-md-6">
-								<button data-dismiss="modal" type="submit" class="btn btn-success btn-sm btn-block" ng-click="login(user)">Login</button>
+								<button data-dismiss="{{success}}" type="submit" class="btn btn-success btn-sm btn-block" ng-click="login(user)">Login</button>
 							</div>
 						</div>
 					</div>

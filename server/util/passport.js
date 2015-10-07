@@ -1,4 +1,4 @@
-var	Api = require('../controls/apiControl');
+var	Api = require('../controls/userControl');
 
 module.exports = function(Passport, LocalStrategy){
 	

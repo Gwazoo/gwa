@@ -32,9 +32,9 @@ angular.module('gwazoo.controllers', [])
 			}
 			Cookies.createSession(userObj);
 			$scope.session = Cookies.getSession().user;
-
+			// $scope.success = 'modal';
 		}).catch(function (err) {
-
+			$scope.error = 'your username and password did not match up together so please try again suka!';
 		});
 	};
 
@@ -67,9 +67,7 @@ angular.module('gwazoo.controllers', [])
 			// "message"  = string - status message
 			// "dbRes"     = obj or null - response from db
 			console.log(user);
-			if (user.added) {
-				$location.path("/account").replace();
-			}
+			if (user.added) $location.path("/account").replace();
 		}).catch(function (err) {
 
 		});
