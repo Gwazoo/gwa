@@ -1,29 +1,41 @@
 'use strict';
 angular.module('gwazoo.controllers', [])
 
-.controller('MainCtrl', function($scope, Account, Cookies) {
+.controller('MainCtrl', function($scope, $location, Account, Cookies) {
 	$scope.user = Account.returnUser();
 	$scope.$on('updateUser', function() {
 		$scope.user = Account.returnUser();
 	});
 	$scope.logout = function() {
+		Cookies.removeCookie("Session");
 		Account.logout();
 	};
 
+	$scope.cartOptions = {
+		type: 'cart'
+	}
+
 	$scope.login = function(userLogin) {
-		// console.log(userLogin);
 		Account.login(userLogin)
 		.then(function (user) {
-			var options = {
-				type: 'session',
-				user: user
+			if (user.loggedIn) $location.path('/account').replace();
+			
+			var cartData = Cookies.getCart();  //null or cart object
+			if (cartData) {
+				Cookies.saveCartToDb(cartData)
+				.then(function () {
+					Cookies.removeCookie("Cart");	
+				})
+				.catch(function (err) {
+					console.log(err);
+				});
 			}
-			Cookies.setCookies(options);
-			// Cookies.getCookies(options);
-			$scope.user.username = '';
-			$scope.user.password = '';
+			Cookies.createSession(user);
+
+			// $scope.user.username = '';
+			// $scope.user.password = '';
 		}).catch(function (err) {
-			$scope.user.password = '';
+			// $scope.user.password = '';
 		});
 	};
 
@@ -32,17 +44,15 @@ angular.module('gwazoo.controllers', [])
 		$scope.user.password = '';
 	};
 
-	$scope.setCookies = function (options) {
-		Cookies.setCookies(options);
+	// CART HELPERS (more functions in Cookies service)
+	$scope.addToCart = function () {
+		Cookies.addToCart();
 	}
-	$scope.getCookies = function (options) {
-		Cookies.getCookies(options);
+	$scope.getCart = function () {
+		Cookies.getCart();
 	}
-	$scope.clearCookies = function () {
-		Cookies.clearCookies();
-	}
-	$scope.cartOptions = {
-		type: 'cart'
+	$scope.clearAllCookies = function () {
+		Cookies.clearAllCookies();
 	}
 })
 

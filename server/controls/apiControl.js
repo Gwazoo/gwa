@@ -199,31 +199,103 @@ module.exports = {
 		});
 	},
 	cart : function (req, res) {
-		// console.log(req.user);
-		// req.session.cookie.username = req.user.username;
-		// console.log("req.session:", req.session.cookie);
+		var sessionData = {
+			username: req.user.username,
+			products: req.body.products
+		}
 
-		var cartCookie = JSON.parse(req.cookies['gwazoo.Cart']);
-		// cartCookie.username = req.user.username;
-		console.log(cartCookie);
-
-		// console.log(req.user);
-
-		// cartCookie = cartCookie[0]; target specific indices
-		// ========== OR ============
-		// cartCookie.forEach(function (item) {
-		// 	console.log(item);
-		// });
-		// r.connect(thinky._config, function (err, connection) {  //connect to db
-		// 	if (err) throw err;
-		// 	r.table('session').get(req.user.username)  //check if user exists by getting with username
-		// 	.run(connection, function(err, user) {
-		// 		if (err) { return done(err); }
-		// 		delete user.password;
-		// 		{ return done(null, user); }  //is success, return callback with user object
-		//  	});
-		// });
-
-		res.json(cartCookie);
+		checkSession(req, res, sessionData);
 	}
 };
+
+function checkSession(req, res, sessionData) {
+	r.connect(thinky._config, function (err, connection) {  //connect to db
+		if (err) throw err;
+		//check if session exists
+		r.table('sessions').get(sessionData.username)
+		.run(connection, function(err, result) {
+			if (err) { return res.status(500).send("Error: DB connection error."); }
+			else if (result) {  //username was found (so don't add new session)
+				mergeCarts(req, res, sessionData.username, sessionData.products);
+			} else {
+				saveSession(req, res, sessionData);
+			}
+		});
+	});
+}
+
+function mergeCarts(req, res, username, productsArray) {
+	console.log("Merging Carts...");
+	r.connect(thinky._config, function (err, connection) {  //connect to db
+		r.table('sessions').get(username).update({
+			products: r.table('sessions').get(username)('products').setUnion(productsArray)
+		},{
+			nonAtomic: true
+		})
+		.run(connection, function(err, result) {
+			if (err) res.status(500).send("Error: Database failed to connect.");
+			else {
+				console.log("result:", result);
+				return res.json({
+					added: false,
+					message: "Successfully merged carts.",
+					result: result
+				});
+	 		}
+	 	});
+	});
+}
+
+function saveSession(req, res, sessionData) {
+	r.connect(thinky._config, function (err, connection) {  //connect to db
+		r.table('sessions').insert(sessionData)  
+		.run(connection, function(err, result) {
+			if (err) {
+				return res.status(500).send("Error: Session not created.");
+			} else if (result.inserted) {  //success
+				return res.json({
+					added: true,
+					message: "Session was added to the database.",
+					result: result
+				});
+			}
+	 	});
+	});
+}
+
+function updateCart(req, res, username, cart) {
+	r.connect(thinky._config, function (err, connection) {  //connect to db
+		r.table('sessions').get(username).update({
+			products: r.table('sessions').get(username)('products').setUnion(cart)
+		},{
+			nonAtomic: true
+		})
+		.run(connection, function(err, result) {
+			console.log("result:", result);
+	 	});
+	});
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

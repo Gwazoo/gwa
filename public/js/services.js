@@ -11,9 +11,13 @@ angular.module('gwazoo.services', [])
 			url: '/api/auth', 
 			data: userLogin
 		}).success(function(user) {
+			var resObj = {
+				loggedIn: true,
+				message: "User was successfully logged in.",
+				user: user
+			}
 			$rootScope.$broadcast('updateUser');
-			$location.path('/account').replace();
-			deferred.resolve(user);
+			deferred.resolve(resObj);
 		}).error(function(err) {
 			console.log(err);
 			deferred.reject(err);
@@ -35,14 +39,14 @@ angular.module('gwazoo.services', [])
 			method: 'POST',
 			url: '/api/create', 
 			data: formData
-		}).success(function(res) {
-			if (res.added) {
-				user = res.user;
+		}).success(function(resObj) {
+			if (resObj.added) {
+				user = resObj.user;
 				$location.path('/account').replace();
 				$rootScope.$broadcast('updateUser');
-				deferred.resolve(res.message);
+				deferred.resolve(resObj.message);
 			} else {
-				deferred.resolve(res.message);
+				deferred.resolve(resObj.message);
 			}
 		}).error(function(err) {
 			console.log("Err", err);
@@ -94,41 +98,68 @@ angular.module('gwazoo.services', [])
 	};
 })
 
-.service('Cookies', function(localStorageService) {
+.service('Cookies', function($q, $http, localStorageService) {
 	var count = 0;
 	var cart = {
-		items: []
+		products: []
 	};
 
-	this.setCookies = function (options) {
-		if (options.type == 'session') {
-			localStorageService.cookie.set("Session", options.user);
-		} else if (options.type == 'cart') {
-			var item = {};
-			item.id = count;
-			item.quantity = Math.floor(Math.random() * 10)	
-			cart.items.push(item);
-			JSON.stringify(cart);
-			console.log(cart);
-			localStorageService.cookie.set("Cart", cart, 30);
-			count++;
-		}
+	this.createSession = function (sessionData) {
+		localStorageService.cookie.set("Session", sessionData);
 	}
 
-	this.clearCookies = function () {
+	this.addToCart = function () {
+		var item = {};
+		item.id = count;
+		item.quantity = Math.floor(Math.random() * 10)	
+		cart.products.push(item);
+		JSON.stringify(cart);
+		console.log(cart);
+		localStorageService.cookie.set("Cart", cart, 30);
+		count++;
+	}
+
+	this.clearAllCookies = function () {
 		localStorageService.cookie.clearAll();
 		cart = {
-			items: []
+			products: []
 		}
 	}
 
-	this.getCookies = function (options) {
-		if (options.type == 'session') {
-			console.log(localStorageService.cookie.get("Session"));
-		} else if (options.type == 'cart') {
-			console.log(localStorageService.cookie.get("Cart"));
-		}
+	this.removeCookie = function (cookieId) {
+		localStorageService.cookie.remove(cookieId);
 	}
+
+	this.getSession = function () {
+		console.log(localStorageService.cookie.get("Session"));
+		return localStorageService.cookie.get("Session");
+	}
+
+	this.getCart = function () {
+		console.log(localStorageService.cookie.get("Cart"));
+		return localStorageService.cookie.get("Cart");
+	}
+
+	this.saveCartToDb = function(cartData) {
+		var deferred = $q.defer();
+		$http({
+			method: 'POST',
+			url: '/api/cart', 
+			data: cartData
+		}).success(function(resObj) {
+			// {
+			// 	added: false,
+			// 	message: "Previous session found.",
+			// 	result: result
+			// }
+			console.log("services.js:", resObj);
+			deferred.resolve(resObj);
+		}).error(function(err) {
+			console.log(err);
+			deferred.reject(err);
+		});
+		return deferred.promise;
+	};
 
 
 })
