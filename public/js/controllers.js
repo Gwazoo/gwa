@@ -2,23 +2,23 @@
 angular.module('gwazoo.controllers', [])
 
 .controller('MainCtrl', function($scope, $location, Account, Cookies) {
-	$scope.user = Account.returnUser();
-	$scope.$on('updateUser', function() {
-		$scope.user = Account.returnUser();
-	});
+
 	$scope.logout = function() {
 		Cookies.removeCookie("Session");
-		Account.logout();
+		$scope.session = Cookies.getSession();  //getSession == null
+		Account.logout()
+		.then(function (nullUser) {
+			$scope.user = nullUser;
+		})
+		.catch(function (err) {
+			console.log("There was an error logging out.");
+		});
 	};
-
-	$scope.cartOptions = {
-		type: 'cart'
-	}
 
 	$scope.login = function(userLogin) {
 		Account.login(userLogin)
-		.then(function (user) {
-			if (user.loggedIn) $location.path('/account').replace();
+		.then(function (userObj) {
+			if (userObj.loggedIn) $location.path('/account').replace();
 			
 			var cartData = Cookies.getCart();  //null or cart object
 			if (cartData) {
@@ -30,18 +30,16 @@ angular.module('gwazoo.controllers', [])
 					console.log(err);
 				});
 			}
-			Cookies.createSession(user);
+			Cookies.createSession(userObj);
+			$scope.session = Cookies.getSession().user;
 
-			// $scope.user.username = '';
-			// $scope.user.password = '';
 		}).catch(function (err) {
-			// $scope.user.password = '';
+
 		});
 	};
 
 	$scope.cancel = function() {
-		$scope.user.username = '';
-		$scope.user.password = '';
+		$scope.user = null;
 	};
 
 	// CART HELPERS (more functions in Cookies service)
@@ -61,7 +59,6 @@ angular.module('gwazoo.controllers', [])
 })
 
 .controller('SignupCtrl', function($scope, $rootScope, $location, Account) {
-	$scope.userResult = {};
 	$scope.register = function (userData) {
 		Account.register(userData)
 		.then(function (user) {
@@ -69,9 +66,10 @@ angular.module('gwazoo.controllers', [])
 			// "added"    = boolean - whether user was successfully added
 			// "message"  = string - status message
 			// "dbRes"     = obj or null - response from db
-			$scope.userResult = user;  //DEBUG
 			console.log(user);
-			if (user.added) $location.path("/account");
+			if (user.added) {
+				$location.path("/account").replace();
+			}
 		}).catch(function (err) {
 
 		});

@@ -84,11 +84,11 @@
 						</div>
 					</form>
 					<ul class="nav navbar-nav navbar-right">
-						<li ng-show="!user" data-toggle="modal" data-target="#loginModal"><a href="">Login</a></li>
-						<li ng-show="!user"><a href="register">register</a></li>
-						<li ng-show="user"><a href="#"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-						<li ng-show="user" class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user.firstName}}'s Account <span class="caret"></span></a>
+						<li ng-show="!session" data-toggle="modal" data-target="#loginModal"><a href="">Login</a></li>
+						<li ng-show="!session"><a href="register">register</a></li>
+						<li ng-show="session"><a href="#"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+						<li ng-show="session" class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{session.firstName}}'s Account <span class="caret"></span></a>
 							<ul class="dropdown-menu"> 
 								<li><a href="/account">Account Settings</a></li>
 								<li role="separator" class="divider"></li>
