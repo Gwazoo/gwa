@@ -2,14 +2,11 @@
 var Express        = require('express');
 var	Passport       = require('passport');
 var	LocalStrategy  = require('passport-local').Strategy;
-var	Connect        = require('connect');
-var	R              = require('rethinkdb');
-var Thinky         = require('./server/util/thinky');
-var	Api            = require('./server/controls/apiControl');
-var	User           = require('./server/controls/userControl');
-var Cart           = require('./server/routes/cart');
-var Account        = require('./server/routes/account');
-var User        = require('./server/routes/user');
+
+var Cart           = require('./server/routers/cart');
+var Account        = require('./server/routers/account');
+var Product        = require('./server/routers/product');
+var User           = require('./server/routers/user');
 
 var app = Express();
 
@@ -20,6 +17,7 @@ require('./server/util/passport.js')(Passport, LocalStrategy);
 // ROUTERS ==============================================
 app.use('/api/user', User);  // Router at PATH ./server/routes/user.js
 app.use('/api/cart', Cart);  // Router at PATH ./server/routes/cart.js
+app.use('/api/product', Product);  // Router at PATH ./server/routes/product.js
 app.use('/account', Account);  // Router at PATH ./server/routes/account.js
 
 // app.post('/api/register', User.create);
@@ -31,7 +29,7 @@ app.get('/api/product/:sku'/*, productControl*/);
 
 // VENDOR ACCESS
 // app.post('/api/category/:slug', Api.isAuthed, Api.categoryControl);
-app.post('/api/product'/*, Api.isAuthed, Api.addProduct*/);
+// app.post('/api/product', Api.product);
 
 // CATCH-ALL REDIRECT ====================================
 app.all('/*', function(req, res, next) {
