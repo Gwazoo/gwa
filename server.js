@@ -65,7 +65,7 @@ app.get('/api/product/:sku'/*, productControl*/);
 
 // VENDOR ACCESS
 // app.post('/api/category/:slug', Api.isAuthed, Api.categoryControl);
-// app.post('/api/product', Api.isAuthed, Api.addProduct);
+app.post('/api/product'/*, Api.isAuthed, Api.addProduct*/);
 
 // PROTECTED ROUTES ======================================
 app.all('/account', Api.isAuthed, function(req, res, next) {

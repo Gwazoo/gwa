@@ -115,6 +115,10 @@ angular.module('gwazoo.controllers', [])
 
 		});
 	};
+
+	$scope.$on('flow::fileAdded', function (event, $flow, flowFile) {
+		
+	});
 })
 
 .controller('CategoryCtrl', function($scope, $rootScope) {

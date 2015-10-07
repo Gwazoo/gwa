@@ -11,7 +11,7 @@ angular.module('gwazoo.services', [])
 			url: '/api/auth', 
 			data: userLogin
 		}).success(function (res) {
-			console.log("Res:", res);
+			// console.log("Res:", res);
 			user = res;
 			$rootScope.$broadcast('updateUser');
 			$location.path('/account').replace();
@@ -70,7 +70,7 @@ angular.module('gwazoo.services', [])
 
 	this.getUser = function() {
 		$http.get('api/currentUser').then(function(res) {
-			console.log(res);
+			// console.log(res);
 			user = res.data;
 			$rootScope.$broadcast('updateUser');
 		});
