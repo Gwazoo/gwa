@@ -1,7 +1,5 @@
 'use strict';
 var Express        = require('express');
-var Session        = require('express-session');
-var	BodyParser     = require('body-parser');
 var	Passport       = require('passport');
 var	LocalStrategy  = require('passport-local').Strategy;
 var	Connect        = require('connect');
@@ -10,56 +8,24 @@ var	R              = require('rethinkdb');
 var Thinky         = require('./server/util/thinky');
 var	Api            = require('./server/controls/apiControl');
 var	User           = require('./server/controls/userControl');
-var CookieParser   = require('cookie-parser');
+var Cart           = require('./server/routes/cart');
+var Account        = require('./server/routes/account');
+var User        = require('./server/routes/user');
 
 var app = Express();
 
-// MIDDLEWARE ============================================
-app.use(CookieParser());
-app.use(BodyParser.json());
-app.use(BodyParser.urlencoded({extended:true}));
-app.use('/', Express.static(__dirname + '/public')); 
+// Bootstrap app and passport config
+require('./server/util/express.js')(app, Passport);
+require('./server/util/passport.js')(Passport, LocalStrategy);
 
-// AUTHENTICATION ========================================
-app.use(Session({secret: 'gwazooTeam', saveUninitialized: true, resave: true}));
-app.use(Passport.initialize());
-app.use(Passport.session());
-Passport.use(new  LocalStrategy(
-	function(username, password, done) {
-		Api.authorize(username, password, done);
-	}));
-Passport.serializeUser(function(user, done) {
-	done(null, user.username);
-});
-Passport.deserializeUser(function(username, done) {
-	Api.read(username, done);
-});
-
-// ENDPOINTS =============================================
-// AUTHENTICATION
-app.post('/api/auth', Passport.authenticate('local'), function(req, res) {  //signup url
-	return res.status(200).json(req.user);
-});
-
-// USER API
-app.get('/api', /*Api.isAuthed,*/ Api.getAll);  //DEBUG METHOD ONLY
-app.post('/api/create', Api.create);
-app.post('/api/username', Api.username);
-app.get('/api/read', Api.read);
-app.delete('/api/delete', Api.isAuthed, Api.delete);
-app.get('/api/logout', function(req, res) {
-	req.logout();
-	res.redirect('/');
-});
-app.post('/api/cart', Api.cart);
+// ROUTERS ==============================================
+app.use('/api/user', User);  // Router at PATH ./server/routes/user.js
+app.use('/api/cart', Cart);  // Router at PATH ./server/routes/cart.js
+app.use('/account', Account);  // Router at PATH ./server/routes/account.js
 
 // app.post('/api/register', User.create);
 // app.put('/api/profile/:id', isAuthed, userControl.profile);
 // app.delete('/api/profile/:id', isAuthed, userControl.profile);
-
-app.get('/api/currentUser', function(req, res) {
-	res.status(200).json(req.user);
-});
 
 app.get('/api/category/:slug'/*, categoryControl*/);
 app.get('/api/product/:sku'/*, productControl*/);
@@ -68,12 +34,7 @@ app.get('/api/product/:sku'/*, productControl*/);
 // app.post('/api/category/:slug', isAuthed, categoryControl);
 // app.post('/api/product/:sku', isAuthed, productControl);
 
-// PROTECTED ROUTES ======================================
-app.all('/account', Api.isAuthed, function(req, res, next) {
-	res.sendFile('index.html', { root: __dirname + "/public"});
-});
-
-// OPEN ROUTES ==========================================
+// CATCH-ALL REDIRECT ====================================
 app.all('/*', function(req, res, next) {
 	res.sendFile('index.html', { root: __dirname + "/public"});
 });

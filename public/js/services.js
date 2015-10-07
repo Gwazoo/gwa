@@ -8,7 +8,7 @@ angular.module('gwazoo.services', [])
 		var deferred = $q.defer();
 		$http({
 			method: 'POST',
-			url: '/api/auth', 
+			url: '/api/user/auth', 
 			data: userLogin
 		}).success(function(user) {
 			var resObj = {
@@ -16,7 +16,7 @@ angular.module('gwazoo.services', [])
 				message: "User was successfully logged in.",
 				user: user
 			}
-			$rootScope.$broadcast('updateUser');
+			// $rootScope.$broadcast('updateUser');
 			deferred.resolve(resObj);
 		}).error(function(err) {
 			console.log(err);
@@ -37,7 +37,7 @@ angular.module('gwazoo.services', [])
 		var deferred = $q.defer();
 		$http({
 			method: 'POST',
-			url: '/api/create', 
+			url: '/api/user/create', 
 			data: formData
 		}).success(function(resObj) {
 			if (resObj.added) {
@@ -59,7 +59,7 @@ angular.module('gwazoo.services', [])
 		var deferred = $q.defer();
 		$http({
 			method: 'POST',
-			url: '/api/username', 
+			url: '/api/user/username', 
 			data: username
 		}).success(function(res) {
 			var username = res;
@@ -70,27 +70,13 @@ angular.module('gwazoo.services', [])
 		return deferred.promise;
 	};
 
-	this.getUser = function() {
-		$http.get('api/currentUser').then(function(res) {
-			console.log(res);
-			user = res.data;
-			$rootScope.$broadcast('updateUser');
-		});
-	};
-	this.getUser();
-
-	this.returnUser = function() {
-		return user;
-	}
-
 	this.logout = function() {
 		var deferred = $q.defer();
 		$http({
 			method: 'GET',
-			url: 'api/logout'
+			url: '/api/user/logout'
 		}).success(function(res) {
-			user = '';
-			$rootScope.$broadcast('updateUser');
+			user = null;  //clear out user data
 			$location.path('/').replace();
 			deferred.resolve(user);
 		});

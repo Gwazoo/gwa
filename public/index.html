@@ -82,14 +82,14 @@
 						</div>
 					</form>
 					<ul class="nav navbar-nav navbar-right">
-						<li ng-show="user"><p class="navbar-text">Welcome, {{user.firstName}}</p></li>
-						<li ng-show="!user" data-toggle="modal" data-target="#loginModal"><a href="">Login</a></li>
-						<li ng-show="!user"><a href="register">register</a></li>
-						<li ng-show="user"><a href="#"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-						<li ng-show="user" class="dropdown">
+						<li ng-show="session"><p class="navbar-text">Welcome {{session.firstName}}!</p></li>
+						<li ng-show="!session" data-toggle="modal" data-target="#loginModal"><a href="">Login</a></li>
+						<li ng-show="!session"><a href="register">register</a></li>
+						<li ng-show="session"><a href="#"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+						<li ng-show="session" class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <span class="caret"></span></a>
 							<ul class="dropdown-menu"> 
-								<li><a href="/account">{{user.firstName}}'s Account</a></li>
+								<li><a href="/account">{{session.firstName}}'s Account</a></li>
 								<li role="separator" class="divider"></li>
 								<li><a href="">Orders</a></li>
 								<li role="separator" class="divider"></li>
@@ -97,7 +97,7 @@
 								<li role="separator" class="divider"></li>
 								<li><a href="">Account Settings</a></li>
 								<li role="separator" class="divider"></li>
-								<li ng-show="user" ng-click="logout()"><a href="">Logout</a></li>
+								<li ng-show="session" ng-click="logout()"><a href="">Logout</a></li>
 							</ul>
 						</li>
 					</ul>
