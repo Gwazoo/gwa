@@ -26,7 +26,9 @@ app.use('/account', Account);  // Router at PATH ./server/routes/account.js
 
 app.get('/api/category/:slug'/*, categoryControl*/);
 app.get('/api/product/:sku'/*, productControl*/);
-
+app.post('/api/flowtest', function(req, res) {
+	res.send("Test");
+});
 // VENDOR ACCESS
 // app.post('/api/category/:slug', Api.isAuthed, Api.categoryControl);
 // app.post('/api/product', Api.product);

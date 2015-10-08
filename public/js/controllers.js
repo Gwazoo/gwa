@@ -39,6 +39,7 @@ angular.module('gwazoo.controllers', [])
 
 	$scope.cancel = function() {
 		$scope.user = null;
+		$scope.error = null;
 	};
 
 	// CART HELPERS (more functions in Cookies service)
@@ -86,23 +87,31 @@ angular.module('gwazoo.controllers', [])
 })
 
 .controller('DashboardCtrl', function($scope, $rootScope, Products) {
-	$scope.addProduct = function (productInfo) {
-		console.log($scope.prod);
+	// var flow = new Flow({
+	// 	target:'/api/product/upload'
+	// });
+	// // Flow.js isn't supported, fall back on a different method
+	// if(!flow.support) {
+	// 	$('.flow-error').show();
+	// 	return;
+	// };
+
+	$scope.addProduct = function (productInfo, e) {
+		// productInfo.images = imgsArr;
+		// console.log(productInfo);
+		e.upload();
 		Products.addProduct(productInfo)
-		.then(function () {
+		.then(function (prod) {
 			$scope.prod.name = '';
 			$scope.prod.description = '';
 			$scope.prod.price = '';
 			$scope.prod.salePrice = '';
-			$scope.prod.images = '';
+			$scope.success = 'Your product was successfully added!';
 		}).catch(function (err) {
-
+			$scope.error = 'There seems to be a problem with adding your product.';
 		});
 	};
-
-	$scope.$on('flow::fileAdded', function (event, $flow, flowFile) {
-		
-	});
+	
 })
 
 .controller('CategoryCtrl', function($scope, $rootScope) {
