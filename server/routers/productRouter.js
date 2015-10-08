@@ -1,10 +1,10 @@
 var Express        = require('express');
-var	Api            = require('../controls/userControl');
+var	Api            = require('../controls/productControl');
 
 var productRouter = Express.Router();
 
 //path => /api/product
-// productRouter.post('/', Api.prodCreate);
+productRouter.post('/', Api.prodCreate);
 // productRouter.delete('/', Api.prodDelete);
 
 module.exports = productRouter;
