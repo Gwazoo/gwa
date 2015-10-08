@@ -51,48 +51,92 @@ module.exports = {
 	* @returns {Obj} JSON with status message.
 	*/
 	create : function (req, res) {
-	    var userObj = new userModel(req.body);  //create new user object
+		userModel.create(req.body)
+		.then(function (result) {
+			res.send(result);
+		}, function (err) {
+			res.status(500).json({
+				message: "Database error. User not created."
+			});
+		});
 
-        try{  //attempt to validate the new user
-            userObj.validate();  //validate the user object using the model
- 		    r.connect(thinky._config, function (err, connection) {  //connect to db
- 		    	if (err) throw err;
- 		    	var salt = bcrypt.genSaltSync(12);
- 		    	bcrypt.hash(userObj.password, salt, null, function (err, hash) {  //hash password
- 		    		if (err) res.status(500).send(err);
- 		    		userObj.password = hash;  //overwrite form data password with hash
- 	    		    r.table('users').insert(userObj)  //save updated form data to db
- 	    			.run(connection, function(err, result) {
- 	    				if (err) { return res.status(500).send("Error Message:", err); }
- 	    				else {
- 		    				console.log("User Created.");
- 		    				delete userObj.password;
- 		    				var user = { 
- 		    					username: userObj.username  //save username returned from db
- 		    				};
- 		    				req.login(user, function(err) {  //create Passport session for new user
- 								if (err) { return res.status(500).send("Error Message:", err); }
- 							});
- 							return res.json(  //res will be handled by services.js
- 								{
- 									added: true,
- 									message: "A new user was successfully created!",
- 									user: userObj
- 								});
- 						}
- 	    			});
- 		    	});
- 			});
-        }
-        catch(err) {  //if the user does not validate
-        	console.log("Failed validation:", err.message);
-            return res.json(  //this response will be handled by services.js
-            	{
-            		added: false,
-            		message: "The user was not validated. " + err.message,
-            		user: null
-            	}); 
-        }
+		// userModel.validate(req.body.username, function (err, result) {
+		// 	if err(err) {
+		// 		res.status(401).json({
+		// 			message: "Form not validated. Check inputs and try again."
+		// 		});
+		// 	}
+		// 	userModel.create(function (err, result) {
+		// 		if (err) {
+		// 			res.status(500).json({
+		// 				message: "Database error. User not created."
+		// 			});
+		// 		}
+		// 		console.log(result);
+		// 	})
+		// });
+
+		// function createUser (userObj) {
+		// 	return userModel.validate(userObj)
+		// 	.then(function (validatedResult) {
+		// 		return userModel.create(validatedResult);
+		// 	}).then(function (createdResult) {
+		// 		return userModel.anyOtherFunction(createdResult);
+		// 	}).then(function (otherResult) {
+		// 		return otherResult;
+		// 	})//...
+		// }
+
+		// createUser(req.body)
+		// .then(function (otherResult) {
+		// 	//do stuff with otherResult
+		// }, function (err) {
+		// 	//handle errors from chained promises
+		// });
+
+
+	   //  var userObj = new userModel(req.body);  //create new user object
+
+    //     try{  //attempt to validate the new user
+    //         userObj.validate();  //validate the user object using the model
+ 		 //    r.connect(thinky._config, function (err, connection) {  //connect to db
+ 		 //    	if (err) throw err;
+ 		 //    	var salt = bcrypt.genSaltSync(12);
+ 		 //    	bcrypt.hash(userObj.password, salt, null, function (err, hash) {  //hash password
+ 		 //    		if (err) res.status(500).send(err);
+ 		 //    		userObj.password = hash;  //overwrite form data password with hash
+ 	  //   		    r.table('users').insert(userObj)  //save updated form data to db
+ 	  //   			.run(connection, function(err, result) {
+ 	  //   				if (err) { return res.status(500).send("Error Message:", err); }
+ 	  //   				else {
+ 		 //    				console.log("User Created.");
+ 		 //    				delete userObj.password;
+ 		 //    				var user = { 
+ 		 //    					username: userObj.username  //save username returned from db
+ 		 //    				};
+ 		 //    				req.login(user, function(err) {  //create Passport session for new user
+ 			// 					if (err) { return res.status(500).send("Error Message:", err); }
+ 			// 				});
+ 			// 				return res.json(  //res will be handled by services.js
+ 			// 					{
+ 			// 						added: true,
+ 			// 						message: "A new user was successfully created!",
+ 			// 						user: userObj
+ 			// 					});
+ 			// 			}
+ 	  //   			});
+ 		 //    	});
+ 			// });
+    //     }
+    //     catch(err) {  //if the user does not validate
+    //     	console.log("Failed validation:", err.message);
+    //         return res.json(  //this response will be handled by services.js
+    //         	{
+    //         		added: false,
+    //         		message: "The user was not validated. " + err.message,
+    //         		user: null
+    //         	}); 
+    //     }
 	},
 	/*
 	* @param {String} username
