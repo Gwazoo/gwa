@@ -7,6 +7,7 @@ var Cart           = require('./server/routers/cartRouter');
 var Account        = require('./server/routers/accountRouter');
 var Product        = require('./server/routers/productRouter');
 var User           = require('./server/routers/userRouter');
+var Category       = require('./server/routers/categoryRouter');
 
 var app = Express();
 
@@ -19,12 +20,14 @@ app.use('/api/user', User);  // Router at PATH ./server/routes/user.js
 app.use('/api/cart', Cart);  // Router at PATH ./server/routes/cart.js
 app.use('/api/product', Product);  // Router at PATH ./server/routes/product.js
 app.use('/account', Account);  // Router at PATH ./server/routes/account.js
+app.use('/api/category', Category); // Router at PATH ./server/routes/category.js
+app.use('/category', Category);
 
 // app.post('/api/register', User.create);
 // app.put('/api/profile/:id', isAuthed, userControl.profile);
 // app.delete('/api/profile/:id', isAuthed, userControl.profile);
 
-app.get('/api/category/:slug'/*, categoryControl*/);
+//app.get('/api/category/:slug'/*, categoryControl*/);
 app.get('/api/product/:sku'/*, productControl*/);
 app.post('/api/flowtest', function(req, res) {
 	res.send("Test");
