@@ -3,10 +3,10 @@ var Express        = require('express');
 var	Passport       = require('passport');
 var	LocalStrategy  = require('passport-local').Strategy;
 
-var Cart           = require('./server/routers/cart');
-var Account        = require('./server/routers/account');
-var Product        = require('./server/routers/product');
-var User           = require('./server/routers/user');
+var Cart           = require('./server/routers/cartRouter');
+var Account        = require('./server/routers/accountRouter');
+var Product        = require('./server/routers/productRouter');
+var User           = require('./server/routers/userRouter');
 
 var app = Express();
 
