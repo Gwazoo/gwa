@@ -9,31 +9,49 @@
 		<form class="form-horizontal">
 			<div class="form-group">
 				<label for="prodProductName" class="col-md-2 col-xs-3 control-label">Product Name</label>
-				<div class="col-md-10 col-xs-9">
+				<div class="col-md-9 col-xs-9">
 					<input type="text" class="form-control" id="itemName" name="productname" ng-model="prod.name" placeholder="Product Name">
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="prodDescription" class="col-md-2 col-xs-3 control-label">Description</label>
-				<div class="col-md-10 col-xs-9">
+				<div class="col-md-9 col-xs-9">
 					<textarea class="form-control" id="itemDescription" name="description" ng-model="prod.description" placeholder="Description" rows="5"></textarea>
 				</div>
 			</div>
 			<div class="form-group">
+				<label class="col-md-2 col-xs-3 control-label">Category</label>
+				<div class="col-md-3 col-xs-3">
+					<select class="form-control" name="mainCat" ng-model="prod.mainCat" ng-options="o.name for o in categories">
+						<!-- <option ng-repeat="firstLevel in categories" value="{{firstLevel.id}}">{{firstLevel.name}}</option> -->
+					</select>
+				</div>
+				<div class="col-md-3 col-xs-3">
+					<select class="form-control" name="subCat" ng-model="prod.subCat" ng-options="o.name for o in subCat">
+						<!-- <option ng-repeat="secondLevel in subCat track by secondLevel.id" value="{{secondLevel.id}}">{{secondLevel.name}}</option> -->
+					</select>
+				</div>
+				<div class="col-md-3 col-xs-3">
+					<select class="form-control" name="subSubCat" ng-model="prod.subSubCat" ng-options="o.name for o in subSubCat">
+						<!-- <option ng-repeat="thirdLevel in subSubCat" value="{{thirdLevel.id}}">{{thirdLevel.name}}</option> -->
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
 				<label for="prodPrice" class="col-md-2 col-xs-3 control-label">Price</label>
-				<div class="col-md-10 col-xs-9">
+				<div class="col-md-9 col-xs-9">
 					<input type="text" class="form-control" id="itemPrice" name="price" ng-model="prod.price" placeholder="Price">
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="prodSalePrice" class="col-md-2 col-xs-3 control-label">Sale Price</label>
-				<div class="col-md-10 col-xs-9">
+				<div class="col-md-9 col-xs-9">
 					<input type="text" class="form-control" id="itemSalePrice" name="salePrice" ng-model="prod.salePrice" placeholder="Sale Price">
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="prodImages" class="col-md-2 col-xs-3 control-label">Images</label>
-				<div class="col-lg-10 col-md-10 col-sm-9 col-xs-9" flow-init flow-name="prodObj.flow" flow-file-added="!!{png:1,jpg:1,jpeg:1}[$file.getExtension()]">
+				<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9" flow-init flow-files-submitted="$flow.upload()" flow-file-added="!!{png:1,jpg:1,jpeg:1}[$file.getExtension()]">
 					<div class="drop" flow-drop ng-class="dropClass" flow-drag-enter="style={border:'4px solid green'}" flow-drag-leave="style={}" ng-style="style">
 						<span class="btn btn-default" flow-btn>Uplaod Image</span>
 						<span class="btn btn-default" flow-btn flow-directory ng-show="$flow.supportDirectory">Upload Folder of Images</span>
@@ -64,7 +82,7 @@
 				<div class="btn btn-sm btn-block btn-danger" ng-click="cancel()">Cancel</div>
 			</div>
 			<div class="col-md-3 col-xs-6">
-				<div class="btn btn-sm btn-block btn-success" ng-click="addProduct(prod, $flow)">Add Product</div>
+				<div class="btn btn-sm btn-block btn-success" ng-click="addProduct(prod)">Add Product</div>
 			</div>
 		</div>
 	</section>

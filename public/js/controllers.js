@@ -87,19 +87,15 @@ angular.module('gwazoo.controllers', [])
 })
 
 .controller('DashboardCtrl', function($scope, $rootScope, Products) {
-	// var flow = new Flow({
-	// 	target:'/api/product/upload'
-	// });
-	// // Flow.js isn't supported, fall back on a different method
-	// if(!flow.support) {
-	// 	$('.flow-error').show();
-	// 	return;
-	// };
+	$scope.uploadImages = function() {
+		var file = $scope.prodObj.flow;
+		console.log('file is ');
+		console.log(file);
+		var uploadUrl = '/fileUpload';
+		Products.uploadImage(file, uploadUrl);
+	};
 
-	$scope.addProduct = function (productInfo, e) {
-		// productInfo.images = imgsArr;
-		// console.log(productInfo);
-		e.upload();
+	$scope.addProduct = function (productInfo) {
 		Products.addProduct(productInfo)
 		.then(function (prod) {
 			$scope.prod.name = '';
@@ -112,6 +108,21 @@ angular.module('gwazoo.controllers', [])
 		});
 	};
 	
+	Products.getCategories().success(function (categories) {
+		$scope.categories = categories;
+		$scope.subCat =[];
+	});
+	$scope.$watch('prod.mainCat', function (val) {
+		if(val != null || val != undefined) {
+			$scope.subCat = val.children;
+		}
+		$scope.subSubCat = [];
+	});
+	$scope.$watch('prod.subCat', function (val) {
+		if(val != null || val != undefined) {
+			$scope.subSubCat = val.children;
+		}
+	});
 })
 
 .controller('CategoryCtrl', function($scope, $rootScope) {

@@ -93,14 +93,29 @@ angular.module('gwazoo.services', [])
 			data: productInfo
 		}).success(function (res) {
 			console.log('product Added:', res);
+			// res.images = imgsArr;
+			deferred.resolve(res.data);
+		})
+		return deferred.promise;
+	};
+	this.uploadImage = function(file, uploadUrl) {
+		var fd = new FormData();
+		fd.append('file', file);
+		$http({
+			method: 'POST',
+			url: 'api/product',
+			data: file, uploadUrl
+		}).success(function (res) {
+			console.log('image uploaded: ', res);
 			deferred.resolve(res.data);
 		})
 		return deferred.promise;
 	};
 	
-	this.getProduct = function() {
-
-	}
+	this.getCategories = function() {
+		var url = 'api/category';
+		return $http.get(url);
+	};
 })
 
 .service('Cookies', function($q, $http, localStorageService) {
