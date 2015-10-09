@@ -1,8 +1,8 @@
 'use strict';
-var util = require('./../util/thinky'),
-	thinky = require('thinky')(util.config),
-	r = thinky.r,
-	type = thinky.type;
+var util     = require('./../util/thinky');
+var	thinky   = require('thinky')(util.config);
+var	r        = thinky.r;
+var	type     = thinky.type;
 
 // User model
 var User = thinky.createModel("users", {
@@ -26,4 +26,21 @@ var User = thinky.createModel("users", {
 	lastActivityDate: type.date() // Last time they logged in
 });
 
-module.exports = User;
+var UserModel = {
+	create: function(userObj) {
+		return new Promise(function (resolve, reject) {
+			User.get('SkylerTest').run()
+			.then(function(success) {
+				if (result) {
+					resolve(result);
+				} else {
+					reject(Error("It broke."));
+			}
+			}, function (err) {
+				reject(Error("It broke."));
+			});
+		});
+	}
+}
+
+module.exports = UserModel;

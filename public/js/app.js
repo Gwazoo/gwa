@@ -1,5 +1,5 @@
 'use strict';
-angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngRoute', /*'ngMaterial',*/ 'LocalStorageModule', 'flow'])
+angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngRoute', /*'ngMaterial',*/ 'LocalStorageModule', 'flow', 'ui.bootstrap'])
 
 .config(function($routeProvider, $locationProvider) {
 	$routeProvider
@@ -43,16 +43,20 @@ angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngRoute', /*
 	.setStorageCookie('session', '/');
 })
 
-.config(function(flowFactoryProvider) {
+.config(['flowFactoryProvider', function (flowFactoryProvider) {
 	flowFactoryProvider.defaults = {
-		target: '/tempProductImgs',
-		permanentErrors:[404, 500, 501],
+		target: '',
+		permanentErrors:[500, 501],
 		maxChunkRetries: 1,
 		chunkRetryInterval: 5000,
-		simultaneousUploads: 2
+		simultaneousUploads: 3,
+		query: {
+			id: 'id',
+			source: 'flow_query'
+		}
 	};
 	flowFactoryProvider.on('catchAll', function (event) {
-		// console.log('catchAll', arguments);
+		console.log('catchAll', arguments);
 	});
-})
+}])
 

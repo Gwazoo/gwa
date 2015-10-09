@@ -1,11 +1,11 @@
 var Express        = require('express');
-var	UserApi        = require('../controls/userControl');
 var	Passport       = require('passport');
+var	UserApi        = require('../controls/userControl');
 
 var userRouter = Express.Router();
 
 //path => /api/user
-userRouter.get('/', /*Api.isAuthed,*/ UserApi.getAll);  //DEBUG METHOD ONLY
+userRouter.get('/', UserApi.getAll);  //DEBUG METHOD ONLY
 
 
 userRouter.post('/auth', Passport.authenticate('local'), function(req, res) {  //signup url

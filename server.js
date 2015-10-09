@@ -3,10 +3,12 @@ var Express        = require('express');
 var	Passport       = require('passport');
 var	LocalStrategy  = require('passport-local').Strategy;
 
-var Cart           = require('./server/routers/cartRouter');
+var UserApi        = require('./server/routers/userApiRouter');
+var CartApi        = require('./server/routers/cartApiRouter');
+var CategoryApi    = require('./server/routers/categoryApiRouter');
+var ProductApi     = require('./server/routers/productApiRouter');
+
 var Account        = require('./server/routers/accountRouter');
-var Product        = require('./server/routers/productRouter');
-var User           = require('./server/routers/userRouter');
 var Category       = require('./server/routers/categoryRouter');
 
 var app = Express();
@@ -15,13 +17,15 @@ var app = Express();
 require('./server/util/express.js')(app, Passport);
 require('./server/util/passport.js')(Passport, LocalStrategy);
 
+// API ROUTERS ==========================================
+app.use('/api/user', UserApi);  // Router at PATH ./server/routes/userApiRouter.js
+app.use('/api/cart', CartApi);  // Router at PATH ./server/routes/cartApiRouter.js
+app.use('/api/category', CategoryApi); // Router at PATH ./server/routes/categoryApiRouter.js
+app.use('/api/product', ProductApi);  // Router at PATH ./server/routes/productApiRouter.js
+
 // ROUTERS ==============================================
-app.use('/api/user', User);  // Router at PATH ./server/routes/user.js
-app.use('/api/cart', Cart);  // Router at PATH ./server/routes/cart.js
-app.use('/api/product', Product);  // Router at PATH ./server/routes/product.js
-app.use('/account', Account);  // Router at PATH ./server/routes/account.js
-app.use('/api/category', Category); // Router at PATH ./server/routes/category.js
-app.use('/category', Category);
+app.use('/account', Account);  // Router at PATH ./server/routes/accountRouter.js
+app.use('/category', Category);  // Router at PATH ./server/routes/categoryRouter.js
 
 // app.post('/api/register', User.create);
 // app.put('/api/profile/:id', isAuthed, userControl.profile);
@@ -29,7 +33,9 @@ app.use('/category', Category);
 
 //app.get('/api/category/:slug'/*, categoryControl*/);
 app.get('/api/product/:sku'/*, productControl*/);
-
+app.post('/api/flowtest', function(req, res) {
+	res.send("Test");
+});
 // VENDOR ACCESS
 // app.post('/api/category/:slug', Api.isAuthed, Api.categoryControl);
 // app.post('/api/product', Api.product);
