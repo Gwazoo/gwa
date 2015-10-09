@@ -4,7 +4,7 @@ var categoryRouter = Express.Router();
 var Root           = require('../util/config');
 
 
-//path => /category
+//path => /api/category
 categoryRouter.get('/', CategoryApi.getAll);
 
 module.exports = categoryRouter;

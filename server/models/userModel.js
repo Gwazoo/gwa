@@ -29,12 +29,16 @@ var User = thinky.createModel("users", {
 var UserModel = {
 	create: function(userObj) {
 		return new Promise(function (resolve, reject) {
-			var result = User.get('SkylerTest').run();
-			if (!result) {
-				resolve(result);
-			} else {
-				reject(Error("It broke."));
+			User.get('SkylerTest').run()
+			.then(function(success) {
+				if (result) {
+					resolve(result);
+				} else {
+					reject(Error("It broke."));
 			}
+			}, function (err) {
+				reject(Error("It broke."));
+			});
 		});
 	}
 }

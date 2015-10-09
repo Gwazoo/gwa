@@ -16,20 +16,20 @@ CategoryModel.belongsTo(CategoryModel, "parent", "parentId", "id");
 
 // Categories Model
 var Category = {
-	getAll: function(cb) {
-		CategoryModel.filter(r.row.hasFields("parentId").not()).getJoin({
-			children: {
-				_apply: function(seq) {
-					return seq.getJoin({children: _apply: function(seq) {
-						return seq.getJoin({children: true})
-					}})
-				}
-			}
-		}).run()
-		.then(function(result) {
-			cb(null, result);
-		})
-	}
+	// getAll: function(cb) {
+	// 	CategoryModel.filter(r.row.hasFields("parentId").not()).getJoin({
+	// 		children: {
+	// 			_apply: function(seq) {
+	// 				return seq.getJoin({children: _apply: function(seq) {
+	// 					return seq.getJoin({children: true});
+	// 				}})
+	// 			}
+	// 		}
+	// 	}).run()
+	// 	.then(function(result) {
+	// 		cb(null, result);
+	// 	})
+	// }
 }
 
 module.exports = Category;
