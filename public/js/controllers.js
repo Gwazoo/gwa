@@ -129,11 +129,7 @@ angular.module('gwazoo.controllers', ['flow'])
     	});
     };
 
-
-	$scope.addProduct = function (productInfo, e) {
-		// productInfo.images = imgsArr;
-		// console.log(productInfo);
-		e.upload();
+	$scope.addProduct = function (productInfo) {
 		Products.addProduct(productInfo)
 		.then(function (prod) {
 			$scope.prod = null;
@@ -143,6 +139,21 @@ angular.module('gwazoo.controllers', ['flow'])
 		});
 	};
 	
+	Products.getCategories().success(function (categories) {
+		$scope.categories = categories;
+		$scope.subCat =[];
+	});
+	$scope.$watch('prod.mainCat', function (val) {
+		if(val != null || val != undefined) {
+			$scope.subCat = val.children;
+		}
+		$scope.subSubCat = [];
+	});
+	$scope.$watch('prod.subCat', function (val) {
+		if(val != null || val != undefined) {
+			$scope.subSubCat = val.children;
+		}
+	});
 })
 
 .controller('CategoryCtrl', function($scope, $rootScope) {
