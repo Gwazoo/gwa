@@ -20,9 +20,7 @@ var Category = {
 		CategoryModel.filter(r.row.hasFields("parentId").not()).getJoin({
 			children: {
 				_apply: function(seq) {
-					return seq.getJoin({children: _apply: function(seq) {
-						return seq.getJoin({children: true})
-					}})
+					return seq.getJoin({children: true})
 				}
 			}
 		}).run()
