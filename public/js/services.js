@@ -98,9 +98,24 @@ angular.module('gwazoo.services', [])
 		return deferred.promise;
 	};
 	
+	this.getCategories = function () {
+		var deferred = $q.defer();
+		$http({
+			method: 'GET',
+			url: '/api/category'
+		}).success(function (res) {
+			console.log('Services Res:', res);
+			deferred.resolve(res);
+		}).error(function (err) {
+			console.log('Services Err:', err);
+			deferred.reject(err);
+		});
+		return deferred.promise;
+	};
+
 	this.getProduct = function() {
 
-	}
+	};
 })
 
 .service('Cookies', function($q, $http, localStorageService) {
