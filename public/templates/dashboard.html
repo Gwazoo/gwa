@@ -4,7 +4,6 @@
 		<h2>pretty awesome</h2>
 		<h6>{{error}}</h6>
 		<h6>{{success}}</h6>
-		<h6>{{product}}</h6>
 	</section>
 	<section>
 		<form class="form-horizontal" data-ng-init="initCategories()">
@@ -23,15 +22,15 @@
 			<div class="form-group">
 				<label class="col-md-2 col-xs-3 control-label">Category</label>
 				<div class="col-md-3 col-xs-3">
-					<select class="form-control" name="mainCat" ng-model="prod.mainCat" ng-options="o.name for o in categories">
+					<select class="form-control" name="mainCat" ng-model="product.mainCat" ng-options="o.name for o in categories">
 					</select>
 				</div>
 				<div class="col-md-3 col-xs-3">
-					<select class="form-control" name="subCat" ng-model="prod.subCat" ng-options="o.name for o in subCat">
+					<select class="form-control" name="subCat" ng-model="product.subCat" ng-options="o.name for o in subCat">
 					</select>
 				</div>
 				<div class="col-md-3 col-xs-3">
-					<select class="form-control" name="subSubCat" ng-model="prod.subSubCat" ng-options="o.name for o in subSubCat">
+					<select class="form-control" name="subSubCat" ng-model="product.subSubCat" ng-options="o.name for o in subSubCat">
 					</select>
 				</div>
 			</div>
@@ -49,7 +48,7 @@
 			</div>
 			<div class="form-group">
 				<label for="prodImages" class="col-md-2 col-xs-3 control-label">Images</label>
-				<div class="col-lg-10 col-md-10 col-sm-9 col-xs-9" flow-init="config" flow-name="prod.flow" file-upload multiple flow-file-added="!!{png:1,jpg:1,jpeg:1}[$file.getExtension()]">
+				<div class="col-lg-10 col-md-10 col-sm-9 col-xs-9" flow-init="config" flow-name="files.flow" file-upload multiple flow-file-added="!!{png:1,jpg:1,jpeg:1}[$file.getExtension()]">
 					<div class="drop" flow-drop ng-class="dropClass" flow-drag-enter="style={border:'4px solid green'}" flow-drag-leave="style={}" ng-style="style">
 						<span class="btn btn-default" flow-btn>Upload Image</span>
 						<span class="btn btn-default" flow-btn flow-directory ng-show="$flow.supportDirectory">Upload Folder of Images</span>

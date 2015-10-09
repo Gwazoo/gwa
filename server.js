@@ -31,7 +31,7 @@ app.use('/api/category', CategoryApi); // Router at PATH ./server/routes/categor
 
 
 app.post('/api/product', multipartMiddleware, function(req, res) {
-	// console.log("Req.body:", req.body);
+	console.log("Req.body:", req.body);
 	
   flow.post(req, function(status, filename, original_filename, identifier) {
     console.log('POST', status, original_filename, identifier);

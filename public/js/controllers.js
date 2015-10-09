@@ -105,7 +105,7 @@ angular.module('gwazoo.controllers', ['flow'])
 
 .controller('DashboardCtrl', function($scope, $http, $rootScope, Products) {
 
-    $scope.prod = {};
+    $scope.files = {};
     $scope.config = {
     	query: function () {
     		var formData = JSON.stringify($scope.product);
@@ -116,7 +116,7 @@ angular.module('gwazoo.controllers', ['flow'])
     }
     $scope.upload = function () {
     	$scope.config.query();
-    	$scope.prod.flow.upload();
+    	$scope.files.flow.upload();
     }
 
     $scope.initCategories = function () {
@@ -132,24 +132,24 @@ angular.module('gwazoo.controllers', ['flow'])
 	$scope.addProduct = function (productInfo) {
 		Products.addProduct(productInfo)
 		.then(function (prod) {
-			$scope.prod = null;
+			$scope.product = null;
 			$scope.success = 'Your product was successfully added!';
 		}).catch(function (err) {
 			$scope.error = 'There seems to be a problem with adding your product.';
 		});
 	};
 	
-	Products.getCategories().success(function (categories) {
+	Products.getCategories().then(function (categories) {
 		$scope.categories = categories;
 		$scope.subCat =[];
 	});
-	$scope.$watch('prod.mainCat', function (val) {
+	$scope.$watch('product.mainCat', function (val) {
 		if(val != null || val != undefined) {
 			$scope.subCat = val.children;
 		}
 		$scope.subSubCat = [];
 	});
-	$scope.$watch('prod.subCat', function (val) {
+	$scope.$watch('product.subCat', function (val) {
 		if(val != null || val != undefined) {
 			$scope.subSubCat = val.children;
 		}
