@@ -12,6 +12,7 @@ module.exports = {
 	* @returns {Obj} JSON with status message.
 	*/
 	prodCreate : function (req, res) {
+		console.log("Control req.body:", req.body);
 	    // var productObj = new productModel(req.body);  //create new user object
 	    var productObj = req.body;
         // try{  //attempt to validate the new user

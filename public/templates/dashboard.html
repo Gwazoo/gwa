@@ -4,36 +4,37 @@
 		<h2>pretty awesome</h2>
 		<h6>{{error}}</h6>
 		<h6>{{success}}</h6>
+		<h6>{{product}}</h6>
 	</section>
 	<section>
 		<form class="form-horizontal" data-ng-init="initCategories()">
 			<div class="form-group">
 				<label for="prodProductName" class="col-md-2 col-xs-3 control-label">Product Name</label>
 				<div class="col-md-10 col-xs-9">
-					<input type="text" class="form-control" id="itemName" name="productname" ng-model="prod.name" placeholder="Product Name">
+					<input type="text" class="form-control" id="itemName" name="productname" ng-model="product.name" placeholder="Product Name">
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="prodDescription" class="col-md-2 col-xs-3 control-label">Description</label>
 				<div class="col-md-10 col-xs-9">
-					<textarea class="form-control" id="itemDescription" name="description" ng-model="prod.description" placeholder="Description" rows="5"></textarea>
+					<textarea class="form-control" id="itemDescription" name="description" ng-model="product.description" placeholder="Description" rows="5"></textarea>
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="prodPrice" class="col-md-2 col-xs-3 control-label">Price</label>
 				<div class="col-md-10 col-xs-9">
-					<input type="text" class="form-control" id="itemPrice" name="price" ng-model="prod.price" placeholder="Price">
+					<input type="text" class="form-control" id="itemPrice" name="price" ng-model="product.price" placeholder="Price">
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="prodSalePrice" class="col-md-2 col-xs-3 control-label">Sale Price</label>
 				<div class="col-md-10 col-xs-9">
-					<input type="text" class="form-control" id="itemSalePrice" name="salePrice" ng-model="prod.salePrice" placeholder="Sale Price">
+					<input type="text" class="form-control" id="itemSalePrice" name="salePrice" ng-model="product.salePrice" placeholder="Sale Price">
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="prodImages" class="col-md-2 col-xs-3 control-label">Images</label>
-				<div class="col-lg-10 col-md-10 col-sm-9 col-xs-9" flow-init flow-name="prodObj.flow" file-upload multiple flow-file-added="!!{png:1,jpg:1,jpeg:1}[$file.getExtension()]">
+				<div class="col-lg-10 col-md-10 col-sm-9 col-xs-9" flow-init="config" flow-name="prod.flow" file-upload multiple flow-file-added="!!{png:1,jpg:1,jpeg:1}[$file.getExtension()]">
 					<div class="drop" flow-drop ng-class="dropClass" flow-drag-enter="style={border:'4px solid green'}" flow-drag-leave="style={}" ng-style="style">
 						<span class="btn btn-default" flow-btn>Upload Image</span>
 						<span class="btn btn-default" flow-btn flow-directory ng-show="$flow.supportDirectory">Upload Folder of Images</span>
@@ -64,7 +65,7 @@
 				<div class="btn btn-sm btn-block btn-danger" ng-click="cancel()">Cancel</div>
 			</div>
 			<div class="col-md-3 col-xs-6">
-				<div class="btn btn-sm btn-block btn-success" ng-click="addProduct(prod, $flow)">Add Product</div>
+				<div class="btn btn-sm btn-block btn-success" ng-click="upload()">Add Product</div>
 			</div>
 		</div>
 	</section>

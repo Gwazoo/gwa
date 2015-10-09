@@ -11,7 +11,13 @@ var ProductApi     = require('./server/routers/productApiRouter');
 var Account        = require('./server/routers/accountRouter');
 var Category       = require('./server/routers/categoryRouter');
 
+var multipart = require('connect-multiparty');
+var multipartMiddleware = multipart();
+var flow = require('./flow-node.js')('temp');
+
 var app = Express();
+
+// var ACCESS_CONTROLL_ALLOW_ORIGIN = false;
 
 // Bootstrap app and passport config
 require('./server/util/express.js')(app, Passport);
@@ -21,7 +27,44 @@ require('./server/util/passport.js')(Passport, LocalStrategy);
 app.use('/api/user', UserApi);  // Router at PATH ./server/routes/userApiRouter.js
 app.use('/api/cart', CartApi);  // Router at PATH ./server/routes/cartApiRouter.js
 app.use('/api/category', CategoryApi); // Router at PATH ./server/routes/categoryApiRouter.js
-app.use('/api/product', ProductApi);  // Router at PATH ./server/routes/productApiRouter.js
+// app.use('/api/product', ProductApi);  // Router at PATH ./server/routes/productApiRouter.js
+
+
+app.post('/api/product', multipartMiddleware, function(req, res) {
+	// console.log("Req.body:", req.body);
+	
+  flow.post(req, function(status, filename, original_filename, identifier) {
+    console.log('POST', status, original_filename, identifier);
+
+    res.status(status).send();
+  });
+});
+
+app.options('/api/product', function(req, res){
+  // console.log('OPTIONS');
+
+  res.status(200).send();
+});
+
+// Handle status checks on chunks through Flow.js
+app.get('/api/product', function(req, res) {
+  flow.get(req, function(status, filename, original_filename, identifier) {
+    // console.log('GET', status);
+
+    if (status == 'found') {
+      status = 200;
+    } else {
+      status = 204;
+    }
+
+    res.status(status).send();
+  });
+});
+
+app.get('/download/:identifier', function(req, res) {
+  flow.write(req.params.identifier, res);
+});
+
 
 // ROUTERS ==============================================
 app.use('/account', Account);  // Router at PATH ./server/routes/accountRouter.js

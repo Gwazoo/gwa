@@ -1,22 +1,22 @@
 'use strict';
-angular.module('gwazoo.controllers', [])
+angular.module('gwazoo.controllers', ['flow'])
 
-.directive('fileUpload', function () {
-    return {
-        scope: true,        //create a new scope
-        link: function (scope, el, attrs) {
-            el.bind('change', function (event) {
-                var files = scope.prodObj.flow.files;
-                //iterate files since 'multiple' may be specified on the element
-                for (var i = 0;i<files.length;i++) {
-                    //emit event upward
-                    scope.$emit("fileSelected", { file: files[i] });
-                }                                       
-                // console.log("Fired!", scope.prodObj.flow.files);
-            });
-        }
-    };
-})
+// .directive('fileUpload', function () {
+//     return {
+//         scope: true,        //create a new scope
+//         link: function (scope, el, attrs) {
+//             el.bind('change', function (event) {
+//                 // var files = scope.prodObj.flow.files;
+//                 //iterate files since 'multiple' may be specified on the element
+//                 // for (var i = 0;i<files.length;i++) {
+//                     //emit event upward
+//                     scope.$emit("uploadComplete", scope.prodObj.flow.files);
+//                 // }                                       
+//                 console.log(scope.prodObj.flow.files[0].file);
+//             });
+//         }
+//     };
+// })
 
 .controller('MainCtrl', function($scope, $location, Account, Cookies) {
 
@@ -103,25 +103,21 @@ angular.module('gwazoo.controllers', [])
 	};
 })
 
-.controller('DashboardCtrl', function($scope, $rootScope, Products) {
-	// var flow = new Flow({
-	// 	target:'/api/product/upload'
-	// });
-	// // Flow.js isn't supported, fall back on a different method
-	// if(!flow.support) {
-	// 	$('.flow-error').show();
-	// 	return;
-	// };
-	$scope.files = [];
+.controller('DashboardCtrl', function($scope, $http, $rootScope, Products) {
 
-   //listen for the file selected event
-    $scope.$on("fileSelected", function (event, args) {
-        $scope.$apply(function () {            
-        	//add the file object to the scope's files collection
-        	$scope.files.push(args.file);
-        });
-        console.log("Scope:", $scope.files);
-    });
+    $scope.prod = {};
+    $scope.config = {
+    	query: function () {
+    		var formData = JSON.stringify($scope.product);
+    		return { 
+    			formData: formData
+    		};
+    	}
+    }
+    $scope.upload = function () {
+    	$scope.config.query();
+    	$scope.prod.flow.upload();
+    }
 
     $scope.initCategories = function () {
     	Products.getCategories()
@@ -140,10 +136,7 @@ angular.module('gwazoo.controllers', [])
 		e.upload();
 		Products.addProduct(productInfo)
 		.then(function (prod) {
-			$scope.prod.name = '';
-			$scope.prod.description = '';
-			$scope.prod.price = '';
-			$scope.prod.salePrice = '';
+			$scope.prod = null;
 			$scope.success = 'Your product was successfully added!';
 		}).catch(function (err) {
 			$scope.error = 'There seems to be a problem with adding your product.';
