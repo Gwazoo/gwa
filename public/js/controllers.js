@@ -124,6 +124,7 @@ angular.module('gwazoo.controllers', ['flow'])
     	.then(function (result) {
     		console.log("Controller Result:", result);
     		$scope.categories = result;
+    		$scope.subCat =[];
     	}).catch(function (err) {
     		console.log("Err:", err);
     	});
@@ -139,10 +140,6 @@ angular.module('gwazoo.controllers', ['flow'])
 		});
 	};
 	
-	Products.getCategories().then(function (categories) {
-		$scope.categories = categories;
-		$scope.subCat =[];
-	});
 	$scope.$watch('product.mainCat', function (val) {
 		if(val != null || val != undefined) {
 			$scope.subCat = val.children;
