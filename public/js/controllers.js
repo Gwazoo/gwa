@@ -1,5 +1,22 @@
 'use strict';
-angular.module('gwazoo.controllers', [])
+angular.module('gwazoo.controllers', ['flow'])
+
+// .directive('fileUpload', function () {
+//     return {
+//         scope: true,        //create a new scope
+//         link: function (scope, el, attrs) {
+//             el.bind('change', function (event) {
+//                 // var files = scope.prodObj.flow.files;
+//                 //iterate files since 'multiple' may be specified on the element
+//                 // for (var i = 0;i<files.length;i++) {
+//                     //emit event upward
+//                     scope.$emit("uploadComplete", scope.prodObj.flow.files);
+//                 // }                                       
+//                 console.log(scope.prodObj.flow.files[0].file);
+//             });
+//         }
+//     };
+// })
 
 .controller('MainCtrl', function($scope, $location, Account, Cookies) {
 
@@ -86,32 +103,54 @@ angular.module('gwazoo.controllers', [])
 	};
 })
 
-.controller('DashboardCtrl', function($scope, $rootScope, Products) {
-	// var flow = new Flow({
-	// 	target:'/api/product/upload'
-	// });
-	// // Flow.js isn't supported, fall back on a different method
-	// if(!flow.support) {
-	// 	$('.flow-error').show();
-	// 	return;
-	// };
+.controller('DashboardCtrl', function($scope, $http, $rootScope, Products) {
 
-	$scope.addProduct = function (productInfo, e) {
-		// productInfo.images = imgsArr;
-		// console.log(productInfo);
-		e.upload();
+    $scope.files = {};
+    $scope.config = {
+    	query: function () {
+    		var formData = JSON.stringify($scope.product);
+    		return { 
+    			formData: formData
+    		};
+    	}
+    }
+    $scope.upload = function () {
+    	$scope.config.query();
+    	$scope.files.flow.upload();
+    }
+
+    $scope.initCategories = function () {
+    	Products.getCategories()
+    	.then(function (result) {
+    		console.log("Controller Result:", result);
+    		$scope.categories = result;
+    		$scope.subCat =[];
+    	}).catch(function (err) {
+    		console.log("Err:", err);
+    	});
+    };
+
+	$scope.addProduct = function (productInfo) {
 		Products.addProduct(productInfo)
 		.then(function (prod) {
-			$scope.prod.name = '';
-			$scope.prod.description = '';
-			$scope.prod.price = '';
-			$scope.prod.salePrice = '';
+			$scope.product = null;
 			$scope.success = 'Your product was successfully added!';
 		}).catch(function (err) {
 			$scope.error = 'There seems to be a problem with adding your product.';
 		});
 	};
 	
+	$scope.$watch('product.mainCat', function (val) {
+		if(val != null || val != undefined) {
+			$scope.subCat = val.children;
+		}
+		$scope.subSubCat = [];
+	});
+	$scope.$watch('product.subCat', function (val) {
+		if(val != null || val != undefined) {
+			$scope.subSubCat = val.children;
+		}
+	});
 })
 
 .controller('CategoryCtrl', function($scope, $rootScope) {
