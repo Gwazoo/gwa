@@ -1,11 +1,11 @@
 'use strict';
-var util = require('./../util/thinky'),
-	thinky = require('thinky')(util.config),
+var thinky = require('./../util/thinky'),
+	//thinky = require('thinky')(util.config),
 	r = thinky.r,
 	type = thinky.type;
 
 // Product Model
-var Product = thinky.createModel("products", {
+var ProductModel = thinky.createModel("products", {
 	id: type.string(),
 	vendor: type.string().required(), // Vendor's username
 	name: type.string().required(),
@@ -20,5 +20,13 @@ var Product = thinky.createModel("products", {
 		sortOrder: type.number().integer() // Display order of images
 	}]
 });
+
+var Product = {
+	create: function(data) {
+		var product = new ProductModel(data);
+		product.validate();
+		product.save();
+	}
+};
 
 module.exports = Product;

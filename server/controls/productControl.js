@@ -1,5 +1,5 @@
-var util 		= require('../util/thinky');
-var thinky 		= require('thinky')(util.config);
+var thinky 		= require('../util/thinky');
+//var thinky 		= require('thinky')(util.config);
 var r 			= require('rethinkdb');
 // var productModel 	= require('./../models/productModel.js');
 
