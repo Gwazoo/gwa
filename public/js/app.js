@@ -45,7 +45,7 @@ angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngRoute', /*
 
 .config(['flowFactoryProvider', function (flowFactoryProvider) {
 	flowFactoryProvider.defaults = {
-		target: '/api/product',
+		target: '/api/product/images',
 		permanentErrors:[500, 501],
 		maxChunkRetries: 1,
 		chunkRetryInterval: 5000,
@@ -55,8 +55,12 @@ angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngRoute', /*
 			source: 'flow_query'
 		}
 	};
-	flowFactoryProvider.on('catchAll', function (event) {
-		console.log('catchAll', arguments);
-	});
+	// flowFactoryProvider.on('catchAll', function (event) {
+	// 	console.log('catchAll', arguments);
+	// });
+	// flowFactoryProvider.on('fileAdded', function (file){
+	// 	var fileExt = file.getExtension();
+	// 	console.log(file)
+	// });
 }])
 

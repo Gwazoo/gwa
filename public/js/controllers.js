@@ -1,5 +1,5 @@
 'use strict';
-angular.module('gwazoo.controllers', ['flow'])
+angular.module('gwazoo.controllers', [])
 
 // .directive('fileUpload', function () {
 //     return {
@@ -105,24 +105,9 @@ angular.module('gwazoo.controllers', ['flow'])
 
 .controller('DashboardCtrl', function($scope, $http, $rootScope, Products) {
 
-    $scope.files = {};
-    $scope.config = {
-    	query: function () {
-    		var formData = JSON.stringify($scope.product);
-    		return { 
-    			formData: formData
-    		};
-    	}
-    }
-    $scope.upload = function () {
-    	$scope.config.query();
-    	$scope.files.flow.upload();
-    }
-
     $scope.initCategories = function () {
     	Products.getCategories()
     	.then(function (result) {
-    		console.log("Controller Result:", result);
     		$scope.categories = result;
     		$scope.subCat =[];
     	}).catch(function (err) {
@@ -130,14 +115,39 @@ angular.module('gwazoo.controllers', ['flow'])
     	});
     };
 
-	$scope.addProduct = function (productInfo) {
-		Products.addProduct(productInfo)
-		.then(function (prod) {
-			$scope.product = null;
-			$scope.success = 'Your product was successfully added!';
-		}).catch(function (err) {
-			$scope.error = 'There seems to be a problem with adding your product.';
-		});
+	$scope.addProduct = function (productInfo, files) {
+		if (files.flow.files.length === 0) {
+			console.log("You must add an image before uploading a product.");
+		} else {
+			Products.addProduct(productInfo)
+			.then(function (prod) {
+				$scope.product = null;
+				//TODO: Return ProductID from Rethink
+				$scope.upload();  //TODO: Pass ID to upload()
+				$scope.success = 'Your product was successfully added!';
+			}).catch(function (err) {
+				$scope.error = 'There seems to be a problem with adding your product.';
+			});
+		}
+	};
+	$scope.files = {};
+	//TODO: update query with ProductID
+	
+	// $scope.config = {
+	// 	query: function () {
+	// 		var formData = JSON.stringify($scope.product);
+	// 		return { 
+	// 			formData: formData
+	// 		};
+	// 	}
+	// }
+	$scope.upload = function () {
+		// $scope.config.query();
+		console.log("Fired upload");
+		$scope.files.flow.upload();
+	}
+	$scope.submitForm = function (files) {
+		console.log("Test ran:", files);
 	};
 	
 	$scope.$watch('product.mainCat', function (val) {

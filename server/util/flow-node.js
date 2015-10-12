@@ -121,6 +121,8 @@ module.exports = flow = function(temporaryFolder) {
                         if (exists) {
                             currentTestChunk++;
                             if (currentTestChunk > numberOfChunks) {
+                                var stream = fs.createWriteStream("temp/" + identifier);  //MODIFIED
+                                $.write(identifier, stream);  //MODIFIED
                                 callback('done', filename, original_filename, identifier);
                             } else {
                                 // Recursion
@@ -171,7 +173,10 @@ module.exports = flow = function(temporaryFolder) {
                     });
                 } else {
                     // When all the chunks have been piped, end the stream
-                    if (options.end) writableStream.end();
+                    if (options.end) {
+                        writableStream.end();
+                        $.clean(identifier);  //MODIFIED
+                    }
                     if (options.onDone) options.onDone();
                 }
             });
