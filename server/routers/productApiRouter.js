@@ -13,7 +13,10 @@ var flow                  = require('./../util/flow-node.js')('temp');
 var productRouter = Express.Router();
 
 //path => /api/product
-productRouter.post('/', Api.prodCreate);
+productRouter.get('/', Api.getAll);
+
+//path => /api/product/create
+productRouter.post('/create', Api.prodCreate);
 
 productRouter.post('/images', multipartMiddleware, function(req, res) {
 	//TODO: Use ProductID in query to update with images
