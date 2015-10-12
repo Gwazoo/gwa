@@ -19,10 +19,7 @@ angular.module('gwazoo.controllers', ['flow'])
 // })
 
 .controller('MainCtrl', function($scope, $location, Account, Cookies) {
-    $scope.year = function() {
-        var date = new Date();document.write(year.getFullYear());
-        // return date;
-    };
+    $scope.date = new Date();
 
 	$scope.logout = function() {
 		Cookies.removeCookie("Session");
