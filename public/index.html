@@ -10,8 +10,8 @@
 	<link rel="stylesheet" href="/css/reset.css">
 	<link rel="stylesheet" href="/libs/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-	<!-- <link rel="stylesheet" href="/css/style.css" media="all"/> -->
-	<link rel="stylesheet" href="/css/brain.css">
+	<link rel="stylesheet" href="/css/style.css" media="all"/>
+	<!-- <link rel="stylesheet" href="/css/brain.css"> -->
 
 <!-- FAVICON -->
 
@@ -36,22 +36,56 @@
 </head>
 <body ng-controller="MainCtrl" flow-prevent-drop>
 <!-- HEADER -->
-	<header class="header">
-		<nav class="navbar navbar-default">
-			<div class="container-fluid">
-				<!-- Brand and toggle get grouped for better mobile display -->
-				<div class="navbar-header">
-					<a class="navbar-brand img-responsive center-block" href="/"><img src="/img/logo.png" alt="Gwazoo"></a>
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-				</div>
-
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse" id="navbar-collapse-1">
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="logo col-xs-12 col-md-2" align="center">
+					<a href="/"><img src="/img/logo.png" alt="Gwazoo"></a>
+                </div>
+                <div class="head_search col-xs-12 col-md-7" align="center">
+                    <form>
+                        <input type="text" placeholder="Search Gwazoo..."><button class="header_search_btn"><i class="fa fa-search fa-2x"></i></button>
+                    </form>
+                </div>
+                <div class="head_right col-xs-12 col-md-3" align="right">
+                    <ul>
+                        <li ng-show="!session" data-toggle="modal" data-target="#loginModal"><a href="#">Login</a></li>
+                        <li ng-show="!session"><a href="/register">register</a></li>
+                    </ul>
+                    <ul>
+                        <li ng-show="session" class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{session.firstName}}'s Account <span class="caret"></span></a>
+                            <ul class="dropdown-menu"> 
+                                <li><a href="/account">Account Settings</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="/account/past-orders/:id">Orders</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="/wishlist">Your Wishlist</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li ng-click="logout()"><a href="">Logout</a></li>
+                            </ul>
+                        </li>
+                        <li ng-show="session"><a href="#"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                    </ul>
+                </div>
+            </div><!-- /. row -->
+        </div><!-- /. container -->
+    </header><!-- /. header -->
+    <!-- Navigation -->
+    <div>
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shop <span class="caret"></span></a>
@@ -76,78 +110,38 @@
 						<li><a href="category/{{category.slug}}">sporting</a></li>
 						<li><a href="category/{{category.slug}}">games</a></li>
 					</ul>
-					<form role="form" class="navbar-form navbar-left">
-						<div class="form-group">
-							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Search Gwazoo...">
-								<span class="input-group-btn" type="button"><button class="btn btn-primary" type="button"><i class=" fa fa-search"></i></button></span>
-							</div>
-						</div>
-					</form>
-					<ul class="nav navbar-nav navbar-right">
-						<li ng-show="!session" data-toggle="modal" data-target="#loginModal"><a href="">Login</a></li>
-						<li ng-show="!session"><a href="register">register</a></li>
-						<li ng-show="session"><a href="#"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-						<li ng-show="session" class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{session.firstName}}'s Account <span class="caret"></span></a>
-							<ul class="dropdown-menu"> 
-								<li><a href="/account">Account Settings</a></li>
-								<li role="separator" class="divider"></li>
-								<li><a href="/account/past-orders/:id">Orders</a></li>
-								<li role="separator" class="divider"></li>
-								<li><a href="">Your Wishlist</a></li>
-								<li role="separator" class="divider"></li>
-								<li ng-click="logout()"><a href="">Logout</a></li>
-							</ul>
-						</li>
-					</ul>
-				</div><!-- /.navbar-collapse -->
-			</div><!-- /.container-fluid -->
-		</nav>
-	</header>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container -->
+        </nav>
+    </div><!-- /.Navigation -->
+
 
 	<container ng-view>	
 	</container>
 
-	<footer class="container">
-		<div class="row">
-			<div class="col-md-4">
-				<a href="#"><i class="fa fa-facebook"></i></a>
-			</div>
-			<div class="col-md-4">
-				<a href="#"><i class="fa fa-twitter"></i></a>
-			</div>
-			<div class="col-md-4">
-				<a href="#"><i class="fa fa-youtube-play"></i></a>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-1">
-			</div>
-			<div class="col-md-2">
-				<a class="footer-about divider" href="#">About</a></li>
-			</div>
-			<div class="col-md-2">
-				<a class="footer-contact divider" href="#">Contact</a></li>
-			</div>
-			<div class="col-md-2">
-				<a class="footer-register divider" href="#">Register</a></li>
-			</div>
-			<div class="col-md-2">
-				<a class="footer-vendor divider" href="#">Vendor</a></li>
-			</div>
-			<div class="col-md-2">
-				<a class="footer-help" href="#">Help</a></li>
-			</div>
-			<div class="col-md-1">
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<p>Copyright &copy; 2015 GWAZOO All Rights Reserved</p>
-			</div>
-		</div>
-	</footer>
+
+    <footer class="container">
+        <div class="footer_left col-xs-12 col-md-6">
+            <p>Copyright <i class="fa fa-copyright"></i> 2015-{{year}}<script>document.write(new Date().getFullYear())</script>. All Rights Reserved | <a href="/">Gwazoo.com</a></p>
+        </div>
+        <!-- <div class="footer_center col-xs-12 col-md-4">
+            <ul>
+                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fa fa-youtube-play"></i></a></li>
+            </ul>
+        </div> -->
+        <div class="footer_right col-xs-12 col-md-6">
+            <ul>
+                <li><a href="#">About Us</a></li></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Register</a></li>
+                <li><a href="#">Vendor</a></li>
+                <li><a href="#">Terms of Use</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+            </ul>
+        </div>
+    </footer>
 
 <!-- LOGIN MODAL -->
 	<div id="loginModal" class="modal fade">

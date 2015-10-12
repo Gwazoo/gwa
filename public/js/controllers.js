@@ -1,5 +1,5 @@
 'use strict';
-angular.module('gwazoo.controllers', [])
+angular.module('gwazoo.controllers', ['flow'])
 
 // .directive('fileUpload', function () {
 //     return {
@@ -19,6 +19,10 @@ angular.module('gwazoo.controllers', [])
 // })
 
 .controller('MainCtrl', function($scope, $location, Account, Cookies) {
+    $scope.year = function() {
+        var date = new Date();document.write(year.getFullYear());
+        // return date;
+    };
 
 	$scope.logout = function() {
 		Cookies.removeCookie("Session");
@@ -105,9 +109,24 @@ angular.module('gwazoo.controllers', [])
 
 .controller('DashboardCtrl', function($scope, $http, $rootScope, Products) {
 
+    $scope.files = {};
+    $scope.config = {
+    	query: function () {
+    		var formData = JSON.stringify($scope.product);
+    		return { 
+    			formData: formData
+    		};
+    	}
+    }
+    $scope.upload = function () {
+    	$scope.config.query();
+    	$scope.files.flow.upload();
+    }
+
     $scope.initCategories = function () {
     	Products.getCategories()
     	.then(function (result) {
+    		console.log("Controller Result:", result);
     		$scope.categories = result;
     		$scope.subCat =[];
     	}).catch(function (err) {
@@ -115,38 +134,14 @@ angular.module('gwazoo.controllers', [])
     	});
     };
 
-
-	$scope.addProduct = function (productInfo, files) {
-		if (files.flow.files.length === 0) {
-			console.log("You must add an image before uploading a product.");
-		} else {
-			Products.addProduct(productInfo)
-			.then(function (prod) {
-				$scope.product = null;
-				//TODO: Return ProductID from Rethink
-				$scope.upload();
-				$scope.success = 'Your product was successfully added!';
-			}).catch(function (err) {
-				$scope.error = 'There seems to be a problem with adding your product.';
-			});
-		}
-	};
-
-
-	$scope.files = {};
-	$scope.upload = function () {  //post images
-		$scope.files.flow.upload();
-	};
-
-
-	$scope.files.urls = [];
-	$scope.submitForm = function (file, message, event) {
-		// console.log("$message:", message);  //res.send ends up here
-		if (message) $scope.files.urls.push(message);  //filters duplicates and adds to url array
-		// console.log($scope.files.urls);
-		if ($scope.files.flow.files.length == $scope.files.urls.length) {
-			//TODO: Batch update product with image urls
-		}
+	$scope.addProduct = function (productInfo) {
+		Products.addProduct(productInfo)
+		.then(function (prod) {
+			$scope.product = null;
+			$scope.success = 'Your product was successfully added!';
+		}).catch(function (err) {
+			$scope.error = 'There seems to be a problem with adding your product.';
+		});
 	};
 	
 	$scope.$watch('product.mainCat', function (val) {
