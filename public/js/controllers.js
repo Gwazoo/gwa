@@ -115,6 +115,7 @@ angular.module('gwazoo.controllers', [])
     	});
     };
 
+
 	$scope.addProduct = function (productInfo, files) {
 		if (files.flow.files.length === 0) {
 			console.log("You must add an image before uploading a product.");
@@ -123,31 +124,29 @@ angular.module('gwazoo.controllers', [])
 			.then(function (prod) {
 				$scope.product = null;
 				//TODO: Return ProductID from Rethink
-				$scope.upload();  //TODO: Pass ID to upload()
+				$scope.upload();
 				$scope.success = 'Your product was successfully added!';
 			}).catch(function (err) {
 				$scope.error = 'There seems to be a problem with adding your product.';
 			});
 		}
 	};
+
+
 	$scope.files = {};
-	//TODO: update query with ProductID
-	
-	// $scope.config = {
-	// 	query: function () {
-	// 		var formData = JSON.stringify($scope.product);
-	// 		return { 
-	// 			formData: formData
-	// 		};
-	// 	}
-	// }
-	$scope.upload = function () {
-		// $scope.config.query();
-		console.log("Fired upload");
+	$scope.upload = function () {  //post images
 		$scope.files.flow.upload();
-	}
-	$scope.submitForm = function (files) {
-		console.log("Test ran:", files);
+	};
+
+
+	$scope.files.urls = [];
+	$scope.submitForm = function (file, message, event) {
+		// console.log("$message:", message);  //res.send ends up here
+		if (message) $scope.files.urls.push(message);  //filters duplicates and adds to url array
+		// console.log($scope.files.urls);
+		if ($scope.files.flow.files.length == $scope.files.urls.length) {
+			//TODO: Batch update product with image urls
+		}
 	};
 	
 	$scope.$watch('product.mainCat', function (val) {

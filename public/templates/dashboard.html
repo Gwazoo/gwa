@@ -48,7 +48,7 @@
 			</div>
 			<div class="form-group">
 				<label for="prodImages" class="col-md-2 col-xs-3 control-label">Images</label>
-				<div class="col-lg-10 col-md-10 col-sm-9 col-xs-9" flow-init="config" flow-name="files.flow" flow-file-added="!!{png:1,jpg:1,jpeg:1}[$file.getExtension()]" flow-complete="submitForm(files)">
+				<div class="col-lg-10 col-md-10 col-sm-9 col-xs-9" flow-init="config" flow-name="files.flow" flow-file-added="!!{png:1,jpg:1,jpeg:1}[$file.getExtension()]" flow-file-success="submitForm($file, $message, $event)">
 					<div class="drop" flow-drop ng-class="dropClass" flow-drag-enter="style={border:'4px solid green'}" flow-drag-leave="style={}" ng-style="style">
 						<span class="btn btn-default" flow-btn>Upload Image</span>
 						<span class="btn btn-default" flow-btn flow-directory ng-show="$flow.supportDirectory">Upload Folder of Images</span>

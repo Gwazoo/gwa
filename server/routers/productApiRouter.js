@@ -17,27 +17,29 @@ productRouter.post('/', Api.prodCreate);
 
 productRouter.post('/images', multipartMiddleware, function(req, res) {
 	//TODO: Use ProductID in query to update with images
-	
+
 	// console.log("Req.body:", req.body);
 	
   flow.post(req, function(status, filename, original_filename, identifier) {
     // console.log('POST', status, original_filename, identifier);
 
-    var oldPath = Path.join('./' + 'temp/' + identifier);
-    var newPath = Path.join('./' + '/public/images/' + req.user.username);
+    var oldPath = Path.join(Root + 'temp/' + identifier);
+    var newPath = Path.join(Root + '/public/images/' + req.user.username);
 
     mkdirp(newPath, function(err) { 
-      if (err) {
-        console.log(err);
-      } else {
-        newPath = newPath + '/' + Date.now() + Path.extname(req.body.flowFilename);
-        fs.rename(oldPath, newPath, function (err) {
-          console.log("FS CB:", err);
-        });
-      }
+		if (err) {
+			console.log(err);
+		} else {
+			newPath = newPath + '/' + Date.now() + Path.extname(req.body.flowFilename);
+			fs.rename(oldPath, newPath, function (err) {
+				if (err) {  //file doesn't exist or can't be read (called for each chunk)
+					return res.status(status).send();
+				} else {  //will only be called once per file
+			    	return res.status(status).send(newPath);    	
+				}
+			});
+		}
     });
-
-    res.status(status).send();
   });
 });
 
