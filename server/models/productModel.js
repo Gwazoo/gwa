@@ -22,11 +22,24 @@ var ProductModel = thinky.createModel("products", {
 });
 
 var Product = {
-	create: function(data) {
+	create: function(data, cb) {
 		var product = new ProductModel(data);
 		product.validate();
-		product.save();
+		product.saveAll().then(function(result){
+			cb(null, result);
+		})
+	},
+	getAll: function(cb) {
+		ProductModel.getJoin({categories: true}).run()
+		.then(function(result) {
+			cb(null, result);
+		})
 	}
 };
 
-module.exports = Product;
+module.exports.product = Product;
+module.exports.productModel = ProductModel;
+
+var category = require('./categoryModel.js');
+
+category.categoryModel.hasAndBelongsToMany(ProductModel, 'products', 'id', 'id');
