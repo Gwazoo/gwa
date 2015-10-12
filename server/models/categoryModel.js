@@ -28,6 +28,16 @@ var Category = {
 		.then(function(result) {
 			cb(null, result);
 		})
+	},
+	getProducts: function(id) {
+		return new Promise(function (resolve, reject) {
+			CategoryModel.get(id).getJoin({products: true}).run()
+			.then(function (result) {
+				resolve(result);
+			}, function (err) {
+				reject(Error("Error retrieving product: " + err));
+			});
+		});
 	}
 };
 

@@ -174,8 +174,12 @@ angular.module('gwazoo.controllers', [])
 	});
 })
 
-.controller('CategoryCtrl', function($scope, $rootScope) {
-	$scope.test = 'category controller';
+.controller('CategoryCtrl', function($scope, $rootScope, $routeParams, Products) {
+	//$scope.test = $routeParams.slug;
+	Products.getCategoryProducts($routeParams.slug)
+	.then(function (result) {
+		$scope.test = result;
+	});
 	$scope.test2 = 'search result ctrl same as category ctrl';
 })
 
