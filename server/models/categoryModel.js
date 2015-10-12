@@ -1,8 +1,8 @@
 'use strict';
-var thinky = require('./../util/thinky'),
-	//thinky = require('thinky')(util.config),
-	r = thinky.r,
-	type = thinky.type;
+var thinky = require('./../util/thinky');
+// var thinky = require('thinky')(util.config);
+var r = thinky.r;
+var type = thinky.type;
 
 var CategoryModel = thinky.createModel("categories", {
 		id: type.string(),
@@ -22,12 +22,28 @@ var Category = {
 				_apply: function(seq) {
 					return seq.getJoin({children: true})
 				}
-			}
+			},
+			products: false
 		}).run()
 		.then(function(result) {
 			cb(null, result);
 		})
+	},
+	getProducts: function(id) {
+		return new Promise(function (resolve, reject) {
+			CategoryModel.get(id).getJoin({products: true}).run()
+			.then(function (result) {
+				resolve(result);
+			}, function (err) {
+				reject(Error("Error retrieving product: " + err));
+			});
+		});
 	}
 };
 
-module.exports = Category;
+module.exports.category = Category;
+module.exports.categoryModel = CategoryModel;
+
+var product = require('./productModel.js');
+
+product.productModel.hasAndBelongsToMany(CategoryModel, 'categories', 'id', 'id');

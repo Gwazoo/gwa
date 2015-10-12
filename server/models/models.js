@@ -1,8 +1,8 @@
 'use strict';
-var thinky = require('./../util/thinky'),
-	//thinky = require('thinky')(util.config),
-	r = thinky.r,
-	type = thinky.type;
+var thinky = require('./../util/thinky');
+// var thinky = require('thinky')(util.config);
+var r = thinky.r;
+var type = thinky.type;
 
 // Users model
 var Users = thinky.createModel("Users", {

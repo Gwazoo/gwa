@@ -89,7 +89,7 @@ angular.module('gwazoo.services', [])
 		var deferred = $q.defer();
 		$http({
 			method: 'POST',
-			url: '/api/product',
+			url: '/api/product/create',
 			data: productInfo
 		}).success(function (res) {
 			console.log('product Added:', res);
@@ -112,9 +112,32 @@ angular.module('gwazoo.services', [])
 		return deferred.promise;
 	};
 
-	this.getProduct = function() {
-
+	this.getProducts = function() {
+		var deferred = $q.defer();
+		$http({
+			method: 'GET',
+			url: '/api/product'
+		}).success(function (res) {
+			deferred.resolve(res.data);
+		}).error(function (err) {
+			deferred.reject(err);
+		});
+		return deferred.promise;
 	};
+	
+	this.getCategoryProducts = function(param) {
+		var deferred = $q.defer();
+		$http({
+			method: 'GET',
+			url: '/api/category/' + param
+		}).success(function (res) {
+			deferred.resolve(res);
+		}).error(function (err) {
+			console.log('Services Err:', err);
+			deferred.reject(err);
+		});
+		return deferred.promise;
+	}
 })
 
 .service('Cookies', function($q, $http, localStorageService) {

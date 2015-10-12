@@ -1,15 +1,14 @@
 'use strict';
-var thinky     = require('./../util/thinky');
-//var	thinky   = require('thinky')(util.config);
-var	r        = thinky.r;
-var	type     = thinky.type;
+var thinky  = require('./../util/thinky');
+var	r       = thinky.r;
+var	type    = thinky.type;
+var bcrypt 	= require('bcrypt-nodejs');
 
 // User model
 var User = thinky.createModel("users", {
 	username: type.string().regex('[A-Za-z0-9](?:[A-Za-z0-9\-]{0,61}[A-Za-z0-9])').min(5).max(25).required(), // Username needs to begin and end with an alphanumeric character, but can contain dashes
 	email: type.string().email().required(),
 	password: type.string().min(8).required(), // Salted hashed password
-	salt: type.string(), // User salt
 	firstName: type.string(),
 	lastName: type.string(),
 	addresses: [{ // Array of address objects
@@ -29,16 +28,24 @@ var User = thinky.createModel("users", {
 var UserModel = {
 	create: function(userObj) {
 		return new Promise(function (resolve, reject) {
-			User.get('SkylerTest').run()
-			.then(function(success) {
-				if (success) {
-					resolve(success);
-				} else {
+			var salt = bcrypt.genSaltSync(12);
+			bcrypt.hash(userObj.password, salt, null, function(err, hash){
+				userObj.password = hash;
+				console.log(userObj);
+				var newUser = new User(userObj);
+				newUser.save()
+				.then(function(success) {
+					console.log(success);
+					if (success) {
+						resolve(success);
+					} else {
+						reject(Error("It broke."));
+				}
+				}, function (err) {
+					console.log(err);
 					reject(Error("It broke."));
-			}
-			}, function (err) {
-				reject(Error("It broke."));
-			});
+				});
+			})
 		});
 	}
 }
