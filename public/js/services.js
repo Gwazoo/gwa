@@ -93,7 +93,7 @@ angular.module('gwazoo.services', [])
 			data: productInfo
 		}).success(function (res) {
 			console.log('product Added:', res);
-			deferred.resolve(res.data);
+			deferred.resolve(res);
 		})
 		return deferred.promise;
 	};
@@ -125,6 +125,20 @@ angular.module('gwazoo.services', [])
 		return deferred.promise;
 	};
 	
+	this.updateProduct = function(productObj) {
+		var deferred = $q.defer();
+		$http({
+			method: 'POST',
+			url: '/api/product/update',
+			data: productObj
+		}).success(function (res) {
+			deferred.resolve(res.data);
+		}).error(function (err) {
+			deferred.reject(err);
+		});
+		return deferred.promise;
+	};
+
 	this.getCategoryProducts = function(param) {
 		var deferred = $q.defer();
 		$http({

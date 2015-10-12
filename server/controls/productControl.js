@@ -35,6 +35,7 @@ module.exports = {
 		});
 	},
 	update : function (req, res) {
+		console.log("Update Test:", req.body);
 		product.update(req.body)
 		.then( function (result) {
 			res.json(result);

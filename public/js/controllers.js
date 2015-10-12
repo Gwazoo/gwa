@@ -137,6 +137,7 @@ angular.module('gwazoo.controllers', [])
 			Products.addProduct(productInfo)
 			.then(function (productObj) {
 				$scope.product = [];
+				console.log("productObj:", productObj);
 				$scope.product.id = productObj.id;
 				$scope.upload();
 				$scope.success = 'Your product was successfully added!';
@@ -157,7 +158,17 @@ angular.module('gwazoo.controllers', [])
 		if (message) $scope.files.urls.push(message);  //filters duplicates and adds to url array
 		console.log($scope.files.urls);
 		if ($scope.files.flow.files.length == $scope.files.urls.length) {
-			//TODO: Use array and ProductID to batch update the product with image urls
+			var productObj = {
+				id: $scope.product.id,
+				images: $scope.files.urls 
+			};
+			Products.updateProduct(productObj)
+			.then(function (productObj) {
+				console.log("updateProduct: Product Updated.");
+				$scope.success = 'Your product was successfully updated!';
+			}).catch(function (err) {
+				$scope.error = 'There seems to be a problem with adding your product.';
+			});
 		}
 	};
 	
