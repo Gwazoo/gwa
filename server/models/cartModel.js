@@ -1,8 +1,8 @@
 // 'use strict';
-var thinky = require('./../util/thinky'),
-	//thinky = require('thinky')(util.config),
-	r = thinky.r,
-	type = thinky.type;
+var thinky = require('./../util/thinky');
+// var thinky = require('thinky')(util.config);
+var r = thinky.r;
+var type = thinky.type;
 
 var Cart = thinky.createModel("Cart", {
 	username: type.string().regex('[A-Za-z0-9](?:[A-Za-z0-9\-]{0,61}[A-Za-z0-9])').required(), // Username needs to begin and end with an alphanumeric character, but can contain dashes

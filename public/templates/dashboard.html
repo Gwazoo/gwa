@@ -4,6 +4,9 @@
 		<h2>pretty awesome</h2>
 		<h6>{{error}}</h6>
 		<h6>{{success}}</h6>
+		<h6>{{categories.mainCat}}</h6>
+		<h6>{{categories.subCat}}</h6>
+		<h6>{{categories.subSubCat}}</h6>
 	</section>
 	<section>
 		<form class="form-horizontal" data-ng-init="initCategories()">
@@ -22,15 +25,15 @@
 			<div class="form-group">
 				<label class="col-md-2 col-xs-3 control-label">Category</label>
 				<div class="col-md-3 col-xs-3">
-					<select class="form-control" name="mainCat" ng-model="product.mainCat" ng-options="o.name for o in categories">
+					<select class="form-control" name="mainCat" ng-model="categories.mainCat" ng-options="o.name for o in categories">
 					</select>
 				</div>
 				<div class="col-md-3 col-xs-3">
-					<select class="form-control" name="subCat" ng-model="product.subCat" ng-options="o.name for o in subCat">
+					<select class="form-control" name="subCat" ng-model="categories.subCat" ng-options="o.name for o in subCat">
 					</select>
 				</div>
 				<div class="col-md-3 col-xs-3">
-					<select class="form-control" name="subSubCat" ng-model="product.subSubCat" ng-options="o.name for o in subSubCat">
+					<select class="form-control" name="subSubCat" ng-model="categories.subSubCat" ng-options="o.name for o in subSubCat">
 					</select>
 				</div>
 			</div>
