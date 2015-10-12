@@ -18,6 +18,8 @@ productRouter.get('/', Api.getAll);
 //path => /api/product/create
 productRouter.post('/create', Api.prodCreate);
 
+productRouter.post('/update', Api.update);
+
 productRouter.post('/images', multipartMiddleware, function(req, res) {
 	//TODO: Use ProductID in query to update with images
 

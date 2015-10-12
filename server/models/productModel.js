@@ -10,7 +10,7 @@ var ProductModel = thinky.createModel("products", {
 	vendor: type.string(), // Vendor's username
 	name: type.string().required(),
 	description: type.string().required(), // Full description
-	shortDescription: type.string().required().max(50), // Short description for display on search pages
+	shortDescription: type.string().max(50), // Short description for display on search pages
 	price: type.string().required(), // The price we pay for it
 	salePrice: type.string().required(), // The price we sell the product for
 	smallImages: [{ // Array of Image objects
@@ -47,6 +47,19 @@ var Product = {
 				resolve(result);
 			}, function (err) {
 				reject(Error("Error retrieving product: " + err));
+			});
+		});
+	},
+	update: function(data) {
+		return new Promise(function (resolve, reject) {
+			ProductModel.get(data.id).run()
+			.then(function (product) {
+				product.merge(data).save()
+				.then(function (result) {
+					resolve(result);
+				}, function (err) {
+					reject(Error("Error updated product: " + err));
+				});
 			});
 		});
 	}

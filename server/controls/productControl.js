@@ -33,5 +33,15 @@ module.exports = {
 				message: "Database error. Product not retrieved."
 			});
 		});
+	},
+	update : function (req, res) {
+		product.update(req.body)
+		.then( function (result) {
+			res.json(result);
+		}, function (err) {
+			res.status(500).json({
+				message: "Database error. Product not updated."
+			});
+		});
 	}
 };
