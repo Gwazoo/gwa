@@ -1,6 +1,6 @@
 // 'use strict';
-var util = require('./../util/thinky'),
-	thinky = require('thinky')(util.config),
+var thinky = require('./../util/thinky'),
+	//thinky = require('thinky')(util.config),
 	r = thinky.r,
 	type = thinky.type;
 

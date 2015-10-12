@@ -1,6 +1,6 @@
 'use strict';
-var util     = require('./../util/thinky');
-var	thinky   = require('thinky')(util.config);
+var thinky     = require('./../util/thinky');
+//var	thinky   = require('thinky')(util.config);
 var	r        = thinky.r;
 var	type     = thinky.type;
 
@@ -31,8 +31,8 @@ var UserModel = {
 		return new Promise(function (resolve, reject) {
 			User.get('SkylerTest').run()
 			.then(function(success) {
-				if (result) {
-					resolve(result);
+				if (success) {
+					resolve(success);
 				} else {
 					reject(Error("It broke."));
 			}

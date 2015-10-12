@@ -1,5 +1,5 @@
-var util 		= require('../util/thinky');
-var thinky 		= require('thinky')(util.config);
+var thinky 		= require('../util/thinky');
+//var thinky 		= require('thinky')(util.config);
 var r 			= require('rethinkdb');
 var bcrypt 		= require('bcrypt-nodejs');
 var cartModel 	= require('./../models/cartModel.js');
