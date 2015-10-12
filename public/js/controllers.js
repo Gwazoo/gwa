@@ -133,10 +133,11 @@ angular.module('gwazoo.controllers', [])
 			productInfo.categories.push($scope.categories.mainCat.id);
 			productInfo.categories.push($scope.categories.subCat.id);
 			productInfo.categories.push($scope.categories.subSubCat.id);
+			
 			Products.addProduct(productInfo)
-			.then(function (prod) {
+			.then(function (productObj) {
 				$scope.product = [];
-				//TODO: Return ProductID from Rethink
+				$scope.product.id = productObj.id;
 				$scope.upload();
 				$scope.success = 'Your product was successfully added!';
 			}).catch(function (err) {
