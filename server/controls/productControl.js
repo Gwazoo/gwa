@@ -13,7 +13,7 @@ module.exports = {
 	*/
 	prodCreate : function (req, res) {
 		console.log("Control req.body:", req.body);
-		product.productModel.create(req.body, function (err, data) {
+		product.product.create(req.body, function (err, data) {
 			console.log("Data:", data);	
 			res.json(data);
 		});
