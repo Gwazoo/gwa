@@ -1,4 +1,4 @@
-var thinky 		= require('../util/thinky');
+var thinky 		= require('./../util/thinky');
 //var thinky 		= require('thinky')(util.config);
 var r 			= require('rethinkdb');
 var bcrypt 		= require('bcrypt-nodejs');
@@ -214,31 +214,26 @@ module.exports = {
 
 		r.connect(thinky._config, function (err, connection) {  //connect to db
 	    	if (err) throw err;
-		    r.table('users').filter({  //search database for username
-		    	username : username
-		    }).run(connection, function (err, cursor) {
-				if (err) throw err;
-				cursor.toArray(function (err, result) {  //convert result "cursor" object to array
-					if (err) { return done(err); }
-					if (result.length == 1) {  //if unique username is found
-						bcrypt.compare(password, result[0].password, function (err, isMatch){
-							//compare user-submitted password with hash, returns boolean isMatch
-							if (isMatch) {
-								console.log("Authenticated!");
-								var user = result[0];
-								delete user.password;
-								console.log(user);
-								{ return done(null, user); }  //Success! Return user object
-							} else {
-								console.log("Incorrect Password!");
-								{ return done(null, false, {message: 'ERROR: Password Did Not Match!'}); }
-							}
-						});
-					} else {
-						console.log("No User Found!");
-						{ return done(null, false, {message: 'ERROR: No User Found!'}); }
-					}
-				});
+		    r.table('users').get(username).run(connection, function (err, result) {
+				if (err) { return done(err); }
+				if (result != null) {  //if unique username is found
+					bcrypt.compare(password, result.password, function (err, isMatch){
+						//compare user-submitted password with hash, returns boolean isMatch
+						if (isMatch) {
+							console.log("Authenticated!");
+							var user = result;
+							delete user.password;
+							console.log(user);
+							{ return done(null, user); }  //Success! Return user object
+						} else {
+							console.log("Incorrect Password!");
+							{ return done(null, false, {message: 'ERROR: Password Did Not Match!'}); }
+						}
+					});
+				} else {
+					console.log("No User Found!");
+					{ return done(null, false, {message: 'ERROR: No User Found!'}); }
+				}
 			});
 		});
 	}

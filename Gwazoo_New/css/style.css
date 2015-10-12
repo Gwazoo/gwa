@@ -51,10 +51,23 @@
 		color:#565656;
 		text-decoration: none;
 	}
+	.btn-primary{
+		color:#565656;
+		background-color: transparent;
+		border:none;
+	}
+	.btn-primary:hover{
+		color:#565656;
+		background-color: transparent;
+		border:none;
+	}
 /* end of header */
 
 
 /* main navigation */
+	.navbar{
+		margin-bottom: 0px;
+	}
 	.navbar-inverse{
 		background-color:white;
 		border-top:1px solid #D7D7D7;
@@ -106,12 +119,18 @@
 	}
 /* end of main banner */
 
+/* sliders */
+.carousel-control {
+  padding-top:7%;
+  width:5%;
+}
+
 /* page content */
 	/* 1st block */
 	.first_block{
 		padding:2em 0;
 		background-color:#EFEFEF;
-		height:260px; /* remove this after carousel */
+		height:100%; /* remove this after carousel */
 	}
 
 	/* 2nd block */

@@ -22,7 +22,8 @@ var Category = {
 				_apply: function(seq) {
 					return seq.getJoin({children: true})
 				}
-			}
+			},
+			products: false
 		}).run()
 		.then(function(result) {
 			cb(null, result);
@@ -30,4 +31,9 @@ var Category = {
 	}
 };
 
-module.exports = Category;
+module.exports.category = Category;
+module.exports.categoryModel = CategoryModel;
+
+var product = require('./productModel.js');
+
+product.productModel.hasAndBelongsToMany(CategoryModel, 'categories', 'id', 'id');
