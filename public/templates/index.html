@@ -18,7 +18,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
     <!-- Custom CSS -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/results.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -34,331 +35,306 @@
 <!-- header -->
 <header>
     <div class="container">
-        <div class="row">
-            <div class="logo col-xs-12 col-md-2" align="center">
-                <a href="index.html"><img src="images/logo.png" alt="" /></a>
-            </div>
-            <div class="head_search col-xs-12 col-md-7" align="center">
-                <form>
-                    <input type="text" placeholder="Search Gwazoo..."><button class="header_search_btn"><i class="fa fa-search fa-2x"></i></button>
-                </form>
-            </div>
-            <div class="head_right col-xs-12 col-md-3" align="right">
-                <ul>
-                    <li style="display:inline-block;">
-                        <a href="#">My Account &#9660;</a><!--
-                        <ul>
-                            <li><a href="">Your Account</a></li>
-                            <li><a href="">Orders</a></li>
-                            <li><a href="">Your Wishlist</a></li>
-                            <li><a href="">Account Settings</a></li>
-                            <li><a href="">Logout</a></li>
-                        </ul> -->
-                    </li>
-                    <li style="border-style:none; display:inline-block;">
-                        <a href="#"><i class="fa fa-shopping-cart"></i> Cart </a>
-                    </li>
-                </ul>
-            </div>
-        </div><!-- /. row -->
-    </div><!-- /. container -->
-</header><!-- /. header -->
+    <div class="row">
+        <div class="logo col-xs-12 col-md-2" align="center">
+            <a href="../index.html"><img src="../images/logo.png" alt="" /></a>
+        </div>
+        <div class="head_search col-xs-12 col-md-7" align="center">
+            <form>
+                <input type="text" placeholder="Search Gwazoo..."><button class="header_search_btn"><i class="fa fa-search fa-2x"></i></button>
+            </form>
+        </div>
+        <div class="head_right col-xs-12 col-md-3" align="right">
+            <ul>
+                <li style="display:inline-block;">
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">My Account <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="">Your Account</a></li>
+                        <li><a href="">Orders</a></li>
+                        <li><a href="">Your Wishlist</a></li>
+                        <li><a href="">Account Settings</a></li>
+                        <li><a href="">Logout</a></li>
+                    </ul>
+                </div>
+                </li>
+                <li style="border-style:none; display:inline-block;">
+                    <a href="#"><i class="fa fa-shopping-cart"></i> Cart </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- /. row -->
+    </div>
+    <!-- /. container -->
+</header>
+<!-- /. header -->
 
 <!-- Navigation -->
 <div class="container">
-    <nav class="navbar navbar-inverse" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">SHOP</a>
-                    </li>
-                    <li>
-                        <a href="#">BEAUTY</a>
-                    </li>
-                    <li>
-                        <a href="#">HEALTH</a>
-                    </li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container -->
-    </nav>
-</div><!-- /.Navigation -->
-
-<!-- main banner -->
-<div class="main_banner container">
-    <div class="banner_text col-xs-6 col-md-6">
-        <h2><b>GOING BACK TO SCHOOL?<br>GWAZOO'S GOT YOU COVERED.</b></h2>
-        <p style="color:gray">Seasonal Blowout Sales on electronics <a href="#">available.</a></p>
-        <br>
-        <a href="#">More Info</a>
+<nav class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="#">SHOP</a>
+                </li>
+                <li>
+                    <a href="#">BEAUTY</a>
+                </li>
+                <li>
+                    <a href="#">HEALTH</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
     </div>
-    <div class="banner_image col-xs-6 col-md-6" align="center">
-        <img src="images/slider-img.png" alt="">
-    </div>
+    <!-- /.container -->
+</nav>
 </div>
-<!-- /.container -->
-<!-- /.main banner -->
-
+<div class="top_bar container">
+    <p>1-16 of 700,234 results for <span>"hello"</span></p>
+</div>
+<!-- /.Navigation -->
 
 
 <!-- page content -->
-
-    <!-- 1st block -->
-<div class="first_block container-fluid">
-    <div class="container">
-        <h3>Latest Products</h3>
+<div class="container">
+    <!-- left menu -->
+    <div class="narrow_search col-lg-2">
+        <h3>Narrow your search</h3>
+        <ul class="expand_cat">
+            <li><a href="#"><span>Digital Music ></span></a>
+                <ul>
+                    <li><a href="#">Dance & Electronic</a></li>
+                    <li><a href="#">House Music</a></li>
+                    <li><a href="#">R&B</a></li>
+                </ul>
+            </li>
+            <li><a href="#"><span>Health & Personal Care ></span></a>
+                <ul>
+                    <li><a href="#">Breath Sprays</a></li>
+                    <li><a href="#">Personal Care Products</a></li>
+                    <li><a href="#">Toothpaste</a></li>
+                </ul>
+            </li>
+            <li><a href="#"><span>Professional Dental Supplies ></span></a>
+                <ul>
+                    <li><a href="#">Toothpastes</a></li>
+                </ul>
+            </li>
+            <li><a href="#"><span>Apps & Games ></span></a>
+                <ul>
+                    <li><a href="#">Magazine Apps</a></li>
+                    <li><a href="#">Music Apps</a></li>
+                    <li><a href="#">Communication Apps</a></li>
+                </ul>
+            </li>
+            <li class="collapse" id="seeall">
+                <ul id="collapse_ul">
+                    <li><a href="#">Electronics ></a></li>
+                        <ul>
+                            <li>Something</li>
+                        </ul>
+                    <li><a href="#">Toys & Games ></a></li>
+                        <ul>
+                            <li>Something</li>
+                        </ul>
+                    <li><a href="#">Toys & Games ></a></li>
+                        <ul>
+                            <li>Something</li>
+                        </ul>
+                </ul>
+            <li><input type="button" id="collapsible" class="filter_collapse btn" data-toggle="collapse" data-target="#seeall" value="See all departments »"></input></li>
+        </ul>
     </div>
-    <div class="item_slider">
+    <!-- /. left menu -->
+    <!-- search results -->
+    <div class="search_results col-lg-10">
+        <div class="search_ad row">
+            <div class="col-md-1"><img src="http://ecx.images-amazon.com/images/I/51vpagSvAYL._UY80_QL95_.jpg"></div>
+            <h4><a href="#">"Illuminae" by Amie Kaufman and Jay Kristoff</a></h4>
+            <p>Kady thought breaking up with Ezra was the hardest thing she’d have to do... until her planet was invaded. <a href="#">Learn more</a></p>
+        </div>
+        <div class="row">
+            <p>Related Searches: 
+                <a href="#">hello brush</a>,
+                <a href="#">hello kitty</a>,
+                <a href="#">hello kitty backpack</a>.
+            </p>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <img src="http://ecx.images-amazon.com/images/I/51PRRJBSrjL._AA160_.jpg">
+            </div>
+            <div class="col-md-5">
+                <span><h4><a href="#">Hello</a></h4></span>
+                <span>by Lionel Richie</span>
+                </br>
+                </br>
+                <span><a href="#">MP3 Music</a></span>
+                <span><h5>$1.29</h5></span>
+            </div>
+            <div class="col-md-5">
+                <div>
+                    STARS / DESCRIPTIONS
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <img src="http://ecx.images-amazon.com/images/I/51PRRJBSrjL._AA160_.jpg">
+            </div>
+            <div class="col-md-5">
+                <span><h4><a href="#">Hello</a></h4></span>
+                <span>by Lionel Richie</span>
+                </br>
+                </br>
+                <span><a href="#">MP3 Music</a></span>
+                <span><h5>$1.29</h5></span>
+            </div>
+            <div class="col-md-5">
+                <div>
+                    STARS / DESCRIPTIONS
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <img src="http://ecx.images-amazon.com/images/I/51PRRJBSrjL._AA160_.jpg">
+            </div>
+            <div class="col-md-5">
+                <span><h4><a href="#">Hello</a></h4></span>
+                <span>by Lionel Richie</span>
+                </br>
+                </br>
+                <span><a href="#">MP3 Music</a></span>
+                <span><h5>$1.29</h5></span>
+            </div>
+            <div class="col-md-5">
+                <div>
+                    STARS / DESCRIPTIONS
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <img src="http://ecx.images-amazon.com/images/I/51PRRJBSrjL._AA160_.jpg">
+            </div>
+            <div class="col-md-5">
+                <span><h4><a href="#">Hello</a></h4></span>
+                <span>by Lionel Richie</span>
+                </br>
+                </br>
+                <span><a href="#">MP3 Music</a></span>
+                <span><h5>$1.29</h5></span>
+            </div>
+            <div class="col-md-5">
+                <div>
+                    STARS / DESCRIPTIONS
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <img src="http://ecx.images-amazon.com/images/I/51PRRJBSrjL._AA160_.jpg">
+            </div>
+            <div class="col-md-5">
+                <span><h4><a href="#">Hello</a></h4></span>
+                <span>by Lionel Richie</span>
+                </br>
+                </br>
+                <span><a href="#">MP3 Music</a></span>
+                <span><h5>$1.29</h5></span>
+            </div>
+            <div class="col-md-5">
+                <div>
+                    STARS / DESCRIPTIONS
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <img src="http://ecx.images-amazon.com/images/I/51PRRJBSrjL._AA160_.jpg">
+            </div>
+            <div class="col-md-5">
+                <span><h4><a href="#">Hello</a></h4></span>
+                <span>by Lionel Richie</span>
+                </br>
+                </br>
+                <span><a href="#">MP3 Music</a></span>
+                <span><h5>$1.29</h5></span>
+            </div>
+            <div class="col-md-5">
+                <div>
+                    STARS / DESCRIPTIONS
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <img src="http://ecx.images-amazon.com/images/I/51PRRJBSrjL._AA160_.jpg">
+            </div>
+            <div class="col-md-5">
+                <span><h4><a href="#">Hello</a></h4></span>
+                <span>by Lionel Richie</span>
+                </br>
+                </br>
+                <span><a href="#">MP3 Music</a></span>
+                <span><h5>$1.29</h5></span>
+            </div>
+            <div class="col-md-5">
+                <div>
+                    STARS / DESCRIPTIONS
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <img src="http://ecx.images-amazon.com/images/I/51PRRJBSrjL._AA160_.jpg">
+            </div>
+            <div class="col-md-5">
+                <span><h4><a href="#">Hello</a></h4></span>
+                <span>by Lionel Richie</span>
+                </br>
+                </br>
+                <span><a href="#">MP3 Music</a></span>
+                <span><h5>$1.29</h5></span>
+            </div>
+            <div class="col-md-5">
+                <div>
+                    STARS / DESCRIPTIONS
+                </div>
+            </div>
+        </div>
+    <!-- /. container -->
     </div>
+    <!-- /. search results -->    
 </div>
-    <!-- /. 1st block -->
-
-    <!-- 2nd block -->
-<div class="page_content container">
-        <!-- left -->
-    <div class="main_left col-xs-12 col-md-3">
-        <div class="main_category col-xs-12">
-            <ul>
-                <h3><i class="fa fa-caret-right"></i> Browse All Categories</h3>
-                <li><a href="#">Appliances</a></li>
-                <li><a href="#">Sports Equipments</a></li>
-                <li><a href="#">Computers & Electronics</a></li>
-                <li><a href="#">Office supplies</a></li>
-                <li><a href="#">Health & Beauty</a></li>
-                <li><a href="#">Home & Garden</a></li>
-                <li><a href="#">Apparel</a></li>
-                <li><a href="#">Toys & Games</a></li>
-                <li><a href="#">Automotive</a></li>
-            </ul>
-
-
-        </div>
-        <div class="main_help col-xs-12">
-            <h3><i class="fa fa-caret-right"></i> Need Help?</h3>
-            <p><span>We want your shopping experience to be easy.</span></p>
-            <p>We are committed to give you all the support you need to make the right decision with minimum fuss. Let Gwazoo know!</p>
-        </div>
-        <div class="main_ad col-xs-12">
-            <img src="images/question.png" alt="">
-            <div class="banner_desc">
-                <h4>Contact Us</h4>
-                <a href="#">More Info</a>
-            </div>
-        </div>
-        <div class="main_ad col-xs-12">
-            <img src="images/ear.png" alt="">
-            <div class="banner_desc">
-                <h4>Suggestions?</h4>
-                <a href="#">More Info</a>                
-            </div>
-        </div>
-    </div>
-        <!-- /. left -->
-
-        <!-- right -->
-    <div class="main_right col-xs-12 col-md-9">
-        <h3><i class="fa fa-caret-right"></i> Trending Items</h3>
-        <div class="section_group col-xs-12 col-md-12">
-            <div class="grid_1_of_4 col-xs-6 col-md-3">
-                <h4><a href="#">Toshiba Satellite Laptop...</a></h4>
-                <a href="preview.html">
-                    <img src="images/product-img1.png">
-                </a>
-                <div class="price_details">
-                    <div class="price_number">
-                        <p><span>$299.99</span></p>
-                    </div>
-                    <div class="add_cart">
-                        <h4><a href="#">More Info</a></h4>
-                    </div>
-                </div>
-            </div>
-            <div class="grid_1_of_4 col-xs-6 col-md-3">
-                <h4><a href="#">Toshiba Satellite Laptop...</a></h4>
-                <a href="preview.html">
-                    <img src="images/product-img1.png">
-                </a>
-                <div class="price_details">
-                    <div class="price_number">
-                        <p><span>$299.99</span></p>
-                    </div>
-                    <div class="add_cart">
-                        <h4><a href="#">More Info</a></h4>
-                    </div>
-                </div>
-            </div>
-            <div class="grid_1_of_4 col-xs-6 col-md-3">
-                <h4><a href="#">Toshiba Satellite Laptop...</a></h4>
-                <a href="preview.html">
-                    <img src="images/product-img1.png">
-                </a>
-                <div class="price_details">
-                    <div class="price_number">
-                        <p><span>$299.99</span></p>
-                    </div>
-                    <div class="add_cart">
-                        <h4><a href="#">More Info</a></h4>
-                    </div>
-                </div>
-            </div>
-            <div class="grid_1_of_4 col-xs-6 col-md-3">
-                <h4><a href="#">Toshiba Satellite Laptop...</a></h4>
-                <a href="preview.html">
-                    <img src="images/product-img1.png">
-                </a>
-                <div class="price_details">
-                    <div class="price_number">
-                        <p><span>$299.99</span></p>
-                    </div>
-                    <div class="add_cart">
-                        <h4><a href="#">More Info</a></h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="section_group col-xs-12 col-md-12">
-            <div class="grid_1_of_4 col-xs-6 col-md-3">
-                <h4><a href="#">Toshiba Satellite Laptop...</a></h4>
-                <a href="preview.html">
-                    <img src="images/product-img1.png">
-                </a>
-                <div class="price_details">
-                    <div class="price_number">
-                        <p><span>$299.99</span></p>
-                    </div>
-                    <div class="add_cart">
-                        <h4><a href="#">More Info</a></h4>
-                    </div>
-                </div>
-            </div>
-            <div class="grid_1_of_4 col-xs-6 col-md-3">
-                <h4><a href="#">Toshiba Satellite Laptop...</a></h4>
-                <a href="preview.html">
-                    <img src="images/product-img1.png">
-                </a>
-                <div class="price_details">
-                    <div class="price_number">
-                        <p><span>$299.99</span></p>
-                    </div>
-                    <div class="add_cart">
-                        <h4><a href="#">More Info</a></h4>
-                    </div>
-                </div>
-            </div>
-            <div class="grid_1_of_4 col-xs-6 col-md-3">
-                <h4><a href="#">Toshiba Satellite Laptop...</a></h4>
-                <a href="preview.html">
-                    <img src="images/product-img1.png">
-                </a>
-                <div class="price_details">
-                    <div class="price_number">
-                        <p><span>$299.99</span></p>
-                    </div>
-                    <div class="add_cart">
-                        <h4><a href="#">More Info</a></h4>
-                    </div>
-                </div>
-            </div>
-            <div class="grid_1_of_4 col-xs-6 col-md-3">
-                <h4><a href="#">Toshiba Satellite Laptop...</a></h4>
-                <a href="preview.html">
-                    <img src="images/product-img1.png">
-                </a>
-                <div class="price_details">
-                    <div class="price_number">
-                        <p><span>$299.99</span></p>
-                    </div>
-                    <div class="add_cart">
-                        <h4><a href="#">More Info</a></h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="section_group col-xs-12 col-md-12">
-            <div class="grid_1_of_4 col-xs-6 col-md-3">
-                <h4><a href="#">Toshiba Satellite Laptop...</a></h4>
-                <a href="preview.html">
-                    <img src="images/product-img1.png">
-                </a>
-                <div class="price_details">
-                    <div class="price_number">
-                        <p><span>$299.99</span></p>
-                    </div>
-                    <div class="add_cart">
-                        <h4><a href="#">More Info</a></h4>
-                    </div>
-                </div>
-            </div>
-            <div class="grid_1_of_4 col-xs-6 col-md-3">
-                <h4><a href="#">Toshiba Satellite Laptop...</a></h4>
-                <a href="preview.html">
-                    <img src="images/product-img1.png">
-                </a>
-                <div class="price_details">
-                    <div class="price_number">
-                        <p><span>$299.99</span></p>
-                    </div>
-                    <div class="add_cart">
-                        <h4><a href="#">More Info</a></h4>
-                    </div>
-                </div>
-            </div>
-            <div class="grid_1_of_4 col-xs-6 col-md-3">
-                <h4><a href="#">Toshiba Satellite Laptop...</a></h4>
-                <a href="preview.html">
-                    <img src="images/product-img1.png">
-                </a>
-                <div class="price_details">
-                    <div class="price_number">
-                        <p><span>$299.99</span></p>
-                    </div>
-                    <div class="add_cart">
-                        <h4><a href="#">More Info</a></h4>
-                    </div>
-                </div>
-            </div>
-            <div class="grid_1_of_4 col-xs-6 col-md-3">
-                <h4><a href="#">Toshiba Satellite Laptop...</a></h4>
-                <a href="preview.html">
-                    <img src="images/product-img1.png">
-                </a>
-                <div class="price_details">
-                    <div class="price_number">
-                        <p><span>$299.99</span></p>
-                    </div>
-                    <div class="add_cart">
-                        <h4><a href="#">More Info</a></h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-            <!-- recommendations for you -->
-        <div class="col-xs-12">
-            <h3><i class="fa fa-caret-right"></i> Recommendations for You</h3>
-        </div>
-            <!-- related to items you've viewed -->
-        <div class="col-xs-12">
-            <h3><i class="fa fa-caret-right"></i> Related to Items You've Viewed</h3>
-        </div>
-    </div>
-        <!-- /. right -->
-</div>
-    <!-- /. 2nd block -->
-
+<!-- /. container -->
 <!-- /. page content -->
 
 
+
+
+
+
+
+
+
+
+
+<!-- footer -->
 <footer>
 <div class="container">
     <div class="footer_left col-xs-12 col-md-6">
@@ -374,10 +350,19 @@
 </div>
 </footer>
 
+<!-- script -->
+
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- filter expand / collapse -->
+<script>
+function handleClick(){
+    this.value = (this.value == 'See all departments »' ? 'Hide departments «' : 'See all departments »');
+}
+document.getElementById('collapsible').onclick=handleClick;
+</script>
 
 </body>
 

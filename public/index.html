@@ -11,15 +11,15 @@
 	<link rel="stylesheet" href="/libs/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/css/style.css" media="all"/>
-	<!-- <link rel="stylesheet" href="/css/brain.css"> -->
+	<link rel="stylesheet" href="/css/results.css">
 
 <!-- FAVICON -->
 
 
 <!-- JS -->
 	<script src="/libs/jquery/dist/jquery.min.js"></script>
-	<script src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="/libs/angular/angular.js"></script>
+    <script src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="/libs/angular-route/angular-route.min.js"></script>
 	<script src="/libs/angular-local-storage/dist/angular-local-storage.min.js"></script>
 	<script src="/libs/ng-flow/dist/ng-flow-standalone.min.js"></script>
@@ -49,7 +49,7 @@
                 </div>
                 <div class="head_right col-xs-12 col-md-3" align="right">
                     <ul>
-                        <li ng-show="!session" data-toggle="modal" data-target="#loginModal"><a href="#">Login</a></li>
+                        <li ng-show="!session"><a ng-click="open()">Login</a></li>
                         <li ng-show="!session"><a href="/register">register</a></li>
                     </ul>
                     <ul>
@@ -90,18 +90,7 @@
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shop <span class="caret"></span></a>
 							<ul class="dropdown-menu">  <!-- NG_REPEAT THROUGHT THESE? -->
-								<li><a href="/category/{{category.slug}}">Automotive & Industrial</a></li>
-								<li><a href="/category/{{category.slug}}">Sports & Outdoors</a></li>
-								<li><a href="/category/{{category.slug}}">Beauty</a></li>
-								<li><a href="/category/{{category.slug}}">Books & Audible</a></li>
-								<li><a href="/category/{{category.slug}}">Clothes, Shoes & Jewelry</a></li>
-								<li><a href="/category/{{category.slug}}">Electronics & Computers</a></li>
-								<li><a href="/category/{{category.slug}}">Office & School Supplies</a></li>
-								<li><a href="/category/{{category.slug}}">Health & Grocery</a></li>
-								<li><a href="/category/{{category.slug}}">Home & Garden</a></li>
-								<li><a href="/category/{{category.slug}}">Movies, Music & Games</a></li>
-								<li><a href="/category/{{category.slug}}">Toys, Kids & Baby</a></li>
-								<li><a href="/category/{{category.slug}}">Other</a></li>
+								<li ng-repeat="category in categories"><a ng-href="/category/{{category.slug}}/{{category.id}}">{{category.name}}</a></li>
 							</ul>
 						</li>
 						<li><a href="/category/{{category.slug}}">beauty</a></li>
@@ -121,7 +110,7 @@
 
 
     <footer class="container">
-        <div class="footer_left col-xs-12 col-md-6">
+        <div class="pull-left col-xs-12 col-md-6">
             <p>Copyright <i class="fa fa-copyright"></i> 2010-{{date | date:'yyyy'}}. All Rights Reserved | <a href="/">Gwazoo.com</a></p>
         </div>
         <!-- <div class="footer_center col-xs-12 col-md-4">
@@ -142,47 +131,5 @@
             </ul>
         </div>
     </footer>
-
-<!-- LOGIN MODAL -->
-	<div id="loginModal" class="modal fade">
-		<div class="modal-dialog modal-md">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h3>User Login</h3>
-				</div>
-				<form class="form-horizontal">
-					<div class="modal-body">
-						<div class="form-group">
-							<label for="registerUsername" class="col-md-2 control-label">Username</label>
-							<div class="col-md-10">
-								<input type="username" class="form-control" name="username" ng-model="user.username" placeholder="Username"/>
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="registerPassword" class="col-md-2 control-label">Password</label>
-							<div class="col-md-10">
-								<input type="password" class="form-control" name="password" ng-model="user.password" placeholder="Password"/>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-12">
-								<span class="error bg-danger">{{error}}</span>
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<div class="row">
-							<div class="col-md-6">
-								<button data-dismiss="modal" class="btn btn-danger btn-sm btn-block" ng-click="cancel()">Cancel</button>
-							</div>
-							<div class="col-md-6">
-								<button data-dismiss="modal" type="submit" class="btn btn-success btn-sm btn-block" ng-click="login(user)">Login</button>
-							</div>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
 </body>
 </html>

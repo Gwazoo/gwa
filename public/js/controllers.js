@@ -18,20 +18,8 @@ angular.module('gwazoo.controllers', ['flow'])
 //     };
 // })
 
-.controller('MainCtrl', function($scope, $location, Account, Cookies) {
+.controller('MainCtrl', function($scope, $location, Account, Cookies, Products) {
     $scope.date = new Date();
-
-	$scope.logout = function() {
-		Cookies.removeCookie("Session");
-		$scope.session = Cookies.getSession();  //getSession == null
-		Account.logout()
-		.then(function (nullUser) {
-			$scope.user = nullUser;
-		})
-		.catch(function (err) {
-			console.log("There was an error logging out.");
-		});
-	};
 
 	$scope.login = function(userLogin) {
 		Account.login(userLogin)
@@ -56,9 +44,21 @@ angular.module('gwazoo.controllers', ['flow'])
 	};
 
 	$scope.cancel = function() {
-		$scope.user = null;
-		$scope.error = null;
+        $scope.user = null;
+        $scope.error = null;
 	};
+
+    $scope.logout = function() {
+        Cookies.removeCookie("Session");
+        $scope.session = Cookies.getSession();  //getSession == null
+        Account.logout()
+        .then(function (nullUser) {
+            $scope.user = nullUser;
+        })
+        .catch(function (err) {
+            console.log("There was an error logging out.");
+        });
+    };
 
 	// CART HELPERS (more functions in Cookies service)
 	$scope.addToCart = function () {
@@ -70,6 +70,12 @@ angular.module('gwazoo.controllers', ['flow'])
 	$scope.clearAllCookies = function () {
 		Cookies.clearAllCookies();
 	}
+
+    // NAVIGATION
+    Products.getCategories()
+    .then(function (result) {
+        $scope.categories = result;
+    });
 })
 
 .controller('HomeCtrl', function($scope, $rootScope, Account) {
@@ -202,11 +208,13 @@ angular.module('gwazoo.controllers', ['flow'])
 })
 
 .controller('CategoryCtrl', function($scope, $rootScope, $routeParams, Products) {
-	//$scope.test = $routeParams.slug;
-	Products.getCategoryProducts($routeParams.slug)
-	.then(function (result) {
-		$scope.test = result;
-	});
+    Products.getCategoryProducts($routeParams.slug)
+    .then(function (result) {
+        // console.log(result);
+        $scope.category = result.name;
+        $scope.products = result.products;
+        $scope.image = result.image;
+    });
 	$scope.test2 = 'search result ctrl same as category ctrl';
 })
 

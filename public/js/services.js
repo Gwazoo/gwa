@@ -1,7 +1,7 @@
 'use strict';
 angular.module('gwazoo.services', [])
 
-.service('Account', function($q, $http, $location, $rootScope) {
+.service('Account', function($q, $http, $location, $rootScope, $modal) {
 	var user = '';
 
 	this.login = function(userLogin) {

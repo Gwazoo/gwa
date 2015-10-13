@@ -1,5 +1,85 @@
-<div class="container">
-	<h1>CATEGORY PRODUCTS</h1>
-	
-	{{test}}
-</div>
+<section class="page-header container"> <!-- page header -->
+    <h1>{{category}}</h1>
+    <h2>BUY ME NOW!!!!</h2>
+</section>
+<section class="container"> <!-- page content -->
+    <div class="narrow_search col-lg-2"> <!-- left menu -->
+        <h3>Narrow your search</h3>
+        <ul class="expand_cat">
+            <li><a href="#"><span>Digital Music ></span></a>
+                <ul>
+                    <li><a href="#">Dance & Electronic</a></li>
+                    <li><a href="#">House Music</a></li>
+                    <li><a href="#">R&B</a></li>
+                </ul>
+            </li>
+            <li><a href="#"><span>Health & Personal Care ></span></a>
+                <ul>
+                    <li><a href="#">Breath Sprays</a></li>
+                    <li><a href="#">Personal Care Products</a></li>
+                    <li><a href="#">Toothpaste</a></li>
+                </ul>
+            </li>
+            <li><a href="#"><span>Professional Dental Supplies ></span></a>
+                <ul>
+                    <li><a href="#">Toothpastes</a></li>
+                </ul>
+            </li>
+            <li><a href="#"><span>Apps & Games ></span></a>
+                <ul>
+                    <li><a href="#">Magazine Apps</a></li>
+                    <li><a href="#">Music Apps</a></li>
+                    <li><a href="#">Communication Apps</a></li>
+                </ul>
+            </li>
+            <li class="collapse" id="seeall">
+                <ul id="collapse_ul">
+                    <li><a href="#">Electronics ></a></li>
+                        <ul>
+                            <li>Something</li>
+                        </ul>
+                    <li><a href="#">Toys & Games ></a></li>
+                        <ul>
+                            <li>Something</li>
+                        </ul>
+                    <li><a href="#">Toys & Games ></a></li>
+                        <ul>
+                            <li>Something</li>
+                        </ul>
+                </ul>
+            <li><input type="button" id="collapsible" class="filter_collapse btn" data-toggle="collapse" data-target="#seeall" value="See all departments »"></input></li>
+        </ul>
+    </div><!-- /. left menu -->
+    <div class="search_results col-lg-10"> <!-- search results -->
+        <div class="search_ad row">
+            <div class="col-md-1"><img src="http://ecx.images-amazon.com/images/I/51vpagSvAYL._UY80_QL95_.jpg"></div>
+            <h4><a href="#">"Illuminae" by Amie Kaufman and Jay Kristoff</a></h4>
+            <p>Kady thought breaking up with Ezra was the hardest thing she’d have to do... until her planet was invaded. <a href="#">Learn more</a></p>
+        </div>
+        <div class="row">
+            <p>Related Searches: 
+                <a href="#">hello brush</a>,
+                <a href="#">hello kitty</a>,
+                <a href="#">hello kitty backpack</a>.
+            </p>
+        </div>
+        <div class="row" ng-repeat="product in products track by product.id">
+            <div class="col-md-2">
+                <img ng-src="{{image}}" style="width: 150px;">
+            </div>
+            <div class="col-md-5">
+                <span><h4><a href="#">{{product.name}}</a></h4></span>
+                </br>
+                </br>
+                </br>
+                <del>${{product.price}}</del>
+                <span><h5>${{product.salePrice}}</h5></span>
+            </div>
+            <div class="col-md-5">
+                <div>
+                    STARS / DESCRIPTIONS
+                </div>
+            </div>
+        </div><!-- /. container -->
+    </div><!-- /. search results -->    
+</section><!-- /. container --> <!-- /. page content -->
