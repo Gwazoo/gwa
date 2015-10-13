@@ -9,7 +9,6 @@ var Users = thinky.createModel("Users", {
 	username: type.string().regex('[A-Za-z0-9](?:[A-Za-z0-9\-]{0,61}[A-Za-z0-9])').required(), // Username needs to begin and end with an alphanumeric character, but can contain dashes
 	email: type.string().email().required(),
 	password: type.string().required(), // Salted hashed password
-	salt: type.string().required(), // User salt
 	firstName: type.string(),
 	lastName: type.string(),
 	addresses: [{ // Array of address objects

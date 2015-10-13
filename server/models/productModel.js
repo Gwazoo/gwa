@@ -40,13 +40,23 @@ var Product = {
 			});
 		});
 	},
+	get: function(id) {
+		return new Promise(function (resolve, reject) {
+			ProductModel.get(id).run()
+			.then(function (result) {
+				resolve(result);
+			}, function (err) {
+				reject(Error("Error retrieving product: " + err));
+			});
+		});
+	},
 	getAll: function() {
 		return new Promise(function (resolve, reject) {
 			ProductModel.getJoin({categories: true}).run()
 			.then(function(result){
 				resolve(result);
 			}, function (err) {
-				reject(Error("Error retrieving product: " + err));
+				reject(Error("Error retrieving products: " + err));
 			});
 		});
 	},

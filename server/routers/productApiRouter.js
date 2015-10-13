@@ -15,6 +15,8 @@ var productRouter = Express.Router();
 //path => /api/product
 productRouter.get('/', Api.getAll);
 
+productRouter.get('/:id', Api.get);
+
 //path => /api/product/create
 productRouter.post('/create', Api.prodCreate);
 

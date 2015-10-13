@@ -30,6 +30,16 @@ module.exports = {
 			res.json(result);
 		}, function (err) {
 			res.status(500).json({
+				message: "Database error. Products not retrieved."
+			});
+		});
+	},
+	get : function (req, res) {
+		product.get(req.params.id)
+		.then(function (result) {
+			res.json(result);
+		}, function (err) {
+			res.status(500).json({
 				message: "Database error. Product not retrieved."
 			});
 		});
