@@ -42,7 +42,11 @@ var Product = {
 	},
 	get: function(id) {
 		return new Promise(function (resolve, reject) {
-			ProductModel.get(id).run()
+			ProductModel.get(id).getJoin({categories: {
+				_apply: function(sequence) {
+					return sequence.pluck("id", "name")
+				}
+			}}).run()
 			.then(function (result) {
 				resolve(result);
 			}, function (err) {
@@ -52,7 +56,11 @@ var Product = {
 	},
 	getAll: function() {
 		return new Promise(function (resolve, reject) {
-			ProductModel.getJoin({categories: true}).run()
+			ProductModel.getJoin({categories: {
+				_apply: function(sequence) {
+					return sequence.pluck("id", "name")
+				}
+			}}).run()
 			.then(function(result){
 				resolve(result);
 			}, function (err) {
