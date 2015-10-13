@@ -1,0 +1,81 @@
+.back_links li{
+	display: inline-block;
+	margin-bottom:10px;
+}
+.item_detail h2{
+	margin:0px;
+}
+.social_share li{
+	display:inline-block;
+}
+/* Checkbox Buttons */
+ .checkbox-buttons ul{
+ 	margin:0;
+ }
+  .checkbox-buttons li:first-child {
+  	margin-left:0;
+  }
+ .checkbox-buttons li {
+	margin: 0 auto;
+	position: relative;
+	display:inline-block;
+	list-style-type:none;
+	margin-left:3px;	
+}
+.checkbox-buttons label {
+	display: inline-block;
+	position: relative;
+	width:30px;
+	height:30px;
+	cursor: pointer;
+	-webkit-transition: color 0.3s;
+	transition: color 0.3s;
+	border:2px solid rgba(255, 255, 255, 0);
+}
+.checkbox-buttons label.grey {
+	background:grey;
+}
+.checkbox-buttons label.blue {
+	background:#354973;
+}
+.checkbox-buttons label.white {
+	background:#FFF;
+}
+.checkbox-buttons label.black {
+	background:#000;
+}
+.checkbox-buttons label:hover{
+	border:2px solid #FD8730;
+}
+.checkbox-buttons input[type="checkbox"],
+.checkbox-buttons input[type="radio"] {
+	display:none;
+}
+.checkbox-buttons input[type="checkbox"]:checked + label,
+.checkbox-buttons input[type="radio"]:checked + label {
+	border:2px solid #FD8730;
+} 
+.community-poll{
+	margin-top:20px;
+}
+.community-poll p {
+	color: #FD8730;
+	font-size: 0.95em;
+	padding:5px  0;
+}
+.poll li {
+	padding:3px 0px 9px 0;
+}
+.poll input.radio {
+	float: left;
+	margin:4px 0 0 0;
+}
+.poll .label {
+	display: block;
+	margin-left: 20px;
+}
+.poll label {
+	font-size:13px;
+	padding:10px 0;
+	color: #666;
+	font-family:

@@ -40,13 +40,31 @@ var Product = {
 			});
 		});
 	},
-	getAll: function() {
+	get: function(id) {
 		return new Promise(function (resolve, reject) {
-			ProductModel.getJoin({categories: true}).run()
-			.then(function(result){
+			ProductModel.get(id).getJoin({categories: {
+				_apply: function(sequence) {
+					return sequence.pluck("id", "name")
+				}
+			}}).run()
+			.then(function (result) {
 				resolve(result);
 			}, function (err) {
 				reject(Error("Error retrieving product: " + err));
+			});
+		});
+	},
+	getAll: function() {
+		return new Promise(function (resolve, reject) {
+			ProductModel.getJoin({categories: {
+				_apply: function(sequence) {
+					return sequence.pluck("id", "name")
+				}
+			}}).run()
+			.then(function(result){
+				resolve(result);
+			}, function (err) {
+				reject(Error("Error retrieving products: " + err));
 			});
 		});
 	},
