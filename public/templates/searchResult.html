@@ -50,13 +50,25 @@
             <li><input type="button" id="collapsible" class="filter_collapse btn" data-toggle="collapse" data-target="#seeall" value="See all departments »"></input></li>
         </ul>
     </div><!-- /. left menu -->
-    <div class="search_results col-lg-10">
+    <div class="search_results col-lg-10"> <!-- search results -->
+        <div class="search_ad row">
+            <div class="col-md-1"><img src="http://ecx.images-amazon.com/images/I/51vpagSvAYL._UY80_QL95_.jpg"></div>
+            <h4><a href="#">"Illuminae" by Amie Kaufman and Jay Kristoff</a></h4>
+            <p>Kady thought breaking up with Ezra was the hardest thing she’d have to do... until her planet was invaded. <a href="#">Learn more</a></p>
+        </div>
+        <div class="row">
+            <p>Related Searches: 
+                <a href="#">hello brush</a>,
+                <a href="#">hello kitty</a>,
+                <a href="#">hello kitty backpack</a>.
+            </p>
+        </div>
         <div class="row" ng-repeat="product in products track by product.id">
             <div class="col-md-2">
                 <img ng-src="{{image}}" style="width: 150px;">
             </div>
             <div class="col-md-5">
-                <span><h4><a href="#">{{product.name}}</a></h4></span>
+                <span><h4><a ng-href="{{#}}">{{product.name}}</a></h4></span>
                 </br>
                 </br>
                 </br>

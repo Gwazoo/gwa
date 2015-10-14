@@ -1,5 +1,5 @@
 'use strict';
-angular.module('gwazoo.controllers', [])
+angular.module('gwazoo.controllers', ['flow'])
 
 // .directive('fileUpload', function () {
 //     return {
@@ -18,8 +18,9 @@ angular.module('gwazoo.controllers', [])
 //     };
 // })
 
-.controller('MainCtrl', function($scope, $location, Account, Cookies) {
-	
+.controller('MainCtrl', function($scope, $location, Account, Cookies, Products) {
+	$scope.date = new Date();
+
 	var loggedIn = Cookies.getSession();
 	if (loggedIn) {
 		$scope.session = loggedIn.user;
@@ -60,9 +61,21 @@ angular.module('gwazoo.controllers', [])
 	};
 
 	$scope.cancel = function() {
-		$scope.user = null;
-		$scope.error = null;
+        $scope.user = null;
+        $scope.error = null;
 	};
+
+    $scope.logout = function() {
+        Cookies.removeCookie("Session");
+        $scope.session = Cookies.getSession();  //getSession == null
+        Account.logout()
+        .then(function (nullUser) {
+            $scope.user = nullUser;
+        })
+        .catch(function (err) {
+            console.log("There was an error logging out.");
+        });
+    };
 
 	// CART HELPERS (more functions in Cookies service)
 	$scope.addToCart = function () {
@@ -74,9 +87,12 @@ angular.module('gwazoo.controllers', [])
 	$scope.clearAllCookies = function () {
 		Cookies.clearAllCookies();
 	}
-	$scope.getSession = function () {
-		Cookies.getSession();
-	}
+
+    // NAVIGATION
+    Products.getCategories()
+    .then(function (result) {
+        $scope.categories = result;
+    });
 })
 
 .controller('HomeCtrl', function($scope, $rootScope, Account) {
@@ -114,6 +130,20 @@ angular.module('gwazoo.controllers', [])
 .controller('DashboardCtrl', function($scope, $http, $rootScope, Products) {
 	$scope.product = {};
 	$scope.product.categories = [];
+
+    $scope.files = {};
+    $scope.config = {
+    	query: function () {
+    		var formData = JSON.stringify($scope.product);
+    		return { 
+    			formData: formData
+    		};
+    	}
+    }
+    $scope.upload = function () {
+    	$scope.config.query();
+    	$scope.files.flow.upload();
+    }
 
     $scope.initCategories = function () {
     	Products.getCategories()
@@ -195,11 +225,13 @@ angular.module('gwazoo.controllers', [])
 })
 
 .controller('CategoryCtrl', function($scope, $rootScope, $routeParams, Products) {
-	//$scope.test = $routeParams.slug;
-	Products.getCategoryProducts($routeParams.slug)
-	.then(function (result) {
-		$scope.test = result;
-	});
+    Products.getCategoryProducts($routeParams.id)
+    .then(function (result) {
+        // console.log(result);
+        $scope.category = result.name;
+        $scope.products = result.products;
+        $scope.image = result.image;
+    });
 	$scope.test2 = 'search result ctrl same as category ctrl';
 })
 

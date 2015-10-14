@@ -19,15 +19,15 @@ angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngRoute', /*
 			templateUrl: './templates/dashboard.html',
 			controller: 'DashboardCtrl'
 		})
-		.when('/category', {
-			templateUrl: './templates/categoryResult.html',
+		.when('/search-result', {
+			templateUrl: './templates/searchResult.html',
 			controller: 'CategoryCtrl'
 		})
-		.when('/category/:slug/', {
+		.when('/category/:slug?/:id', {
 			templateUrl: './templates/categoryProducts.html',
 			controller: 'CategoryCtrl'
 		})
-		.when('/product/:sku/', {
+		.when('/product/:slug?/:sku?/:id', {
 			templateUrl: './templates/productDetails.html',
 			controller: 'ProductCtrl'
 		})
