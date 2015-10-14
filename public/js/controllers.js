@@ -19,6 +19,11 @@ angular.module('gwazoo.controllers', [])
 // })
 
 .controller('MainCtrl', function($scope, $location, Account, Cookies) {
+	
+	var loggedIn = Cookies.getSession();
+	if (loggedIn) {
+		$scope.session = loggedIn.user;
+	}
 
 	$scope.logout = function() {
 		Cookies.removeCookie("Session");
@@ -69,6 +74,9 @@ angular.module('gwazoo.controllers', [])
 	$scope.clearAllCookies = function () {
 		Cookies.clearAllCookies();
 	}
+	$scope.getSession = function () {
+		Cookies.getSession();
+	}
 })
 
 .controller('HomeCtrl', function($scope, $rootScope, Account) {
@@ -110,7 +118,7 @@ angular.module('gwazoo.controllers', [])
     $scope.initCategories = function () {
     	Products.getCategories()
     	.then(function (result) {
-    		console.log(result);
+    		console.log("Categories:", result);
     		$scope.categories = result;
     		$scope.subCat =[];
     	}).catch(function (err) {
