@@ -34,66 +34,74 @@
 <!-- header -->
 <header>
     <div class="container">
-        <div class="row">
-            <div class="logo col-xs-12 col-md-2" align="center">
-                <a href="index.html"><img src="images/logo.png" alt="" /></a>
-            </div>
-            <div class="head_search col-xs-12 col-md-7" align="center">
-                <form>
-                    <input type="text" placeholder="Search Gwazoo..."><button class="header_search_btn"><i class="fa fa-search fa-2x"></i></button>
-                </form>
-            </div>
-            <div class="head_right col-xs-12 col-md-3" align="right">
-                <ul>
-                    <li style="display:inline-block;">
-                        <a href="#">My Account &#9660;</a><!--
-                        <ul>
-                            <li><a href="">Your Account</a></li>
-                            <li><a href="">Orders</a></li>
-                            <li><a href="">Your Wishlist</a></li>
-                            <li><a href="">Account Settings</a></li>
-                            <li><a href="">Logout</a></li>
-                        </ul> -->
-                    </li>
-                    <li style="border-style:none; display:inline-block;">
-                        <a href="#"><i class="fa fa-shopping-cart"></i> Cart </a>
-                    </li>
-                </ul>
-            </div>
-        </div><!-- /. row -->
-    </div><!-- /. container -->
-</header><!-- /. header -->
+    <div class="row">
+        <div class="logo col-xs-12 col-md-2" align="center">
+            <a href="index.html"><img src="images/logo.png" alt="" /></a>
+        </div>
+        <div class="head_search col-xs-12 col-md-7" align="center">
+            <form action="template/results.html">
+                <input type="text" placeholder="Search Gwazoo..."><button class="header_search_btn"><i class="fa fa-search fa-2x"></i></button>
+            </form>
+        </div>
+        <div class="head_right col-xs-12 col-md-3" align="right">
+            <ul>
+                <li style="display:inline-block;">
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">My Account <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="">Your Account</a></li>
+                        <li><a href="">Orders</a></li>
+                        <li><a href="">Your Wishlist</a></li>
+                        <li><a href="">Account Settings</a></li>
+                        <li><a href="">Logout</a></li>
+                    </ul>
+                </div>
+                </li>
+                <li style="border-style:none; display:inline-block;">
+                    <a href="#"><i class="fa fa-shopping-cart"></i> Cart </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- /. row -->
+    </div>
+    <!-- /. container -->
+</header>
+<!-- /. header -->
 
 <!-- Navigation -->
 <div class="container">
-    <nav class="navbar navbar-inverse" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">SHOP</a>
-                    </li>
-                    <li>
-                        <a href="#">BEAUTY</a>
-                    </li>
-                    <li>
-                        <a href="#">HEALTH</a>
-                    </li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container -->
-    </nav>
-</div><!-- /.Navigation -->
+<nav class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="#">SHOP</a>
+                </li>
+                <li>
+                    <a href="#">BEAUTY</a>
+                </li>
+                <li>
+                    <a href="#">HEALTH</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+</div>
+<!-- /.Navigation -->
 
 <!-- main banner -->
 <div class="main_banner container">
@@ -110,16 +118,76 @@
 <!-- /.container -->
 <!-- /.main banner -->
 
-
-
 <!-- page content -->
 
     <!-- 1st block -->
 <div class="first_block container-fluid">
     <div class="container">
-        <h3>Latest Products</h3>
-    </div>
-    <div class="item_slider">
+        <h3>Recommendations for you</h3>
+        <div id="myCarousel" class="carousel slide">
+                
+                <!-- Carousel items -->
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <div class="row">
+                            <div class="col-sm-2"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
+                            </div>
+                            <div class="col-sm-2"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
+                            </div>
+                            <div class="col-sm-2"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
+                            </div>
+                            <div class="col-sm-2"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
+                            </div>
+                            <div class="col-sm-2"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
+                            </div>
+                            <div class="col-sm-2"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
+                            </div>
+                        </div>
+                        <!--/row-->
+                    </div>
+                    <!--/item-->
+                    <div class="item">
+                        <div class="row">
+                            <div class="col-sm-2"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
+                            </div>
+                            <div class="col-sm-2"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
+                            </div>
+                            <div class="col-sm-2"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
+                            </div>
+                            <div class="col-sm-2"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
+                            </div>
+                            <div class="col-sm-2"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
+                            </div>
+                            <div class="col-sm-2"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
+                            </div>
+                        </div>
+                        <!--/row-->
+                    </div>
+                    <!--/item-->
+                    <div class="item">
+                        <div class="row">
+                            <div class="col-sm-2"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
+                            </div>
+                            <div class="col-sm-2"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
+                            </div>
+                            <div class="col-sm-2"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
+                            </div>
+                            <div class="col-sm-2"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
+                            </div>
+                            <div class="col-sm-2"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
+                            </div>
+                            <div class="col-sm-2"><a href="#x" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" class="img-responsive"></a>
+                            </div>
+                        </div>
+                        <!--/row-->
+                    </div>
+                    <!--/item-->
+                </div>
+                <!--/carousel-inner--> <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+
+                <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+            </div>
+            <!--/myCarousel-->
     </div>
 </div>
     <!-- /. 1st block -->
@@ -378,7 +446,17 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
+<!-- slider -->
+<script>
+    $(document).ready(function() {
+        $('#myCarousel').carousel({
+        interval: 20000
+        })
+    $('#myCarousel').on('slid.bs.carousel', function() {
+        //alert("slid");
+        });
+    });
+</script>
 </body>
 
 </html>

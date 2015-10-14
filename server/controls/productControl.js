@@ -12,10 +12,8 @@ module.exports = {
 	* @returns {Obj} JSON with status message.
 	*/
 	prodCreate : function (req, res) {
-        console.log("Control req.body:", req.body);
 		product.create(req.body)
 		.then(function(result){
-			console.log("Data:", result);	
 			res.json(result);
 		}, function (err) {
 			res.status(500).json({
@@ -26,7 +24,6 @@ module.exports = {
 	getAll : function (req, res) {
 		product.getAll()
 		.then(function(result){
-			console.log("Data:", result);
 			res.json(result);
 		}, function (err) {
 			res.status(500).json({
@@ -45,7 +42,6 @@ module.exports = {
 		});
 	},
 	update : function (req, res) {
-		console.log("Update Test:", req.body);
 		product.update(req.body)
 		.then( function (result) {
 			res.json(result);

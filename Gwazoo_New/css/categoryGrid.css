@@ -1,0 +1,14 @@
+.cate_results div{
+	text-align: center;
+}
+#cate_navi{
+	text-align:left;
+	margin-top:10px;
+}
+#cate_navi ul li{
+	display: inline-block;
+	padding-left: 10px;
+}
+#cate_navi ul li a{
+	color:black;
+}

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Gwazoo</title>
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link href="../css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/results.css">
+    <link href="../css/categoryGrid.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+<!-- header -->
+<header>
+    <div class="container">
+    <div class="row">
+        <div class="logo col-xs-12 col-md-2" align="center">
+            <a href="../index.html"><img src="../images/logo.png" alt="" /></a>
+        </div>
+        <div class="head_search col-xs-12 col-md-7" align="center">
+            <form>
+                <input type="text" placeholder="Search Gwazoo..."><button class="header_search_btn"><i class="fa fa-search fa-2x"></i></button>
+            </form>
+        </div>
+        <div class="head_right col-xs-12 col-md-3" align="right">
+            <ul>
+                <li style="display:inline-block;">
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">My Account <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="">Your Account</a></li>
+                        <li><a href="">Orders</a></li>
+                        <li><a href="">Your Wishlist</a></li>
+                        <li><a href="">Account Settings</a></li>
+                        <li><a href="">Logout</a></li>
+                    </ul>
+                </div>
+                </li>
+                <li style="border-style:none; display:inline-block;">
+                    <a href="#"><i class="fa fa-shopping-cart"></i> Cart </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- /. row -->
+    </div>
+    <!-- /. container -->
+</header>
+<!-- /. header -->
+
+<!-- Navigation -->
+<div class="container">
+<nav class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="#">SHOP</a>
+                </li>
+                <li>
+                    <a href="#">BEAUTY</a>
+                </li>
+                <li>
+                    <a href="#">HEALTH</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+</div>
+<div class="top_bar container">
+    <p>1-16 of 700,234 results for <span>"hello"</span></p>
+</div>
+<!-- /.Navigation -->
+
+
+<!-- page content -->
+<div class="container">
+    <!-- left menu -->
+    <div class="narrow_search col-lg-2">
+        <h3>Narrow your search</h3>
+        <ul class="expand_cat">
+            <li><a href="#"><span>Digital Music ></span></a>
+                <ul>
+                    <li><a href="#">Dance & Electronic</a></li>
+                    <li><a href="#">House Music</a></li>
+                    <li><a href="#">R&B</a></li>
+                </ul>
+            </li>
+            <li><a href="#"><span>Health & Personal Care ></span></a>
+                <ul>
+                    <li><a href="#">Breath Sprays</a></li>
+                    <li><a href="#">Personal Care Products</a></li>
+                    <li><a href="#">Toothpaste</a></li>
+                </ul>
+            </li>
+            <li><a href="#"><span>Professional Dental Supplies ></span></a>
+                <ul>
+                    <li><a href="#">Toothpastes</a></li>
+                </ul>
+            </li>
+            <li><a href="#"><span>Apps & Games ></span></a>
+                <ul>
+                    <li><a href="#">Magazine Apps</a></li>
+                    <li><a href="#">Music Apps</a></li>
+                    <li><a href="#">Communication Apps</a></li>
+                </ul>
+            </li>
+            <li class="collapse" id="seeall">
+                <ul id="collapse_ul">
+                    <li><a href="#">Electronics ></a></li>
+                        <ul>
+                            <li>Something</li>
+                        </ul>
+                    <li><a href="#">Toys & Games ></a></li>
+                        <ul>
+                            <li>Something</li>
+                        </ul>
+                    <li><a href="#">Toys & Games ></a></li>
+                        <ul>
+                            <li>Something</li>
+                        </ul>
+                </ul>
+            <li><input type="button" id="collapsible" class="filter_collapse btn" data-toggle="collapse" data-target="#seeall" value="See all departments »"></input></li>
+        </ul>
+    </div>
+    <!-- /. left menu -->
+
+    <!-- category results -->
+    <br>
+    <div class="cate_results col-lg-10">
+        <!-- category navi -->
+        <div id="cate_navi">
+            <ul>
+                <li><a href="#">Order by popularity</a></li>
+                <li><a href="#">Price: low to high</a></li>
+                <li><a href="#">Price: high to low</a></li>
+                <li><a href="#">Order by reviews</a></li>
+                <li><a href="#">Newest</a></li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <a href="#"><img src="../images/product-img1.png"></a>
+                <div><a href="#">TOSHIBA LAPTOP</a></div>
+                <div><a href="#">$100.00</a></div>
+            </div>
+            <div class="col-md-3">
+                <a href="#"><img src="../images/product-img1.png"></a>
+                <div><a href="#">TOSHIBA LAPTOP</a></div>
+                <div><a href="#">$100.00</a></div>
+            </div>
+            <div class="col-md-3">
+                <a href="#"><img src="../images/product-img1.png"></a>
+                <div><a href="#">TOSHIBA LAPTOP</a></div>
+                <div><a href="#">$100.00</a></div>
+            </div>
+            <div class="col-md-3">
+                <a href="#"><img src="../images/product-img1.png"></a>
+                <div><a href="#">TOSHIBA LAPTOP</a></div>
+                <div><a href="#">$100.00</a></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <a href="#"><img src="../images/product-img1.png"></a>
+                <div><a href="#">TOSHIBA LAPTOP</a></div>
+                <div><a href="#">$100.00</a></div>
+            </div>
+            <div class="col-md-3">
+                <a href="#"><img src="../images/product-img1.png"></a>
+                <div><a href="#">TOSHIBA LAPTOP</a></div>
+                <div><a href="#">$100.00</a></div>
+            </div>
+            <div class="col-md-3">
+                <a href="#"><img src="../images/product-img1.png"></a>
+                <div><a href="#">TOSHIBA LAPTOP</a></div>
+                <div><a href="#">$100.00</a></div>
+            </div>
+            <div class="col-md-3">
+                <a href="#"><img src="../images/product-img1.png"></a>
+                <div><a href="#">TOSHIBA LAPTOP</a></div>
+                <div><a href="#">$100.00</a></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <a href="#"><img src="../images/product-img1.png"></a>
+                <div><a href="#">TOSHIBA LAPTOP</a></div>
+                <div><a href="#">$100.00</a></div>
+            </div>
+            <div class="col-md-3">
+                <a href="#"><img src="../images/product-img1.png"></a>
+                <div><a href="#">TOSHIBA LAPTOP</a></div>
+                <div><a href="#">$100.00</a></div>
+            </div>
+            <div class="col-md-3">
+                <a href="#"><img src="../images/product-img1.png"></a>
+                <div><a href="#">TOSHIBA LAPTOP</a></div>
+                <div><a href="#">$100.00</a></div>
+            </div>
+            <div class="col-md-3">
+                <a href="#"><img src="../images/product-img1.png"></a>
+                <div><a href="#">TOSHIBA LAPTOP</a></div>
+                <div><a href="#">$100.00</a></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <a href="#"><img src="../images/product-img1.png"></a>
+                <div><a href="#">TOSHIBA LAPTOP</a></div>
+                <div><a href="#">$100.00</a></div>
+            </div>
+            <div class="col-md-3">
+                <a href="#"><img src="../images/product-img1.png"></a>
+                <div><a href="#">TOSHIBA LAPTOP</a></div>
+                <div><a href="#">$100.00</a></div>
+            </div>
+            <div class="col-md-3">
+                <a href="#"><img src="../images/product-img1.png"></a>
+                <div><a href="#">TOSHIBA LAPTOP</a></div>
+                <div><a href="#">$100.00</a></div>
+            </div>
+            <div class="col-md-3">
+                <a href="#"><img src="../images/product-img1.png"></a>
+                <div><a href="#">TOSHIBA LAPTOP</a></div>
+                <div><a href="#">$100.00</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /. page content -->
+
+
+
+
+
+
+
+
+
+
+
+<!-- footer -->
+<footer>
+<div class="container">
+    <div class="footer_left col-xs-12 col-md-6">
+        <p>Copy Rights (C). All Rights Reserved | <a href="/">Gwazoo.com</a></p>
+    </div>
+    <div class="footer_right col-xs-12 col-md-6">
+        <ul>
+            <li><a href="#">Terms of Use</a> &nbsp|&nbsp</li>
+            <li><a href="#">Privacy Policy</a> &nbsp|&nbsp</li>
+            <li><a href="#">Contact Us</a></li>
+        </ul>
+    </div>
+</div>
+</footer>
+
+<!-- script -->
+
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- filter expand / collapse -->
+<script>
+function handleClick(){
+    this.value = (this.value == 'See all departments »' ? 'Hide departments «' : 'See all departments »');
+}
+document.getElementById('collapsible').onclick=handleClick;
+</script>
+
+</body>
+
+</html>

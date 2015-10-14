@@ -1,4 +1,6 @@
 <!DOCTYPE HTML>
+<html lang="en">
+
 <head>
 <title>Gwazoo</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -27,21 +29,66 @@
 <script src="../js/jquery.etalage.min.js"></script>
 <script>
 			jQuery(document).ready(function($){
+</script>
 
-				$('#etalage').etalage({
-					thumb_image_width: 300,
-					thumb_image_height: 400,
-					source_image_width: 900,
-					source_image_height: 1200,
-					show_hint: true,
-					click_callback: function(image_anchor, instance_id){
-						alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
-					}
-				});
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
 
+	<title>Gwazoo</title>
+
+	<!-- Font Awesome CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+	<!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link href="../css/style.css" rel="stylesheet">
+	<link href="../css/preview.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="../js/jquery.openCarousel.js" type="text/javascript"></script>
+	<script type="text/javascript" src="../js/easing.js"></script>
+	<script type="text/javascript" src="../js/move-top.js"></script>
+	<script src="../js/easyResponsiveTabs.js" type="text/javascript"></script>
+	<link href="../css/easy-responsive-tabs.css" rel="stylesheet" type="text/css" media="all"/>
+	<script type="text/javascript">
+	    $(document).ready(function () {
+	        $('#horizontalTab').easyResponsiveTabs({
+	            type: 'default', //Types: default, vertical, accordion           
+	            width: 'auto', //auto or any width like 600px
+	            fit: true   // 100% fit in a container
+	        });
+	    });
+	</script>		
+	<link rel="stylesheet" href="../css/etalage.css">
+	<script src="../js/jquery.etalage.min.js"></script>
+	<script>
+		jQuery(document).ready(function($){
+			$('#etalage').etalage({
+				thumb_image_width: 300,
+				thumb_image_height: 400,
+				source_image_width: 900,
+				source_image_height: 1200,
+				show_hint: true,
+				click_callback: function(image_anchor, instance_id){
+				alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
+				}
 			});
-		</script>
-	  <script src="js/star-rating.js" type="text/javascript"></script>
+		});
+	</script>
+	<script src="js/star-rating.js" type="text/javascript"></script>
 </head>
 <body>
 <!-- header -->
@@ -392,12 +439,34 @@
 				   </div>    		
     	       </div>
         </div> -->
+<<<<<<< HEAD
+=======
+        
+<footer>
+<div class="container">
+    <div class="footer_left col-xs-12 col-md-6">
+        <p>Copy Rights (C). All Rights Reserved | <a href="/">Gwazoo.com</a></p>
+    </div>
+    <div class="footer_right col-xs-12 col-md-6">
+        <ul>
+            <li><a href="#">Terms of Use</a> &nbsp|&nbsp</li>
+            <li><a href="#">Privacy Policy</a> &nbsp|&nbsp</li>
+            <li><a href="#">Contact Us</a></li>
+        </ul>
+    </div>
+</div>
+</footer>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+>>>>>>> 91387d8eaf7cde64f28037c7cb1093dae7697f8a
 <script type="text/javascript">
 	$(document).ready(function() {			
 	$().UItoTop({ easingType: 'easeOutQuart' });
 	});
 </script>
-<a href="#" id="toTop"> </a>
+
+<a style="float:right;" href="#" id="toTop"><img src="../images/arrow_up.png"></a>
 </body>
 </html>
 

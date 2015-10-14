@@ -7,19 +7,18 @@ var category = require('./categoryModel.js');
 // Product Model
 var ProductModel = thinky.createModel("products", {
 	id: type.string(),
-	vendor: type.string(), // Vendor's username
+	vendor: type.string(), 						// Vendor's username
 	name: type.string().required(),
-	description: type.string().required(), // Full description
-	shortDescription: type.string().max(50), // Short description for display on search pages
-	price: type.string().required(), // The price we pay for it
-	salePrice: type.string().required(), // The price we sell the product for
-	smallImages: [{ // Array of Image objects
-		url: type.string(), // URL to image
-		sortOrder: type.number().integer() // Display order of images
+	description: type.string().required(),		// Full description
+	shortDescription: type.string().max(50), 	// Short description for display on search pages
+	price: type.string().required(), 			// The price we pay for it
+	salePrice: type.string().required(), 		// The price we sell the product for
+	smallImages: [{ 							// Array of Image objects
+		url: type.string().required(),			// URL to image
 	}],
-	largeImages: [{
-		url: type.string(), // URL to image
-		sortOrder: type.number().integer() // Display order of images
+	images: [{
+		url: type.string().required(), 			// URL to image
+		isPrimary: type.boolean()	 			// Display order of images
 	}]
 });
 
