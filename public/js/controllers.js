@@ -39,8 +39,8 @@ angular.module('gwazoo.controllers', ['flow'])
             $scope.error = 'Either your username or password did not match our records. Please try again.';
         });
     };
-    
-    $scope.cancel = function() {
+
+	$scope.cancel = function() {
         $scope.user = null;
         $scope.error = null;
         $modalInstance.dismiss();
@@ -151,7 +151,7 @@ angular.module('gwazoo.controllers', ['flow'])
     $scope.initCategories = function () {
     	Products.getCategories()
     	.then(function (result) {
-    		console.log(result);
+    		console.log("Categories:", result);
     		$scope.categories = result;
     		$scope.subCat =[];
     	}).catch(function (err) {

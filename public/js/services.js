@@ -170,16 +170,15 @@ angular.module('gwazoo.services', [])
 		item.quantity = Math.floor(Math.random() * 10)	
 		cart.products.push(item);
 		JSON.stringify(cart);
-		console.log(cart);
+		console.log("Add To Cart:", cart);
 		localStorageService.cookie.set("Cart", cart, 30);
 		count++;
 	}
 
 	this.clearAllCookies = function () {
 		localStorageService.cookie.clearAll();
-		cart = {
-			products: []
-		}
+		cart.products = [];
+		console.log("Clear Cart:", cart)
 	}
 
 	this.removeCookie = function (cookieId) {
@@ -187,12 +186,12 @@ angular.module('gwazoo.services', [])
 	}
 
 	this.getSession = function () {
-		console.log(localStorageService.cookie.get("Session"));
+		console.log("Session:", localStorageService.cookie.get("Session"));
 		return localStorageService.cookie.get("Session");
 	}
 
 	this.getCart = function () {
-		console.log(localStorageService.cookie.get("Cart"));
+		console.log("Cart:", localStorageService.cookie.get("Cart"));
 		return localStorageService.cookie.get("Cart");
 	}
 
@@ -208,7 +207,7 @@ angular.module('gwazoo.services', [])
 			// 	message: "Previous session found.",
 			// 	result: result
 			// }
-			console.log("services.js:", resObj);
+			console.log("Saved Cart:", resObj);
 			deferred.resolve(resObj);
 		}).error(function(err) {
 			console.log(err);
