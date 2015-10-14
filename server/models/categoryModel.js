@@ -58,7 +58,3 @@ var Category = {
 
 module.exports.category = Category;
 module.exports.categoryModel = CategoryModel;
-
-var product = require('./productModel.js');
-
-product.productModel.hasAndBelongsToMany(CategoryModel, 'categories', 'id', 'id');

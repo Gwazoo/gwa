@@ -1,6 +1,6 @@
-var Express        = require('express');
-var	Api            = require('../controls/userControl');
-var Root           = require('../util/config');
+var Express = require('express');
+var Api = require('../controls/userControl');
+var Root = require('../util/config');
 
 var accountRouter = Express.Router();
 
@@ -8,8 +8,8 @@ var accountRouter = Express.Router();
 accountRouter.use(Api.isAuthed);
 
 //path => /account
-accountRouter.all('/', function(req, res, next){  
-	res.sendFile('index.html', { root: Root + "/public"});
+accountRouter.all('/', function (req, res, next) {
+    res.sendFile('index.html', {root: Root + "/public"});
 });
 
 module.exports = accountRouter;

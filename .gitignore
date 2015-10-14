@@ -2,3 +2,6 @@
 node_modules
 public/libs/fusty-flow.js
 public/images/*
+/nbproject/private/
+/nbproject/project.xml
+/nbproject/project.properties

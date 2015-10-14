@@ -1,7 +1,7 @@
 'use strict';
 var Express        = require('express');
-var	Passport       = require('passport');
-var	LocalStrategy  = require('passport-local').Strategy;
+var Passport       = require('passport');
+var LocalStrategy  = require('passport-local').Strategy;
 
 var UserApi        = require('./server/routers/userApiRouter');
 var CartApi        = require('./server/routers/cartApiRouter');

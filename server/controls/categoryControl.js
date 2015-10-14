@@ -1,7 +1,10 @@
 var thinky			= require('../util/thinky');
 var r 				= require('rethinkdb');
-var categoryModel 	= require('./../models/categoryModel.js');
-var category 		= categoryModel.category;
+var categoryModel 	= require('./../models/categoryModel.js').categoryModel;
+var category 		= require('./../models/categoryModel.js').category;
+var productModel = require('./../models/productModel.js').productModel;
+
+categoryModel.hasAndBelongsToMany(productModel, 'products', 'id', 'id');
 
 module.exports = {
 	/*
