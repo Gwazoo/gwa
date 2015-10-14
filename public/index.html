@@ -24,9 +24,9 @@
 <!-- JS -->
     <script src="/libs/jquery/dist/jquery.min.js"></script>
     <script src="/libs/angular/angular.js"></script>
-    <script src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="/libs/angular-bootstrap/ui-bootstrap.min.js"></script>
     <script src="/libs/angular-route/angular-route.min.js"></script>
+    <script src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/libs/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script src="/libs/angular-local-storage/dist/angular-local-storage.min.js"></script>
     <script src="/libs/ng-flow/dist/ng-flow-standalone.min.js"></script>
 
@@ -95,7 +95,7 @@
                 </div>
                 <div class="head_right col-xs-12 col-md-3" align="right">
                     <ul>
-                        <li ng-show="!session"><a ng-click="open()">Login</a></li>
+                        <li ng-show="!session"><a href="#" ng-click="loginModal()">Login</a></li>
                         <li ng-show="!session"><a href="/register">register</a></li>
                     </ul>
                     <ul>
