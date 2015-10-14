@@ -20,7 +20,7 @@ angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngRoute', /*
 			controller: 'DashboardCtrl'
 		})
 		.when('/search-result', {
-			templateUrl: './templates/categoryResult.html',
+			templateUrl: './templates/searchResult.html',
 			controller: 'CategoryCtrl'
 		})
 		.when('/category/:slug?/:id', {

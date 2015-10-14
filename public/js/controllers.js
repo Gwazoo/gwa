@@ -208,7 +208,7 @@ angular.module('gwazoo.controllers', ['flow'])
 })
 
 .controller('CategoryCtrl', function($scope, $rootScope, $routeParams, Products) {
-    Products.getCategoryProducts($routeParams.slug)
+    Products.getCategoryProducts($routeParams.id)
     .then(function (result) {
         // console.log(result);
         $scope.category = result.name;
