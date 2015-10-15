@@ -242,14 +242,3 @@ angular.module('gwazoo.services', [])
 
 
 
-
-
-
-
-
-
-
-
-
-
-

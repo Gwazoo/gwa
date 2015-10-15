@@ -18,40 +18,42 @@ angular.module('gwazoo.controllers', ['flow'])
 //     };
 // })
 
-.controller('MainCtrl', function($scope, $location, Account, Cookies, Products) {
-	$scope.date = new Date();
-	
-	var loggedIn = Cookies.getSession();
-	if (loggedIn) {
-		$scope.session = loggedIn.user;
-	}
-
-	$scope.login = function(userLogin) {
-		Account.login(userLogin)
-		.then(function (userObj) {
-			if (userObj.loggedIn) $location.path('/account').replace();
-			
-			var cartData = Cookies.getCart();  //null or cart object
-			if (cartData) {
-				Cookies.saveCartToDb(cartData)
-				.then(function () {
-					Cookies.removeCookie("Cart");	
-				})
-				.catch(function (err) {
-					console.log(err);
-				});
-			}
-			Cookies.createSession(userObj);
-			$scope.session = Cookies.getSession().user;
-		}).catch(function (err) {
-			$scope.error = 'Your username and password did not match up together so please try again suka!';
-		});
-	};
+.controller('MainCtrl.Modal', function($scope, $modalInstance, $location, Cookies, Account) {
+    $scope.login = function(userLogin) {
+        Account.login(userLogin)
+        .then(function (userObj) {
+            if (userObj.loggedIn) $location.path('/account').replace();
+            var cartData = Cookies.getCart();  //null or cart object
+            if (cartData) {
+                Cookies.saveCartToDb(cartData)
+                .then(function () {
+                    Cookies.removeCookie("Cart");   
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
+            };
+            Cookies.createSession(userObj);
+            $modalInstance.close();
+        }).catch(function (err) {
+            $scope.error = 'Either your username or password did not match our records. Please try again.';
+        });
+    };
 
 	$scope.cancel = function() {
         $scope.user = null;
         $scope.error = null;
-	};
+        $modalInstance.dismiss();
+    };
+})
+
+.controller('MainCtrl', function($scope, $location, $modal, $templateCache, Account, Cookies, Products) {
+    $scope.date = new Date();
+
+    var loggedIn = Cookies.getSession();
+    if (loggedIn) {
+        $scope.session = loggedIn.user;
+    }
 
     $scope.logout = function() {
         Cookies.removeCookie("Session");
@@ -62,6 +64,19 @@ angular.module('gwazoo.controllers', ['flow'])
         })
         .catch(function (err) {
             console.log("There was an error logging out.");
+        });
+    };
+
+    // MODAL HELPERS
+    $scope.loginModal = function() {
+        var modalInstance = $modal.open({
+            templateUrl : 'templates/loginModal.html',
+            controller : 'MainCtrl.Modal'
+        });
+
+        modalInstance.result.then(function() {
+            $scope.session = Cookies.getSession().user;
+        }, function() {
         });
     };
 

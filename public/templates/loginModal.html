@@ -1,41 +1,35 @@
 <!-- LOGIN MODAL -->
-	<div id="loginModal" class="modal fade">
-		<div class="modal-dialog modal-md">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h3>User Login</h3>
+	<div class="modal-header">
+		<h3>User Login</h3>
+	</div>
+	<form class="form-horizontal" ng-submit="login(user)">
+		<div class="modal-body">
+			<div class="form-group">
+				<label for="registerUsername" class="col-md-2 control-label">Username</label>
+				<div class="col-md-10">
+					<input type="username" autofocus class="form-control" name="username" ng-model="user.username" placeholder="Username"/>
 				</div>
-				<form class="form-horizontal">
-					<div class="modal-body">
-						<div class="form-group">
-							<label for="registerUsername" class="col-md-2 control-label">Username</label>
-							<div class="col-md-10">
-								<input type="username" class="form-control" name="username" ng-model="user.username" placeholder="Username"/>
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="registerPassword" class="col-md-2 control-label">Password</label>
-							<div class="col-md-10">
-								<input type="password" class="form-control" name="password" ng-model="user.password" placeholder="Password"/>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-12">
-								<span class="error bg-danger">{{error}}</span>
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<div class="row">
-							<div class="col-md-6">
-								<button data-dismiss="modal" class="btn btn-danger btn-sm btn-block" ng-click="cancel()">Cancel</button>
-							</div>
-							<div class="col-md-6">
-								<button data-dismiss="modal" type="submit" class="btn btn-success btn-sm btn-block" ng-click="login(user)">Login</button>
-							</div>
-						</div>
-					</div>
-				</form>
+			</div>
+			<div class="form-group">
+				<label for="registerPassword" class="col-md-2 control-label">Password</label>
+				<div class="col-md-10">
+					<input type="password" class="form-control" name="password" ng-model="user.password" placeholder="Password"/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<span class="error bg-danger">{{error}}</span>
+				</div>
 			</div>
 		</div>
-	</div>
+		<div class="modal-footer">
+			<div class="row">
+				<div class="col-md-6">
+					<button type="button" class="btn btn-danger btn-sm btn-block" ng-click="cancel()">Cancel</button>
+				</div>
+				<div class="col-md-6">
+					<button type="submit" class="btn btn-success btn-sm btn-block">Login</button>
+				</div>
+			</div>
+		</div>
+	</form>
