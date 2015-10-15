@@ -172,8 +172,8 @@ angular.module('gwazoo.controllers', ['flow'])
 			console.log("You must add an image before uploading a product.");
 		} else {
 			productInfo.categories.push($scope.categories.mainCat.id);
-			productInfo.categories.push($scope.categories.subCat.id);
-			productInfo.categories.push($scope.categories.subSubCat.id);
+			// productInfo.categories.push($scope.categories.subCat.id);
+			// productInfo.categories.push($scope.categories.subSubCat.id);
 			
 			Products.addProduct(productInfo)
 			.then(function (productObj) {

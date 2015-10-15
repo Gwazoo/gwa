@@ -160,25 +160,29 @@ angular.module('gwazoo.services', [])
 	// 	products: []
 	// };
 
-	function getCart () {
-		var cart = localStorageService.cookie.get("Cart");
-		if (cart == null) {
-			console.log("Creating cart...");
+	// function getCart () {
+	// 	var cart = localStorageService.cookie.get("Cart");
+	// 	if (cart == null) {
+	// 		console.log("Creating cart...");
 
-		}
+	// 	}
 
-	}
+	// }
 
-	function setCart (cart) {
-		return localStorageService.cookie.set("Cart", cart);
-	}
+	// function setCart (cart) {
+	// 	return localStorageService.cookie.set("Cart", cart);
+	// }
 
-	function createCart () {
-		return {
-			member: false,
-			username: null, 
-			products: []
-		};
+	// function createCart () {
+	// 	return {
+	// 		member: false,
+	// 		username: null, 
+	// 		products: []
+	// 	};
+	// }
+
+	this.getCart = function () {
+		return localStorageService.cookie.get("Cart");
 	}
 
 	this.createSession = function (sessionData) {
