@@ -1,7 +1,7 @@
 'use strict';
 angular.module('gwazoo.controllers')
 
-.controller('SignupCtrl', function($scope, $rootScope, $location, Account) {
+.controller('SignupCtrl', ['$scope', '$rootScope', '$location', 'Account', function($scope, $rootScope, $location, Account) {
 	$scope.register = function (userData) {
 		Account.register(userData)
 		.then(function (user) {
@@ -27,4 +27,6 @@ angular.module('gwazoo.controllers')
 			$scope.check = err;  //DEBUG
 		});
 	};
-})
+}]);
+
+

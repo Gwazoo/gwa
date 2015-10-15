@@ -1,7 +1,7 @@
 'use strict';
-angular.module('gwazoo.controllers', [])
+angular.module('gwazoo.controllers')
 
-.controller('MainCtrl', function($scope, $location, Account, Cookies) {
+.controller('MainCtrl', ['$scope', '$location', '$modal', '$templateCache', 'Account', 'Cookies', 'Products', function($scope, $location, $modal, $templateCache, Account, Cookies, Products) {
     $scope.date = new Date();
 
     var loggedIn = Cookies.getSession();
@@ -50,4 +50,36 @@ angular.module('gwazoo.controllers', [])
     .then(function (result) {
         $scope.categories = result;
     });
+}])
+
+.controller('MainCtrl.Modal', function($scope, $modalInstance, $location, Cookies, Account) {
+    $scope.login = function(userLogin) {
+        Account.login(userLogin)
+        .then(function (userObj) {
+            console.log($scope.date);
+            // if (userObj.loggedIn) $location.path('/account').replace();
+            // var cartData = Cookies.getCart();  //null or cart object
+            // if (cartData) {
+            //     Cookies.saveCartToDb(cartData)
+            //     .then(function () {
+            //         Cookies.removeCookie("Cart");   
+            //     })
+            //     .catch(function (err) {
+            //         console.log(err);
+            //     });
+            // };
+            // Cookies.createSession(userObj);
+            // $modalInstance.close();
+        }).catch(function (err) {
+            $scope.error = 'Either your username or password did not match our records. Please try again.';
+        });
+    };
+
+    $scope.cancel = function() {
+        $scope.user = null;
+        $scope.error = null;
+        $modalInstance.dismiss();
+    };
 });
+
+
