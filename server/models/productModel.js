@@ -66,6 +66,21 @@ var Product = {
             });
         });
     },
+    getByTag: function (data) {
+        return new Promise(function (resolve, reject) {
+            ProductModel.filter({tag: data}).run()
+            .then(function (result) {
+                if (result) {
+                    resolve(result);
+                } else {
+                    reject(Error("It broke."));
+                }
+            }, function (err) {
+                console.log(err);
+                reject(Error(err));
+            });
+        });
+    },
     update: function (data) {
         return new Promise(function (resolve, reject) {
             ProductModel.get(data.id).run()

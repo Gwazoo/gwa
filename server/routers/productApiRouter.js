@@ -17,6 +17,8 @@ productRouter.get('/', Api.getAll);
 
 productRouter.get('/:id', Api.get);
 
+productRouter.get('/tag/:tag', Api.getByTag);
+
 //path => /api/product/create
 productRouter.post('/create', Api.prodCreate);
 

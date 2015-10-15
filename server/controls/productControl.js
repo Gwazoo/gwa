@@ -42,7 +42,7 @@ module.exports = {
 		}, function (err) {
 			res.status(500).json({
 				message: "Database error." + err
-			});
+			})
 		});
 	},
 	update : function (req, res) {
@@ -52,7 +52,17 @@ module.exports = {
 		}, function (err) {
 			res.status(500).json({
 				message: "Database error. Product not updated."
-			});
+			})
 		});
-	}
+	},
+        getByTag : function (req, res) {
+            product.getByTag(req.params.tag)
+            .then(function (result) {
+                res.json(result);
+            }, function (err) {
+                res.status(500).json({
+                    message: "Database error: " + err
+                })
+            });
+        }
 };
