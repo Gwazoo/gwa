@@ -11,13 +11,7 @@ angular.module('gwazoo.services', [])
 			url: '/api/user/auth', 
 			data: userLogin
 		}).success(function(user) {
-			var resObj = {
-				loggedIn: true,
-				message: "User was successfully logged in.",
-				user: user
-			}
-			// $rootScope.$broadcast('updateUser');
-			deferred.resolve(resObj);
+			deferred.resolve(user);
 		}).error(function(err) {
 			console.log(err);
 			deferred.reject(err);
@@ -155,65 +149,148 @@ angular.module('gwazoo.services', [])
 })
 
 .service('Cookies', function ($q, $http, localStorageService) {
-	var count = 0;
-	// var cart = {
-	// 	products: []
-	// };
 
-	// function getCart () {
-	// 	var cart = localStorageService.cookie.get("Cart");
-	// 	if (cart == null) {
-	// 		console.log("Creating cart...");
-
-	// 	}
-
-	// }
-
-	// function setCart (cart) {
-	// 	return localStorageService.cookie.set("Cart", cart);
-	// }
-
-	// function createCart () {
-	// 	return {
-	// 		member: false,
-	// 		username: null, 
-	// 		products: []
-	// 	};
-	// }
+	this.getSession = function () {
+		return localStorageService.cookie.get("Session");
+	};
 
 	this.getCart = function () {
 		return localStorageService.cookie.get("Cart");
+	};
+
+	this.newCart = function () {
+		console.log("Creating cart...");
+		var newCart = {
+			member: false,
+			username: "", 
+			products: []
+		};
+	 	return setCart(newCart);
+	};
+
+	this.clear = function (cart) {
+		cart.products = [];
+		updateDb(cart);
+		return this.setCart(cart);
 	}
+
+	this.add = function (cart, productId) {
+		if (typeof cart.products[0] == undefined) {
+			pushToCart(cart, productId);
+		} else {
+			var index = getProductIndex(cart.products, productId);
+			if (index == -1) {
+				pushToCart(cart, productId);
+			} else {
+				cart.products[index].quantity += 1;
+			}
+		}
+		return this.setCart(cart);
+	};
+
+	this.remove = function (cart, productId) {
+		var index = getProductIndex(cart.products, productId);
+		cart.products.splice(index, 1);
+		return this.setCart(cart);
+	};
+
+	this.increment = function (cart, productId) {
+		var index = getProductIndex(cart.products, productId);	
+		cart.products[index].quantity += 1;
+		return this.setCart(cart);
+	};
+
+	this.decrement = function (cart, productId) {
+		var index = getProductIndex(cart.products, productId);	
+		if (cart.products[index].quantity > 1) {
+			cart.products[index].quantity -= 1;			
+		} else {
+			cart.products.splice(index, 1);
+		}
+		return this.setCart(cart);
+	};
+
+	this.setCart = function (cart) {
+		localStorageService.cookie.set("Cart", cart, 30);
+		return cart;
+	};
+
+	this.save = function (products, username) {
+		var deferred = $q.defer();
+		var data = {
+			username: username,
+			products: products
+		};
+		$http({
+			method: 'POST',
+			url: '/api/cart/save',  // MAKE SURE THIS IS THE RIGHT ENDPOINT!
+			data: data
+		}).success(function(cart) {  // Merged Cart
+			deferred.resolve(cart);
+		}).error(function(err) {
+			console.log(err);
+			deferred.reject(err);
+		});
+		return deferred.promise;
+	};
+
+	//HELPER FUNCTIONS
+	function getProductIndex(products, value) {
+		return products.map(function(product) { return product.id; }).indexOf(value);
+    }
+
+    function pushToCart (cart, productId) {
+		cart.products.push({
+			id: productId,
+			quantity: 1
+		})
+	}
+
+	function updateDb (cart) {
+		var deferred = $q.defer();
+		if (cart.member) {
+			$http({
+				method: 'POST',
+				url: '/api/cart/update',  // MAKE SURE THIS IS THE RIGHT ENDPOINT!
+				data: cart.products
+			}).success(function(res) {
+				deferred.resolve(res);
+			}).error(function(err) {
+				console.log(err);
+				deferred.reject(err);
+			});			
+		} else {
+			deferred.resolve();
+		}
+		return deferred.promise;
+	}
+
+	// this.getCart = function () {
+	// 	return localStorageService.cookie.get("Cart");
+	// }
 
 	this.createSession = function (sessionData) {
 		localStorageService.cookie.set("Session", sessionData);
 	}
 
-	this.addToCart = function () {
-		var cart = getCart();
-		var item = {};
-		item.id = count;
-		item.quantity = Math.floor(Math.random() * 10)	
-		cart.products.push(item);
-		JSON.stringify(cart);
-		console.log("Add To Cart:", cart);
-		localStorageService.cookie.set("Cart", cart, 30);
-		count++;
-	}
+	// this.addToCart = function () {
+	// 	var cart = this.getCart();
+	// 	var item = {};
+	// 	item.id = count;
+	// 	item.quantity = Math.floor(Math.random() * 10)	
+	// 	cart.products.push(item);
+	// 	JSON.stringify(cart);
+	// 	console.log("Add To Cart:", cart);
+	// 	localStorageService.cookie.set("Cart", cart, 30);
+	// 	count++;
+	// }
 
 	this.clearAllCookies = function () {
 		localStorageService.cookie.clearAll();
-		cart.products = [];
-		console.log("Clear Cart:", cart)
 	}
 
 	this.removeCookie = function (cookieId) {
 		localStorageService.cookie.remove(cookieId);
-	}
-
-	this.getSession = function () {
-		console.log("Session:", localStorageService.cookie.get("Session"));
-		return localStorageService.cookie.get("Session");
 	}
 
 	// this.getCart = function () {
@@ -221,26 +298,26 @@ angular.module('gwazoo.services', [])
 	// 	return localStorageService.cookie.get("Cart");
 	// }
 
-	this.saveCartToDb = function(cartData) {
-		var deferred = $q.defer();
-		$http({
-			method: 'POST',
-			url: '/api/cart', 
-			data: cartData
-		}).success(function(resObj) {
-			// {
-			// 	added: false,
-			// 	message: "Previous session found.",
-			// 	result: result
-			// }
-			console.log("Saved Cart:", resObj);
-			deferred.resolve(resObj);
-		}).error(function(err) {
-			console.log(err);
-			deferred.reject(err);
-		});
-		return deferred.promise;
-	};
+	// this.saveCartToDb = function(cartData) {
+	// 	var deferred = $q.defer();
+	// 	$http({
+	// 		method: 'POST',
+	// 		url: '/api/cart', 
+	// 		data: cartData
+	// 	}).success(function(resObj) {
+	// 		// {
+	// 		// 	added: false,
+	// 		// 	message: "Previous session found.",
+	// 		// 	result: result
+	// 		// }
+	// 		console.log("Saved Cart:", resObj);
+	// 		deferred.resolve(resObj);
+	// 	}).error(function(err) {
+	// 		console.log(err);
+	// 		deferred.reject(err);
+	// 	});
+	// 	return deferred.promise;
+	// };
 })
 
 
