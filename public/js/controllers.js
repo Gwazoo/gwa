@@ -20,23 +20,11 @@ angular.module('gwazoo.controllers', ['flow'])
 
 .controller('MainCtrl', function($scope, $location, Account, Cookies, Products) {
 	$scope.date = new Date();
-
+	
 	var loggedIn = Cookies.getSession();
 	if (loggedIn) {
 		$scope.session = loggedIn.user;
 	}
-
-	$scope.logout = function() {
-		Cookies.removeCookie("Session");
-		$scope.session = Cookies.getSession();  //getSession == null
-		Account.logout()
-		.then(function (nullUser) {
-			$scope.user = nullUser;
-		})
-		.catch(function (err) {
-			console.log("There was an error logging out.");
-		});
-	};
 
 	$scope.login = function(userLogin) {
 		Account.login(userLogin)

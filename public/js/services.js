@@ -1,7 +1,7 @@
 'use strict';
 angular.module('gwazoo.services', [])
 
-.service('Account', function($q, $http, $location, $rootScope, $modal) {
+.service('Account', function ($q, $http, $location, $rootScope, $modal) {
 	var user = '';
 
 	this.login = function(userLogin) {
@@ -33,7 +33,7 @@ angular.module('gwazoo.services', [])
 	*	"message"  => string - status message
 	*	"user"     => obj or null - response from db
 	*/
-	this.register = function(formData) {
+	this.register = function (formData) {
 		var deferred = $q.defer();
 		$http({
 			method: 'POST',
@@ -55,7 +55,7 @@ angular.module('gwazoo.services', [])
 		return deferred.promise;
 	};
 
-	this.checkUsername = function(username) {
+	this.checkUsername = function (username) {
 		var deferred = $q.defer();
 		$http({
 			method: 'POST',
@@ -70,7 +70,7 @@ angular.module('gwazoo.services', [])
 		return deferred.promise;
 	};
 
-	this.logout = function() {
+	this.logout = function () {
 		var deferred = $q.defer();
 		$http({
 			method: 'GET',
@@ -84,7 +84,7 @@ angular.module('gwazoo.services', [])
 	};
 })
 
-.service('Products', function($q, $http, $rootScope) {
+.service('Products', function ($q, $http, $rootScope) {
 	this.addProduct = function (productInfo) {
 		var deferred = $q.defer();
 		$http({
@@ -125,7 +125,7 @@ angular.module('gwazoo.services', [])
 		return deferred.promise;
 	};
 	
-	this.updateProduct = function(productObj) {
+	this.updateProduct = function (productObj) {
 		var deferred = $q.defer();
 		$http({
 			method: 'POST',
@@ -139,7 +139,7 @@ angular.module('gwazoo.services', [])
 		return deferred.promise;
 	};
 
-	this.getCategoryProducts = function(param) {
+	this.getCategoryProducts = function (param) {
 		var deferred = $q.defer();
 		$http({
 			method: 'GET',
@@ -154,17 +154,39 @@ angular.module('gwazoo.services', [])
 	}
 })
 
-.service('Cookies', function($q, $http, localStorageService) {
+.service('Cookies', function ($q, $http, localStorageService) {
 	var count = 0;
-	var cart = {
-		products: []
-	};
+	// var cart = {
+	// 	products: []
+	// };
+
+	function getCart () {
+		var cart = localStorageService.cookie.get("Cart");
+		if (cart == null) {
+			console.log("Creating cart...");
+
+		}
+
+	}
+
+	function setCart (cart) {
+		return localStorageService.cookie.set("Cart", cart);
+	}
+
+	function createCart () {
+		return {
+			member: false,
+			username: null, 
+			products: []
+		};
+	}
 
 	this.createSession = function (sessionData) {
 		localStorageService.cookie.set("Session", sessionData);
 	}
 
 	this.addToCart = function () {
+		var cart = getCart();
 		var item = {};
 		item.id = count;
 		item.quantity = Math.floor(Math.random() * 10)	
@@ -190,10 +212,10 @@ angular.module('gwazoo.services', [])
 		return localStorageService.cookie.get("Session");
 	}
 
-	this.getCart = function () {
-		console.log("Cart:", localStorageService.cookie.get("Cart"));
-		return localStorageService.cookie.get("Cart");
-	}
+	// this.getCart = function () {
+	// 	console.log("Cart:", localStorageService.cookie.get("Cart"));
+	// 	return localStorageService.cookie.get("Cart");
+	// }
 
 	this.saveCartToDb = function(cartData) {
 		var deferred = $q.defer();
