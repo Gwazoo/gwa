@@ -17,7 +17,7 @@ var ProductModel = thinky.createModel("products", {
         }],
     images: [{
             url: type.string().required(), // URL to image
-            isPrimary: type.boolean()	 			// Display order of images
+            isPrimary: type.boolean() // Display order of images
         }]
 });
 
@@ -30,68 +30,68 @@ var Product = {
             product.categories = categories;
             product.validate();
             product.saveAll({categories: true})
-            .then(function (result) {
-                console.log("Product: ", result);
-                resolve(result);
-            }, function (err) {
-                reject(Error("Error saving product: " + err));
-            });
+                    .then(function (result) {
+                        console.log("Product: ", result);
+                        resolve(result);
+                    }, function (err) {
+                        reject(Error("Error saving product: " + err));
+                    });
         });
     },
     get: function (id) {
         return new Promise(function (resolve, reject) {
             ProductModel.get(id).getJoin({categories: {
-                _apply: function (sequence) {
-                    return sequence.pluck("id", "name");
-                }
-            }}).run()
-            .then(function (result) {
-                resolve(result);
-            }, function (err) {
-                reject(Error("Error retrieving product: " + err));
-            });
+                    _apply: function (sequence) {
+                        return sequence.pluck("id", "name");
+                    }
+                }}).run()
+                    .then(function (result) {
+                        resolve(result);
+                    }, function (err) {
+                        reject(Error("Error retrieving product: " + err));
+                    });
         });
     },
     getAll: function () {
         return new Promise(function (resolve, reject) {
             ProductModel.getJoin({categories: {
-                _apply: function (sequence) {
-                    return sequence.pluck("id", "name");
-                }
-            }}).run()
-            .then(function (result) {
-                resolve(result);
-            }, function (err) {
-                reject(Error("Error retrieving products: " + err));
-            });
+                    _apply: function (sequence) {
+                        return sequence.pluck("id", "name");
+                    }
+                }}).run()
+                    .then(function (result) {
+                        resolve(result);
+                    }, function (err) {
+                        reject(Error("Error retrieving products: " + err));
+                    });
         });
     },
     getByTag: function (data) {
         return new Promise(function (resolve, reject) {
             ProductModel.filter({tag: data}).run()
-            .then(function (result) {
-                if (result) {
-                    resolve(result);
-                } else {
-                    reject(Error("It broke."));
-                }
-            }, function (err) {
-                console.log(err);
-                reject(Error(err));
-            });
+                    .then(function (result) {
+                        if (result) {
+                            resolve(result);
+                        } else {
+                            reject(Error("It broke."));
+                        }
+                    }, function (err) {
+                        console.log(err);
+                        reject(Error(err));
+                    });
         });
     },
     update: function (data) {
         return new Promise(function (resolve, reject) {
             ProductModel.get(data.id).run()
-            .then(function (product) {
-                product.merge(data).save()
-                .then(function (result) {
-                    resolve(result);
-                }, function (err) {
-                    reject(Error("Error updated product: " + err));
-                });
-            });
+                    .then(function (product) {
+                        product.merge(data).save()
+                                .then(function (result) {
+                                    resolve(result);
+                                }, function (err) {
+                                    reject(Error("Error updated product: " + err));
+                                });
+                    });
         });
     }
 };

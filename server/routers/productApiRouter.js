@@ -15,8 +15,6 @@ var productRouter = Express.Router();
 //path => /api/product
 productRouter.get('/', Api.getAll);
 
-productRouter.get('/:id', Api.get);
-
 productRouter.get('/tag/:tag', Api.getByTag);
 
 //path => /api/product/create
@@ -76,5 +74,11 @@ productRouter.get('/images', function(req, res) {
 productRouter.get('/download/:identifier', function(req, res) {
   flow.write(req.params.identifier, res);
 });
+
+
+
+
+productRouter.get('/:id', Api.get);
+
 
 module.exports = productRouter;

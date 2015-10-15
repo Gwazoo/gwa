@@ -198,11 +198,17 @@ angular.module('gwazoo.controllers', ['flow'])
 		// console.log("$message:", message);  //res.send ends up here
 		if (message) $scope.files.urls.push(message);  //filters duplicates and adds to url array
 		console.log($scope.files.urls);
-		if ($scope.files.flow.files.length == $scope.files.urls.length) {
+		if ($scope.files.flow.files.length === $scope.files.urls.length) {
 			var productObj = {
-				id: $scope.product.id,
-				images: $scope.files.urls 
+                            id: $scope.product.id,
+                            images: array()
 			};
+                        $scope.files.urls.forEach(function(url) {
+                            var primary = false;
+                            if (primary)
+                                primary = true;
+                            productObj.images.push({url: url, isPrimary: primary});
+                        });
 			Products.updateProduct(productObj)
 			.then(function (productObj) {
 				console.log("updateProduct: Product Updated.");

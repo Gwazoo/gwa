@@ -51,7 +51,7 @@ module.exports = {
 			res.json(result);
 		}, function (err) {
 			res.status(500).json({
-				message: "Database error. Product not updated."
+				message: "Database error: " + err
 			})
 		});
 	},
