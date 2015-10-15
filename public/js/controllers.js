@@ -22,19 +22,20 @@ angular.module('gwazoo.controllers', ['flow'])
     $scope.login = function(userLogin) {
         Account.login(userLogin)
         .then(function (userObj) {
-            if (userObj.loggedIn) $location.path('/account').replace();
-            var cartData = Cookies.getCart();  //null or cart object
-            if (cartData) {
-                Cookies.saveCartToDb(cartData)
-                .then(function () {
-                    Cookies.removeCookie("Cart");   
-                })
-                .catch(function (err) {
-                    console.log(err);
-                });
-            };
-            Cookies.createSession(userObj);
-            $modalInstance.close();
+            console.log($scope.date);
+            // if (userObj.loggedIn) $location.path('/account').replace();
+            // var cartData = Cookies.getCart();  //null or cart object
+            // if (cartData) {
+            //     Cookies.saveCartToDb(cartData)
+            //     .then(function () {
+            //         Cookies.removeCookie("Cart");   
+            //     })
+            //     .catch(function (err) {
+            //         console.log(err);
+            //     });
+            // };
+            // Cookies.createSession(userObj);
+            // $modalInstance.close();
         }).catch(function (err) {
             $scope.error = 'Either your username or password did not match our records. Please try again.';
         });
@@ -246,4 +247,8 @@ angular.module('gwazoo.controllers', ['flow'])
 
 .controller('ProductCtrl', function($scope, $rootScope, Products) {
 	$scope.test = 'product controller';
+})
+
+.controller('CartCtrl', function($scope, $rootScope) {
+
 })

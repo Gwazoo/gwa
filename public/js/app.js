@@ -1,14 +1,10 @@
 'use strict';
-angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngRoute', /*'ngAnimate',*/ 'LocalStorageModule', 'flow', 'ui.bootstrap'])
+angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngRoute', 'LocalStorageModule', 'flow', 'ui.bootstrap'])
 
 .config(function($routeProvider, $locationProvider) {
 	$routeProvider
 		.when('/', {
 			templateUrl: './templates/home.html',
-			controller: 'HomeCtrl'
-		})
-		.when('/test', {
-			templateUrl: './templates/index.html',
 			controller: 'HomeCtrl'
 		})
 		.when('/register', {
@@ -30,6 +26,10 @@ angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngRoute', /*
 		.when('/product/:slug?/:sku?/:id', {
 			templateUrl: './templates/productDetails.html',
 			controller: 'ProductCtrl'
+		})
+		.when('/test', {
+			templateUrl: './templates/cart/orderConfirmation.html',
+			controller: 'CartCtrl'
 		})
 		.otherwise({
 			redirectTo: '/'
