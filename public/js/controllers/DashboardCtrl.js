@@ -72,7 +72,7 @@ angular.module('gwazoo.controllers')
 		if ($scope.files.flow.files.length === $scope.files.urls.length) {
 			var productObj = {
                 id: $scope.product.id,
-                images: array()  // ERROR: undefined
+                images: []
 			};
             $scope.files.urls.forEach(function(url) {
                 var primary = false;
