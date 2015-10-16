@@ -9,7 +9,6 @@ angular.module('gwazoo.controllers')
         $scope.products = result.products;
         $scope.image = result.image;
     });
-    $scope.test2 = 'search result ctrl same as category ctrl';
 }]);
 
 

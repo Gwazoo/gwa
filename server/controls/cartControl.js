@@ -64,7 +64,6 @@ module.exports = {
 
 ////////////////////////////////////////
 //HELPER FUNCTIONS
-
 function checkSession(req, res, sessionData) {
     r.connect(thinky._config, function (err, connection) {  //connect to db
         if (err) {
