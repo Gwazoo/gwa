@@ -1,9 +1,6 @@
-var thinky 			= require('../util/thinky');
-var r 				= require('rethinkdb');
 var productModel = require('./../models/productModel.js').productModel;
 var product = require('./../models/productModel.js').product;
 var categoryModel = require('./../models/categoryModel.js').categoryModel;
-var cartModel = require('./../models/cartModel.js').cartModel;
 
 productModel.hasAndBelongsToMany(categoryModel, 'categories', 'id', 'id');
 
