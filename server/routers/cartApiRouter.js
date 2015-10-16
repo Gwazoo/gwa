@@ -6,7 +6,7 @@ var cartRouter = Express.Router();
 //path => /api/cart
 cartRouter.post('/', Api.cart);
 
-cartRouter.post('/createAndAddProducts', Api.createAndAddProducts);
+cartRouter.post('/save', Api.save);
 
 cartRouter.get('/:id', Api.get);
 

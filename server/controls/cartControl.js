@@ -37,9 +37,9 @@ module.exports = {
 
         checkSession(req, res, sessionData);
     },
-    createAndAddProducts: function (req, res) {
+    save: function (req, res) {
         req.body.createdDate = Date.now();
-        cart.cart.createAndAddProducts(req.body)
+        cart.cart.save(req.body)
         .then(function(result){
                 res.json(result);
         }, function (err) {
