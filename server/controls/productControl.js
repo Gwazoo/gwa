@@ -39,7 +39,7 @@ module.exports = {
 		}, function (err) {
 			res.status(500).json({
 				message: "Database error." + err
-			})
+			});
 		});
 	},
 	update : function (req, res) {
@@ -49,7 +49,7 @@ module.exports = {
 		}, function (err) {
 			res.status(500).json({
 				message: "Database error: " + err
-			})
+			});
 		});
 	},
         getByTag : function (req, res) {
@@ -59,7 +59,7 @@ module.exports = {
             }, function (err) {
                 res.status(500).json({
                     message: "Database error: " + err
-                })
+                });
             });
         }
 };

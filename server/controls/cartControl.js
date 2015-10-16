@@ -8,7 +8,7 @@ var product = require('./../models/productModel.js');
 // Model relationships
 cart.cartModel.hasMany(cart.cartItemModel, 'products', 'id', 'cartId');
 cart.cartItemModel.belongsTo(cart.cartModel, 'cart', 'cartId', 'id');
-cart.cartItemModel.belongsTo(product.productModel, 'product', 'productId', 'id');
+cart.cartItemModel.hasOne(product.productModel, 'product', 'productId', 'id');
 
 module.exports = {
     cart: function (req, res) {
@@ -38,6 +38,7 @@ module.exports = {
         checkSession(req, res, sessionData);
     },
     save: function (req, res) {
+        cart.cart.get(req.body.username);
         req.body.createdDate = Date.now();
         cart.cart.save(req.body)
         .then(function(result){
@@ -49,7 +50,7 @@ module.exports = {
         });
     },
     get: function (req, res) {
-        cart.cart.get(req.params.id)
+        cart.cart.get(req.params.username)
         .then(function(result){
             res.json(result);
         }, function (err) {
@@ -64,6 +65,20 @@ module.exports = {
 
 ////////////////////////////////////////
 //HELPER FUNCTIONS
+
+function mergeCarts (localCart, dbCart) {
+    localCart.products.forEach(function (localProduct) {
+        var index = dbCart.products.map(function(dbProduct) {
+            return dbProduct.id;
+        }).indexOf(localProduct.id);
+        if (index === -1) {
+            dbCart.products.push(localProduct);
+        } else {
+            dbCart.products[index].quantity += localProduct.quantity;
+        }
+    });
+    return dbCart;
+}
 
 function checkSession(req, res, sessionData) {
     r.connect(thinky._config, function (err, connection) {  //connect to db
@@ -113,31 +128,6 @@ function addToCart(req, res, username, product, callback) {
                         return callback(err);
                     } else {
                         callback(null, result);
-                    }
-                });
-    });
-}
-
-function mergeCarts(req, res, username, productsArray) {
-    console.log("Merging Carts...");
-    r.connect(thinky._config, function (err, connection) {  //connect to db
-        if (err)
-            throw err;
-        r.table('sessions').get(username).update({
-            products: r.table('sessions').get(username)('products').setUnion(productsArray)
-        }, {
-            nonAtomic: true
-        })
-                .run(connection, function (err, result) {
-                    if (err)
-                        res.status(500).send("Error: Database failed to connect.");
-                    else {
-                        console.log("result:", result);
-                        return res.json({//success
-                            added: false,
-                            message: "Successfully merged carts.",
-                            result: result
-                        });
                     }
                 });
     });

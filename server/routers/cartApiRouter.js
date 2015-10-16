@@ -8,6 +8,6 @@ cartRouter.post('/', Api.cart);
 
 cartRouter.post('/save', Api.save);
 
-cartRouter.get('/:id', Api.get);
+cartRouter.get('/:username', Api.get);
 
 module.exports = cartRouter;
