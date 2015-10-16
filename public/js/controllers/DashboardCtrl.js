@@ -71,15 +71,15 @@ angular.module('gwazoo.controllers')
 		console.log($scope.files.urls);
 		if ($scope.files.flow.files.length === $scope.files.urls.length) {
 			var productObj = {
-                            id: $scope.product.id,
-                            images: array()
+                id: $scope.product.id,
+                images: []
 			};
-                        $scope.files.urls.forEach(function(url) {
-                            var primary = false;
-                            if (primary)
-                                primary = true;
-                            productObj.images.push({url: url, isPrimary: primary});
-                        });
+            $scope.files.urls.forEach(function(url) {
+                var primary = false;
+                if (primary)
+                    primary = true;
+                productObj.images.push({url: url, isPrimary: primary});
+            });
 			Products.updateProduct(productObj)
 			.then(function (productObj) {
 				console.log("updateProduct: Product Updated.");

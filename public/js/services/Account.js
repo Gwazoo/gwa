@@ -11,13 +11,7 @@ angular.module('gwazoo.services')
 			url: '/api/user/auth', 
 			data: userLogin
 		}).success(function(user) {
-			var resObj = {
-				loggedIn: true,
-				message: "User was successfully logged in.",
-				user: user
-			}
-			// $rootScope.$broadcast('updateUser');
-			deferred.resolve(resObj);
+			deferred.resolve(user);
 		}).error(function(err) {
 			console.log(err);
 			deferred.reject(err);

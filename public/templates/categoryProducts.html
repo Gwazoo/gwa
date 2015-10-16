@@ -1,5 +1,6 @@
 <section class="page-header container"> <!-- page header -->
     <h1>{{category}}</h1>
+    {{cart}}
 </section>
 <section class="container"> <!-- page content -->
     <div class="narrow_search col-lg-2"> <!-- left menu -->
@@ -66,6 +67,12 @@
                 <div>
                     STARS / DESCRIPTIONS
                 </div>
+                <div ng-click="cart.add(cart, product.id)">Add To Cart</div>
+                <div ng-click="cart.remove(cart, product.id)">Remove From Cart</div>
+                <div ng-click="cart.increment(cart, product.id)">Increment</div>
+                <div ng-click="cart.decrement(cart, product.id)">Decrement</div>
+                <div ng-click="cart.clear(cart)">Clear Cart</div>
+                <div ng-click="cart.get()">View Cart</div>
             </div>
         </div><!-- /. container -->
     </div><!-- /. search results -->    
