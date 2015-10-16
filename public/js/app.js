@@ -28,7 +28,7 @@ angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngRoute', 'L
 			controller: 'ProductCtrl'
 		})
 		.when('/test', {
-			templateUrl: './templates/cart/cartCheckout.html',
+			templateUrl: './templates/cart/cart.html',
 			controller: 'CartCtrl'
 		})
 		.otherwise({

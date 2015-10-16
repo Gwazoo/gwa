@@ -1,0 +1,64 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-7 col-sm-7 col-md-9 col-lg-9">
+            <section class="row">
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    <h3 class="text-capitalize"><strong>shopping cart</strong></h3>
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                    <h5>Price</h5> <!-- MAKE THIS SIT ON THE BASELINE -->
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                    <h5>Quantity</h5> <!-- MAKE THIS SIT ON THE BASELINE -->
+                </div>
+            </section> <!-- PUT A BORDER-BOTTOM ON THIS SECTION -->
+            <section class="row"> <!-- NG-REPEAT(ng-repeat="items in cart") -->
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="row">
+                        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                            <img src="{{product.image}}"/><img style="max-width: 100%;" src="/img/preview-small-img4.png"/> <!-- MAYBE MAKE THE HEIGHT STANDARD SO THEY WILL EITHER GO FULL WIDTH OF COLUMN OR MAX-HEIGHT -->
+                        </div>
+                        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                            <h5><strong>{{product.name}}Everest Multiple Pocket Waist Pack, Black, One Size</strong></h5>
+                            <p>${{product.price}}11.45</p>
+                            <p><strong>Quantity: </strong>{{product.quantity}}</p>
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                            <h4><strong class="text-danger">${{item.price}}61.25</strong></h4>
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                            <form>
+                                <div class="form-group">
+                                    <label class="sr-only">Quantity</label>
+                                    <select  class="form-control" name="repeatSelect" id="quantitySelect" ng-model="quantity.repeatSelect">
+                                        <option ng-repeat="option in quantity.available" value="{{option.id}}">{{option.name}}</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section> <!-- PUT A BORDER-BOTTOM ON THIS SECTION -->
+            <section class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <H4 class="text-right"><strong>Subtotal ({{cart.quantity}}2 items): </strong><strong class="text-danger">${{cart.total}}122.50</strong></h4>
+                    <button class="btn btn-warning btn-sm text-capitalize pull-right">proceed to checkout</button>
+                </div>
+            </section>
+        </div>
+        <div class="col-xs-5 col-sm-5 col-md-3 col-lg-3 fixed"> <!-- PUT A BORDER AROUND THIS DIV (WITH BORDER-RADIUS) AND MAKE IT SCROLL WITH THE PAGE -->
+            <section class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <H4 class="text-center"><strong>Subtotal ({{cart.quantity}}2 items): </strong><strong class="text-danger">${{cart.total}}122.50</strong></h4>
+                </div>
+            </section>
+            <section class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <button class="btn btn-warning btn-md btn-block text-capitalize">proceed to checkout</button>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+

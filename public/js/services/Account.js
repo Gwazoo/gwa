@@ -36,8 +36,6 @@ angular.module('gwazoo.services')
 		}).success(function(resObj) {
 			if (resObj.added) {
 				user = resObj.user;
-				$location.path('/account').replace();
-				$rootScope.$broadcast('updateUser');
 				deferred.resolve(resObj.message);
 			} else {
 				deferred.resolve(resObj.message);
@@ -70,8 +68,6 @@ angular.module('gwazoo.services')
 			method: 'GET',
 			url: '/api/user/logout'
 		}).success(function(res) {
-			user = null;  //clear out user data
-			$location.path('/').replace();
 			deferred.resolve(user);
 		});
 		return deferred.promise;

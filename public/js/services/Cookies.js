@@ -14,8 +14,7 @@ angular.module('gwazoo.services')
         console.log("Creating cart...");
         var newCart = {
             member: false,
-            username: "", 
-            products: []
+            products: [],
         };
         return this.setCart(newCart);
     };
@@ -35,6 +34,7 @@ angular.module('gwazoo.services')
                 pushToCart(cart, productId);
             } else {
                 cart.products[index].quantity += 1;
+                cart.products[index].modified = new Date();
             }
         }
         return this.setCart(cart);
@@ -49,13 +49,15 @@ angular.module('gwazoo.services')
     this.increment = function (cart, productId) {
         var index = getProductIndex(cart.products, productId);  
         cart.products[index].quantity += 1;
+        cart.products[index].modified = new Date();
         return this.setCart(cart);
     };
 
     this.decrement = function (cart, productId) {
         var index = getProductIndex(cart.products, productId);  
         if (cart.products[index].quantity > 1) {
-            cart.products[index].quantity -= 1;         
+            cart.products[index].quantity -= 1;   
+            cart.products[index].modified = new Date();      
         } else {
             cart.products.splice(index, 1);
         }
@@ -106,7 +108,8 @@ angular.module('gwazoo.services')
     function pushToCart (cart, productId) {
         cart.products.push({
             id: productId,
-            quantity: 1
+            quantity: 1,
+            modified: new Date()
         })
     }
     function updateDb (cart) {
