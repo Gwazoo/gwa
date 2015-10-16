@@ -1,76 +1,95 @@
 <div class="container">
-    <section class="container-fluid">
-        <div class="row parent"> <!-- SHOULD USE FLEXBOX TO VERTICALLY CENTER THESE https://css-tricks.com/snippets/css/a-guide-to-flexbox/ -->
-            <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2 child-center">
-                <a href="/"><img src="/img/logo.png"/></a>
-            </div>
-            <div class="col-xs-6 col-sm-6 col-md-10 col-lg-10 child-center">
-                <ul class="list-unstyled list-inline text-right">
-                    <li><a href="/account">your account</a></li>
-                    <li><a href="/">gwazoo.com</a></li>
-                </ul>
-                <!-- BORDERBOTTOM: 1PX SOLID LIGHTGRAY -->
-                <ul class="list-unstyled pull-right">
-                    <li class="text-capitalize"><h4>order confirmation</h4></li>
-                    <li>Order #<a href="/order-history/{{order.id}}">{{order.id}}351-9871583-7164285</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="row">
-            <address class="text-lowercase">
-                <a href="mailto:#">Callum.Poole@example.com</a>
-            </address>
-        </div>
-        <div class="row">
-            <p>Thanks you for shopping with us. We'd like to let you know that Gwazoo has recieved your order, and is preparing it for shipment. Your estimated delivery date is below. If you would like to view the status of your order or make changes to it, please visit <a href="/order-history">Your Orders</a> on Gwazoo.com.</p>
-        </div>
-        <div class="row panel panel-default"> <!-- BORDER-TOP: 15PX SOLID LIGHTGRAY -->
-            <div class="panel-body">
-                <div class="row parent"> <!-- SHOULD USE FLEXBOX TO VERTICALLY CENTER THESE https://css-tricks.com/snippets/css/a-guide-to-flexbox/ -->
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2 child-base">
-                        <h4>Your estimated delivery date is:</h4>
-                        <strong>{{delivery.starteDate}}Friday, October 30, 2015 -<br>
-                        {{delivery.endDate}}Saturday, October 31, 2015</strong>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2 child-base">
-                        <address class="text-capitalize">
-                            <strong>{{user.name}}callum poole</strong><br>
-                            {{user.address.street}}4923 ryan road<br>
-                            Rapid City{{user.address.city}}, {{user.address.state}}SD {{user.address.zip}}57702<br>
-                        </address>
+    <div class="row">
+        <div class="col-xs-7 col-sm-7 col-md-9 col-lg-9">
+            <section class="row">
+                <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                    <h5 class="text-capitalize"><strong>1 shipping address</strong></h5>
+                </div>
+                <div class="col-xs-8 col-sm-8 col-md-7 col-lg-7">
+                    <address class="text-capitalize">
+                        {{user.name}}callum poole<br>
+                        {{user.address.street}}4923 ryan road<br>
+                        Rapid City{{user.address.city}}, {{user.address.state}}SD {{user.address.zip}}57702<br>
+                    </address>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-2 col-lg-2">
+                    <button class="btn btn-default btn-xs btn-block text-capitalize">change</button>
+                </div>
+            </section> <!-- PUT A BORDER-BOTTOM ON THIS SECTION -->
+            <section class="row">
+                <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                    <h5 class="text-capitalize"><strong>2 payment method</strong></h5>
+                </div>
+                <div class="col-xs-8 col-sm-8 col-md-7 col-lg-7">
+                    <P><strong class="text-capitalize">{{user.cardType}}debit card </strong>ending in {{user.cardNumber}}4865</P>
+                    <p><strong class="text-capitalize">billing address: </strong>{{user.billingOption}}same as shipping address. <a href="#billingAddressModal">Change</a></p>
+                </div>
+                <div class="col-xs-4 col-sm-4 col-md-2 col-lg-2">
+                    <button class="btn btn-default btn-xs btn-block text-capitalize" ng-click="">change</button>
+                </div>
+            </section> <!-- PUT A BORDER-BOTTOM ON THIS SECTION -->
+            <section class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <h5 class="text-capitalize"><strong>3 review items</strong></h5>
+                </div>
+                <div class="col-xs-10 col-xs-offset-2 col-sm-10 col-sm-offset-2 col-md-10 col-md-offset-2 col-lg-10 col-lg-offset-2"> <!-- PUT A BORDER AROUND THIS DIV (WITH BORDER-RADIUS) NG-REPEAT(ng-repeat="items in cart") -->
+                    <div class="row">
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                            <img src="{{product.image}}"/><img style="max-width: 100%;" src="/img/preview-small-img4.png"/> <!-- MAYBE MAKE THE HEIGHT STANDARD SO THEY WILL EITHER GO FULL WIDTH OF COLUMN OR MAX-HEIGHT -->
+                        </div>
+                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                            <h5><strong>{{product.name}}Everest Multiple Pocket Waist Pack, Black, One Size</strong></h5>
+                            <p>${{product.price}}11.45</p>
+                            <p><strong>Quantity: </strong>{{product.quantity}}</p>
+                        </div>
+                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                            <h6 class="text-capitalization"><strong>Your delivery option is:</strong></h6>
+                            <p><span class="text-uppercase">standard: </span><strong>{{delivery.starteDate}}Friday, October 30, 2015 -<br>
+                            {{delivery.endDate}}Saturday, October 31, 2015</strong></p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <ul class="list-unstyled">
-                    <li class="text-capitalize"><h4>order details</h4></li>
-                </ul>
-                <!-- BORDERBOTTOM: 1PX SOLID LIGHTGRAY -->
-                <ul class="list-unstyled">
-                    <li>Order #<a href="/order-history/{{order.id}}">{{order.id}}351-9871583-7164285</a></li>
-                    <li>Placed on {{order.date}}Wednesday, October 15, 2015</li>
-                </ul>
-            </div>
+        <div class="col-xs-5 col-sm-5 col-md-3 col-lg-3 fixed"> <!-- PUT A BORDER AROUND THIS DIV (WITH BORDER-RADIUS) AND MAKE IT SCROLL WITH THE PAGE -->
+            <section class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <button class="btn btn-warning btn-md btn-block text-capitalize">place your order</button>
+                </div>
+            </section>
+            <section class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <p class="text-center">By placing your order, you agree to Gwazoo's <a href="/privacy-policy">privacy notice</a> and <a href="/conditions">conditions of use</a>.</p>
+                </div>
+            </section> <!-- PUT A BORDER-BOTTOM ON THIS SECTION -->
+            <section class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <h4>Order Summary</h4>
+                    <div class="row">
+                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                            <p>Items ({{cart.quantity}}2):</p>
+                            <p>Shipping & Handling:</p>
+                            <p>Total before tax:</p>
+                            <p>Estimated tax to be collected:*</p>
+                        </div>
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                            <p class="text-right">${{cart.price}}122.51</p>
+                            <p class="text-right">${{shipping.price}}9.00</p> <!-- PUT A BORDER-BOTTOM ON THIS SECTION -->
+                            <p class="text-right">${{cart.subTotal}}131.51</p>
+                            <p class="text-right">${{tax}}0.00</p>
+                        </div>
+                    </div> <!-- PUT A BORDER-BOTTOM ON THIS SECTION -->
+                    <div class="row">
+                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                            <h4 class="red">Order Total:</h4>
+                        </div>
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                            <h4 class="text-right red">${{cart.subTotal}}131.51</h4>
+                    </div>
+                </div>
+            </section>
         </div>
-        <div class="row"> <!-- NG-REPEAT THROUGH THE ITEMS IN THE ORDER -->
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <img src="{{item.img}}"/><img src="/img/preview-small-img4.png"/><!-- MAYBE MAKE THE HEIGHT STANDARD SO THEY WILL EITHER GO FULL WIDTH OF COLUMN OR MAX-HEIGHT -->
-            </div>
-            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                <ul class="list-unstyled">
-                    <li><a href="">{{item.name}}Really awesome front-loader washing machine</a></li>
-                    <li>{{item.category}}Appliences</li>
-                    <li><p>{{item.details}}Step up to efficiency, cleaning power and convenience with the 4.3 cu. ft. Kenmore 41162 front-load washer. It has technologies such as Kenmore Connect™, which can troubleshoot some problems over the phone, and Smart Motion™, which uses motions such as rolling, tumbling, saturating and swinging, depending on the cycle you select.</p>
-                    <p>This white Kenmore 4116 front-loading washer gives you 8 wash cycles, 5 water temperatures and 6 options—such as Delay Start, Prewash and Extra Rinse—so different fabrics and levels of dirt get the best treatment. It's ENERGY STAR® qualified to save money and energy while conserving natural resources. Its 1,300 RPM maximum spin speed extracts water, so garments need less drying, also saving energy. Sound insulation and an anti-vibration system keep this Kenmore washer quiet, so you can install it near living areas and bedrooms.</p></li>
-                </ul>
-            </div>
-            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                <p><strong>${{item.price}}1,254.51</strong></p>
-            </div>
-        </div>
-    </section>
+    </div>
 </div>
 
 
