@@ -25,9 +25,9 @@ var Cart = {
         return new Promise(function (resolve, reject) {
             var cart = new CartModel(data);
             cart.saveAll({products: true})
-                    .then(function (result) {
-                        if (result) {
-                            resolve(result);
+                    .then(function (cart) {
+                        if (cart) {
+                            resolve(cart);
                         } else {
                             reject(Error("It broke."));
                         }

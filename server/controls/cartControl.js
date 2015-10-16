@@ -40,8 +40,8 @@ module.exports = {
     save: function (req, res) {
         req.body.createdDate = Date.now();
         cart.cart.save(req.body)
-        .then(function(result){
-                res.json(result);
+        .then(function(cart){
+                res.json(cart);
         }, function (err) {
                 res.status(500).json({
                         message: "Database error. " + err
