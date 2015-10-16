@@ -21,7 +21,7 @@ var CartItemModel = thinky.createModel("carts_items", {
 });
 
 var Cart = {
-    createAndAddProducts: function (data) {
+    save: function (data) {
         return new Promise(function (resolve, reject) {
             var cart = new CartModel(data);
             cart.saveAll({products: true})
