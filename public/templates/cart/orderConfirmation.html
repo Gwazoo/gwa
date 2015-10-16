@@ -1,0 +1,76 @@
+<div class="container">
+    <section class="container-fluid">
+        <div class="row parent"> <!-- SHOULD USE FLEXBOX TO VERTICALLY CENTER THESE https://css-tricks.com/snippets/css/a-guide-to-flexbox/ -->
+            <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2 child-center">
+                <a href="/"><img src="/img/logo.png"/></a>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-10 col-lg-10 child-center">
+                <ul class="list-unstyled list-inline text-right">
+                    <li><a href="/account">your account</a></li>
+                    <li><a href="/">gwazoo.com</a></li>
+                </ul>
+                <!-- BORDERBOTTOM: 1PX SOLID LIGHTGRAY -->
+                <ul class="list-unstyled pull-right">
+                    <li class="text-capitalize"><h4>order confirmation</h4></li>
+                    <li>Order #<a href="/order-history/{{order.id}}">{{order.id}}351-9871583-7164285</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <address class="text-lowercase">
+                <a href="mailto:#">Callum.Poole@example.com</a>
+            </address>
+        </div>
+        <div class="row">
+            <p>Thanks you for shopping with us. We'd like to let you know that Gwazoo has recieved your order, and is preparing it for shipment. Your estimated delivery date is below. If you would like to view the status of your order or make changes to it, please visit <a href="/order-history">Your Orders</a> on Gwazoo.com.</p>
+        </div>
+        <div class="row panel panel-default"> <!-- BORDER-TOP: 15PX SOLID LIGHTGRAY -->
+            <div class="panel-body">
+                <div class="row parent"> <!-- SHOULD USE FLEXBOX TO VERTICALLY CENTER THESE https://css-tricks.com/snippets/css/a-guide-to-flexbox/ -->
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2 child-base">
+                        <h4>Your estimated delivery date is:</h4>
+                        <strong>{{delivery.starteDate}}Friday, October 30, 2015 -<br>
+                        {{delivery.endDate}}Saturday, October 31, 2015</strong>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2 child-base">
+                        <address class="text-capitalize">
+                            <strong>{{user.name}}callum poole</strong><br>
+                            {{user.address.street}}4923 ryan road<br>
+                            Rapid City{{user.address.city}}, {{user.address.state}}SD {{user.address.zip}}57702<br>
+                        </address>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <ul class="list-unstyled">
+                    <li class="text-capitalize"><h4>order details</h4></li>
+                </ul>
+                <!-- BORDERBOTTOM: 1PX SOLID LIGHTGRAY -->
+                <ul class="list-unstyled">
+                    <li>Order #<a href="/order-history/{{order.id}}">{{order.id}}351-9871583-7164285</a></li>
+                    <li>Placed on {{order.date}}Wednesday, October 15, 2015</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row"> <!-- NG-REPEAT THROUGH THE ITEMS IN THE ORDER -->
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <img src="{{item.img}}"/><img src="/img/preview-small-img4.png"/><!-- MAYBE MAKE THE HEIGHT STANDARD SO THEY WILL EITHER GO FULL WIDTH OF COLUMN OR MAX-HEIGHT -->
+            </div>
+            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                <ul class="list-unstyled">
+                    <li><a href="">{{item.name}}Really awesome front-loader washing machine</a></li>
+                    <li>{{item.category}}Appliences</li>
+                    <li><p>{{item.details}}Step up to efficiency, cleaning power and convenience with the 4.3 cu. ft. Kenmore 41162 front-load washer. It has technologies such as Kenmore Connect™, which can troubleshoot some problems over the phone, and Smart Motion™, which uses motions such as rolling, tumbling, saturating and swinging, depending on the cycle you select.</p>
+                    <p>This white Kenmore 4116 front-loading washer gives you 8 wash cycles, 5 water temperatures and 6 options—such as Delay Start, Prewash and Extra Rinse—so different fabrics and levels of dirt get the best treatment. It's ENERGY STAR® qualified to save money and energy while conserving natural resources. Its 1,300 RPM maximum spin speed extracts water, so garments need less drying, also saving energy. Sound insulation and an anti-vibration system keep this Kenmore washer quiet, so you can install it near living areas and bedrooms.</p></li>
+                </ul>
+            </div>
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                <p><strong>${{item.price}}1,254.51</strong></p>
+            </div>
+        </div>
+    </section>
+</div>
+
+
