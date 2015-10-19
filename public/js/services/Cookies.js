@@ -14,7 +14,7 @@ angular.module('gwazoo.services')
         console.log("Creating cart...");
         var newCart = {
             member: false,
-            products: [],
+            products: []
         };
         return this.setCart(newCart);
     };
@@ -23,14 +23,14 @@ angular.module('gwazoo.services')
         cart.products = [];
         updateDb(cart);
         return this.setCart(cart);
-    }
+    };
 
     this.add = function (cart, productId) {
-        if (typeof cart.products[0] == undefined) {
+        if (typeof cart.products[0] === undefined) {
             pushToCart(cart, productId);
         } else {
             var index = getProductIndex(cart.products, productId);
-            if (index == -1) {
+            if (index === -1) {
                 pushToCart(cart, productId);
             } else {
                 cart.products[index].quantity += 1;
@@ -90,27 +90,27 @@ angular.module('gwazoo.services')
 
     this.createSession = function (sessionData) {
         localStorageService.cookie.set("Session", sessionData);
-    }
+    };
 
     this.clearAllCookies = function () {
         localStorageService.cookie.clearAll();
-    }
+    };
 
     this.removeCookie = function (cookieId) {
         localStorageService.cookie.remove(cookieId);
-    }
+    };
 
     // HELPER FUNCTIONS /////////////////////////////
     function getProductIndex(products, value) {
-        return products.map(function(product) { return product.id; }).indexOf(value);
+        return products.map(function(product) { return product.productId; }).indexOf(value);
     }
 
     function pushToCart (cart, productId) {
         cart.products.push({
-            id: productId,
+            productId: productId,
             quantity: 1,
             modified: new Date()
-        })
+        });
     }
     function updateDb (cart) {
         var deferred = $q.defer();
