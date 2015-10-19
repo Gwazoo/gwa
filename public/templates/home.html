@@ -1,30 +1,128 @@
-<section class="main_banner container"> <!-- main banner -->
-    <div class="banner_text col-xs-6 col-md-6">
-        <h2><b>GOING BACK TO SCHOOL?<br>GWAZOO'S GOT YOU COVERED.</b></h2>
-        <p style="color:gray">Seasonal Blowout Sales on electronics <a href="#">available.</a></p>
-        <br>
-        {{test}}
-        <a href="#">More Info</a>
-    </div>
-    <div class="banner_image col-xs-6 col-md-6" align="center">
-        <img src="img/slider-img.png" alt="">
-    </div>
-</section> <!-- /.container --> <!-- /.main banner -->
-<section> <!-- page content -->
-    <section class="first_block container-fluid"> <!-- 1st block -->
-        <div class="container">
-            <h3>Latest Products</h3>
+<div class="container">
+    <section id="home-carousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner" role="listbox"> <!-- WRAPPER FOR SLIDES -->
+            <div class="item active">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <h2 class="text-uppercase"><b>going back to school?</b></h2>
+                        <h2 class="text-uppercase"><b>gwazoo has got you covered.</b></h2>
+                        <p style="color:gray">Seasonal Blowout Sales on electronics <a href="#">available.</a></p>
+                        {{test}}
+                        <a href="#">More Info</a>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <img src="img/slider-img.png" alt=""> <!-- MAX-HEIGHT: 300PX; -->
+                    </div>
+                </div>
+                <div class="carousel-caption">
+                </div>
+            </div>
+            <div class="item">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <h2 class="text-uppercase"><b>second image title</b></h2>
+                        <h2 class="text-uppercase"><b>GWAZOO'S GOT YOU COVERED.</b></h2>
+                        <p style="color:gray">Seasonal Blowout Sales on electronics <a href="#">available.</a></p>
+                        {{test}}
+                        <a href="#">More Info</a>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <img src="img/slider-img.png" alt="">
+                    </div>
+                </div>
+                <div class="carousel-caption">
+                </div>
+            </div>
+            <div class="item">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <h2 class="text-uppercase"><b>third image title</b></h2>
+                        <h2 class="text-uppercase"><b>GWAZOO'S GOT YOU COVERED.</b></h2>
+                        <p style="color:gray">Seasonal Blowout Sales on electronics <a href="#">available.</a></p>
+                        {{test}}
+                        <a href="#">More Info</a>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <img src="img/slider-img.png" alt="">
+                    </div>
+                </div>
+                <div class="carousel-caption">
+                </div>
+            </div>
         </div>
-        <div class="item_slider">
-        </div>
-    </section> <!-- /. 1st block -->
+    </section> <!-- /SLIDER -->
 
-    <section class="page_content container"> <!-- 2nd block -->
-        <div class="main_left col-xs-12 col-md-3"> <!-- left -->
-            <div class="main_category col-xs-12">
+    <section class="container-fluid"> <!-- PRODUCT HIGHLIGHT -->
+        <div class="container">
+            <h3 class="text-center text-capitalize">Latest Products</h3>
+        </div>
+        <div class="container">
+            <div class="row parent"> <!-- SHOULD USE FLEXBOX TO VERTICALLY CENTER THESE https://css-tricks.com/snippets/css/a-guide-to-flexbox/ -->
+                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 pager child">
+                    <a href="#" ng-click="shiftRight()"><span class="text-right previous fa fa-chevron-left" aria-hidden="true"></span></a>
+                </div>
+                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 child"> <!-- OVERFLOW: HIDDEN -->
+                    <ul class="list-unstyled row" style="overflow: hidden;">
+                        <li class="col-xs-6 col-sm-6 col-md-2 col-lg-2" ng-repeat="d in data | limitTo:displayed"> <!-- NG-REPEAT THROUGH TOP PRODUCTS RESTRICT TO 18 ITEMS. -->
+                            <a href="{{d}}" class="thumbnail">
+                                <img src="img/slider-img.png" style="max-width: 100%;"> <!-- MAX-WIDTH: 100%; (THE HOVER-STATE SHOULD SHOW INFORMATION ABOUT PRODUCT) -->
+                            </a>
+                        </li> <!-- NG-REPEAT -->
+                        <!-- <li class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
+                            <a href="{{}}" class="thumbnail">
+                                <img src="img/slider-img.png" style="max-width: 100%;">
+                            </a>
+                        </li>
+                        <li class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
+                            <a href="{{}}" class="thumbnail">
+                                <img src="img/slider-img.png" style="max-width: 100%;">
+                            </a>
+                        </li>
+                        <li class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
+                            <a href="{{}}" class="thumbnail">
+                                <img src="img/slider-img.png" style="max-width: 100%;">
+                            </a>
+                        </li>
+                        <li class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
+                            <a href="{{}}" class="thumbnail">
+                                <img src="img/slider-img.png" style="max-width: 100%;">
+                            </a>
+                        </li>
+                        <li class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
+                            <a href="{{}}" class="thumbnail">
+                                <img src="img/slider-img.png" style="max-width: 100%;">
+                            </a>
+                        </li>
+                        <li class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
+                            <a href="{{}}" class="thumbnail">
+                                <img src="img/slider-img.png" style="max-width: 100%;">
+                            </a>
+                        </li>
+                        <li class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
+                            <a href="{{}}" class="thumbnail">
+                                <img src="img/slider-img.png" style="max-width: 100%;">
+                            </a>
+                        </li>
+                        <li class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
+                            <a href="{{}}" class="thumbnail">
+                                <img src="img/slider-img.png" style="max-width: 100%;">
+                            </a>
+                        </li> -->
+                    </ul>
+                </div>
+                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 pager child">
+                    <a href="#" ng-click="shiftLeft()"><span class="text-left next fa fa-chevron-right" aria-hidden="true"></span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="page_content container row"> <!-- 2nd block -->
+        <div class="main_left col-xs-12 col-sm-12 col-md-3 col-lg-3"> <!-- left -->
+            <div class="main_category">
                 <ul>
                     <h3><i class="fa fa-caret-right"></i> Browse All Categories</h3>
-                    <li><a href="#">Appliances</a></li>
+                    <li><a href="#">Appliances</a></li> 
                     <li><a href="#">Sports Equipments</a></li>
                     <li><a href="#">Computers & Electronics</a></li>
                     <li><a href="#">Office supplies</a></li>
@@ -35,211 +133,267 @@
                     <li><a href="#">Automotive</a></li>
                 </ul>
             </div>
-            <div class="main_help col-xs-12">
+            <div class="main_help">
                 <h3><i class="fa fa-caret-right"></i> Need Help?</h3>
                 <p><span>We want your shopping experience to be easy.</span></p>
                 <p>We are committed to give you all the support you need to make the right decision with minimum fuss. Let Gwazoo know!</p>
             </div>
-            <div class="main_ad col-xs-12">
+            <div class="main_ad">
                 <img src="img/question.png" alt="" />
                 <div class="banner_desc">
                     <h4>Contact Us</h4>
                     <a href="#">More Info</a>
                 </div>
             </div>
-            <div class="main_ad col-xs-12">
+            <div class="main_ad">
                 <img src="img/ear.png" alt="">
                 <div class="banner_desc">
                     <h4>Suggestions?</h4>
-                    <a href="#">More Info</a>                
+                    <a href="#">More Info</a>
                 </div>
             </div>
-        </div><!-- /. left -->
+        </div>
 
-        <div class="main_right col-xs-12 col-md-9"> <!-- right -->
-            <h3><i class="fa fa-caret-right"></i> Trending Items</h3>
-            <div class="section_group col-xs-12 col-md-12">
-                <div class="grid_1_of_4 col-xs-6 col-md-3">
-                    <h4><a href="#">Toshiba Satellite Laptop...</a></h4>
-                    <a href="preview.html">
+        <div class="main_right col-xs-12 col-sm-12 col-md-9 col-lg-9">
+            <h3 class="text-capitalize"><i class="fa fa-caret-right"></i> Trending Items</h3>
+            <div class="section_group parent">
+                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child"> <!-- NG-REPEAT THROUGH TOP PRODUCTS RESTRICT TO 8 ITEMS. BORDER & BORDER-RADIUS -->
+                    <h4 class="text-capitalize"><a href="#">{{item.name}}Toshiba Satellite Laptop...</a></h4> <!-- LIMIT TO 28 CHARACTERS -->
+                    <a href="/product/:slug?/:sku?/:id">
                         <img src="img/product-img1.png">
                     </a>
                     <div class="price_details">
                         <div class="price_number">
-                            <p><span>$299.99</span></p>
+                            <p class="text-right"><span>${{item.price}}299.99</span></p>
                         </div>
                         <div class="add_cart">
-                            <h4><a href="#">More Info</a></h4>
+                            <button class="btn btn-sm btn-success btn-block text-uppercase">More Info</button>
                         </div>
                     </div>
                 </div>
-                <div class="grid_1_of_4 col-xs-6 col-md-3">
-                    <h4><a href="#">Toshiba Satellite Laptop...</a></h4>
-                    <a href="preview.html">
+                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child">
+                    <h4 class="text-capitalize"><a href="#">{{item.name}}Toshiba Satellite Laptop...</a></h4>
+                    <a href="/product/:slug?/:sku?/:id">
                         <img src="img/product-img1.png">
                     </a>
                     <div class="price_details">
                         <div class="price_number">
-                            <p><span>$299.99</span></p>
+                            <p class="text-right"><span>${{item.price}}299.99</span></p>
                         </div>
                         <div class="add_cart">
-                            <h4><a href="#">More Info</a></h4>
+                            <button class="btn btn-sm btn-success btn-block text-uppercase">More Info</button>
                         </div>
                     </div>
                 </div>
-                <div class="grid_1_of_4 col-xs-6 col-md-3">
-                    <h4><a href="#">Toshiba Satellite Laptop...</a></h4>
-                    <a href="preview.html">
+                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child">
+                    <h4 class="text-capitalize"><a href="#">{{item.name}}Toshiba Satellite Laptop...</a></h4>
+                    <a href="/product/:slug?/:sku?/:id">
                         <img src="img/product-img1.png">
                     </a>
                     <div class="price_details">
                         <div class="price_number">
-                            <p><span>$299.99</span></p>
+                            <p class="text-right"><span>${{item.price}}299.99</span></p>
                         </div>
                         <div class="add_cart">
-                            <h4><a href="#">More Info</a></h4>
+                            <button class="btn btn-sm btn-success btn-block text-uppercase">More Info</button>
                         </div>
                     </div>
                 </div>
-                <div class="grid_1_of_4 col-xs-6 col-md-3">
-                    <h4><a href="#">Toshiba Satellite Laptop...</a></h4>
-                    <a href="preview.html">
+                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child">
+                    <h4 class="text-capitalize"><a href="#">{{item.name}}Toshiba Satellite Laptop...</a></h4>
+                    <a href="/product/:slug?/:sku?/:id">
                         <img src="img/product-img1.png">
                     </a>
                     <div class="price_details">
                         <div class="price_number">
-                            <p><span>$299.99</span></p>
+                            <p class="text-right"><span>${{item.price}}299.99</span></p>
                         </div>
                         <div class="add_cart">
-                            <h4><a href="#">More Info</a></h4>
+                            <button class="btn btn-sm btn-success btn-block text-uppercase">More Info</button>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="section_group col-xs-12 col-md-12">
-                <div class="grid_1_of_4 col-xs-6 col-md-3">
-                    <h4><a href="#">Toshiba Satellite Laptop...</a></h4>
-                    <a href="preview.html">
+                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child">
+                    <h4 class="text-capitalize"><a href="#">{{item.name}}Toshiba Satellite Laptop...</a></h4>
+                    <a href="/product/:slug?/:sku?/:id">
                         <img src="img/product-img1.png">
                     </a>
                     <div class="price_details">
                         <div class="price_number">
-                            <p><span>$299.99</span></p>
+                            <p class="text-right"><span>${{item.price}}299.99</span></p>
                         </div>
                         <div class="add_cart">
-                            <h4><a href="#">More Info</a></h4>
+                            <button class="btn btn-sm btn-success btn-block text-uppercase">More Info</button>
                         </div>
                     </div>
                 </div>
-                <div class="grid_1_of_4 col-xs-6 col-md-3">
-                    <h4><a href="#">Toshiba Satellite Laptop...</a></h4>
-                    <a href="preview.html">
+                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child">
+                    <h4 class="text-capitalize"><a href="#">{{item.name}}Toshiba Satellite Laptop...</a></h4>
+                    <a href="/product/:slug?/:sku?/:id">
                         <img src="img/product-img1.png">
                     </a>
                     <div class="price_details">
                         <div class="price_number">
-                            <p><span>$299.99</span></p>
+                            <p class="text-right"><span>${{item.price}}299.99</span></p>
                         </div>
                         <div class="add_cart">
-                            <h4><a href="#">More Info</a></h4>
+                            <button class="btn btn-sm btn-success btn-block text-uppercase">More Info</button>
                         </div>
                     </div>
                 </div>
-                <div class="grid_1_of_4 col-xs-6 col-md-3">
-                    <h4><a href="#">Toshiba Satellite Laptop...</a></h4>
-                    <a href="preview.html">
+                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child">
+                    <h4 class="text-capitalize"><a href="#">{{item.name}}Toshiba Satellite Laptop...</a></h4>
+                    <a href="/product/:slug?/:sku?/:id">
                         <img src="img/product-img1.png">
                     </a>
                     <div class="price_details">
                         <div class="price_number">
-                            <p><span>$299.99</span></p>
+                            <p class="text-right"><span>${{item.price}}299.99</span></p>
                         </div>
                         <div class="add_cart">
-                            <h4><a href="#">More Info</a></h4>
+                            <button class="btn btn-sm btn-success btn-block text-uppercase">More Info</button>
                         </div>
                     </div>
                 </div>
-                <div class="grid_1_of_4 col-xs-6 col-md-3">
-                    <h4><a href="#">Toshiba Satellite Laptop...</a></h4>
-                    <a href="preview.html">
+                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child">
+                    <h4 class="text-capitalize"><a href="#">{{item.name}}Toshiba Satellite Laptop...</a></h4>
+                    <a href="/product/:slug?/:sku?/:id">
                         <img src="img/product-img1.png">
                     </a>
                     <div class="price_details">
                         <div class="price_number">
-                            <p><span>$299.99</span></p>
+                            <p class="text-right"><span>${{item.price}}299.99</span></p>
                         </div>
                         <div class="add_cart">
-                            <h4><a href="#">More Info</a></h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="section_group col-xs-12 col-md-12">
-                <div class="grid_1_of_4 col-xs-6 col-md-3">
-                    <h4><a href="#">Toshiba Satellite Laptop...</a></h4>
-                    <a href="preview.html">
-                        <img src="img/product-img1.png">
-                    </a>
-                    <div class="price_details">
-                        <div class="price_number">
-                            <p><span>$299.99</span></p>
-                        </div>
-                        <div class="add_cart">
-                            <h4><a href="#">More Info</a></h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid_1_of_4 col-xs-6 col-md-3">
-                    <h4><a href="#">Toshiba Satellite Laptop...</a></h4>
-                    <a href="preview.html">
-                        <img src="img/product-img1.png">
-                    </a>
-                    <div class="price_details">
-                        <div class="price_number">
-                            <p><span>$299.99</span></p>
-                        </div>
-                        <div class="add_cart">
-                            <h4><a href="#">More Info</a></h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid_1_of_4 col-xs-6 col-md-3">
-                    <h4><a href="#">Toshiba Satellite Laptop...</a></h4>
-                    <a href="preview.html">
-                        <img src="img/product-img1.png">
-                    </a>
-                    <div class="price_details">
-                        <div class="price_number">
-                            <p><span>$299.99</span></p>
-                        </div>
-                        <div class="add_cart">
-                            <h4><a href="#">More Info</a></h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid_1_of_4 col-xs-6 col-md-3">
-                    <h4><a href="#">Toshiba Satellite Laptop...</a></h4>
-                    <a href="preview.html">
-                        <img src="img/product-img1.png">
-                    </a>
-                    <div class="price_details">
-                        <div class="price_number">
-                            <p><span>$299.99</span></p>
-                        </div>
-                        <div class="add_cart">
-                            <h4><a href="#">More Info</a></h4>
+                            <button class="btn btn-sm btn-success btn-block text-uppercase">More Info</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12"> <!-- recommendations for you -->
-                <h3><i class="fa fa-caret-right"></i> Recommendations for You</h3>
+        </div>
+        <div class="main_right col-xs-12 col-sm-12 col-md-9 col-lg-9">
+            <h3 class="text-capitalize"><i class="fa fa-caret-right"></i> Recommendations for You</h3>
+                <div class="section_group parent">
+                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child"> <!-- NG-REPEAT THROUGH SIMILAR PRODUCTS RESTRICT TO 4 ITEMS. BORDER & BORDER-RADIUS -->
+                    <h4 class="text-capitalize"><a href="#">{{item.name}}Toshiba Satellite Laptop...</a></h4> <!-- LIMIT TO 28 CHARACTERS -->
+                    <a href="/product/:slug?/:sku?/:id">
+                        <img src="img/product-img1.png">
+                    </a>
+                    <div class="price_details">
+                        <div class="price_number">
+                            <p class="text-right"><span>${{item.price}}299.99</span></p>
+                        </div>
+                        <div class="add_cart">
+                            <button class="btn btn-sm btn-success btn-block text-uppercase">More Info</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child">
+                    <h4 class="text-capitalize"><a href="#">{{item.name}}Toshiba Satellite Laptop...</a></h4>
+                    <a href="/product/:slug?/:sku?/:id">
+                        <img src="img/product-img1.png">
+                    </a>
+                    <div class="price_details">
+                        <div class="price_number">
+                            <p class="text-right"><span>${{item.price}}299.99</span></p>
+                        </div>
+                        <div class="add_cart">
+                            <button class="btn btn-sm btn-success btn-block text-uppercase">More Info</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child">
+                    <h4 class="text-capitalize"><a href="#">{{item.name}}Toshiba Satellite Laptop...</a></h4>
+                    <a href="/product/:slug?/:sku?/:id">
+                        <img src="img/product-img1.png">
+                    </a>
+                    <div class="price_details">
+                        <div class="price_number">
+                            <p class="text-right"><span>${{item.price}}299.99</span></p>
+                        </div>
+                        <div class="add_cart">
+                            <button class="btn btn-sm btn-success btn-block text-uppercase">More Info</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child">
+                    <h4 class="text-capitalize"><a href="#">{{item.name}}Toshiba Satellite Laptop...</a></h4>
+                    <a href="/product/:slug?/:sku?/:id">
+                        <img src="img/product-img1.png">
+                    </a>
+                    <div class="price_details">
+                        <div class="price_number">
+                            <p class="text-right"><span>${{item.price}}299.99</span></p>
+                        </div>
+                        <div class="add_cart">
+                            <button class="btn btn-sm btn-success btn-block text-uppercase">More Info</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-xs-12"> <!-- related to items you've viewed -->
-                <h3><i class="fa fa-caret-right"></i> Related to Items You've Viewed</h3>
+        </div>
+        <div class="main_right col-xs-12 col-sm-12 col-md-9 col-lg-9 col-md-offset-3 col-lg-offset-3">
+            <h3 class="text-capitalize"><i class="fa fa-caret-right"></i> Recently viewed items</h3>
+            <div class="section_group parent">
+                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child"> <!-- NG-REPEAT THROUGH RECENTLY VIEWED RESTRICT TO 4 ITEMS. -->
+                    <h4 class="text-capitalize"><a href="#">{{item.name}}Toshiba Satellite Laptop...</a></h4> <!-- LIMIT TO 28 CHARACTERS -->
+                    <a href="/product/:slug?/:sku?/:id">
+                        <img src="img/product-img1.png">
+                    </a>
+                    <div class="price_details">
+                        <div class="price_number">
+                            <p class="text-right"><span>${{item.price}}299.99</span></p>
+                        </div>
+                        <div class="add_cart">
+                            <button class="btn btn-sm btn-success btn-block text-uppercase">More Info</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child">
+                    <h4 class="text-capitalize"><a href="#">{{item.name}}Toshiba Satellite Laptop...</a></h4>
+                    <a href="/product/:slug?/:sku?/:id">
+                        <img src="img/product-img1.png">
+                    </a>
+                    <div class="price_details">
+                        <div class="price_number">
+                            <p class="text-right"><span>${{item.price}}299.99</span></p>
+                        </div>
+                        <div class="add_cart">
+                            <button class="btn btn-sm btn-success btn-block text-uppercase">More Info</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child">
+                    <h4 class="text-capitalize"><a href="#">{{item.name}}Toshiba Satellite Laptop...</a></h4>
+                    <a href="/product/:slug?/:sku?/:id">
+                        <img src="img/product-img1.png">
+                    </a>
+                    <div class="price_details">
+                        <div class="price_number">
+                            <p class="text-right"><span>${{item.price}}299.99</span></p>
+                        </div>
+                        <div class="add_cart">
+                            <button class="btn btn-sm btn-success btn-block text-uppercase">More Info</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child">
+                    <h4 class="text-capitalize"><a href="#">{{item.name}}Toshiba Satellite Laptop...</a></h4>
+                    <a href="/product/:slug?/:sku?/:id">
+                        <img src="img/product-img1.png">
+                    </a>
+                    <div class="price_details">
+                        <div class="price_number">
+                            <p class="text-right"><span>${{item.price}}299.99</span></p>
+                        </div>
+                        <div class="add_cart">
+                            <button class="btn btn-sm btn-success btn-block text-uppercase">More Info</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div> <!-- /. right -->
-    </section> <!-- /. 2nd block -->
-</section> <!-- /. page content -->
+        </div> <!-- /.right -->
+    </section> <!-- /.2nd block -->
+</div> <!-- /CONTENT -->
 
 
