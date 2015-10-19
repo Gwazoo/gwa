@@ -29,7 +29,6 @@ angular.module('gwazoo.services')
                 method: 'GET',
                 url: '/api/cart/db'
             }).success(function(res) {
-                console.log("getDbCart Result:", res);
                 deferred.resolve(res);
             }).error(function(err) {
                 console.log(err);
@@ -39,12 +38,11 @@ angular.module('gwazoo.services')
     }
 
     this.newCart = function () {
-        console.log("Creating cart...");
-        var newCart = {
+        var cart = {
             username: "",
             products: []
         };
-        return this.setCart(newCart);
+        return this.setCart(cart);
     };
 
     this.clear = function () {
@@ -86,28 +84,6 @@ angular.module('gwazoo.services')
         return this.setCart(cart);
     };
 
-    // this.increment = function (productId) {
-    //     var cart = this.getCart();
-
-    //     var index = getProductIndex(cart.products, productId);  
-    //     cart.products[index].quantity += 1;
-    //     cart.products[index].modified = new Date();
-    //     return this.setCart(cart);
-    // };
-
-    // this.decrement = function (productId) {
-    //     var cart = this.getCart();
-
-    //     var index = getProductIndex(cart.products, productId);  
-    //     if (cart.products[index].quantity > 1) {
-    //         cart.products[index].quantity -= 1;   
-    //         cart.products[index].modified = new Date();      
-    //     } else {
-    //         cart.products.splice(index, 1);
-    //     }
-    //     return this.setCart(cart);
-    // };
-
     this.setCart = function (cart) {
         localStorageService.cookie.set("Cart", cart, 30);
         return cart;
@@ -116,14 +92,11 @@ angular.module('gwazoo.services')
     this.save = function (username) {
         var deferred = $q.defer();
         var cart = this.getCart();
-        var data = {
-            username: username,
-            products: cart.products
-        };
+        cart.username = username;
         $http({
             method: 'POST',
             url: '/api/cart/save',  // MAKE SURE THIS IS THE RIGHT ENDPOINT!
-            data: data
+            data: cart
         }).success(function(cart) {  // Merged Cart
             deferred.resolve(cart);
         }).error(function(err) {
@@ -146,7 +119,7 @@ angular.module('gwazoo.services')
     };
 
     // HELPER FUNCTIONS /////////////////////////////
-    function getProductIndex(products, value) {
+    function getProductIndex (products, value) {
         return products.map(function(product) { return product.productId; }).indexOf(value);
     }
 
@@ -158,6 +131,7 @@ angular.module('gwazoo.services')
         });
     }
     function updateDb (cart) {
+        console.log("Sending update...");
         var deferred = $q.defer();
         if (cart.username != "") {
             $http({
@@ -165,6 +139,7 @@ angular.module('gwazoo.services')
                 url: '/api/cart/update',  // MAKE SURE THIS IS THE RIGHT ENDPOINT!
                 data: cart.products
             }).success(function(res) {
+                console.log("Update completed");
                 deferred.resolve(res);
             }).error(function(err) {
                 console.log(err);
@@ -176,5 +151,27 @@ angular.module('gwazoo.services')
         return deferred.promise;
     }
 });
+
+    // this.increment = function (productId) {
+    //     var cart = this.getCart();
+
+    //     var index = getProductIndex(cart.products, productId);  
+    //     cart.products[index].quantity += 1;
+    //     cart.products[index].modified = new Date();
+    //     return this.setCart(cart);
+    // };
+
+    // this.decrement = function (productId) {
+    //     var cart = this.getCart();
+
+    //     var index = getProductIndex(cart.products, productId);  
+    //     if (cart.products[index].quantity > 1) {
+    //         cart.products[index].quantity -= 1;   
+    //         cart.products[index].modified = new Date();      
+    //     } else {
+    //         cart.products.splice(index, 1);
+    //     }
+    //     return this.setCart(cart);
+    // };
 
 
