@@ -121,9 +121,8 @@ var app = Express();
 //   console.log(body);
 // });
 
-// Bootstrap app and passport config
+// Bootstrap app config
 require('./server/util/express.js')(app, Passport);
-require('./server/util/passport.js')(Passport, LocalStrategy);
 
 // API ROUTERS ==========================================
 app.use('/api/user', UserApi);  // Router at PATH ./server/routes/userApiRouter.js
@@ -150,6 +149,9 @@ app.use('/category', Category);  // Router at PATH ./server/routes/categoryRoute
 app.all('/*', function(req, res, next) {
 	res.sendFile('index.html', { root: __dirname + "/public"});
 });
+
+// Bootstrap passport config
+require('./server/util/passport.js')(Passport, LocalStrategy);
 
 // CONNECTIONS ===========================================
 var port = process.env.PORT || 1337;
