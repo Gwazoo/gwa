@@ -8,9 +8,7 @@ var CartModel = thinky.createModel("carts", {
     products: [{
             productId: type.string(),
             quantity: type.number()
-        }],
-    created: type.date().default(r.now()), // When the cart was created
-    modified: type.date().default(r.now()) // When the cart was modified
+        }]
 }, {
     pk: 'username'
 });
@@ -75,6 +73,20 @@ var Cart = {
                         });
             }, function (err) {
                 console.log(err);
+                reject(Error(err));
+            });
+        });
+    },
+    replace: function (data) {
+        return new Promise(function (resolve, reject) {
+            CartModel.get(data.username).run().then(function (cart){
+                cart.products = data.products;
+                cart.saveAll({products: true}).then(function (cart) {
+                    resolve(cart);
+                }, function (err) {
+                    reject(Error(err));
+                });
+            }, function (err) {
                 reject(Error(err));
             });
         });
