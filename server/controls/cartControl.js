@@ -60,28 +60,13 @@ module.exports = {
         });
     },
     update: function (req, res) {
-        console.log('testing');
-        Cart.cart.get(req.params.username)
-        .then(function (cart){
-            cart.replace(req.body).then(function (cart) {
-                res.json(cart);
-            }, function (err) {
-                res.status(500).json({
-                    message: "Database error: " + err
-                });
-            });
+        cart = req.body;
+        cart.username = req.user.username;
+        Cart.cart.replace(cart).then(function (cart) {
+            res.json(cart);
         }, function (err) {
-            var newCart = {
-                username: req.params.username
-            };
-            newCart.products = req.body;
-            Cart.cart.save(newCart)
-            .then(function(cart){
-                    res.json(cart);
-            }, function (err) {
-                    res.status(500).json({
-                            message: "Database error. " + err
-                    });
+            res.status(500).json({
+                message: "Database error: " + err
             });
         });
     },
