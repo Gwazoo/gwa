@@ -9,8 +9,10 @@ var CartModel = thinky.createModel("carts", {
             productId: type.string(),
             quantity: type.number()
         }],
-    created: type.date(), // When the cart was created
-    modified: type.date() // When the cart was modified
+    created: type.date().default(r.now()), // When the cart was created
+    modified: type.date().default(r.now()) // When the cart was modified
+}, {
+    pk: 'username'
 });
 
 var CartItemModel = thinky.createModel("carts_items", {
@@ -39,8 +41,7 @@ var Cart = {
     },
     get: function (username) {
         return new Promise(function (resolve, reject) {
-            console.log(username);
-            CartModel.getAll(username, {index: "username"}).getJoin({products: {
+            CartModel.get(username).getJoin({products: {
                             _apply: function(seq) {
                                     return seq.getJoin({product: true});
                             }
@@ -59,7 +60,24 @@ var Cart = {
         });
     },
     update: function (data) {
-
+        return new Promise(function (resolve, reject) {
+            CartModel.get(data.username).run()
+                    .then(function (cart){
+                        cart.merge(data).save().then(function (result) {
+                            if (result) {
+                                resolve(result);
+                            } else {
+                                reject(Error("It broke."));
+                            }
+                        }, function (err) {
+                            console.log(err);
+                            reject(Error(err));
+                        });
+            }, function (err) {
+                console.log(err);
+                reject(Error(err));
+            });
+        });
     }
 };
 
