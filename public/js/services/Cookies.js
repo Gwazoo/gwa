@@ -6,26 +6,62 @@ angular.module('gwazoo.services')
         return localStorageService.cookie.get("Session");
     };
 
+    this.getCartCount = function () {
+        var cart = this.getCart();
+        if (cart == null) {
+            cart = this.newCart();
+        }
+
+        var quantity = cart.products.map(function (product) {
+            return product.quantity;
+        });
+
+        return quantity.reduce(function(pv, cv) { return pv + cv; }, 0);
+    }
+
     this.getCart = function () {
         return localStorageService.cookie.get("Cart");
     };
 
+    this.getDbCart = function () {
+        var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: '/api/cart/db'
+            }).success(function(res) {
+                console.log("getDbCart Result:", res);
+                deferred.resolve(res);
+            }).error(function(err) {
+                console.log(err);
+                deferred.reject(err);
+            });         
+        return deferred.promise;
+    }
+
     this.newCart = function () {
         console.log("Creating cart...");
         var newCart = {
-            member: false,
+            username: "",
             products: []
         };
         return this.setCart(newCart);
     };
 
-    this.clear = function (cart) {
-        cart.products = [];
-        updateDb(cart);
-        return this.setCart(cart);
+    this.clear = function () {
+        var cart = this.getCart();
+
+        if (cart != null) {
+            cart.products = [];
+            updateDb(cart);
+            return this.setCart(cart);
+        }
     };
 
-    this.add = function (cart, productId) {
+    this.add = function (productId) {
+        var cart = this.getCart();
+
+        if (cart == null) cart = this.newCart();
+
         if (typeof cart.products[0] === undefined) {
             pushToCart(cart, productId);
         } else {
@@ -37,43 +73,52 @@ angular.module('gwazoo.services')
                 cart.products[index].modified = new Date();
             }
         }
+        updateDb(cart);
         return this.setCart(cart);
     };
 
-    this.remove = function (cart, productId) {
+    this.remove = function (productId) {
+        var cart = this.getCart();
+
         var index = getProductIndex(cart.products, productId);
         cart.products.splice(index, 1);
+        updateDb(cart);
         return this.setCart(cart);
     };
 
-    this.increment = function (cart, productId) {
-        var index = getProductIndex(cart.products, productId);  
-        cart.products[index].quantity += 1;
-        cart.products[index].modified = new Date();
-        return this.setCart(cart);
-    };
+    // this.increment = function (productId) {
+    //     var cart = this.getCart();
 
-    this.decrement = function (cart, productId) {
-        var index = getProductIndex(cart.products, productId);  
-        if (cart.products[index].quantity > 1) {
-            cart.products[index].quantity -= 1;   
-            cart.products[index].modified = new Date();      
-        } else {
-            cart.products.splice(index, 1);
-        }
-        return this.setCart(cart);
-    };
+    //     var index = getProductIndex(cart.products, productId);  
+    //     cart.products[index].quantity += 1;
+    //     cart.products[index].modified = new Date();
+    //     return this.setCart(cart);
+    // };
+
+    // this.decrement = function (productId) {
+    //     var cart = this.getCart();
+
+    //     var index = getProductIndex(cart.products, productId);  
+    //     if (cart.products[index].quantity > 1) {
+    //         cart.products[index].quantity -= 1;   
+    //         cart.products[index].modified = new Date();      
+    //     } else {
+    //         cart.products.splice(index, 1);
+    //     }
+    //     return this.setCart(cart);
+    // };
 
     this.setCart = function (cart) {
         localStorageService.cookie.set("Cart", cart, 30);
         return cart;
     };
 
-    this.save = function (products, username) {
+    this.save = function (username) {
         var deferred = $q.defer();
+        var cart = this.getCart();
         var data = {
             username: username,
-            products: products
+            products: cart.products
         };
         $http({
             method: 'POST',
@@ -114,7 +159,7 @@ angular.module('gwazoo.services')
     }
     function updateDb (cart) {
         var deferred = $q.defer();
-        if (cart.member) {
+        if (cart.username != "") {
             $http({
                 method: 'POST',
                 url: '/api/cart/update',  // MAKE SURE THIS IS THE RIGHT ENDPOINT!

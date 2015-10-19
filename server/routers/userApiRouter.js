@@ -27,7 +27,7 @@ userRouter.delete('/delete', UserApi.isAuthed, UserApi.delete);
 
 userRouter.get('/logout', function (req, res) {
     req.logout();
-    res.redirect('/');
+    res.send();
 });
 
 

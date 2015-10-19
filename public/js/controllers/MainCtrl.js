@@ -6,20 +6,16 @@ angular.module('gwazoo.controllers')
 
     //Check session and initialize cart
     $scope.session = Cookies.getSession();
-    $scope.cart = Cookies.getCart();
-    if ($scope.cart == null) {
-        $scope.cart = Cookies.newCart();
-    }
+    $scope.cartCount = Cookies.getCartCount();
 
     $scope.logout = function() {
-        Cookies.removeCookie("Session");
+        Cookies.clearAllCookies();
         $scope.session = null;
-        $scope.cart = Cookies.clear($scope.cart);
-        $scope.cart.member = false;
-        $scope.cart.username = "";
+        $scope.cartCount = 0;
         Account.logout()
         .then(function (nullUser) {
             $scope.user = nullUser;
+            $location.path('/').replace();
         })
         .catch(function (err) {
             console.log("There was an error logging out.");
@@ -34,28 +30,28 @@ angular.module('gwazoo.controllers')
             scope : $scope
         });
 
-        modalInstance.result.then(function() {
+        modalInstance.result.then(function(cartCount) {
             $scope.session = Cookies.getSession();
+            $scope.cartCount = cartCount;
         }, function() {
         });
     };
 
     // CART HELPERS
-    $scope.cart.add = function (cart, productId) {
-        $scope.cart = Cookies.add(cart, productId);
+    $scope.add = function (productId) {
+        Cookies.add(productId);
+        $scope.cartCount = Cookies.getCartCount();
     };
-    $scope.cart.remove = function (cart, productId) {
-        $scope.cart = Cookies.remove(cart, productId);
+    $scope.remove = function (productId) {
+        Cookies.remove(productId);
+        $scope.cartCount = Cookies.getCartCount();
     };
-    $scope.cart.increment = function (cart, productId) {
-        $scope.cart = Cookies.increment(cart, productId);
+    $scope.clear = function () {
+        Cookies.clear();
     };
-    $scope.cart.decrement = function (cart, productId) {
-        $scope.cart = Cookies.decrement(cart, productId);
-    };
-    $scope.cart.clear = function (cart) {
-        $scope.cart = Cookies.clear(cart);
-    };
+    $scope.get = function () {
+        console.log(Cookies.getCart());
+    }
 
     // NAVIGATION
     Products.getCategories()
@@ -68,18 +64,35 @@ angular.module('gwazoo.controllers')
     $scope.login = function(userLogin) {
         Account.login(userLogin)
         .then(function (user) {
-            if (typeof $scope.cart.products[0] != undefined) {
-                Cookies.save($scope.cart.products, user.username)
-                .then(function (cart) {  
-                    $scope.cart = Cookies.setCart(cart);
+            var cart = Cookies.getCart();
+            if (cart == null || cart.products.length == 0) {
+
+                console.log("getDbCart()");
+
+                var cartCount = Cookies.getDbCart()
+                .then(function (cart) {
+                    console.log("MainCTRL",cart);
+                    Cookies.setCart(cart);
+                    return Cookies.getCartCount();
                 })
                 .catch(function (err) {
                     console.log(err);
                 });
-            };
+
+            } else {
+                console.log("saveDbCart()");
+                Cookies.save(user.username)
+                .then(function (cart) {
+                    console.log("MainCTRL:", cart);
+                    Cookies.setCart(cart);
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
+            }
             Cookies.createSession(user);
             $location.path('/account').replace();
-            $modalInstance.close();
+            $modalInstance.close(cartCount);
         }).catch(function (err) {
             $scope.error = 'Either your username or password did not match our records. Please try again.';
         });

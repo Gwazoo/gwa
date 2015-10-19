@@ -10,6 +10,6 @@ cartRouter.post('/save', Api.save);
 
 cartRouter.post('/update', Api.update);
 
-cartRouter.get('/:username', Api.get);
+cartRouter.get('/db', Api.get);
 
 module.exports = cartRouter;

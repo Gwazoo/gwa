@@ -33,7 +33,6 @@ var Cart = {
                         }
                     }, function (err) {
                         console.log(err);
-                        reject(Error("It broke."));
                     });
         });
     },
@@ -52,7 +51,7 @@ var Cart = {
                             reject(Error("It broke."));
                         }
                     }, function (err) {
-                        console.log(err);
+                        console.log("TEST");
                         reject(Error(err));
                     });
         });
@@ -61,7 +60,7 @@ var Cart = {
         return new Promise(function (resolve, reject) {
             CartModel.get(data.username).run()
                     .then(function (cart){
-                        cart.merge(data).save().then(function (result) {
+                        cart.merge(data).saveAll().then(function (result) {
                             if (result) {
                                 resolve(result);
                             } else {
