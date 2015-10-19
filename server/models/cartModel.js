@@ -8,13 +8,13 @@ var CartModel = thinky.createModel("carts", {
     products: [{
             productId: type.string(),
             quantity: type.number()
-        }],
-    created: type.date(), // When the cart was created
-    modified: type.date() // When the cart was modified
+        }]
+}, {
+    pk: 'username'
 });
 
 var CartItemModel = thinky.createModel("carts_items", {
-    cartId: type.string(),
+    username: type.string(),
     productId: type.string(),
     created: type.date(),
     modified: type.date()
@@ -33,14 +33,12 @@ var Cart = {
                         }
                     }, function (err) {
                         console.log(err);
-                        reject(Error("It broke."));
                     });
         });
     },
     get: function (username) {
         return new Promise(function (resolve, reject) {
-            console.log(username);
-            CartModel.getAll(username, {index: "username"}).getJoin({products: {
+            CartModel.get(username).getJoin({products: {
                             _apply: function(seq) {
                                     return seq.getJoin({product: true});
                             }
@@ -53,13 +51,49 @@ var Cart = {
                             reject(Error("It broke."));
                         }
                     }, function (err) {
-                        console.log(err);
+                        console.log("TEST");
                         reject(Error(err));
                     });
         });
     },
     update: function (data) {
-
+        return new Promise(function (resolve, reject) {
+            CartModel.get(data.username).run()
+                    .then(function (cart){
+                        cart.merge(data).saveAll().then(function (result) {
+                            if (result) {
+                                resolve(result);
+                            } else {
+                                reject(Error("It broke."));
+                            }
+                        }, function (err) {
+                            console.log(err);
+                            reject(Error(err));
+                        });
+            }, function (err) {
+                console.log(err);
+                reject(Error(err));
+            });
+        });
+    },
+    replace: function (username, data) {
+        return new Promise(function (resolve, reject) {
+            CartItemModel.filter(r.row("username").eq(username)).delete().run()
+            .then(function() {
+                CartModel.get(username).run()
+                .then(function (cart) {
+                    cart.products = data;
+                    cart.saveAll({products: true})
+                            .then(function (cart) {
+                                resolve(cart);
+                    }, function (err) {
+                        reject(Error(err));
+                    });
+                }, function (err) {
+                    reject(Error(err));
+                });
+            });
+        });
     }
 };
 
