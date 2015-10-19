@@ -39,22 +39,23 @@ module.exports = {
     save: function (req, res) {
         Cart.cart.get(req.body.username)
         .then(function (cart){
-            cart = mergeCarts(req.body.products, cart);
-            Cart.cart.update(cart).then(function (cart) {
+            mergedCart = mergeCarts(req.body.products, cart);
+            Cart.cart.update(mergedCart).then(function (cart) {
                 res.json(cart);
             }, function (err) {
                 res.status(500).json({
                     message: "Database error: " + err
                 });
             });
-        }, function (err) {
+        }, function () {
             Cart.cart.save(req.body)
             .then(function(cart){
-                    res.json(cart);
+                console.log("Created Cart");
+                res.json(cart);     
             }, function (err) {
-                    res.status(500).json({
-                            message: "Database error. " + err
-                    });
+                res.status(500).json({
+                        message: "Database error. " + err
+                });
             });
         });
     },
@@ -85,7 +86,7 @@ module.exports = {
         });
     },
     get: function (req, res) {
-        Cart.cart.get(req.params.username)
+        Cart.cart.get(req.user.username)
         .then(function(result){
             res.json(result);
         }, function (err) {
@@ -104,7 +105,7 @@ module.exports = {
 function mergeCarts (localProducts, dbCart) {
     localProducts.forEach(function (localProduct) {
         var index = dbCart.products.map(function(dbProduct) {
-            return dbProduct.id;
+            return dbProduct.productId;
         }).indexOf(localProduct.productId);
         if (index === -1) {
             dbCart.products.push(localProduct);
@@ -112,5 +113,6 @@ function mergeCarts (localProducts, dbCart) {
             dbCart.products[index].quantity += localProduct.quantity;
         }
     });
+    console.log("DbCart", dbCart);
     return dbCart;
 }

@@ -8,6 +8,9 @@ angular.module('gwazoo.services')
 
     this.getCartCount = function () {
         var cart = this.getCart();
+        if (cart == null) {
+            cart = this.newCart();
+        }
 
         var quantity = cart.products.map(function (product) {
             return product.quantity;
@@ -20,10 +23,25 @@ angular.module('gwazoo.services')
         return localStorageService.cookie.get("Cart");
     };
 
+    this.getDbCart = function () {
+        var deferred = $q.defer();
+            $http({
+                method: 'GET',
+                url: '/api/cart/db'
+            }).success(function(res) {
+                console.log("getDbCart Result:", res);
+                deferred.resolve(res);
+            }).error(function(err) {
+                console.log(err);
+                deferred.reject(err);
+            });         
+        return deferred.promise;
+    }
+
     this.newCart = function () {
         console.log("Creating cart...");
         var newCart = {
-            member: false,
+            username: "",
             products: []
         };
         return this.setCart(newCart);
@@ -55,7 +73,7 @@ angular.module('gwazoo.services')
                 cart.products[index].modified = new Date();
             }
         }
-        // updateDb(cart);
+        updateDb(cart);
         return this.setCart(cart);
     };
 
@@ -64,6 +82,7 @@ angular.module('gwazoo.services')
 
         var index = getProductIndex(cart.products, productId);
         cart.products.splice(index, 1);
+        updateDb(cart);
         return this.setCart(cart);
     };
 
@@ -94,11 +113,12 @@ angular.module('gwazoo.services')
         return cart;
     };
 
-    this.save = function (products, username) {
+    this.save = function (username) {
         var deferred = $q.defer();
+        var cart = this.getCart();
         var data = {
             username: username,
-            products: products
+            products: cart.products
         };
         $http({
             method: 'POST',
@@ -139,7 +159,7 @@ angular.module('gwazoo.services')
     }
     function updateDb (cart) {
         var deferred = $q.defer();
-        if (cart.member) {
+        if (cart.username != "") {
             $http({
                 method: 'POST',
                 url: '/api/cart/update',  // MAKE SURE THIS IS THE RIGHT ENDPOINT!

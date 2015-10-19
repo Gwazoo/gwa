@@ -15,6 +15,7 @@ angular.module('gwazoo.controllers')
         Account.logout()
         .then(function (nullUser) {
             $scope.user = nullUser;
+            $location.path('/').replace();
         })
         .catch(function (err) {
             console.log("There was an error logging out.");
@@ -29,8 +30,9 @@ angular.module('gwazoo.controllers')
             scope : $scope
         });
 
-        modalInstance.result.then(function() {
+        modalInstance.result.then(function(cartCount) {
             $scope.session = Cookies.getSession();
+            $scope.cartCount = cartCount;
         }, function() {
         });
     };
@@ -62,19 +64,35 @@ angular.module('gwazoo.controllers')
     $scope.login = function(userLogin) {
         Account.login(userLogin)
         .then(function (user) {
-            if (typeof $scope.cart.products[0] != undefined) {
-                Cookies.save($scope.cart.products, user.username)
+            var cart = Cookies.getCart();
+            if (cart == null || cart.products.length == 0) {
+
+                console.log("getDbCart()");
+
+                var cartCount = Cookies.getDbCart()
                 .then(function (cart) {
+                    console.log("MainCTRL",cart);
                     Cookies.setCart(cart);
-                    Cookies.getCartCount();
+                    return Cookies.getCartCount();
                 })
                 .catch(function (err) {
                     console.log(err);
                 });
-            };
+
+            } else {
+                console.log("saveDbCart()");
+                Cookies.save(user.username)
+                .then(function (cart) {
+                    console.log("MainCTRL:", cart);
+                    Cookies.setCart(cart);
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
+            }
             Cookies.createSession(user);
             $location.path('/account').replace();
-            $modalInstance.close();
+            $modalInstance.close(cartCount);
         }).catch(function (err) {
             $scope.error = 'Either your username or password did not match our records. Please try again.';
         });
