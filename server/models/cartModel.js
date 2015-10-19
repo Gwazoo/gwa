@@ -14,7 +14,7 @@ var CartModel = thinky.createModel("carts", {
 });
 
 var CartItemModel = thinky.createModel("carts_items", {
-    cartId: type.string(),
+    username: type.string(),
     productId: type.string(),
     created: type.date(),
     modified: type.date()
@@ -79,9 +79,14 @@ var Cart = {
     },
     replace: function (data) {
         return new Promise(function (resolve, reject) {
-            CartModel.get(data.username).run().then(function (cart){
+            CartModel.get(data.username).getJoin({products: true}).run()
+            .then(function (cart){
                 cart.products = data.products;
-                cart.saveAll({products: true}).then(function (cart) {
+                cart.saveAll({products: true})
+                .then(function (cart) {
+                    CartItemModel.filter(r.row("username").eq(true), {default: true}).delete().run().then(function(items){
+                        console.log(items);
+                    });
                     resolve(cart);
                 }, function (err) {
                     reject(Error(err));
