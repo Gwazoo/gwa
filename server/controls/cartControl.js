@@ -60,9 +60,9 @@ module.exports = {
         });
     },
     update: function (req, res) {
-        cart = req.body;
-        cart.username = req.user.username;
-        Cart.cart.replace(cart).then(function (cart) {
+        products = req.body;
+        username = req.user.username;
+        Cart.cart.replace(username, products).then(function (cart) {
             res.json(cart);
         }, function (err) {
             res.status(500).json({

@@ -76,26 +76,28 @@ var Cart = {
             });
         });
     },
-    replace: function (data) {
+    replace: function (username, data) {
         return new Promise(function (resolve, reject) {
-            CartModel.get(data.username).getJoin({products: true}).run()
-            .then(function (cart){
-                cart.products = data.products;
-                cart.saveAll({products: true})
-                .then(function (cart) {
-                    CartItemModel.filter(r.row("username").eq(true), {default: true}).delete().run().then(function(items){
-                        console.log(items);
-                    });
+            deleteCart(username);
+            var cart = new CartModel({username: username, products: data});
+            cart.saveAll({products: true})
+            .then(function (cart) {
+                if (cart) {
                     resolve(cart);
-                }, function (err) {
-                    reject(Error(err));
-                });
+                } else {
+                    reject(Error("It broke."));
+                }
             }, function (err) {
-                reject(Error(err));
+                console.log(err);
             });
         });
     }
 };
+
+function deleteCart(username) {
+    CartModel.get(username).delete().run();
+    CartItemModel.filter(r.row("username").eq(username)).delete().run();
+}
 
 module.exports.cartModel = CartModel;
 module.exports.cart = Cart;
