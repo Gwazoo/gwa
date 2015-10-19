@@ -65,11 +65,12 @@ angular.module('gwazoo.controllers')
         Account.login(userLogin)
         .then(function (user) {
             var cart = Cookies.getCart();
+            var cartCount;
             if (cart == null || cart.products.length == 0) {
 
                 console.log("getDbCart()");
 
-                var cartCount = Cookies.getDbCart()
+                cartCount = Cookies.getDbCart()
                 .then(function (cart) {
                     console.log("MainCTRL",cart);
                     Cookies.setCart(cart);
@@ -81,10 +82,11 @@ angular.module('gwazoo.controllers')
 
             } else {
                 console.log("saveDbCart()");
-                Cookies.save(user.username)
+                cartCount = Cookies.save(user.username)
                 .then(function (cart) {
                     console.log("MainCTRL:", cart);
                     Cookies.setCart(cart);
+                    return Cookies.getCartCount();
                 })
                 .catch(function (err) {
                     console.log(err);
