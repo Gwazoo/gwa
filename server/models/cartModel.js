@@ -78,26 +78,24 @@ var Cart = {
     },
     replace: function (username, data) {
         return new Promise(function (resolve, reject) {
-            deleteCart(username);
-            var cart = new CartModel({username: username, products: data});
-            cart.saveAll({products: true})
-            .then(function (cart) {
-                if (cart) {
-                    resolve(cart);
-                } else {
-                    reject(Error("It broke."));
-                }
-            }, function (err) {
-                console.log(err);
+            CartItemModel.filter(r.row("username").eq(username)).delete().run()
+            .then(function() {
+                CartModel.get(username).run()
+                .then(function (cart) {
+                    cart.products = data;
+                    cart.saveAll({products: true})
+                            .then(function (cart) {
+                                resolve(cart);
+                    }, function (err) {
+                        reject(Error(err));
+                    });
+                }, function (err) {
+                    reject(Error(err));
+                });
             });
         });
     }
 };
-
-function deleteCart(username) {
-    CartModel.get(username).delete().run();
-    CartItemModel.filter(r.row("username").eq(username)).delete().run();
-}
 
 module.exports.cartModel = CartModel;
 module.exports.cart = Cart;
