@@ -3,7 +3,7 @@ var thinky = require('./../util/thinky');
 var r = thinky.r;
 var type = thinky.type;
 
-var CartItemModel = thinky.createModel("carts_items", {
+var CartItemModel = thinky.createModel("cart_items", {
     username: type.string(),
     productId: type.string(),
     created: type.date(),
