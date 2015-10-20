@@ -101,6 +101,5 @@ function mergeCarts (localProducts, dbCart) {
             dbCart[index].quantity += localProduct.quantity;
         }
     });
-    console.log("DbCart", dbCart);
     return dbCart;
 }

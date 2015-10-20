@@ -63,7 +63,7 @@ angular.module('gwazoo.services')
 			method: 'GET',
 			url: '/api/user/logout'
 		}).success(function(res) {
-			deferred.resolve(user);
+			deferred.resolve();
 		});
 		return deferred.promise;
 	};
