@@ -58,7 +58,6 @@ module.exports = {
 	create : function (req, res) {
 		userModel.create(req.body)
 		.then(function (user) {
-			delete user.password;
 			res.send(user);
 		}, function (err) {
 			res.status(500).json({

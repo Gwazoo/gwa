@@ -8,9 +8,10 @@ angular.module('gwazoo.controllers')
 
 		Account.register(userData)
 		.then(function (user) {
-			//TODO: Set cart cookie, get cartCount and add to scope
-			// Cookie.setCart(cart);
-			// $scope.$parent.cartCount = Cookie.getCartCount();
+			cart = user.cart;
+			delete user.cart;
+			Cookies.setCart(cart);
+			$scope.$parent.cartCount = Cookies.getCartCount();
 		    $scope.$parent.session = user;
 		    Cookies.createSession(user);
 			$location.path("/account").replace();

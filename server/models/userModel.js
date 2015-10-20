@@ -34,22 +34,20 @@ var UserModel = {
             bcrypt.hash(userObj.password, salt, null, function (err, hash) {
                 userObj.password = hash;
                 var newUser = new User(userObj);
-                newUser.save()
-                        .then(function (user) {
-                            if (user) {
-                                resolve(user);
+
                 newUser.saveAll({cart: true})
-                        .then(function (user) {
-                            console.log(user);
-                            if (user) {
-                                resolve(user);
-                            } else {
-                                reject(Error("It broke."));
-                            }
-                        }, function (err) {
-                            console.log(err);
-                            reject(Error("It broke."));
-                        });
+                .then(function (user) {
+                    // console.log("UserModel Result:", user);
+                    if (user) {
+                        delete user.password;
+                        resolve(user);
+                    } else {
+                        reject(Error("It broke."));
+                    }
+                }, function (err) {
+                    console.log(err);
+                    reject(Error("It broke."));
+                });
             });
         });
     },

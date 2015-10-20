@@ -27,12 +27,12 @@ angular.module('gwazoo.services')
 	*	"message"  => string - status message
 	*	"user"     => obj or null - response from db
 	*/
-	this.register = function (formData) {
+	this.register = function (userData) {
 		var deferred = $q.defer();
 		$http({
 			method: 'POST',
 			url: '/api/user/create', 
-			data: formData
+			data: userData
 		}).success(function(user) {
 			deferred.resolve(user);
 		}).error(function (err) {
