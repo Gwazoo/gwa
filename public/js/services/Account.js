@@ -33,13 +33,8 @@ angular.module('gwazoo.services')
 			method: 'POST',
 			url: '/api/user/create', 
 			data: formData
-		}).success(function(resObj) {
-			if (resObj.added) {
-				user = resObj.user;
-				deferred.resolve(resObj.message);
-			} else {
-				deferred.resolve(resObj.message);
-			}
+		}).success(function(user) {
+			deferred.resolve(user);
 		}).error(function (err) {
 			console.log("Err", err);
 			deferred.reject(err);

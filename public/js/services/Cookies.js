@@ -131,9 +131,9 @@ angular.module('gwazoo.services')
         });
     }
     function updateDb (cart) {
-        console.log("Sending update...");
         var deferred = $q.defer();
         if (cart.username != "") {
+            console.log("Sending update...");
             $http({
                 method: 'POST',
                 url: '/api/cart/update',  // MAKE SURE THIS IS THE RIGHT ENDPOINT!

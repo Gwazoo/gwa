@@ -52,8 +52,9 @@ module.exports = {
 	*/
 	create : function (req, res) {
 		userModel.create(req.body)
-		.then(function (result) {
-			res.send(result);
+		.then(function (user) {
+			delete user.password;
+			res.send(user);
 		}, function (err) {
 			res.status(500).json({
 				message: "Database error. User not created."

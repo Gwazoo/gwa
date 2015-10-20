@@ -31,13 +31,11 @@ var UserModel = {
             var salt = bcrypt.genSaltSync(12);
             bcrypt.hash(userObj.password, salt, null, function (err, hash) {
                 userObj.password = hash;
-                console.log(userObj);
                 var newUser = new User(userObj);
                 newUser.save()
-                        .then(function (success) {
-                            console.log(success);
-                            if (success) {
-                                resolve(success);
+                        .then(function (user) {
+                            if (user) {
+                                resolve(user);
                             } else {
                                 reject(Error("It broke."));
                             }
