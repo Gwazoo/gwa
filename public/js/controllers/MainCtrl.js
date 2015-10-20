@@ -66,11 +66,14 @@ angular.module('gwazoo.controllers')
         .then(function (user) {
             var cart = Cookies.getCart();
             var cartCount;
-            if (cart == null || cart.products.length == 0) {
+            if (cart == null || cart.length == 0) {
                 cartCount = Cookies.getDbCart()
                 .then(function (cart) {
-                    console.log("MainCTRL",cart);
-                    Cookies.setCart(cart);
+                    var newCart = {};
+                    newCart.products = cart;
+                    newCart.username = user.username;
+                    console.log("MainCTRL", newCart);
+                    Cookies.setCart(newCart);
                     return Cookies.getCartCount();
                 })
                 .catch(function (err) {
@@ -80,8 +83,11 @@ angular.module('gwazoo.controllers')
             } else {
                 cartCount = Cookies.save(user.username)
                 .then(function (cart) {
-                    console.log("MainCTRL:", cart);
-                    Cookies.setCart(cart);
+                    var newCart = {};
+                    newCart.products = cart;
+                    newCart.username = user.username;
+                    console.log("MainCTRL:", newCart);
+                    Cookies.setCart(newCart);
                     return Cookies.getCartCount();
                 })
                 .catch(function (err) {

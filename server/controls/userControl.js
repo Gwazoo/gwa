@@ -2,7 +2,12 @@ var thinky 		= require('./../util/thinky');
 //var thinky 		= require('thinky')(util.config);
 var r 			= require('rethinkdb');
 var bcrypt 		= require('bcrypt-nodejs');
-var userModel 	= require('./../models/userModel.js');
+var userModel 	= require('./../models/userModel.js').userModel;
+var user = require('./../models/userModel.js').user;
+var cartItem = require('./../models/cartModel.js').cartItemModel;
+
+// Relationships
+user.hasMany(cartItem, "cart", "username", "username");
 
 module.exports = {
     /*

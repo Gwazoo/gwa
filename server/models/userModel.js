@@ -23,6 +23,8 @@ var User = thinky.createModel("users", {
     createdDate: type.date(), // When the account was created
     modifiedDate: type.date(), // When the account was modified
     lastActivityDate: type.date() // Last time they logged in
+}, {
+    pk: 'username'
 });
 
 var UserModel = {
@@ -33,7 +35,7 @@ var UserModel = {
                 userObj.password = hash;
                 console.log(userObj);
                 var newUser = new User(userObj);
-                newUser.save()
+                newUser.saveAll({cart: true})
                         .then(function (success) {
                             console.log(success);
                             if (success) {
@@ -47,7 +49,24 @@ var UserModel = {
                         });
             });
         });
+    },
+    updateCart: function (username, products) {
+        return new Promise(function (resolve, reject) {
+            User.get(username).getJoin({cart: true}).run()
+            .then(function (user){
+                user.cart = products;
+                user.saveAll({cart: true})
+                .then(function (result) {
+                    resolve(result);
+                }, function (err) {
+                    reject(Error(err));
+                });
+            }, function (err) {
+                reject(Error(err));
+            });
+        });
     }
 };
 
-module.exports = UserModel;
+module.exports.userModel = UserModel;
+module.exports.user = User;
