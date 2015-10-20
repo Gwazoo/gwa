@@ -23,6 +23,8 @@ var User = thinky.createModel("users", {
     createdDate: type.date(), // When the account was created
     modifiedDate: type.date(), // When the account was modified
     lastActivityDate: type.date() // Last time they logged in
+}, {
+    pk: 'username'
 });
 
 var UserModel = {
@@ -31,23 +33,41 @@ var UserModel = {
             var salt = bcrypt.genSaltSync(12);
             bcrypt.hash(userObj.password, salt, null, function (err, hash) {
                 userObj.password = hash;
-                console.log(userObj);
                 var newUser = new User(userObj);
-                newUser.save()
-                        .then(function (success) {
-                            console.log(success);
-                            if (success) {
-                                resolve(success);
-                            } else {
-                                reject(Error("It broke."));
-                            }
-                        }, function (err) {
-                            console.log(err);
-                            reject(Error("It broke."));
-                        });
+
+                newUser.saveAll({cart: true})
+                .then(function (user) {
+                    // console.log("UserModel Result:", user);
+                    if (user) {
+                        delete user.password;
+                        resolve(user);
+                    } else {
+                        reject(Error("It broke."));
+                    }
+                }, function (err) {
+                    console.log(err);
+                    reject(Error("It broke."));
+                });
+            });
+        });
+    },
+    updateCart: function (username, products) {
+        return new Promise(function (resolve, reject) {
+            User.get(username).getJoin({cart: true}).run()
+            .then(function (user){
+                user.cart = products;
+                user.saveAll({cart: true})
+                .then(function (result) {
+                    resolve(result);
+                }, function (err) {
+                    reject(Error(err));
+                });
+            }, function (err) {
+                reject(Error(err));
             });
         });
     }
 };
 
-module.exports = UserModel;
+module.exports.userModel = UserModel;
+module.exports.user = User;

@@ -27,19 +27,14 @@ angular.module('gwazoo.services')
 	*	"message"  => string - status message
 	*	"user"     => obj or null - response from db
 	*/
-	this.register = function (formData) {
+	this.register = function (userData) {
 		var deferred = $q.defer();
 		$http({
 			method: 'POST',
 			url: '/api/user/create', 
-			data: formData
-		}).success(function(resObj) {
-			if (resObj.added) {
-				user = resObj.user;
-				deferred.resolve(resObj.message);
-			} else {
-				deferred.resolve(resObj.message);
-			}
+			data: userData
+		}).success(function(user) {
+			deferred.resolve(user);
 		}).error(function (err) {
 			console.log("Err", err);
 			deferred.reject(err);
@@ -68,7 +63,7 @@ angular.module('gwazoo.services')
 			method: 'GET',
 			url: '/api/user/logout'
 		}).success(function(res) {
-			deferred.resolve(user);
+			deferred.resolve();
 		});
 		return deferred.promise;
 	};

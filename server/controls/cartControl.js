@@ -1,13 +1,15 @@
 var thinky = require('../util/thinky');
 var r = require('rethinkdb');
 var bcrypt = require('bcrypt-nodejs');
-var Cart = require('./../models/cartModel.js');
-var Product = require('./../models/productModel.js');
+var CartItem = require('./../models/cartModel.js').cartItem;
+var CartItemModel = require('./../models/cartModel.js').cartItemModel;
+var UserModel = require('./../models/userModel.js').user;
+var User = require('./../models/userModel.js').userModel;
+var ProductModel = require('./../models/productModel.js').productModel;
 
 // Model relationships
-Cart.cartModel.hasMany(Cart.cartItemModel, 'products', 'username', 'username');
-Cart.cartItemModel.belongsTo(Cart.cartModel, 'cart', 'username', 'username');
-Cart.cartItemModel.belongsTo(Product.productModel, 'product', 'productId', 'id');
+CartItemModel.belongsTo(UserModel, "user", "username", "username");
+CartItemModel.belongsTo(ProductModel, "product", "productId", "id");
 
 module.exports = {
     cart: function (req, res) {
@@ -37,10 +39,10 @@ module.exports = {
         checkSession(req, res, sessionData);
     },
     save: function (req, res) {
-        Cart.cart.get(req.body.username)
+        CartItem.get(req.body.username)
         .then(function (cart){
-            mergedCart = mergeCarts(req.body.products, cart);
-            Cart.cart.update(mergedCart).then(function (cart) {
+            mergedCart = mergeCarts(req.body, cart);
+            CartItem.update(req.body.username, mergedCart).then(function (cart) {
                 res.json(cart);
             }, function (err) {
                 res.status(500).json({
@@ -48,7 +50,7 @@ module.exports = {
                 });
             });
         }, function () {
-            Cart.cart.save(req.body)
+            CartItem.save(req.body)
             .then(function(cart){
                 console.log("Created Cart");
                 res.json(cart);     
@@ -60,18 +62,18 @@ module.exports = {
         });
     },
     update: function (req, res) {
-        products = req.body;
-        username = req.user.username;
-        Cart.cart.replace(username, products).then(function (cart) {
-            res.json(cart);
-        }, function (err) {
-            res.status(500).json({
-                message: "Database error: " + err
+        CartItem.cleanup(req.user.username).then(function () {
+            User.updateCart(req.user.username, req.body).then(function (cart) {
+                res.json(cart);
+            }, function (err) {
+                res.status(500).json({
+                    message: "Database error: " + err
+                });
             });
         });
     },
     get: function (req, res) {
-        Cart.cart.get(req.user.username)
+        CartItem.get(req.user.username)
         .then(function(result){
             res.json(result);
         }, function (err) {
@@ -88,16 +90,16 @@ module.exports = {
 //HELPER FUNCTIONS
 
 function mergeCarts (localProducts, dbCart) {
-    localProducts.forEach(function (localProduct) {
-        var index = dbCart.products.map(function(dbProduct) {
+    localProducts.products.forEach(function (localProduct) {
+        var index = dbCart.map(function(dbProduct) {
             return dbProduct.productId;
         }).indexOf(localProduct.productId);
         if (index === -1) {
-            dbCart.products.push(localProduct);
+            localProduct.username = localProducts.username;
+            dbCart.push(localProduct);
         } else {
-            dbCart.products[index].quantity += localProduct.quantity;
+            dbCart[index].quantity += localProduct.quantity;
         }
     });
-    console.log("DbCart", dbCart);
     return dbCart;
 }
