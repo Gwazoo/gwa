@@ -13,8 +13,8 @@ angular.module('gwazoo.controllers')
         $scope.session = null;
         $scope.cartCount = 0;
         Account.logout()
-        .then(function (nullUser) {
-            $scope.user = nullUser;
+        .then(function () {
+            $scope.user = null;
             $location.path('/').replace();
         })
         .catch(function (err) {

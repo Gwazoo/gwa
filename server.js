@@ -7,11 +7,10 @@ var UserApi        = require('./server/routers/userApiRouter');
 var CartApi        = require('./server/routers/cartApiRouter');
 var CategoryApi    = require('./server/routers/categoryApiRouter');
 var ProductApi     = require('./server/routers/productApiRouter');
+var CheckoutApi     = require('./server/routers/checkoutApiRouter');
 
 var Account        = require('./server/routers/accountRouter');
 var Category       = require('./server/routers/categoryRouter');
-
-var Request        = require('request');
 
 var app = Express();
 
@@ -125,25 +124,15 @@ var app = Express();
 require('./server/util/express.js')(app, Passport);
 
 // API ROUTERS ==========================================
-app.use('/api/user', UserApi);  // Router at PATH ./server/routes/userApiRouter.js
-app.use('/api/cart', CartApi);  // Router at PATH ./server/routes/cartApiRouter.js
-app.use('/api/category', CategoryApi); // Router at PATH ./server/routes/categoryApiRouter.js
-app.use('/api/product', ProductApi);  // Router at PATH ./server/routes/productApiRouter.js
+app.use('/api/user', UserApi);  
+app.use('/api/cart', CartApi);  
+app.use('/api/category', CategoryApi); 
+app.use('/api/product', ProductApi);  
+app.use('/api/checkout', CheckoutApi);
 
 // ROUTERS ==============================================
-app.use('/account', Account);  // Router at PATH ./server/routes/accountRouter.js
-app.use('/category', Category);  // Router at PATH ./server/routes/categoryRouter.js
-
-// app.post('/api/register', User.create);
-// app.put('/api/profile/:id', isAuthed, userControl.profile);
-// app.delete('/api/profile/:id', isAuthed, userControl.profile);
-
-// app.get('/api/category/:slug'/*, categoryControl*/);
-// app.get('/api/product/:sku'/*, productControl*/);
-
-// VENDOR ACCESS
-// app.post('/api/category/:slug', Api.isAuthed, Api.categoryControl);
-// app.post('/api/product', Api.product);
+app.use('/account', Account);  
+app.use('/category', Category);  
 
 // CATCH-ALL REDIRECT ====================================
 app.all('/*', function(req, res, next) {
