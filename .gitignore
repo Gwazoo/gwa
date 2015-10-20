@@ -3,6 +3,7 @@ node_modules
 public/libs/fusty-flow.js
 public/images/*
 server/util/authorize.js
+server/util/mailer.js
 /nbproject/private/
 /nbproject/project.xml
 /nbproject/project.properties

@@ -1,6 +1,8 @@
 var Express = require('express');
 var Passport = require('passport');
 var UserApi = require('../controls/userControl');
+var Mailer = require('../util/mailer');
+var template = require('../util/templates/confirmation');
 
 var userRouter = Express.Router();
 
@@ -29,6 +31,19 @@ userRouter.get('/logout', function (req, res) {
     req.logout();
     res.send();
 });
+
+userRouter.post('/test', function (req, res) {
+	var html = template(req.body.firstName);
+
+	Mailer.sendMail({
+	    from: 'no-reply@gwazoo.com',
+	    to: 'brosky117@gmail.com',
+	    subject: 'Order Confirmation | Gwazoo',
+	    html: html
+	});
+
+	res.send();
+})
 
 
 module.exports = userRouter;

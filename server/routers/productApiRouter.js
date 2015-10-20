@@ -8,7 +8,7 @@ var mkdirp                = require('mkdirp');
 var Path                  = require('path');
 var multipart             = require('connect-multiparty');
 var multipartMiddleware   = multipart();
-var flow                  = require('./../util/flow-node.js')('temp');
+var flow                  = require('./../util/flow.js')('temp');
 
 var productRouter = Express.Router();
 
