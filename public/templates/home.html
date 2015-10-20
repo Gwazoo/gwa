@@ -57,61 +57,15 @@
             <h3 class="text-center text-capitalize">Latest Products</h3>
         </div>
         <div class="container">
-            <div class="row parent"> <!-- SHOULD USE FLEXBOX TO VERTICALLY CENTER THESE https://css-tricks.com/snippets/css/a-guide-to-flexbox/ -->
-                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 pager child">
-                    <a href="#" ng-click="shiftRight()"><span class="text-right previous fa fa-chevron-left" aria-hidden="true"></span></a>
-                </div>
-                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 child"> <!-- OVERFLOW: HIDDEN -->
-                    <ul class="list-unstyled row" style="overflow: hidden;">
-                        <li class="col-xs-6 col-sm-6 col-md-2 col-lg-2" ng-repeat="d in data | limitTo:displayed"> <!-- NG-REPEAT THROUGH TOP PRODUCTS RESTRICT TO 18 ITEMS. -->
-                            <a href="{{d}}" class="thumbnail">
-                                <img src="img/slider-img.png" style="max-width: 100%;"> <!-- MAX-WIDTH: 100%; (THE HOVER-STATE SHOULD SHOW INFORMATION ABOUT PRODUCT) -->
-                            </a>
-                        </li> <!-- NG-REPEAT -->
-                        <!-- <li class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
-                            <a href="{{}}" class="thumbnail">
-                                <img src="img/slider-img.png" style="max-width: 100%;">
+            <div class="row"> <!-- SHOULD USE FLEXBOX TO VERTICALLY CENTER THESE https://css-tricks.com/snippets/css/a-guide-to-flexbox/ -->
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <ul class="list-unstyled parent" style="white-space:nowrap;">
+                        <li class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child-center" style="display:inline-block; float:none; max-height:160px;" ng-repeat="product in products | limitTo: 4"> <!-- NG-REPEAT THROUGH TOP PRODUCTS RESTRICT TO 18 ITEMS. -->
+                            <a class="thumbnail" href="">
+                                <img src="{{product.image}}" style="max-width: 100%;"> <!-- (THE HOVER-STATE SHOULD SHOW INFORMATION ABOUT PRODUCT) -->
                             </a>
                         </li>
-                        <li class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
-                            <a href="{{}}" class="thumbnail">
-                                <img src="img/slider-img.png" style="max-width: 100%;">
-                            </a>
-                        </li>
-                        <li class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
-                            <a href="{{}}" class="thumbnail">
-                                <img src="img/slider-img.png" style="max-width: 100%;">
-                            </a>
-                        </li>
-                        <li class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
-                            <a href="{{}}" class="thumbnail">
-                                <img src="img/slider-img.png" style="max-width: 100%;">
-                            </a>
-                        </li>
-                        <li class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
-                            <a href="{{}}" class="thumbnail">
-                                <img src="img/slider-img.png" style="max-width: 100%;">
-                            </a>
-                        </li>
-                        <li class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
-                            <a href="{{}}" class="thumbnail">
-                                <img src="img/slider-img.png" style="max-width: 100%;">
-                            </a>
-                        </li>
-                        <li class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
-                            <a href="{{}}" class="thumbnail">
-                                <img src="img/slider-img.png" style="max-width: 100%;">
-                            </a>
-                        </li>
-                        <li class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
-                            <a href="{{}}" class="thumbnail">
-                                <img src="img/slider-img.png" style="max-width: 100%;">
-                            </a>
-                        </li> -->
                     </ul>
-                </div>
-                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 pager child">
-                    <a href="#" ng-click="shiftLeft()"><span class="text-left next fa fa-chevron-right" aria-hidden="true"></span></a>
                 </div>
             </div>
         </div>

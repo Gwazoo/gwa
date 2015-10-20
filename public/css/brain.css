@@ -106,3 +106,56 @@ textarea {
 	cursor: inherit;
 	display: block;
 }
+
+
+
+
+
+
+
+
+
+
+/* LEFT */
+.fade.ng-click { 
+    -webkit-transition: 1000ms cubic-bezier(0.420, 0.000, 0.580, 1.000) all;
+    -moz-transition: 1000ms cubic-bezier(0.420, 0.000, 0.580, 1.000) all;
+    -ms-transition: 1000ms cubic-bezier(0.420, 0.000, 0.580, 1.000) all;
+    -o-transition: 1000ms cubic-bezier(0.420, 0.000, 0.580, 1.000) all;
+    transition: 1000ms cubic-bezier(0.420, 0.000, 0.580, 1.000) all;
+}
+.animate-enter {
+    left: -100%;
+}
+.animate-enter.animate-enter-active {
+    left: 0;
+}
+.animate-leave {
+    left: 0;
+}
+.animate-leave.animate-leave-active{
+    left: 100%;
+}
+
+/* RIGHT */
+.animate-enter, .animate-leave { 
+    -webkit-transition: 1000ms cubic-bezier(0.420, 0.000, 0.580, 1.000) all;
+    -moz-transition: 1000ms cubic-bezier(0.420, 0.000, 0.580, 1.000) all;
+    -ms-transition: 1000ms cubic-bezier(0.420, 0.000, 0.580, 1.000) all;
+    -o-transition: 1000ms cubic-bezier(0.420, 0.000, 0.580, 1.000) all;
+    transition: 1000ms cubic-bezier(0.420, 0.000, 0.580, 1.000) all;
+}
+.animate-enter {
+    left: 100%;
+}
+.animate-enter.animate-enter-active {
+    left: 0;
+}
+.animate-leave {
+    left: 0;
+}
+.animate-leave.animate-leave-active {
+    left: -100%;
+}
+
+

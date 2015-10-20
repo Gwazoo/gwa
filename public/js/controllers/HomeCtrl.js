@@ -2,22 +2,58 @@
 angular.module('gwazoo.controllers')
 
 .controller('HomeCtrl', ['$scope', '$rootScope', 'Account', function($scope, $rootScope, Account) {
-    // FAKE DATA
-    var count = 18;
-    var data = [];
-    while(count) {
-        data[count] = count--;
-    };
+    $scope.totalProducts = 6;
+    $scope.next = function(item) {
 
-    $scope.displayed = 6;
-    $scope.shiftleft = function() {
-      $scope.displayed += 6;  
-    };
-    $scope.shiftRight = function () {
-      $scope.displayed -= 6;  
-    };
+    }
+    $scope.products = [
+        {
+            image: 'img/product-img1.png',
+            name: 'awesome lap-top',
+            price: '1999.50',
+            rate: '4.8'
+        },
+        {
+            image: 'img/product-img2.png',
+            name: 'awesome lap-top',
+            price: '1999.50',
+            rate: '4.8'
+        },
+        {
+            image: 'img/product-img3.png',
+            name: 'awesome lap-top',
+            price: '1999.50',
+            rate: '4.8'
+        },
+        {
+            image: 'img/product-img4.png',
+            name: 'awesome lap-top',
+            price: '1999.50',
+            rate: '4.8'
+        }
+    ];
+}])
 
-    $scope.data = data;
+.animation('.fade', [function() {
+    return {
+        enter: function(element, done) {
+            element.css('display', 'none');
+            $(element).fadeIn(1000, function() {
+                done();
+            });
+        },
+        leave: function(element, done) {
+            $(element).fadeOut(1000, function() {
+                done();
+            });
+        },
+        move: function(element, done) {
+            element.css('display', 'none');
+            $(element).slideDown(500, function() {
+                done();
+            });
+        }
+    }
 }]);
 
 

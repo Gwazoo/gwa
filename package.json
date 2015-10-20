@@ -9,6 +9,7 @@
   "author": "Gwazoo Team",
   "license": "",
   "dependencies": {
+    "angular-animate": "^1.4.7",
     "angular-mocks": "^1.4.7",
     "bcrypt-nodejs": "^0.0.3",
     "body-parser": "^1.14.0",
