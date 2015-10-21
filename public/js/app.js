@@ -1,5 +1,5 @@
 'use strict';
-angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngRoute', 'ngAnimate', 'LocalStorageModule', 'flow', 'ui.bootstrap'])
+angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngRoute', 'ngAnimate', 'ng-breadcrumbs', 'LocalStorageModule', 'flow', 'ui.bootstrap'])
 
 .config(function($routeProvider, $locationProvider) {
 	$routeProvider
@@ -38,6 +38,10 @@ angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngRoute', 'n
 		.when('/order-confirmation', {
 			templateUrl: './templates/cart/orderConfirmation.html',
 			controller: 'CartCtrl'
+		})
+		.when('/test', {
+			templateUrl: './templates/productDetails.html',
+			controller: 'ProductCtrl'
 		})
 		.otherwise({
 			redirectTo: '/'
