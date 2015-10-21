@@ -111,115 +111,17 @@
         <div class="main_right col-xs-12 col-sm-12 col-md-9 col-lg-9">
             <h3 class="text-capitalize"><i class="fa fa-caret-right"></i> Trending Items</h3>
             <div class="section_group parent">
-                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child"> <!-- NG-REPEAT THROUGH TOP PRODUCTS RESTRICT TO 8 ITEMS. BORDER & BORDER-RADIUS -->
-                    <h4 class="text-capitalize"><a href="#">{{item.name}}Toshiba Satellite Laptop...</a></h4> <!-- LIMIT TO 28 CHARACTERS -->
+                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child" ng-repeat="product in products | limitTo: 8"> <!-- NG-REPEAT THROUGH TOP PRODUCTS RESTRICT TO 8 ITEMS. BORDER & BORDER-RADIUS -->
+                    <h4 class="text-capitalize"><a href="#">{{product.name}}</a></h4> <!-- LIMIT TO 28 CHARACTERS -->
                     <a href="/product/:slug?/:sku?/:id">
-                        <img src="img/product-img1.png">
+                        <img src="{{product.image}}">
                     </a>
                     <div class="price_details">
                         <div class="price_number">
-                            <p class="text-right"><span>${{item.price}}299.99</span></p>
+                            <p class="text-right"><span>${{product.price}}</span></p>
                         </div>
                         <div class="add_cart">
-                            <button class="btn btn-sm btn-success btn-block text-uppercase">More Info</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child">
-                    <h4 class="text-capitalize"><a href="#">{{item.name}}Toshiba Satellite Laptop...</a></h4>
-                    <a href="/product/:slug?/:sku?/:id">
-                        <img src="img/product-img1.png">
-                    </a>
-                    <div class="price_details">
-                        <div class="price_number">
-                            <p class="text-right"><span>${{item.price}}299.99</span></p>
-                        </div>
-                        <div class="add_cart">
-                            <button class="btn btn-sm btn-success btn-block text-uppercase">More Info</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child">
-                    <h4 class="text-capitalize"><a href="#">{{item.name}}Toshiba Satellite Laptop...</a></h4>
-                    <a href="/product/:slug?/:sku?/:id">
-                        <img src="img/product-img1.png">
-                    </a>
-                    <div class="price_details">
-                        <div class="price_number">
-                            <p class="text-right"><span>${{item.price}}299.99</span></p>
-                        </div>
-                        <div class="add_cart">
-                            <button class="btn btn-sm btn-success btn-block text-uppercase">More Info</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child">
-                    <h4 class="text-capitalize"><a href="#">{{item.name}}Toshiba Satellite Laptop...</a></h4>
-                    <a href="/product/:slug?/:sku?/:id">
-                        <img src="img/product-img1.png">
-                    </a>
-                    <div class="price_details">
-                        <div class="price_number">
-                            <p class="text-right"><span>${{item.price}}299.99</span></p>
-                        </div>
-                        <div class="add_cart">
-                            <button class="btn btn-sm btn-success btn-block text-uppercase">More Info</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child">
-                    <h4 class="text-capitalize"><a href="#">{{item.name}}Toshiba Satellite Laptop...</a></h4>
-                    <a href="/product/:slug?/:sku?/:id">
-                        <img src="img/product-img1.png">
-                    </a>
-                    <div class="price_details">
-                        <div class="price_number">
-                            <p class="text-right"><span>${{item.price}}299.99</span></p>
-                        </div>
-                        <div class="add_cart">
-                            <button class="btn btn-sm btn-success btn-block text-uppercase">More Info</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child">
-                    <h4 class="text-capitalize"><a href="#">{{item.name}}Toshiba Satellite Laptop...</a></h4>
-                    <a href="/product/:slug?/:sku?/:id">
-                        <img src="img/product-img1.png">
-                    </a>
-                    <div class="price_details">
-                        <div class="price_number">
-                            <p class="text-right"><span>${{item.price}}299.99</span></p>
-                        </div>
-                        <div class="add_cart">
-                            <button class="btn btn-sm btn-success btn-block text-uppercase">More Info</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child">
-                    <h4 class="text-capitalize"><a href="#">{{item.name}}Toshiba Satellite Laptop...</a></h4>
-                    <a href="/product/:slug?/:sku?/:id">
-                        <img src="img/product-img1.png">
-                    </a>
-                    <div class="price_details">
-                        <div class="price_number">
-                            <p class="text-right"><span>${{item.price}}299.99</span></p>
-                        </div>
-                        <div class="add_cart">
-                            <button class="btn btn-sm btn-success btn-block text-uppercase">More Info</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child">
-                    <h4 class="text-capitalize"><a href="#">{{item.name}}Toshiba Satellite Laptop...</a></h4>
-                    <a href="/product/:slug?/:sku?/:id">
-                        <img src="img/product-img1.png">
-                    </a>
-                    <div class="price_details">
-                        <div class="price_number">
-                            <p class="text-right"><span>${{item.price}}299.99</span></p>
-                        </div>
-                        <div class="add_cart">
-                            <button class="btn btn-sm btn-success btn-block text-uppercase">More Info</button>
+                            <a href="" class="btn btn-sm btn-success btn-block text-uppercase">More Info</a>
                         </div>
                     </div>
                 </div>
@@ -228,59 +130,17 @@
         <div class="main_right col-xs-12 col-sm-12 col-md-9 col-lg-9">
             <h3 class="text-capitalize"><i class="fa fa-caret-right"></i> Recommendations for You</h3>
                 <div class="section_group parent">
-                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child"> <!-- NG-REPEAT THROUGH SIMILAR PRODUCTS RESTRICT TO 4 ITEMS. BORDER & BORDER-RADIUS -->
-                    <h4 class="text-capitalize"><a href="#">{{item.name}}Toshiba Satellite Laptop...</a></h4> <!-- LIMIT TO 28 CHARACTERS -->
+                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child" ng-repeat="product in products | limitTo: 4"> <!-- NG-REPEAT THROUGH SIMILAR PRODUCTS RESTRICT TO 4 ITEMS. BORDER & BORDER-RADIUS -->
+                    <h4 class="text-capitalize"><a href="#">{{product.name}}</a></h4> <!-- LIMIT TO 28 CHARACTERS -->
                     <a href="/product/:slug?/:sku?/:id">
-                        <img src="img/product-img1.png">
+                        <img src="{{product.image}}">
                     </a>
                     <div class="price_details">
                         <div class="price_number">
-                            <p class="text-right"><span>${{item.price}}299.99</span></p>
+                            <p class="text-right"><span>${{product.price}}</span></p>
                         </div>
                         <div class="add_cart">
-                            <button class="btn btn-sm btn-success btn-block text-uppercase">More Info</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child">
-                    <h4 class="text-capitalize"><a href="#">{{item.name}}Toshiba Satellite Laptop...</a></h4>
-                    <a href="/product/:slug?/:sku?/:id">
-                        <img src="img/product-img1.png">
-                    </a>
-                    <div class="price_details">
-                        <div class="price_number">
-                            <p class="text-right"><span>${{item.price}}299.99</span></p>
-                        </div>
-                        <div class="add_cart">
-                            <button class="btn btn-sm btn-success btn-block text-uppercase">More Info</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child">
-                    <h4 class="text-capitalize"><a href="#">{{item.name}}Toshiba Satellite Laptop...</a></h4>
-                    <a href="/product/:slug?/:sku?/:id">
-                        <img src="img/product-img1.png">
-                    </a>
-                    <div class="price_details">
-                        <div class="price_number">
-                            <p class="text-right"><span>${{item.price}}299.99</span></p>
-                        </div>
-                        <div class="add_cart">
-                            <button class="btn btn-sm btn-success btn-block text-uppercase">More Info</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child">
-                    <h4 class="text-capitalize"><a href="#">{{item.name}}Toshiba Satellite Laptop...</a></h4>
-                    <a href="/product/:slug?/:sku?/:id">
-                        <img src="img/product-img1.png">
-                    </a>
-                    <div class="price_details">
-                        <div class="price_number">
-                            <p class="text-right"><span>${{item.price}}299.99</span></p>
-                        </div>
-                        <div class="add_cart">
-                            <button class="btn btn-sm btn-success btn-block text-uppercase">More Info</button>
+                            <a href="" class="btn btn-sm btn-success btn-block text-uppercase">More Info</a>
                         </div>
                     </div>
                 </div>
@@ -289,59 +149,17 @@
         <div class="main_right col-xs-12 col-sm-12 col-md-9 col-lg-9 col-md-offset-3 col-lg-offset-3">
             <h3 class="text-capitalize"><i class="fa fa-caret-right"></i> Recently viewed items</h3>
             <div class="section_group parent">
-                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child"> <!-- NG-REPEAT THROUGH RECENTLY VIEWED RESTRICT TO 4 ITEMS. -->
-                    <h4 class="text-capitalize"><a href="#">{{item.name}}Toshiba Satellite Laptop...</a></h4> <!-- LIMIT TO 28 CHARACTERS -->
+                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child" ng-repeat="product in products | limitTo: 4"> <!-- NG-REPEAT THROUGH RECENTLY VIEWED RESTRICT TO 4 ITEMS. -->
+                    <h4 class="text-capitalize"><a href="#">{{product.name}}</a></h4> <!-- LIMIT TO 28 CHARACTERS -->
                     <a href="/product/:slug?/:sku?/:id">
-                        <img src="img/product-img1.png">
+                        <img src="{{product.image}}">
                     </a>
                     <div class="price_details">
                         <div class="price_number">
-                            <p class="text-right"><span>${{item.price}}299.99</span></p>
+                            <p class="text-right"><span>${{product.price}}</span></p>
                         </div>
                         <div class="add_cart">
-                            <button class="btn btn-sm btn-success btn-block text-uppercase">More Info</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child">
-                    <h4 class="text-capitalize"><a href="#">{{item.name}}Toshiba Satellite Laptop...</a></h4>
-                    <a href="/product/:slug?/:sku?/:id">
-                        <img src="img/product-img1.png">
-                    </a>
-                    <div class="price_details">
-                        <div class="price_number">
-                            <p class="text-right"><span>${{item.price}}299.99</span></p>
-                        </div>
-                        <div class="add_cart">
-                            <button class="btn btn-sm btn-success btn-block text-uppercase">More Info</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child">
-                    <h4 class="text-capitalize"><a href="#">{{item.name}}Toshiba Satellite Laptop...</a></h4>
-                    <a href="/product/:slug?/:sku?/:id">
-                        <img src="img/product-img1.png">
-                    </a>
-                    <div class="price_details">
-                        <div class="price_number">
-                            <p class="text-right"><span>${{item.price}}299.99</span></p>
-                        </div>
-                        <div class="add_cart">
-                            <button class="btn btn-sm btn-success btn-block text-uppercase">More Info</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child">
-                    <h4 class="text-capitalize"><a href="#">{{item.name}}Toshiba Satellite Laptop...</a></h4>
-                    <a href="/product/:slug?/:sku?/:id">
-                        <img src="img/product-img1.png">
-                    </a>
-                    <div class="price_details">
-                        <div class="price_number">
-                            <p class="text-right"><span>${{item.price}}299.99</span></p>
-                        </div>
-                        <div class="add_cart">
-                            <button class="btn btn-sm btn-success btn-block text-uppercase">More Info</button>
+                            <a href="" class="btn btn-sm btn-success btn-block text-uppercase">More Info</a>
                         </div>
                     </div>
                 </div>

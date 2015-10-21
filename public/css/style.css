@@ -236,54 +236,25 @@
 
 
 /* footer */
-footer{
+footer {
 	padding:3% 0;
 	border-top: 1px solid #dfdfdf;
 }
-	/* left */
-	.footer_left{
-
-	}
-	/* right */
-	.footer_right{
-		float:right;
-		text-align: right;
-	}
-    .footer_right ul li {
-        list-style-type: none;
-        display: inline-block;
-        padding: 0 10px;
-        border-right: 1px solid gray;
-    }
-    .footer_right ul li:last-child {
-        border-right: none;
-    }
-	.footer_right ul {
-		padding:0px;
-	}
-	.footer_right ul li a {
-		text-decoration: none;
-		color:black;
-	}
-	.footer_right ul li a:hover {
-		color: #37b34a;
-	}
-    /* center */
-    /*.footer_center ul li {
-        list-style-type: none;
-        display: inline-block;
-        padding: 10px;
-    }
-    .footer_center ul {
-        padding: 0px;
-    }
-    .footer_center ul li a {
-        text-decoration: none;
-        color: ;
-    }
-    .footer_center ul li a:hover {
-        color: #37b34a;
-    }*/
+/* right */
+footer ul li {
+    border-right: 1px solid gray;
+}
+footer ul li:last-child {
+    border-right: none;
+}
+footer ul li a, footer p a {
+	text-decoration: none;
+	color:black;
+}
+footer ul li a:hover, footer p a:hover {
+	text-decoration: none;
+	color: #37b34a;
+}
 
 /* end of footer */
 

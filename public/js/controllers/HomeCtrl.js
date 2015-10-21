@@ -30,6 +30,30 @@ angular.module('gwazoo.controllers')
             name: 'awesome lap-top',
             price: '1999.50',
             rate: '4.8'
+        },
+        {
+            image: 'img/product-img1.png',
+            name: 'awesome lap-top',
+            price: '1999.50',
+            rate: '4.8'
+        },
+        {
+            image: 'img/product-img2.png',
+            name: 'awesome lap-top',
+            price: '1999.50',
+            rate: '4.8'
+        },
+        {
+            image: 'img/product-img3.png',
+            name: 'awesome lap-top',
+            price: '1999.50',
+            rate: '4.8'
+        },
+        {
+            image: 'img/product-img4.png',
+            name: 'awesome lap-top',
+            price: '1999.50',
+            rate: '4.8'
         }
     ];
 }])
