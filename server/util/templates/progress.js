@@ -52,7 +52,7 @@ module.exports = function () {
 	    }
 
 	    a {
-	      color: ${linkText} !important;
+	      color: ${linkText};
 	      text-decoration: none !important;
 	    }
 
@@ -409,7 +409,7 @@ module.exports = function () {
 
 	                               <!-- STEP TWO -->
 	                              <td class='step active'>
-	                                <img src='http://www.gwazoo.com/public/images/OrangeProgress2.png' alt='step two' /><br />
+	                                <img src='http://s3.amazonaws.com/swu-filepicker/YL3H3V5bRyGuy6pess9T_v33_04.jpg' alt='step two' /><br />
 	                                Update Info
 	                              </td>
 
