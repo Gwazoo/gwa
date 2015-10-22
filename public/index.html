@@ -17,7 +17,8 @@
     <link rel="stylesheet" href="/css/etalage.css">
     <link rel="stylesheet" href="/css/cart.css">
     <link rel="stylesheet" href="/css/orderConfirmation.css">
-    <link rel="stylesheet" href="/css/cartCheckout.css">
+    <!-- <link rel="stylesheet" href="/css/cartCheckout.css"> -->
+    <link rel="stylesheet" href="/libs/bootstrap-magnify/css/bootstrap-magnify.min.css">
 
 
 
@@ -36,6 +37,7 @@
 
     <script src="/libs/flow/dist/flow.min.js"></script>
     <script src="/libs/ng-breadcrumbs/dist/ng-breadcrumbs.min.js"></script>
+    <script type="/libs/bootstrap-magnify/js/bootstrap-magnify.min.js"></script>
     <script src="/js/vendor/jquery.etalage.min.js"></script>
 
 <!-- APP -->
@@ -78,7 +80,7 @@
                     </ul>
                     <ul>
                         <li ng-show="session" class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{session.firstName}}'s Account <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle text-capitalize" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{session.firstName}}'s Account <span class="caret"></span></a>
                             <ul class="dropdown-menu"> 
                                 <li><a href="/account">Account Settings</a></li>
                                 <li role="separator" class="divider"></li>
