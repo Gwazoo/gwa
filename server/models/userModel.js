@@ -8,7 +8,7 @@ var bcrypt = require('bcrypt-nodejs');
 var User = thinky.createModel("users", {
     username: type.string().regex('[A-Za-z0-9](?:[A-Za-z0-9\-]{0,61}[A-Za-z0-9])').min(5).max(25).required(), // Username needs to begin and end with an alphanumeric character, but can contain dashes
     email: type.string().email().required(),
-    password: type.string().min(8).required(), // Salted hashed password
+    password: type.string().required(), // Salted hashed password
     firstName: type.string(),
     lastName: type.string(),
     addresses: [{// Array of address objects
@@ -18,14 +18,44 @@ var User = thinky.createModel("users", {
             state: type.string(),
             country: type.string()
         }],
-    type: type.string(), // This is probably going to be an ID to a user types table
-    isActive: type.boolean(), // So we can disable users
-    createdDate: type.date(), // When the account was created
-    modifiedDate: type.date(), // When the account was modified
-    lastActivityDate: type.date() // Last time they logged in
+    typeId: type.string(), // This is probably going to be an ID to a user types table
+    isActive: type.boolean().default(true), // So we can disable users
+    created: type.date().default(r.now()), // When the account was created
+    modified: type.date().default(r.now()), // When the account was modified
+    lastActivity: type.date().default(r.now()) // Last time they logged in
 }, {
     pk: 'username'
 });
+
+var PasswordReset = thinky.createModel("resetQueue", {
+    username: type.string(),
+    tokenHash: type.string(),
+    expiration: type.date(),
+    isUsed: type.boolean().default(false)
+});
+
+var PasswordResetModel = {
+    create: function (username, token) {
+        return new Promise(function (resolve, reject) {
+            var salt = bcrypt.genSaltSync(10);
+            bcrypt.hash(token, salt, null, function (err, hash) {
+                var expirationDate = new Date();
+                expirationDate.setDate(expirationDate.getDate() + 2);
+                var newReset = new PasswordReset({
+                    username: username,
+                    tokenHash: hash,
+                    expiration: expirationDate
+                });
+                
+                newReset.save().then(function () {
+                    resolve();
+                }, function (err) {
+                    reject(err);
+                });
+            });
+        });
+    }
+};
 
 var UserModel = {
     create: function (userObj) {

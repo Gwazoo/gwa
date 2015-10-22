@@ -31,6 +31,10 @@ angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngRoute', 'n
 			templateUrl: './templates/cart/cart.html',
 			controller: 'CartCtrl'
 		})
+		.when('/test', {
+			templateUrl: './templates/cart/orderConfirmation.html',
+			controller: 'CartCtrl'
+		})
 		.when('/cart-checkout', {
 			templateUrl: './templates/cart/cartCheckout.html',
 			controller: 'CartCtrl'
