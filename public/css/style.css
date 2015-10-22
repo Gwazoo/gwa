@@ -298,7 +298,9 @@ footer ul li a:hover, footer p a:hover {
 }
 
 @media only screen and (max-width:992px) {
-
+	.row > div > a > img{
+		max-width:40%;
+	}
 
 	.main_banner{
 		padding:0% 0 2%;
