@@ -12,9 +12,10 @@ var User = thinky.createModel("users", {
     firstName: type.string(),
     lastName: type.string(),
     addresses: [{// Array of address objects
+            name: type.string(),
             address1: type.string(),
             address2: type.string(),
-            postalCode: type.string(),
+            postalCode: type.number(),
             state: type.string(),
             country: type.string()
         }],
