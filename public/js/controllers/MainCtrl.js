@@ -1,7 +1,7 @@
 'use strict';
 angular.module('gwazoo.controllers')
 
-.controller('MainCtrl', ['$scope', '$location', '$modal', '$templateCache', 'Account', 'Cookies', 'Products', function($scope, $location, $modal, $templateCache, Account, Cookies, Products) {
+.controller('MainCtrl', ['$scope', '$location', '$uibModal', '$templateCache', 'Account', 'Cookies', 'Products', function($scope, $location, $uibModal, $templateCache, Account, Cookies, Products) {
     $scope.date = new Date();
 
     //Check session and initialize cart
@@ -24,7 +24,7 @@ angular.module('gwazoo.controllers')
 
     // MODAL HELPERS
     $scope.loginModal = function() {
-        var modalInstance = $modal.open({
+        var modalInstance = $uibModal.open({
             templateUrl : 'templates/loginModal.html',
             controller : 'MainCtrl.Modal',
             scope : $scope
