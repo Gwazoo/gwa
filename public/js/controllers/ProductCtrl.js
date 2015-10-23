@@ -2,14 +2,14 @@
 angular.module('gwazoo.controllers')
 
 .controller('ProductCtrl', ['$scope', '$rootScope', 'breadcrumbs', 'Products', 'Cookies', function($scope, $rootScope, breadcrumbs, Products, Cookies) {
-    // $scope.rate = 7;
-    // $scope.max = 5;
-    // $scope.isReadonly = false;
+    $scope.rate = 4.2;
+    $scope.max = 5;
+    $scope.isReadonly = false;
 
-    // $scope.hoveringOver = function(value) {
-    //     $scope.overStar = value;
-    //     $scope.percent = 100 * (value / $scope.max);
-    // };
+    $scope.hoveringOver = function(value) {
+        $scope.overStar = value;
+        $scope.percent = 100 * (value / $scope.max);
+    };
     
     $scope.add = function (productId) {
         Cookies.add(productId);
