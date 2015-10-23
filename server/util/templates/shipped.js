@@ -311,7 +311,7 @@ module.exports = function () {
 	        <table cellspacing='0' cellpadding='0' width='600' class='w320'>
 	          <tr>
 	            <td class='header-lg'>
-	              Thank you for your order ${firstName}!
+	              Thank you for your order!
 	            </td>
 	          </tr>
 	          <tr>

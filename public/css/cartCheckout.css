@@ -1,0 +1,40 @@
+.checkout_fixed{
+	background-color:#f3f3f3;
+	border:1px solid #DDD;
+	border-radius:5px;
+}
+.checkout_fixed .checkout_conditions{
+	border-bottom: 1px solid #ddd;
+}
+.child-base{
+	display:flex;
+	align-items:baseline;
+}
+.checkout_review{
+	background-color:#effaf1;
+	border:1px solid #c2ecc8;
+	border-radius:5px;
+}
+.checkout_head{
+	text-align: center;
+	background-color:#f3f3f3;
+	border-bottom: 1px solid #DDD;
+}
+.checkout_content section{
+	border-bottom: 1px solid #ddd;
+}
+.checkout_content section:last-child{
+	border:none;
+}
+.checkout_summary{
+	border-bottom:1px solid #ddd;
+}
+.checkout_shipping{
+	border-bottom:1px solid #ddd;
+}
+.checkout_breakdown p{
+	margin:0px;
+}
+.checkout_summary p{
+	margin:0px;
+}

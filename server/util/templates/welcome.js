@@ -402,7 +402,9 @@ module.exports = function () {
 	      <center>
 	        <table cellspacing='0' cellpadding='0' width='600' class='w320'>
 	          <tr>
-	            <strong><a href='#'>Update</a></strong> your email preferences.
+	          	<td style='padding: 25px 0 25px'>
+	          	  <strong><a href='#'>Update</a></strong> your email preferences.
+	          	</td>
 	          </tr>
 	        </table>
 	      </center>
