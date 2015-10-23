@@ -12,6 +12,10 @@ angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngRoute', 'n
 			controller: 'SignupCtrl'
 		})
 		.when('/account', {
+			templateUrl: './templates/settings.html',
+			controller: 'SettingsCtrl'
+		})
+		.when('/account/product', {
 			templateUrl: './templates/dashboard.html',
 			controller: 'DashboardCtrl'
 		})
@@ -71,12 +75,5 @@ angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngRoute', 'n
 			source: 'flow_query'
 		}
 	};
-	// flowFactoryProvider.on('catchAll', function (event) {
-	// 	console.log('catchAll', arguments);
-	// });
-	// flowFactoryProvider.on('fileAdded', function (file){
-	// 	var fileExt = file.getExtension();
-	// 	console.log(file)
-	// });
 }])
 

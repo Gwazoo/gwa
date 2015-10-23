@@ -1,8 +1,12 @@
 var productModel = require('./../models/productModel.js').productModel;
 var product = require('./../models/productModel.js').product;
 var categoryModel = require('./../models/categoryModel.js').categoryModel;
+var optionSetModel = require('./../models/optionModel.js').optionSetModel;
 
 productModel.hasAndBelongsToMany(categoryModel, 'categories', 'id', 'id');
+productModel.hasMany(productModel, "items", "id", "parentId");
+productModel.belongsTo(productModel, "product", "parentId", "id");
+productModel.belongsTo(optionSetModel, "optionSets", "optionSetId", "id");
 
 module.exports = {
 	/*
@@ -33,9 +37,9 @@ module.exports = {
 		});
 	},
 	get : function (req, res) {
-		product.get(req.params.id)
+		product.getProduct(req.params.id)
 		.then(function (result) {
-			res.json(result);
+                    res.json(result);
 		}, function (err) {
 			res.status(500).json({
 				message: "Database error." + err

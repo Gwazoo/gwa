@@ -1,13 +1,19 @@
-var inline = require('juice');
+var inlineCSS = require('juice');
 
-module.exports = function (firstName) {
+module.exports = function () {
+
+	
+	var buttonColor = "#37B34A";
+	var linkText = "#FD8730";
+
+
 	var html = `
 	<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 	<html xmlns='http://www.w3.org/1999/xhtml'>
 	<head>
 	  <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
 	  <meta name='viewport' content='width=device-width, initial-scale=1' />
-	  <title>Gwazoo Invoice</title>
+	  <title>Gwazoo Order</title>
 
 	  <style type='text/css'>
 	    /* Take care of image borders and formatting, client hacks */
@@ -46,7 +52,7 @@ module.exports = function (firstName) {
 	    }
 
 	    a {
-	      color: #676767;
+	      color: ${linkText};
 	      text-decoration: none !important;
 	    }
 
@@ -283,10 +289,9 @@ module.exports = function (firstName) {
 	                      <a href=''><img width='180' height='51' src='http://gwazoo.com/Gwazoo/img/logo.png' alt='logo'></a>
 	                    </td>
 	                    <td class='pull-right mobile-header-padding-right' style='color: #4d4d4d;'>
-	                      <a href=''><img width='44' height='47' src='http://s3.amazonaws.com/swu-filepicker/k8D8A7SLRuetZspHxsJk_social_08.gif' alt='twitter' /></a>
-	                      <a href=''><img width='38' height='47' src='http://s3.amazonaws.com/swu-filepicker/LMPMj7JSRoCWypAvzaN3_social_09.gif' alt='facebook' /></a>
-	                      <a href=''><img width='40' height='47' src='http://s3.amazonaws.com/swu-filepicker/hR33ye5FQXuDDarXCGIW_social_10.gif' alt='rss' /></a>
-	                    </td>
+	                      <a href='https://www.twitter.com/'><img width='44' height='47' src='http://s3.amazonaws.com/swu-filepicker/k8D8A7SLRuetZspHxsJk_social_08.gif' alt='twitter' /></a>
+	                      <a href='https://www.facebook.com/softicastle'><img width='38' height='47' src='http://s3.amazonaws.com/swu-filepicker/LMPMj7JSRoCWypAvzaN3_social_09.gif' alt='facebook' /></a>
+	                      </td>
 	                  </tr>
 	                </table>
 	              </center>
@@ -306,7 +311,7 @@ module.exports = function (firstName) {
 	        <table cellspacing='0' cellpadding='0' width='600' class='w320'>
 	          <tr>
 	            <td class='header-lg'>
-	              Thank you for your order ${firstName}!
+	              Thank you for your order!
 	            </td>
 	          </tr>
 	          <tr>
@@ -317,12 +322,12 @@ module.exports = function (firstName) {
 	          <tr>
 	            <td class='button'>
 	              <div><!--[if mso]>
-	                <v:roundrect xmlns:v='urn:schemas-microsoft-com:vml' xmlns:w='urn:schemas-microsoft-com:office:word' href='http://' style='height:45px;v-text-anchor:middle;width:155px;' arcsize='15%' strokecolor='#ffffff' fillcolor='#37B34A'>
+	                <v:roundrect xmlns:v='urn:schemas-microsoft-com:vml' xmlns:w='urn:schemas-microsoft-com:office:word' href='http://' style='height:45px;v-text-anchor:middle;width:155px;' arcsize='15%' strokecolor='#ffffff' fillcolor='${buttonColor}'>
 	                  <w:anchorlock/>
 	                  <center style='color:#ffffff;font-family:Helvetica, Arial, sans-serif;font-size:14px;font-weight:regular;'>My Account</center>
 	                </v:roundrect>
 	              <![endif]--><a href='http://'
-	              style='background-color:#37B34A;border-radius:5px;color:#ffffff;display:inline-block;font-family: Helvetica, Arial, sans-serif;font-size:14px;font-weight:regular;line-height:45px;text-align:center;text-decoration:none;width:155px;-webkit-text-size-adjust:none;mso-hide:all;'>My Account</a></div>
+	              style='background-color:${buttonColor};border-radius:5px;color:#ffffff;display:inline-block;font-family: Helvetica, Arial, sans-serif;font-size:14px;font-weight:regular;line-height:45px;text-align:center;text-decoration:none;width:155px;-webkit-text-size-adjust:none;mso-hide:all;'>My Account</a></div>
 	            </td>
 	          </tr>
 	          <tr>
@@ -476,7 +481,7 @@ module.exports = function (firstName) {
 	        <table cellspacing='0' cellpadding='0' width='600' class='w320'>
 	          <tr>
 	            <td style='padding: 25px 0 25px'>
-	              <strong><a href='#'>Unsubscribe</a></strong> from future notifications.
+	              <strong><a href='#'>Update</a></strong> your email preferences.
 	            </td>
 	          </tr>
 	        </table>
@@ -488,7 +493,7 @@ module.exports = function (firstName) {
 	</body>
 	</html>
 	`;
-	
-	html = inline(html);
+
+	html = inlineCSS(html);
 	return html;
 }

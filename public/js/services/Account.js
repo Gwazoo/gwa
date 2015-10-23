@@ -19,14 +19,6 @@ angular.module('gwazoo.services')
 		return deferred.promise;
 	};
 
-	/*
-	* @param {Obj} formData
-	*	Object containing all the info from form
-	* @returns {Obj} res
-	*   "added"    => boolean - whether user was successfully added
-	*	"message"  => string - status message
-	*	"user"     => obj or null - response from db
-	*/
 	this.register = function (userData) {
 		var deferred = $q.defer();
 		$http({

@@ -45,6 +45,9 @@
 <!-- CONTROLLERS -->
     <script src="/js/controllers.js"></script>
     <script src="/js/controllers/MainCtrl.js"></script>
+    <script src="/js/controllers/DashboardCtrl.js"></script>
+    <script src="/js/controllers/SettingsCtrl.js"></script>
+    <script src="/js/controllers/SignupCtrl.js"></script>
     <script src="/js/controllers/HomeCtrl.js"></script>
     <script src="/js/controllers/CategoryCtrl.js"></script>
     <script src="/js/controllers/ProductCtrl.js"></script>
@@ -74,15 +77,15 @@
                 </div>
                 <div class="head_right col-xs-12 col-md-3" align="right">
                     <ul>
-                        <li><a href="#">{{cartCount}}</a></li>
+                        <li><a href="#">Cart: {{cartCount}}</a></li>
                         <li ng-show="!session"><a href="#" ng-click="loginModal()">Login</a></li>
-                        <li ng-show="!session"><a href="/register">register</a></li>
+                        <li ng-show="!session"><a href="/register">Register</a></li>
                     </ul>
                     <ul>
                         <li ng-show="session" class="dropdown">
                             <a href="#" class="dropdown-toggle text-capitalize" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{session.firstName}}'s Account <span class="caret"></span></a>
                             <ul class="dropdown-menu"> 
-                                <li><a href="/account">Account Settings</a></li>
+                                <li><a href="/account">Settings</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="/account/past-orders/:id">Orders</a></li>
                                 <li role="separator" class="divider"></li>

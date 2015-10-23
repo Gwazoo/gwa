@@ -4,24 +4,20 @@ var type = thinky.type;
 
 // OptionSet model
 var OptionSetModel = thinky.createModel("optionSets", {
-    name: type.string().required(), // Name of the optionSet. IE: 'T-shirts' or 'Dresses'
-    options: [{
-            name: type.string().required(), // Name of the option. IE: 'Size' or 'Color'
-            variations: type.array(), // Variations. IE 'Red, Blue, Green'
-            type: type.string(),
-            required: type.boolean()
-    }],
-    username: type.string(),
-    created: type.date().default(r.now()), // When the optionSet was created
-    modified: type.date().default(r.now()) // When the optionSet was modified
+    name: type.string(), // Name of the optionSet. IE: 'T-shirts' or 'Dresses'
+    username: type.string(), // Vendor's username to tie the optionset to them
+    created: type.date(), // When the optionSet was created
+    modified: type.date() // When the optionSet was modified
 });
 
 var OptionModel = thinky.createModel("options", {
-    name: type.string().required(),
-    variations: type.array(),
-    type: type.string(),
+    name: type.string(), // Name of the option. IE: 'Size' or 'Color'
+    variations: type.array(), // Variations. IE 'Red, Blue, Green'
+    type: type.string(), // For Gwazoo defined templates and helpers. IE 'color', 'select', 'customtext'
     username: type.string()
 });
+
+OptionSetModel.hasAndBelongsToMany(OptionModel, "options", "id", "id");
 
 var Option = {
     create: function (username, option) {
@@ -37,49 +33,25 @@ var Option = {
     }
 };
 
-var UserModel = {
-    create: function (userObj) {
+var OptionSet = {
+    create: function (username, optionSet) {
         return new Promise(function (resolve, reject) {
-            var salt = bcrypt.genSaltSync(12);
-            bcrypt.hash(userObj.password, salt, null, function (err, hash) {
-                userObj.password = hash;
-                var newUser = new User(userObj);
-
-                newUser.saveAll({cart: true})
-                .then(function (user) {
-                    // console.log("UserModel Result:", user);
-                    if (user) {
-                        delete user.password;
-                        resolve(user);
-                    } else {
-                        reject(Error("It broke."));
-                    }
-                }, function (err) {
-                    console.log(err);
-                    reject(Error("It broke."));
-                });
-            });
-        });
-    },
-    updateCart: function (username, products) {
-        return new Promise(function (resolve, reject) {
-            User.get(username).getJoin({cart: true}).run()
-            .then(function (user){
-                user.cart = products;
-                user.saveAll({cart: true})
-                .then(function (result) {
-                    resolve(result);
-                }, function (err) {
-                    reject(Error(err));
-                });
+            var options = optionSet.options;
+            optionSet.options = null;
+            optionSet.username = username;
+            var newOptionSet = new OptionSet(optionSet);
+            newOptionSet.options = options;
+            newOptionSet.saveAll().then(function (optionSet) {
+                resolve(optionSet);
             }, function (err) {
-                reject(Error(err));
+                reject(err);
             });
         });
     }
 };
 
-module.exports.userModel = UserModel;
-module.exports.user = User;
-
+module.exports.optionSetModel = OptionSetModel;
+module.exports.optionModel = OptionModel;
+module.exports.optionSet = OptionSet;
+module.exports.option = Option;
 

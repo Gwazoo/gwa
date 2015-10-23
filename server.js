@@ -7,7 +7,7 @@ var UserApi        = require('./server/routers/userApiRouter');
 var CartApi        = require('./server/routers/cartApiRouter');
 var CategoryApi    = require('./server/routers/categoryApiRouter');
 var ProductApi     = require('./server/routers/productApiRouter');
-var CheckoutApi     = require('./server/routers/checkoutApiRouter');
+var CheckoutApi    = require('./server/routers/checkoutApiRouter');
 
 var Account        = require('./server/routers/accountRouter');
 var Category       = require('./server/routers/categoryRouter');

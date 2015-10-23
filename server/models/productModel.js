@@ -7,18 +7,37 @@ var type = thinky.type;
 var ProductModel = thinky.createModel("products", {
     id: type.string(),
     vendor: type.string(), // Vendor's username
-    name: type.string().required(),
-    description: type.string().required(), // Full description
+    name: type.string(),
+    description: type.string(), // Full description
     shortDescription: type.string().max(50), // Short description for display on search pages
-    price: type.string().required(), // The price we pay for it
-    salePrice: type.string().required(), // The price we sell the product for
-    smallImages: [{ // Array of Image objects
-            url: type.string().required() // URL to image
-        }],
+    supplyPrice: type.string(), // The price we pay for it
+    retailPrice: type.string(), // The price we sell the product for
+    shippingPrice: type.string(), // Flat rate shipping price
+    shippingType: type.string(), // Free Shipping, Flat Rate Shipping, Calculated Shipping
+    msrp: type.string(), // Suggested Retail Price
+    stockQuantity: type.number(), // Amount of product in stock
+    minQuantity: type.number(), // Minimum quantity to add to cart
+    maxQuantity: type.number(), // Maximum quantity to add to cart
+    sku: type.string(), // Vendor's SKU for the product
+    parentSku: type.string(), // Vendor's SKU for the product's parent product
     images: [{
-            url: type.string().required(), // URL to image
-            isPrimary: type.boolean() // Display order of images
-        }]
+            small: {
+                url: type.string(),
+                isPrimary: type.boolean().default(false)
+            },
+            large: {
+                url: type.string(),
+                isPrimary: type.boolean().default(false)
+            }
+    }],
+    options: type.object(), // K:V pairs. IE - {"color":"blue", "size":"medium"}
+    additionalInfo: [{ // Array of Objects that contain key and value
+            name: type.string(), // Additional Info Key
+            value: type.string() // Additional Info Value
+    }],
+    isActive: type.boolean().default(false),
+    created: type.date().default(r.now()),
+    modified: type.date().default(r.now())
 });
 
 var Product = {
@@ -29,7 +48,7 @@ var Product = {
             var product = new ProductModel(data);
             product.categories = categories;
             product.validate();
-            product.saveAll({categories: true})
+            product.saveAll({categories: true, optionSet: true, product: true, items: true})
                     .then(function (result) {
                         console.log("Product: ", result);
                         resolve(result);
@@ -38,18 +57,48 @@ var Product = {
                     });
         });
     },
-    get: function (id) {
+    getProduct: function (id) {
         return new Promise(function (resolve, reject) {
-            ProductModel.get(id).getJoin({categories: {
+            ProductModel.get(id).getJoin({
+                categories: {
                     _apply: function (sequence) {
                         return sequence.pluck("id", "name");
                     }
-                }}).run()
-                    .then(function (result) {
-                        resolve(result);
-                    }, function (err) {
-                        reject(Error("Error retrieving product: " + err));
-                    });
+                }, 
+                items: true, 
+                optionSets: {
+                    _apply: function (seq) {
+                        return seq.getJoin({options: true});
+                    }
+                }
+            }).run()
+            .then(function (result) {
+                resolve(result);
+            }, function (err) {
+                reject(Error("Error retrieving product: " + err));
+            });
+        });
+    },
+    getItem: function (id) {
+        return new Promise(function (resolve, reject) {
+            ProductModel.get(id).getJoin({
+                product: {
+                    _apply: function (sequence) {
+                        return sequence.getJoin({
+                            categories: {
+                                _apply: function (seq) {
+                                    return seq.pluck("id", "name");
+                                }
+                            }
+                        });
+                    }
+                }
+            }).run()
+            .then(function (result) {
+                resolve(result);
+            }, function (err) {
+                reject(Error("Error retrieving product: " + err));
+            });
         });
     },
     getAll: function () {
