@@ -1,55 +1,79 @@
 'use strict';
-angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngRoute', 'ngAnimate', 'ng-breadcrumbs', 'LocalStorageModule', 'flow', 'ui.bootstrap'])
+angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngAnimate', 'ngRoute', 'routeStyles', 'ui.router', 'ng-breadcrumbs', 'LocalStorageModule', 'flow', 'ui.bootstrap'])
 
-.config(function($routeProvider, $locationProvider) {
-    $routeProvider
-        .when('/', {
+.config(function($stateProvider, $locationProvider, $urlRouterProvider) {
+    $stateProvider
+        .state('homePage', {
+            url:  '/',
             templateUrl: './templates/home.html',
             controller: 'HomeCtrl'
         })
-        .when('/register', {
+        .state('registration', {
+            url: '/register',
             templateUrl: './templates/signup.html',
             controller: 'SignupCtrl'
         })
-        .when('/account', {
-            templateUrl: './templates/admin/index.html',
-            controller: 'SettingsCtrl'
+        .state('account', {
+            url: '/account',
+            templateUrl: './templates/admin/admin.html',
+            controller: 'SettingsCtrl',
+            css: ['css/admin.css', 'css/plugin/morris.css']
         })
-        .when('/account/product', {
-            templateUrl: './templates/dashboard.html',
-            controller: 'DashboardCtrl'
-        })
-        .when('/search-result', {
+            .state('account.profile', {
+                url: '/account/profile',
+                templateUrl: './templates/admin/blank-page.html',
+                controller: 'SettingsCtrl',
+                css: ['css/admin.css', 'css/plugin/morris.css']
+            })
+            .state('account.orders', {
+                url: '/account/order-history',
+                templateUrl: './templates/admin/blank-page.html',
+                controller: 'SettingsCtrl',
+                css: ['css/admin.css', 'css/plugin/morris.css']
+            })
+
+
+            .state('account.product', {
+                url: '/account/product',
+                templateUrl: './templates/dashboard.html',
+                controller: 'DashboardCtrl'
+            })
+        .state('search', {
+            url: '/search-result',
             templateUrl: './templates/searchResult.html',
             controller: 'CategoryCtrl'
         })
-        .when('/category/:slug?/:id', {
+        .state('category', {
+            url: '/category/:slug?/:id',
             templateUrl: './templates/categoryProducts.html',
             controller: 'CategoryCtrl'
         })
-        .when('/product/:slug?/:sku?/:id', {
+        .state('product', {
+            url: '/product/:slug?/:sku?/:id',
             templateUrl: './templates/productDetails.html',
             controller: 'ProductCtrl'
         })
-        .when('/cart', {
+        .state('cart', {
+            url: '/cart',
             templateUrl: './templates/cart/cart.html',
             controller: 'CartCtrl'
         })
-        .when('/cart-checkout', {
+        .state('checkout', {
+            url: '/cart-checkout',
             templateUrl: './templates/cart/cartCheckout.html',
             controller: 'CartCtrl'
         })
-        .when('/order-confirmation', {
+        .state('order-confirmation', {
+            url: '/order-confirmation',
             templateUrl: './templates/cart/orderConfirmation.html',
             controller: 'CartCtrl'
         })
-        .when('/test', {
+        .state('test', {
+            url: '/test',
             templateUrl: './templates/cart/orderConfirmation.html',
             controller: 'CartCtrl'
         })
-        .otherwise({
-            redirectTo: '/'
-    });
+    $urlRouterProvider.otherwise('/');
     $locationProvider.html5Mode(true);
 })
 
@@ -72,4 +96,9 @@ angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngRoute', 'n
 		}
 	};
 }])
+
+.run(function($rootScope, $location) {
+    $rootScope.location = $location;
+});
+
 

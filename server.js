@@ -29,9 +29,9 @@ app.use('/account', Account);
 app.use('/category', Category);  
 
 // CATCH-ALL REDIRECT ====================================
-app.all('/account', function(req, res) {
-    res.sendFile('index.html', { root: __dirname + '/public/templates/admin'});
-});
+// app.all('/account', function(req, res) {
+//     res.sendFile('index.html', { root: __dirname + '/public/templates/admin'});
+// });
 app.all('/*', function(req, res, next) {
 	res.sendFile('index.html', { root: __dirname + '/public'});
 });
