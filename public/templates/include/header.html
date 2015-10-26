@@ -19,7 +19,7 @@
                     <li ng-show="session" class="dropdown">
                         <a href="#" class="dropdown-toggle text-capitalize" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{session.firstName}}'s Account <span class="caret"></span></a>
                         <ul class="dropdown-menu"> 
-                            <li><a href="/account">Settings</a></li>
+                            <li><a ui-sref="account.admin">Settings</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="/account/past-orders/:id">Orders</a></li>
                             <li role="separator" class="divider"></li>
