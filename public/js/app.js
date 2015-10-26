@@ -19,6 +19,10 @@ angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngRoute', 'n
 			templateUrl: './templates/dashboard.html',
 			controller: 'DashboardCtrl'
 		})
+		.when('/account/orders', {
+			templateUrl: './templates/orders.html',
+			controller: 'SettingsCtrl'
+		})
 		.when('/search-result', {
 			templateUrl: './templates/searchResult.html',
 			controller: 'CategoryCtrl'

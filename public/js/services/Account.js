@@ -4,12 +4,12 @@ angular.module('gwazoo.services')
 .service('Account', function ($q, $http, $location, $rootScope, $modal) {
 	var user = '';
 
-	this.login = function(userLogin) {
+	this.login = function(loginObj) {
 		var deferred = $q.defer();
 		$http({
 			method: 'POST',
 			url: '/api/user/auth', 
-			data: userLogin
+			data: loginObj
 		}).success(function(user) {
 			deferred.resolve(user);
 		}).error(function(err) {
@@ -19,12 +19,12 @@ angular.module('gwazoo.services')
 		return deferred.promise;
 	};
 
-	this.register = function (userData) {
+	this.register = function (userObj) {
 		var deferred = $q.defer();
 		$http({
 			method: 'POST',
 			url: '/api/user/create', 
-			data: userData
+			data: userObj
 		}).success(function(user) {
 			deferred.resolve(user);
 		}).error(function (err) {
@@ -40,8 +40,7 @@ angular.module('gwazoo.services')
 			method: 'POST',
 			url: '/api/user/username', 
 			data: username
-		}).success(function (res) {
-			var username = res;
+		}).success(function (username) {
 			deferred.resolve(username);
 		}).error(function (err) {
 			deferred.reject(err);
@@ -59,6 +58,34 @@ angular.module('gwazoo.services')
 		});
 		return deferred.promise;
 	};
+
+	this.updateEmail = function (emailObj) {
+		var deferred = $q.defer();
+		$http({
+			method: 'POST',
+			url: '/api/user/update/email', 
+			data: emailObj
+		}).success(function (res) {
+			deferred.resolve(res);
+		}).error(function (err) {
+			deferred.reject(err);
+		});
+		return deferred.promise;
+	}
+
+	this.updatePassword = function (passwordObj) {
+		var deferred = $q.defer();
+		$http({
+			method: 'POST',
+			url: '/api/user/update/password', 
+			data: passwordObj
+		}).success(function (res) {
+			deferred.resolve(res);
+		}).error(function (err) {
+			deferred.reject(err);
+		});
+		return deferred.promise;
+	}
 });
 
 
