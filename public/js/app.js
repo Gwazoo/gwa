@@ -1,7 +1,10 @@
 'use strict';
-angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngAnimate', 'ngRoute', 'routeStyles', 'ui.router', 'ng-breadcrumbs', 'LocalStorageModule', 'flow', 'ui.bootstrap'])
+angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngAnimate', 'ngRoute', 'uiRouterStyles', 'ui.router', 'ng-breadcrumbs', 'LocalStorageModule', 'flow', 'ui.bootstrap'])
 
 .config(function($stateProvider, $locationProvider, $urlRouterProvider) {
+    $locationProvider.html5Mode(true);
+    $urlRouterProvider.otherwise('/');
+
     $stateProvider
         .state('homePage', {
             url:  '/',
@@ -13,23 +16,43 @@ angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngAnimate', 
             templateUrl: './templates/signup.html',
             controller: 'SignupCtrl'
         })
+
         .state('account', {
-            url: '/account',
-            templateUrl: './templates/admin/admin.html',
-            controller: 'SettingsCtrl',
-            css: ['css/admin.css', 'css/plugin/morris.css']
-        })
+                url: '/account',
+                templateUrl: './templates/admin/index.html',
+                data: {
+                    css: ['css/admin.css', 'css/plugin/morris.css']                
+                }
+            })
+            .state('account.admin', {
+                url: '/admin',
+                templateUrl: './templates/admin/admin.html',
+                controller: 'SettingsCtrl'
+            })
             .state('account.profile', {
-                url: '/account/profile',
+                url: '/profile',
                 templateUrl: './templates/admin/blank-page.html',
-                controller: 'SettingsCtrl',
-                css: ['css/admin.css', 'css/plugin/morris.css']
+                controller: 'SettingsCtrl'
             })
             .state('account.orders', {
-                url: '/account/order-history',
+                url: '/order-history',
                 templateUrl: './templates/admin/blank-page.html',
-                controller: 'SettingsCtrl',
-                css: ['css/admin.css', 'css/plugin/morris.css']
+                controller: 'SettingsCtrl'
+            })
+            .state('account.charts', {
+                url: '/charts',
+                templateUrl: './templates/admin/charts.html',
+                controller: 'SettingsCtrl'
+            })
+            .state('account.forms', {
+                url: '/forms',
+                templateUrl: './templates/admin/forms.html',
+                controller: 'SettingsCtrl'
+            })
+            .state('account.tables', {
+                url: '/tables',
+                templateUrl: './templates/admin/tables.html',
+                controller: 'SettingsCtrl'
             })
 
 
@@ -43,11 +66,18 @@ angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngAnimate', 
             templateUrl: './templates/searchResult.html',
             controller: 'CategoryCtrl'
         })
+
         .state('category', {
-            url: '/category/:slug?/:id',
-            templateUrl: './templates/categoryProducts.html',
-            controller: 'CategoryCtrl'
-        })
+                url: '/category/:slug?/:id',
+                templateUrl: './templates/categoryProducts.html',
+                controller: 'CategoryCtrl'
+            })
+            .state('category', {
+                url: '/category/:slug?/:id',
+                templateUrl: './templates/categoryProducts.html',
+                controller: 'CategoryCtrl'
+            })
+
         .state('product', {
             url: '/product/:slug?/:sku?/:id',
             templateUrl: './templates/productDetails.html',
@@ -73,8 +103,6 @@ angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngAnimate', 
             templateUrl: './templates/cart/orderConfirmation.html',
             controller: 'CartCtrl'
         })
-    $urlRouterProvider.otherwise('/');
-    $locationProvider.html5Mode(true);
 })
 
 .config(function (localStorageServiceProvider) {
