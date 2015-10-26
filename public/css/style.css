@@ -63,18 +63,16 @@
 
 /* main navigation */
 	.navbar-inverse{
-		background-color:white;
-		border-top:1px solid #D7D7D7;
-		border-bottom:1px solid #D7D7D7;
-		border-left:none;
-		border-right:none;
-		border-radius:0px;
+		background-color:#37b34a;
+		border:none;
+		border-radius: 0px;
 	}
 	.navbar-nav>li:hover{
 		background-color:#37b34a;
 	}
 	.navbar-inverse .navbar-nav>li>a{
-		color:#565656;
+		color:white;
+		font-size:20px;
 	}
 	.navbar-inverse .navbar-toggle .icon-bar{
 		background-color: #565656;
