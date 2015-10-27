@@ -53,47 +53,75 @@ angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngAnimate', 
 
 
         .state('account', {
-            abstract: true,
             url: '/account',
+            abstract: true,
             templateUrl: './templates/admin/dashboard.html',
             data: {
                 css: ['css/admin.css', 'css/plugin/morris.css']                
             }
         })
         .state('account.admin', {
-            url: '/:id',
-            templateUrl: './templates/admin/admin.html',
-            controller: 'SettingsCtrl'
+            url: '',
+            views: {
+              'content': {
+                templateUrl: './templates/admin/admin.html',
+                controller: 'SettingsCtrl'
+              }
+            }
         })
         .state('account.profile', {
             url: '/profile',
-            templateUrl: './templates/admin/blank-page.html',
-            controller: 'SettingsCtrl'
+            views: {
+              'content': {
+                templateUrl: './templates/admin/blank-page.html',
+                controller: 'SettingsCtrl'
+              }
+            }
         })
         .state('account.orders', {
-            url: 'order-history',
-            templateUrl: './templates/admin/blank-page.html',
-            controller: 'SettingsCtrl'
+            url: '/order-history',
+            views: {
+              'content': {
+                templateUrl: './templates/admin/blank-page.html',
+                controller: 'SettingsCtrl'
+              }
+            }
         })
         .state('account.charts', {
             url: '/charts',
-            templateUrl: './templates/admin/charts.html',
-            controller: 'SettingsCtrl'
+            views: {
+              'content': {
+                templateUrl: './templates/admin/charts.html',
+                controller: 'SettingsCtrl'
+              }
+            }
         })
         .state('account.forms', {
             url: '/forms',
-            templateUrl: './templates/admin/forms.html',
-            controller: 'SettingsCtrl'
+            views: {
+              'content': {
+                templateUrl: './templates/admin/forms.html',
+                controller: 'SettingsCtrl'
+              }
+            }
         })
         .state('account.tables', {
             url: '/tables',
-            templateUrl: './templates/admin/tables.html',
-            controller: 'SettingsCtrl'
+            views: {
+              'content': {
+                templateUrl: './templates/admin/tables.html',
+                controller: 'SettingsCtrl'
+              }
+            }
         })
         .state('account.product', {
             url: '/product',
-            templateUrl: './templates/admin/product.html',
-            controller: 'DashboardCtrl'
+            views: {
+              'content': {
+                templateUrl: './templates/admin/product.html',
+                controller: 'DashboardCtrl'
+              }
+            }
         })
 
 

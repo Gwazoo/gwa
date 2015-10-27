@@ -22,7 +22,7 @@ angular.module('gwazoo.controllers')
     $scope.initCategories = function () {
     	Products.getCategories()
     	.then(function (result) {
-    		console.log("Categories:", result);
+    		// console.log("Categories:", result);
     		$scope.categories = result;
     		$scope.subCat =[];
     	}).catch(function (err) {
