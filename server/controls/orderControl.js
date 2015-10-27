@@ -41,6 +41,12 @@ module.exports = {
 				message: "Database error." + err
 			});
 		});
+	},
+	getMemberOrders : function (req, res) {
+		
+	},
+	getVendorOrders : function (req, res) {
+
 	}
 };
 

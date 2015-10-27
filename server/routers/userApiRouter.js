@@ -22,6 +22,12 @@ userRouter.post('/username', UserApi.username);
 userRouter.get('/read', UserApi.read);
 
 
+userRouter.post('/update/email', UserApi.updateEmail);
+
+
+userRouter.post('/update/password', UserApi.updatePassword);
+
+
 userRouter.delete('/delete', UserApi.isAuthed, UserApi.delete);
 
 
