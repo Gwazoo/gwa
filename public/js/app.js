@@ -46,7 +46,7 @@ angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngAnimate', 
             controller: 'CategoryCtrl'
         })
         .state('product', {
-            url: '/product-details/:id',
+            url: '/product/:slug?/:sku?/:id',
             templateUrl: './templates/productDetails.html',
             controller: 'ProductCtrl'
         })
@@ -120,6 +120,15 @@ angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngAnimate', 
               'content': {
                 templateUrl: './templates/admin/product.html',
                 controller: 'DashboardCtrl'
+              }
+            }
+        })
+        .state('account.settings', {
+            url: '/settings',
+            views: {
+              'content': {
+                templateUrl: './templates/admin/settings.html',
+                controller: 'SettingsCtrl'
               }
             }
         })
