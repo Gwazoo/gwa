@@ -1,10 +1,11 @@
 'use strict';
 angular.module('gwazoo.controllers')
 
-.controller('CategoryCtrl', ['$scope', '$rootScope', '$routeParams', 'Products', function($scope, $rootScope, $routeParams, Products) {
-    Products.getCategoryProducts($routeParams.id)
+.controller('CategoryCtrl', ['$scope', '$rootScope', '$stateParams', 'Products', function($scope, $rootScope, $stateParams, Products) {
+    console.log($stateParams.id);
+    Products.getCategoryProducts($stateParams.id)
     .then(function (result) {
-        // console.log(result);
+        console.log(result);
         $scope.category = result.name;
         $scope.products = result.products;
         $scope.image = result.image;
