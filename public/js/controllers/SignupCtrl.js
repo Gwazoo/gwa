@@ -3,8 +3,10 @@ angular.module('gwazoo.controllers')
 
 .controller('SignupCtrl', ['$scope', '$rootScope', '$location', 'Account', 'Cookies', function($scope, $rootScope, $location, Account, Cookies) {
 	$scope.register = function (userData) {
+		console.log(userData);
 		var cart = Cookies.getCart();
 		userData.cart = cart;
+		userData.type = 'member';
 
 		Account.register(userData)
 		.then(function (user) {

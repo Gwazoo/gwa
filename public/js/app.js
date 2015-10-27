@@ -1,5 +1,5 @@
 'use strict';
-angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngAnimate', 'ngRoute', 'uiRouterStyles', 'ui.router', 'ng-breadcrumbs', 'LocalStorageModule', 'flow', 'ui.bootstrap'])
+angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngAnimate', 'ngRoute', 'ng-breadcrumbs', 'angular.morris-chart', 'uiRouterStyles', 'ui.router', 'ui.bootstrap', 'LocalStorageModule', 'flow'])
 
 .config(function($stateProvider, $locationProvider, $urlRouterProvider) {
     $locationProvider.html5Mode(true);
@@ -46,7 +46,7 @@ angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngAnimate', 
             controller: 'CategoryCtrl'
         })
         .state('product', {
-            url: '/product/:slug?/:sku?/:id',
+            url: '/:slug/:sku/:id',
             templateUrl: './templates/productDetails.html',
             controller: 'ProductCtrl'
         })
@@ -65,52 +65,7 @@ angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngAnimate', 
             views: {
               'content': {
                 templateUrl: './templates/admin/admin.html',
-                controller: 'SettingsCtrl'
-              }
-            }
-        })
-        .state('account.profile', {
-            url: '/profile',
-            views: {
-              'content': {
-                templateUrl: './templates/admin/blank-page.html',
-                controller: 'SettingsCtrl'
-              }
-            }
-        })
-        .state('account.orders', {
-            url: '/order-history',
-            views: {
-              'content': {
-                templateUrl: './templates/admin/blank-page.html',
-                controller: 'SettingsCtrl'
-              }
-            }
-        })
-        .state('account.charts', {
-            url: '/charts',
-            views: {
-              'content': {
-                templateUrl: './templates/admin/charts.html',
-                controller: 'SettingsCtrl'
-              }
-            }
-        })
-        .state('account.forms', {
-            url: '/forms',
-            views: {
-              'content': {
-                templateUrl: './templates/admin/forms.html',
-                controller: 'SettingsCtrl'
-              }
-            }
-        })
-        .state('account.tables', {
-            url: '/tables',
-            views: {
-              'content': {
-                templateUrl: './templates/admin/tables.html',
-                controller: 'SettingsCtrl'
+                controller: 'DashboardCtrl'
               }
             }
         })
@@ -120,6 +75,51 @@ angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngAnimate', 
               'content': {
                 templateUrl: './templates/admin/product.html',
                 controller: 'DashboardCtrl'
+              }
+            }
+        })
+        .state('account.orders', {
+            url: '/order-history',
+            views: {
+              'content': {
+                templateUrl: './templates/admin/order-history.html',
+                controller: 'DashboardCtrl'
+              }
+            }
+        })
+        .state('account.pending', {
+            url: '/orders-pending',
+            views: {
+              'content': {
+                templateUrl: './templates/admin/orders-pending.html',
+                controller: 'DashboardCtrl'
+              }
+            }
+        })
+        .state('account.shipped', {
+            url: '/orders-shipped',
+            views: {
+              'content': {
+                templateUrl: './templates/admin/orders-shipped.html',
+                controller: 'DashboardCtrl'
+              }
+            }
+        })
+        .state('account.forms', {
+            url: '/forms',
+            views: {
+              'content': {
+                templateUrl: './templates/admin/forms.html',
+                controller: 'DashboardCtrl'
+              }
+            }
+        })
+        .state('account.profile', {
+            url: '/profile',
+            views: {
+              'content': {
+                templateUrl: './templates/admin/profile.html',
+                controller: 'SettingsCtrl'
               }
             }
         })

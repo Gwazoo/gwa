@@ -183,5 +183,11 @@ module.exports = {
                 }
             });
         });
+    },
+    updateEmail: function (req, res) {
+        
+    },
+    updatePassword: function (req, res) {
+
     }
 };

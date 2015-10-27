@@ -42,8 +42,8 @@ angular.module('gwazoo.services')
         return deferred.promise;
     };
 
-    this.getProduct = function (param) {
-        console.log(param);
+    this.getProductItem = function (param) {
+        // console.log(param);
         var deferred = $q.defer();
         $http({
             method: 'GET',

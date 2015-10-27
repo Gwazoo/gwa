@@ -16,10 +16,10 @@ angular.module('gwazoo.controllers')
         $scope.cartCount = Cookies.getCartCount();
     };
 
-    console.log($stateParams.id);
-    Products.getProduct($stateParams.id)
+    // console.log($stateParams.id);
+    Products.getProductItem($stateParams.id)
     .then(function (result) {
-        console.log(result);
+        // console.log(result);
         $scope.product = result;
     });
 

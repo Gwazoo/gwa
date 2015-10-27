@@ -20,6 +20,10 @@
     "bootstrap-magnify": "~0.3.0",
     "angular-bootstrap": "~0.14.2",
     "angular-ui-router": "~0.2.15",
-    "angular-ui-router-styles": "~0.0.6"
+    "angular-ui-router-styles": "~0.0.6",
+    "angular-morris-chart": "~1.1.0"
+  },
+  "resolutions": {
+    "angular": "1.4.7"
   }
 }
