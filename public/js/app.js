@@ -22,7 +22,7 @@ angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngAnimate', 
             controller: 'CategoryCtrl'
         })
 
-
+        
         .state('cart', {
             url: '/cart',
             templateUrl: './templates/cart/cart.html',
@@ -138,6 +138,7 @@ angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngAnimate', 
             url: '/test',
             templateUrl: './templates/cart/orderConfirmation.html',
             controller: 'CartCtrl'
+
         })
 })
 
