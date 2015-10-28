@@ -20,13 +20,13 @@ angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngAnimate', 
             css: ['css/admin.css', 'css/plugin/morris.css']
         })
             .state('account.profile', {
-                url: '/account/profile',
+                url: '/profile',
                 templateUrl: './templates/admin/blank-page.html',
                 controller: 'SettingsCtrl',
                 css: ['css/admin.css', 'css/plugin/morris.css']
             })
             .state('account.orders', {
-                url: '/account/order-history',
+                url: '/order-history',
                 templateUrl: './templates/admin/blank-page.html',
                 controller: 'SettingsCtrl',
                 css: ['css/admin.css', 'css/plugin/morris.css']
@@ -34,7 +34,7 @@ angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngAnimate', 
 
 
             .state('account.product', {
-                url: '/account/product',
+                url: '/product',
                 templateUrl: './templates/dashboard.html',
                 controller: 'DashboardCtrl'
             })
@@ -44,12 +44,12 @@ angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngAnimate', 
             controller: 'CategoryCtrl'
         })
         .state('category', {
-            url: '/category/:slug?/:id',
+            url: '/category/:slug/:id',
             templateUrl: './templates/categoryProducts.html',
             controller: 'CategoryCtrl'
         })
         .state('product', {
-            url: '/product/:slug?/:sku?/:id',
+            url: '/product/:sku/:id',
             templateUrl: './templates/productDetails.html',
             controller: 'ProductCtrl'
         })
@@ -72,7 +72,7 @@ angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngAnimate', 
             url: '/test',
             templateUrl: './templates/cart/orderConfirmation.html',
             controller: 'CartCtrl'
-        })
+        });
     $urlRouterProvider.otherwise('/');
     $locationProvider.html5Mode(true);
 })

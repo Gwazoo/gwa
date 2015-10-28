@@ -19,7 +19,7 @@ var User = thinky.createModel("users", {
             state: type.string(),
             country: type.string()
         }],
-    typeId: type.string(), // This is probably going to be an ID to a user types table
+    type: type.string().default('member'), // This is probably going to be an ID to a user types table
     isActive: type.boolean().default(true), // So we can disable users
     created: type.date().default(r.now()), // When the account was created
     modified: type.date().default(r.now()), // When the account was modified
