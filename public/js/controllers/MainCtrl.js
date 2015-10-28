@@ -37,21 +37,21 @@ angular.module('gwazoo.controllers')
         });
     };
 
-    // CART HELPERS
-    $scope.add = function (productId) {
-        Cookies.add(productId);
-        $scope.cartCount = Cookies.getCartCount();
-    };
-    $scope.remove = function (productId) {
-        Cookies.remove(productId);
-        $scope.cartCount = Cookies.getCartCount();
-    };
-    $scope.clear = function () {
-        Cookies.clear();
-    };
-    $scope.get = function () {
-        console.log(Cookies.getCart());
-    }
+    // // CART HELPERS
+    // $scope.add = function (productId) {
+    //     Cookies.add(productId);
+    //     $scope.cartCount = Cookies.getCartCount();
+    // };
+    // $scope.remove = function (productId) {
+    //     Cookies.remove(productId);
+    //     $scope.cartCount = Cookies.getCartCount();
+    // };
+    // $scope.clear = function () {
+    //     Cookies.clear();
+    // };
+    // $scope.get = function () {
+    //     console.log(Cookies.getCart());
+    // }
 
     // NAVIGATION
     Products.getCategories()

@@ -13,8 +13,6 @@
                 <ul>
                     <li ng-show="!session"><a href="#" ng-click="loginModal()">Login</a></li>
                     <li ng-show="!session"><a href="/register">Register</a></li>
-                </ul>
-                <ul>
                     <li ng-show="session" class="dropdown">
                         <a href="#" class="dropdown-toggle text-capitalize" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{session.firstName}}'s Account <span class="caret"></span></a>
                         <ul class="dropdown-menu"> 

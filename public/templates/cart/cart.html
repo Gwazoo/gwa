@@ -31,13 +31,20 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="row">
                         <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2">
-                            <img src="{{item.image}}"/><img style="max-width: 100%;" src="/img/preview-small-img4.png"/> <!-- MAYBE MAKE THE HEIGHT STANDARD SO THEY WILL EITHER GO FULL WIDTH OF COLUMN OR MAX-HEIGHT -->
+                            <img src="{{item.image}}"/><!-- <img style="max-width: 100%;" src="/img/preview-small-img4.png"/> --> <!-- MAYBE MAKE THE HEIGHT STANDARD SO THEY WILL EITHER GO FULL WIDTH OF COLUMN OR MAX-HEIGHT -->
                         </div>
                         <div class="col-xs-5 col-sm-5 col-md-6 col-lg-6">
-                            <a href="#"><h5><strong>{{item.name}}</strong></h5></a>
-                            <p>${{item.price}}</p><!-- 
-                            <p><strong>Quantity: </strong>{{item.quantity}}</p> 
-                            <span><input type="submit" value="Delete"></span>-->
+                            <a ng-href="product/{{item.sku}}/{{item.id}}"><h5><strong>{{item.name}}</strong></h5></a>
+                            <p>${{item.price}}</p>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <button class="btn btn-primary btn-xs text-capitalize" ng-click="add(item.id)"> Add To Cart </button>
+                                    <button class="btn btn-danger btn-xs text-capitalize" ng-click="remove(item.id)">Remove From Cart</button>
+                                    <!-- 
+                                    <p><strong>Quantity: </strong>{{item.quantity}}</p> 
+                                    <span><input type="submit" value="Delete"></span>-->
+                                </div>
+                            </div>
                         </div>
                         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                             <h4><strong class="text-danger">${{item.price*item.quantity | number:2}}</strong></h4>
@@ -57,7 +64,7 @@
             </section> <!-- PUT A BORDER-BOTTOM ON THIS SECTION -->
             <section class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <H4 class="text-right"><strong>Subtotal ({{cart.products.quantity}}): </strong><strong class="text-danger">${{cart.total}}122.50</strong></h4>
+                    <H4 class="text-right"><strong>Subtotal ({{cartQuantity}}): </strong><strong class="text-danger">${{cart.total}}122.50</strong></h4>
                     <button class="btn btn-warning btn-sm text-capitalize pull-right" ui-sref="checkout">proceed to checkout</button>
                 </div>
             </section>
@@ -65,12 +72,13 @@
         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 subTotal_fixed pull-right"> <!-- PUT A BORDER AROUND THIS DIV (WITH BORDER-RADIUS) AND MAKE IT SCROLL WITH THE PAGE -->
             <section class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <H4 class="text-center"><strong>Subtotal ({{cart.quantity}}2 items): </strong><strong class="text-danger">${{cart.total}}122.50</strong></h4>
+                    <H4 class="text-center"><strong>Subtotal ({{cartQuantity}}): </strong><strong class="text-danger">${{cart.total}}122.50</strong></h4>
                 </div>
             </section>
             <section class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <button class="btn btn-warning btn-md btn-block text-capitalize" ui-sref="checkout">proceed to checkout</button>
+                    <button class="btn btn-danger btn-md btn-block text-capitalize" ng-click="clear()">clear cart</button>
                 </div>
             </section>
         </div>

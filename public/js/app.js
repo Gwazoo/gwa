@@ -1,5 +1,5 @@
 'use strict';
-angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngAnimate', 'ngRoute', 'ng-breadcrumbs', 'angular.morris-chart', 'uiRouterStyles', 'ui.router', 'ui.bootstrap', 'LocalStorageModule', 'flow'])
+angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngAnimate', 'ngRoute', 'ng-breadcrumbs', /*'angular.morris-chart',*/ 'uiRouterStyles', 'ui.router', 'ui.bootstrap', 'LocalStorageModule', 'flow'])
 
 .config(function($stateProvider, $locationProvider, $urlRouterProvider) {
     $locationProvider.html5Mode(true);

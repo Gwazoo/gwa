@@ -17,7 +17,7 @@ angular.module('gwazoo.services')
         });
 
         return quantity.reduce(function(pv, cv) { return pv + cv; }, 0);
-    }
+    };
 
     this.getCart = function () {
         return localStorageService.cookie.get("Cart");
@@ -35,7 +35,7 @@ angular.module('gwazoo.services')
                 deferred.reject(err);
             });         
         return deferred.promise;
-    }
+    };
 
     this.newCart = function () {
         var cart = {
