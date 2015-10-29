@@ -127,8 +127,15 @@ angular.module('gwazoo.services')
     this.initMerge = function (cart) {
         var mergedCart = [];
         cart.forEach(function (item) {
-            mergedCart.push(overrideProductInfo(item, item.product));
+            for (var attrname in item.product.product) { 
+                if (item.product[attrname] === undefined) {
+                    item.product[attrname] = item.product.product[attrname]; 
+                }
+            }
+            console.log(item);
+            mergedCart.push(item);
         });
+        console.log('Merged', mergedCart);
         return mergedCart;
     };
     

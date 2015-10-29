@@ -87,6 +87,7 @@ angular.module('gwazoo.controllers')
                     var newCart = {};
                     newCart.products = cart;
                     newCart.username = user.username;
+                    newCart.products = Products.initMerge(cart);
                     console.log("MainCTRL:", newCart);
                     Cookies.setCart(newCart);
                     return Cookies.getCartCount();
