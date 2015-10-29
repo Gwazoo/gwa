@@ -49,7 +49,7 @@ angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngAnimate', 
             controller: 'CategoryCtrl'
         })
         .state('product', {
-            url: '/product/:sku/:id',
+            url: '/product/:sku/:id?itemId',
             templateUrl: './templates/productDetails.html',
             controller: 'ProductCtrl'
         })

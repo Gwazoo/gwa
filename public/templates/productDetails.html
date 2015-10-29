@@ -15,36 +15,18 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <ul class="list-inline">
-                            <div ng-switch on="item.images === undefined">
-                                <div ng-switch-when="false">
-                                    <li class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-repeat="data in item.images | limitTo: 1">
-                                        <img class="thumbnail" data-toggle="magnify" src="{{data.large.url}}" style="width: 100%;"/>
-                                    </li>
-                                </div>
-                                <div ng-switch-default>
-                                    <li class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-repeat="data in product.images | limitTo: 1">
-                                        <img class="thumbnail" data-toggle="magnify" src="{{data.large.url}}" style="width: 100%;"/>
-                                    </li>
-                                </div>
-                            </div>
+                            <li class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-repeat="data in item.images | limitTo: 1">
+                                <img class="thumbnail" data-toggle="magnify" src="{{data.large.url}}" style="width: 100%;"/>
+                            </li>
                         </ul>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <ul class="list-inline">
-                            <div ng-switch on="item.images === undefined">
-                                <div ng-switch-when="false">
-                                    <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2" ng-repeat="data in item.images">
-                                        <img class="thumbnail" data-toggle="magnify" src="{{data.small.url}}" style="width: 100%;"/>
-                                    </li>
-                                </div>
-                                <div ng-switch-default>
-                                    <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2" ng-repeat="data in product.images">
-                                        <img class="thumbnail" data-toggle="magnify" src="{{data.small.url}}" style="width: 100%;"/>
-                                    </li>
-                                </div>
-                            </div>
+                            <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2" ng-repeat="data in item.images">
+                                <img class="thumbnail" data-toggle="magnify" src="{{data.small.url}}" style="width: 100%;"/>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -75,6 +57,7 @@
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-5 col-lg-5">
                         <h5><strong>${{product.supplyPrice}}</strong></h5>
+                        <input type="hidden" ng-model="item.supplyPrice" value="{{product.supplyPrice}}">
                     </div>
                     <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
                         <h5 class="text-right text-danger">You Save <strong>${{product.retailPrice-product.supplyPrice | number:2}} ({{((product.supplyPrice/product.retailPrice)*100) | number:0}}%)</strong></h5>
@@ -139,14 +122,7 @@
                 </div>
                 <div class="row container-fluid">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div ng-switch on="item.description === undefined">
-                            <div ng-switch-when="false">
-                                <p>{{item.description}}</p>
-                            </div>
-                            <div ng-switch-default>
-                                <p>{{product.description}}</p>
-                            </div>
-                        </div>
+                        <p>{{item.description}}</p>
                     </div>
                 </div>
 
@@ -164,14 +140,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <uib-tabset justified="true">
                     <uib-tab heading="Item Details">
-                        <div ng-switch on="item.description === undefined">
-                            <div ng-switch-when="false">
-                                {{item.description}}
-                            </div>
-                            <div ng-switch-default>
-                                {{product.description}}
-                            </div>
-                        </div>
+                        {{item.description}}
                     </uib-tab>
                     <uib-tab heading="Customer Reviews">
                         {{product.modified}}

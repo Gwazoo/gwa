@@ -15,8 +15,12 @@ angular.module('gwazoo.controllers')
     };
     
     $scope.add = function (item) {
-            Cookies.add(item.id);
-            $scope.cartCount = Cookies.getCartCount();
+        if(item.quantity === undefined) {
+            item.quantity = 1;
+        }
+        Cookies.add(item).then(function(cart) {
+            $scope.$parent.cartCount = Cookies.getCartCount();
+        });
     };
     
     Products.getProduct($stateParams.id)
@@ -39,6 +43,7 @@ angular.module('gwazoo.controllers')
             });
             $scope.options = options;
             $scope.product = result;
+            $scope.item = result;
         }
     });
     

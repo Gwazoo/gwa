@@ -145,5 +145,8 @@ var Product = {
     }
 };
 
+ProductModel.hasMany(ProductModel, "items", "id", "parentId");
+ProductModel.belongsTo(ProductModel, "product", "parentId", "id");
+
 module.exports.product = Product;
 module.exports.productModel = ProductModel;

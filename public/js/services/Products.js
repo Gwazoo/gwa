@@ -124,19 +124,25 @@ angular.module('gwazoo.services')
         return deferred.promise;
     };
     
-    this.getProductItemByOptions = function (product, options) {
-        
+    this.initMerge = function (cart) {
+        var mergedCart = [];
+        cart.forEach(function (item) {
+            mergedCart.push(overrideProductInfo(item, item.product));
+        });
+        return mergedCart;
+    };
+    
+    this.qtyRange = function (min, max) {
+        var input = [];
+        if (min === 0 || min === undefined) min = 1;
+        if (max === 0 || max === undefined) max = 15;
+        for (var i = min; i <= max; i++) input.push(i);
+        return input;
     };
 });
 
 function overrideProductInfo(product, item) {
-    var productObj = {};
-    if (item.description !== null)
-        productObj.description = item.description;
-    if (item.id !== null)
-        productObj.id = item.id;
-    if (item.images !== null) {
-        productObj.images = item.images;
-    }
-    return productObj;
+    
+    for (var attrname in item) { product[attrname] = item[attrname]; }
+    return product;
 }
