@@ -6,7 +6,12 @@ angular.module('gwazoo.controllers')
 
     //Check session and initialize cart
     $scope.session = Cookies.getSession();
-    $scope.cartCount = Cookies.getCartCount();
+    $scope.cartCount = function() {
+        var cartCount = 0;
+        cartCount = Cookies.getCartCount();
+        // console.log(cartCount);
+        return cartCount; 
+    }
 
     $scope.logout = function() {
         Cookies.clearAllCookies();
@@ -60,7 +65,7 @@ angular.module('gwazoo.controllers')
     });
 }])
 
-.controller('MainCtrl.Modal', function($scope, $modalInstance, $location, Cookies, Account) {
+.controller('MainCtrl.Modal', function($scope, $modalInstance, $location, Cookies, Account, Products) {
     $scope.login = function(userLogin) {
         Account.login(userLogin)
         .then(function (user) {
@@ -72,6 +77,7 @@ angular.module('gwazoo.controllers')
                     var newCart = {};
                     newCart.products = cart;
                     newCart.username = user.username;
+                    newCart.products = Products.initMerge(cart);
                     console.log("MainCTRL", newCart);
                     Cookies.setCart(newCart);
                     return Cookies.getCartCount();
@@ -86,6 +92,7 @@ angular.module('gwazoo.controllers')
                     var newCart = {};
                     newCart.products = cart;
                     newCart.username = user.username;
+                    newCart.products = Products.initMerge(cart);
                     console.log("MainCTRL:", newCart);
                     Cookies.setCart(newCart);
                     return Cookies.getCartCount();

@@ -1,4 +1,4 @@
-<header>
+<header  ng-controller="MainCtrl">
     <div class="container">
         <div class="row">
             <div class="logo col-xs-12 col-md-2" align="center">
@@ -25,7 +25,7 @@
                             <li ng-click="logout()"><a href="">Logout</a></li>
                         </ul>
                     </li>
-                    <li><a ui-sref="cart"><i class="fa fa-lg fa-shopping-cart"></i> <span class="label label-warning label-as-badge"> {{cartCount}}</span></a></li>
+                    <li><a ui-sref="cart"><i class="fa fa-lg fa-shopping-cart"></i> <span class="label label-warning label-as-badge"> {{ cartCount() }}</span></a></li>
                 </ul>
             </div>
         </div>

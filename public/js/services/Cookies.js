@@ -3,12 +3,12 @@ angular.module('gwazoo.services')
 
 .service('Cookies', function ($q, $http, localStorageService) {
     this.getSession = function () {
-        return localStorageService.cookie.get("Session");
+        return localStorageService.get("Session");
     };
 
     this.getCartCount = function () {
         var cart = this.getCart();
-        if (cart == null) {
+        if (cart === null || Object.keys(cart).length === 0) {
             cart = this.newCart();
         }
 
@@ -16,24 +16,26 @@ angular.module('gwazoo.services')
             return product.quantity;
         });
 
-        return quantity.reduce(function(pv, cv) { return pv + cv; }, 0);
+        return quantity.reduce(function (pv, cv) {
+            return pv + cv;
+        }, 0);
     };
 
     this.getCart = function () {
-        return localStorageService.cookie.get("Cart");
+        return localStorageService.get("Cart");
     };
 
     this.getDbCart = function () {
         var deferred = $q.defer();
-            $http({
-                method: 'GET',
-                url: '/api/cart/db'
-            }).success(function(res) {
-                deferred.resolve(res);
-            }).error(function(err) {
-                console.log(err);
-                deferred.reject(err);
-            });         
+        $http({
+            method: 'GET',
+            url: '/api/cart/db'
+        }).success(function (res) {
+            deferred.resolve(res);
+        }).error(function (err) {
+            console.log(err);
+            deferred.reject(err);
+        });
         return deferred.promise;
     };
 
@@ -42,37 +44,57 @@ angular.module('gwazoo.services')
             username: "",
             products: []
         };
-        return this.setCart(cart);
+        return setCart(cart);
     };
 
     this.clear = function () {
         var cart = this.getCart();
 
-        if (cart != null) {
+        if (cart !== null) {
             cart.products = [];
-            updateDb(cart);
-            return this.setCart(cart);
+            updateDb(cart).then(function (newCart) {
+                cart = newCart;
+            });
+            return setCart(cart);
         }
     };
 
-    this.add = function (productId) {
+    this.add = function (product) {
+        var deferred = $q.defer();
         var cart = this.getCart();
 
-        if (cart == null) cart = this.newCart();
+        if (cart === null)
+            cart = this.newCart();
 
         if (typeof cart.products[0] === undefined) {
-            pushToCart(cart, productId);
+            cart = pushToCart(cart, product);
         } else {
-            var index = getProductIndex(cart.products, productId);
+            var index = getProductIndex(cart.products, product.id);
             if (index === -1) {
-                pushToCart(cart, productId);
+                cart = pushToCart(cart, product);
             } else {
-                cart.products[index].quantity += 1;
+                cart.products[index].quantity += product.quantity;
                 cart.products[index].modified = new Date();
             }
         }
-        updateDb(cart);
-        return this.setCart(cart);
+        updateDb(cart).then(function (newCart) {
+            cart.products = newCart;
+            setCart(cart);
+            deferred.resolve(setCart(cart));
+        });
+        return deferred.promise;
+    };
+
+    this.update = function (item) {
+        var deferred = $q.defer();
+        var cart = this.setCart();
+
+        updateDb(cart).then(function (newCart) {
+            cart.products = newCart;
+            setCart(cart);
+            deferred.resolve(setCart(cart));
+        });
+        return deferred.promise;
     };
 
     this.remove = function (productId) {
@@ -80,14 +102,17 @@ angular.module('gwazoo.services')
 
         var index = getProductIndex(cart.products, productId);
         cart.products.splice(index, 1);
-        updateDb(cart);
-        return this.setCart(cart);
+        updateDb(cart).then(function (newCart) {
+            cart = newCart;
+        });
+        return setCart(cart);
+    };
+    
+    this.setCart = function (cart) {
+        return setCart(cart);
     };
 
-    this.setCart = function (cart) {
-        localStorageService.cookie.set("Cart", cart, 30);
-        return cart;
-    };
+
 
     this.save = function (username) {
         var deferred = $q.defer();
@@ -95,11 +120,11 @@ angular.module('gwazoo.services')
         cart.username = username;
         $http({
             method: 'POST',
-            url: '/api/cart/save',  // MAKE SURE THIS IS THE RIGHT ENDPOINT!
+            url: '/api/cart/save', // MAKE SURE THIS IS THE RIGHT ENDPOINT!
             data: cart
-        }).success(function(cart) {  // Merged Cart
+        }).success(function (cart) {  // Merged Cart
             deferred.resolve(cart);
-        }).error(function(err) {
+        }).error(function (err) {
             console.log(err);
             deferred.reject(err);
         });
@@ -107,49 +132,62 @@ angular.module('gwazoo.services')
     };
 
     this.createSession = function (sessionData) {
-        localStorageService.cookie.set("Session", sessionData);
+        localStorageService.set("Session", sessionData);
     };
 
     this.clearAllCookies = function () {
-        localStorageService.cookie.clearAll();
+        localStorageService.clearAll();
     };
 
     this.removeCookie = function (cookieId) {
-        localStorageService.cookie.remove(cookieId);
+        localStorageService.remove(cookieId);
     };
 
-    // HELPER FUNCTIONS /////////////////////////////
-    function getProductIndex (products, value) {
-        return products.map(function(product) { return product.productId; }).indexOf(value);
-    }
 
-    function pushToCart (cart, productId) {
-        cart.products.push({
-            productId: productId,
-            quantity: 1,
-            modified: new Date()
-        });
-    }
-    function updateDb (cart) {
+    // HELPER FUNCTIONS /////////////////////////////
+    function setCart(cart) {
+        localStorageService.set("Cart", cart);
+
+        return cart;
+    };
+
+    function getProductIndex(products, value) {
+        return products.map(function (product) {
+            return product.productId;
+        }).indexOf(value);
+    };
+
+    function pushToCart(cart, product) {
+        var newProduct = {};
+        newProduct.product = product;
+        newProduct.productId = product.id;
+        newProduct.quantity = product.quantity;
+        newProduct.modified = new Date();
+        delete newProduct.product.quantity;
+        cart.products.push(newProduct);
+        return cart;
+    };
+
+    function updateDb(cart) {
         var deferred = $q.defer();
-        if (cart.username != "") {
+        if (cart.username !== "") {
             console.log("Sending update...");
             $http({
                 method: 'POST',
-                url: '/api/cart/update',  // MAKE SURE THIS IS THE RIGHT ENDPOINT!
+                url: '/api/cart/update', // MAKE SURE THIS IS THE RIGHT ENDPOINT!
                 data: cart.products
-            }).success(function(res) {
+            }).success(function (res) {
                 console.log("Update completed");
                 deferred.resolve(res);
-            }).error(function(err) {
+            }).error(function (err) {
                 console.log(err);
                 deferred.reject(err);
-            });         
+            });
         } else {
-            deferred.resolve();
+            deferred.resolve(cart.products);
         }
         return deferred.promise;
-    }
+    };
 });
 
     // this.increment = function (productId) {
