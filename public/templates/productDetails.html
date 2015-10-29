@@ -17,11 +17,6 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <ul class="list-inline">
-
-                            <!-- <li class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-repeat="data in product.images | limitTo: 1">
-                                <img class="thumbnail" data-toggle="magnify" src="{{data.large.url}}" style="width: 100%;"/>
-                            </li> -->
-
                             <div ng-switch on="item.images === undefined">
                                 <div ng-switch-when="false">
                                     <li class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-repeat="data in item.images | limitTo: 1">
@@ -40,11 +35,6 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <ul class="list-inline">
-
-                           <!--  <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2" ng-repeat="data in product.images">
-                                <img class="thumbnail" data-toggle="magnify" src="{{data.small.url}}" style="width: 100%;"/>
-                            </li> -->
-
                             <div ng-switch on="item.images === undefined">
                                 <div ng-switch-when="false">
                                     <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2" ng-repeat="data in item.images">
@@ -94,36 +84,8 @@
                 </div>
                 <div class="row">
                     <form name="myForm">
-                        <!-- <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                            <div class="form-group">
-                                <div class="colors-share">
-                                    <div class="color-types">
-                                        <div class="checkbox-buttons">
-                                            <ul class="list-inline" ng-repeat="option in product.optionSet.options | filter:{name:'color'}">
-                                                <li ng-repeat="color in otion">
-                                                    <input id="color{{color.name}}" name="colorOption" type="radio"><label for="color{{color.name}}" class="grey"> </label>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="" ng-repeat="option in product.optionSet.options">
-                                    <label class="sr-only">Available {{option.name}}</label>
-                                    <select class="form-control" name="options" ng-model="item.options">
-                                        <option value="{{optionVar}}" ng-repeat="optionVar in option.variations">{{optionVar}}</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div> -->
                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                             <div class="form-group">
-
-                               <!--  <div class="" ng-repeat="option in product.optionSet.options">
-                                    <label class="sr-only">Available {{option.name}}</label>
-                                    <select class="form-control" name="options" ng-model="item.options">
-                                        <option value="{{optionVar}}" ng-repeat="optionVar in option.variations">{{optionVar}}</option> -->
-
                                 <div class="" ng-repeat="option in options" ng-init="optionNumber = $index">
                                     <label>Available {{option.name}}s</label>
                                     <select class="form-control" name="itemOptions[{{option.name}}]" ng-model="itemOptions.options[optionNumber]" ng-options="optionVar.value disable when optionVar.disabled for optionVar in option.variations track by optionVar.value">
@@ -134,12 +96,8 @@
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                             <div class="form-group">
-                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                    <label>Quantity: </label>
-                                </div>
-                                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                    <input class="form-control" type="number" value="{{product.minQuantity}}" min="{{product.minQuantity}}" max="{{product.maxQuantity}}" ng-model="item.quantity"/>
-                                </div>
+                                <label>Quantity</label>
+                                <input class="form-control" type="number" value="{{product.minQuantity}}" min="{{product.minQuantity}}" max="{{product.maxQuantity}}" ng-model="item.quantity"/>
                             </div>
                         </div>
                     </form>
@@ -186,7 +144,7 @@
                     <!-- <uib-tab heading="Item Details">{{product.description}}</uib-tab> -->
 
                     <uib-tab heading="Item Details">
-                        <div ng-switch on="item.description === undefined">
+                        <div class="product-tab-set" ng-switch on="item.description === undefined">
                             <div ng-switch-when="false">
                                 {{item.description}}
                             </div>
