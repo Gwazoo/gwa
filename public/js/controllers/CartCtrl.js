@@ -36,8 +36,9 @@ angular.module('gwazoo.controllers')
         if(item.quantity === undefined) {
             item.quantity = 1;
         }
-        Cookies.update(item.quantity).then(function(cart) {
+        Cookies.update(item).then(function(cart) {
             $scope.$parent.cartCount = Cookies.getCartCount();
+            // $scope.cart = cart;
         });
     }
 }]);
