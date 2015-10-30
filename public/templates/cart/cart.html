@@ -55,11 +55,11 @@
                             <form>
                                 <div class="form-group">
                                     <label class="sr-only">Quantity</label>
-                                    <select class="form-control" name="repeatSelect" id="quantitySelect" ng-model="product.quantity" ng-options="optionVar for optionVar in range(product.product.minQuantity, product.product.maxQuantity) track by optionVar">
+                                    <select class="form-control" name="repeatSelect" id="quantitySelect" ng-change="updateCartItem(product)" ng-model="product.quantity" ng-options="optionVar for optionVar in range(product.product.minQuantity, product.product.maxQuantity) track by optionVar">
                                     </select>
                                 </div>
                             </form>
-                            <button class="btn btn-warning btn-sm btn-block" ng-click="updateCartItem(product)">Update Cart</button>
+                            <!-- <button class="btn btn-warning btn-sm btn-block" ng-click="updateCartItem(product)">Update Cart</button> -->
                         </div>
                     </div>
                 </div>
