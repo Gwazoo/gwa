@@ -55,6 +55,21 @@ angular.module('gwazoo.services')
         });
         return deferred.promise;
     };
+
+    this.getProductItem = function (param) {
+        // console.log(param);
+        var deferred = $q.defer();
+        $http({
+            method: 'GET',
+            url: '/api/product/' + param
+        }).success(function (res) {
+            deferred.resolve(res);
+        }).error(function (err) {
+            console.log('Services Err:', err);
+            deferred.reject(err);
+        });
+        return deferred.promise;
+    }
     
     this.updateProduct = function (productObj) {
         var deferred = $q.defer();

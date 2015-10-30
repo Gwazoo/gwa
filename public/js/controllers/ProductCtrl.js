@@ -56,6 +56,5 @@ angular.module('gwazoo.controllers')
             });
         }
     });
-    
 }]);
 

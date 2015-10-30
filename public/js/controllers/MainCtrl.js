@@ -6,7 +6,12 @@ angular.module('gwazoo.controllers')
 
     //Check session and initialize cart
     $scope.session = Cookies.getSession();
-    $scope.cartCount = Cookies.getCartCount();
+    $scope.cartCount = function() {
+        var cartCount = 0;
+        cartCount = Cookies.getCartCount();
+        // console.log(cartCount);
+        return cartCount; 
+    }
 
     $scope.logout = function() {
         Cookies.clearAllCookies();
@@ -37,21 +42,21 @@ angular.module('gwazoo.controllers')
         });
     };
 
-    // CART HELPERS
-    $scope.add = function (productId) {
-        Cookies.add(productId);
-        $scope.cartCount = Cookies.getCartCount();
-    };
-    $scope.remove = function (productId) {
-        Cookies.remove(productId);
-        $scope.cartCount = Cookies.getCartCount();
-    };
-    $scope.clear = function () {
-        Cookies.clear();
-    };
-    $scope.get = function () {
-        console.log(Cookies.getCart());
-    };
+    // // CART HELPERS
+    // $scope.add = function (productId) {
+    //     Cookies.add(productId);
+    //     $scope.cartCount = Cookies.getCartCount();
+    // };
+    // $scope.remove = function (productId) {
+    //     Cookies.remove(productId);
+    //     $scope.cartCount = Cookies.getCartCount();
+    // };
+    // $scope.clear = function () {
+    //     Cookies.clear();
+    // };
+    // $scope.get = function () {
+    //     console.log(Cookies.getCart());
+    // }
 
     // NAVIGATION
     Products.getCategories()

@@ -28,15 +28,6 @@ angular.module('gwazoo.controllers')
 		});
 	};
 
-	$scope.viewOrders = function () {
-		Orders.viewOrders()
-		.then(function (orders) {
-			$scope.orders = orders;
-		}).catch(function (err) {
-
-		});
-	};
-
 }]);
 
 

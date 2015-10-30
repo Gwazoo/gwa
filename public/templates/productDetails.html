@@ -1,3 +1,5 @@
+<header ng-include="'templates/include/header.html'"></header>
+
 <div class="container">
 	<section class="container-fluid">
         <div class="row">
@@ -65,28 +67,6 @@
                 </div>
                 <div class="row">
                     <form name="myForm">
-                        <!-- <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                            <div class="form-group">
-                                <div class="colors-share">
-                                    <div class="color-types">
-                                        <div class="checkbox-buttons">
-                                            <ul class="list-inline" ng-repeat="option in product.optionSet.options | filter:{name:'color'}">
-                                                <li ng-repeat="color in otion">
-                                                    <input id="color{{color.name}}" name="colorOption" type="radio"><label for="color{{color.name}}" class="grey"> </label>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="" ng-repeat="option in product.optionSet.options">
-                                    <label class="sr-only">Available {{option.name}}</label>
-                                    <select class="form-control" name="options" ng-model="item.options">
-                                        <option value="{{optionVar}}" ng-repeat="optionVar in option.variations">{{optionVar}}</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div> -->
                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                             <div class="form-group">
                                 <div class="" ng-repeat="option in options" ng-init="optionNumber = $index">
@@ -99,12 +79,8 @@
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                             <div class="form-group">
-                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                    <label>Quantity: </label>
-                                </div>
-                                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                    <input class="form-control" type="number" value="{{product.minQuantity}}" min="{{product.minQuantity}}" max="{{product.maxQuantity}}" ng-model="item.quantity"/>
-                                </div>
+                                <label>Quantity</label>
+                                <input class="form-control" type="number" value="{{product.minQuantity}}" min="{{product.minQuantity}}" max="{{product.maxQuantity}}" ng-model="item.quantity"/>
                             </div>
                         </div>
                     </form>
@@ -122,11 +98,16 @@
                 </div>
                 <div class="row container-fluid">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <p>{{item.description}}</p>
+                        <div ng-switch on="item.description === undefined">
+                            <div ng-switch-when="false">
+                                <p>{{item.description}}</p>
+                            </div>
+                            <div ng-switch-default>
+                                <p>{{product.description}}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-
                 <div class="available">
                     <ul>
                         <li><span>Units in Stock: </span>{{product.stockQuantity}}</li>
@@ -139,8 +120,18 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <uib-tabset justified="true">
+
+                    <!-- <uib-tab heading="Item Details">{{product.description}}</uib-tab> -->
+
                     <uib-tab heading="Item Details">
-                        {{item.description}}
+                        <div class="product-tab-set" ng-switch on="item.description === undefined">
+                            <div ng-switch-when="false">
+                                {{item.description}}
+                            </div>
+                            <div ng-switch-default>
+                                {{product.description}}
+                            </div>
+                        </div>
                     </uib-tab>
                     <uib-tab heading="Customer Reviews">
                         {{product.modified}}
@@ -156,5 +147,7 @@
         </div>
     </section>
 </div>
+
+<footer ng-include="'templates/include/footer.html'"></footer>
 
 
