@@ -2,16 +2,16 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <a href="#" class="cart_ad">
-                <div class="col-md-1 cart_ad_img">
-                    <img src="https://images-na.ssl-images-amazon.com/images/G/01/credit/img13/PLCC/HUC-VC/plcc-5perback_cart._CB363876589_.png">
-                </div>
-                <div class="col-md-10 cart_ad_text"><span style="color: black" class="text-capitalize">{{ user.firstName }}</span>, you are earning <span>5% Back Every Day</span> with your Gwazoo Prime STORE CARD WOW!!!! </div>f
-                <div class="col-md-1 cart_ad_details">
-                    <button class="cart_ad_details btn btn-default btn-sm">See Details</button>
-                </div>
-            </a>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 cart_ad" ng-show="session">
+            <div class="col-md-1 cart_ad_img">
+                <img src="https://images-na.ssl-images-amazon.com/images/G/01/credit/img13/PLCC/HUC-VC/plcc-5perback_cart._CB363876589_.png">
+            </div>
+            <div class="col-md-10 cart_ad_text">
+                <span style="color: black" class="text-capitalize">{{ user.firstName }}</span>, you are earning <span><a href="#">5% Back Every Day</a></span> with your Gwazoo Prime STORE CARD WOW!!!!
+            </div>
+            <div class="col-md-1 cart_ad_details">
+                <button class="cart_ad_details btn btn-default btn-sm">See Details</button>
+            </div>
         </div>
     </div>
     <div class="row">
