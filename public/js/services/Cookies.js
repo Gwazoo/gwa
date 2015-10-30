@@ -50,12 +50,11 @@ angular.module('gwazoo.services')
     this.clear = function () {
         var cart = this.getCart();
 
-        if (cart !== null) {
+        if (cart !== null || cart !== undefined) {
             cart.products = [];
             updateDb(cart).then(function (newCart) {
-                cart = newCart;
+                return setCart(cart);
             });
-            return setCart(cart);
         }
     };
 
@@ -78,7 +77,6 @@ angular.module('gwazoo.services')
             }
         }
         updateDb(cart).then(function (newCart) {
-            cart.products = newCart;
             deferred.resolve(setCart(cart));
         });
         return deferred.promise;
@@ -97,7 +95,6 @@ angular.module('gwazoo.services')
         }
     
         updateDb(cart).then(function (newCart) {
-            cart.products = newCart;
             deferred.resolve(setCart(cart));
         });
         return deferred.promise;
