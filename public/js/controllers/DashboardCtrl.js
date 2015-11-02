@@ -1,7 +1,7 @@
 'use strict';
 angular.module('gwazoo.controllers')
 
-.controller('DashboardCtrl', ['$scope', '$http', '$rootScope', 'Products', function($scope, $http, $rootScope, Products) {
+.controller('DashboardCtrl', ['$scope', '$http', '$rootScope', 'Products', 'Orders', function($scope, $http, $rootScope, Products, Orders) {
 	$scope.product = {};
 	$scope.product.categories = [];
 
@@ -90,7 +90,6 @@ angular.module('gwazoo.controllers')
 		}
 	};
 	
-	
 	$scope.$watch('categories.mainCat', function (val) {
 		if(val != null || val != undefined) {
 			$scope.subCat = val.children;
@@ -102,6 +101,7 @@ angular.module('gwazoo.controllers')
 			$scope.subSubCat = val.children;
 		}
 	});
+
 }]);
 
 

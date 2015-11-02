@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html ng-app="gwazoo">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-	<title>Gwazoo</title>
+    <title>Gwazoo</title>
 
 <!-- CSS -->
-	<link rel="stylesheet" href="/css/reset.css">
-	<link rel="stylesheet" href="/libs/bootstrap/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="/css/style.css">
-	<link rel="stylesheet" href="/css/results.css">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/libs/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/results.css">
     <link rel="stylesheet" href="/css/preview.css">
-    <!-- <link rel="stylesheet" href="/css/easy-responsive-tabs.css"> -->
     <link rel="stylesheet" href="/css/etalage.css">
     <link rel="stylesheet" href="/css/cart.css">
     <link rel="stylesheet" href="/css/orderConfirmation.css">
-    <!-- <link rel="stylesheet" href="/css/cartCheckout.css"> -->
+    <!-- <link rel="stylesheet" href="/css/plugin/morris.css">
+    <link rel="stylesheet" href="/css/cartCheckout.css"> -->
     <link rel="stylesheet" href="/libs/bootstrap-magnify/css/bootstrap-magnify.min.css">
 
     <!-- google fonts-->
@@ -31,18 +31,14 @@
     <script src="/libs/angular/angular.js"></script>
     <script src="/libs/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="/libs/angular-route/angular-route.min.js"></script>
-    <script src="/libs/angular-route-styles/route-styles.js"></script>
+    <script src="/libs/angular-ui-router-styles/ui-router-styles.js"></script>
     <script src="/libs/angular-animate/angular-animate.min.js"></script>
     <script src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/libs/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script src="/libs/angular-local-storage/dist/angular-local-storage.min.js"></script>
     <script src="/libs/ng-flow/dist/ng-flow-standalone.min.js"></script>
     <script src="/libs/ng-breadcrumbs/dist/ng-breadcrumbs.min.js"></script>
-    <script type="/libs/bootstrap-magnify/js/bootstrap-magnify.min.js"></script>
-    <!-- Morris Charts JavaScript -->
-    <script src="js/vendor/morris/raphael.min.js"></script>
-    <script src="js/vendor/morris/morris.min.js"></script>
-    <script src="js/vendor/morris/morris-data.js"></script>
+    <script src="/libs/bootstrap-magnify/js/bootstrap-magnify.min.js"></script>
 
 <!-- APP -->
     <script src="/js/app.js"></script>
@@ -63,15 +59,16 @@
     <script src="/js/services/Account.js"></script>
     <script src="/js/services/Products.js"></script>
     <script src="/js/services/Cookies.js"></script>
+    <script src="/js/services/Orders.js"></script>
+    <script src="/js/services/Subdomain.js"></script>
 
-	<base href="/"></base>
+	<base href="/">
 </head>
 <body ng-controller="MainCtrl" flow-prevent-drop>
 
-    <div ng-include="'/templates/include/header.html'" ng-if="location.path() !== '/account'"></div>
-	<container ui-view>
-	</container>
-    <div ng-include="'/templates/include/footer.html'" ng-if="location.path() !== '/account'"></div>
+
+	<container ui-view></container>
+
 
 </body>
 </html>

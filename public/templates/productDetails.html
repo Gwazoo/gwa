@@ -1,3 +1,5 @@
+<header ng-include="'templates/include/header.html'"></header>
+
 <div class="container">
 	<section class="container-fluid">
         <div class="row">
@@ -15,7 +17,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <ul class="list-inline">
-                            <li class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-repeat="data in tester.images | limitTo: 1">
+                            <li class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-repeat="data in item.images | limitTo: 1">
                                 <img class="thumbnail" data-toggle="magnify" src="{{data.large.url}}" style="width: 100%;"/>
                             </li>
                         </ul>
@@ -24,7 +26,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <ul class="list-inline">
-                            <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2" ng-repeat="data in tester.images">
+                            <li class="col-xs-2 col-sm-2 col-md-2 col-lg-2" ng-repeat="data in item.images">
                                 <img class="thumbnail" data-toggle="magnify" src="{{data.small.url}}" style="width: 100%;"/>
                             </li>
                         </ul>
@@ -34,7 +36,7 @@
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <h1 class="text-capitalize">{{tester.name}}</h1>
+                        <h1 class="text-capitalize">{{product.name}}</h1>
                     </div>
                 </div>
                 <div class="row">
@@ -48,7 +50,7 @@
                         <h5>Retail Price:</h5>
                     </div>
                     <div class="col-xs-9 col-sm-9 col-md-10 col-lg-10">
-                        <h5><s class="text-muted">${{tester.retailPrice}}</s></h5>
+                        <h5><s class="text-muted">${{product.retailPrice}}</s></h5>
                     </div>
                 </div>
                 <div class="row">
@@ -56,55 +58,29 @@
                         <h5>Price:</h5>
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-5 col-lg-5">
-                        <h5><strong>${{tester.supplyPrice}}</strong></h5>
+                        <h5><strong>${{product.supplyPrice}}</strong></h5>
+                        <input type="hidden" ng-model="item.supplyPrice" value="{{product.supplyPrice}}">
                     </div>
                     <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-                        <h5 class="text-right text-danger">You Save <strong>${{tester.retailPrice-tester.supplyPrice | number:2}} ({{((tester.supplyPrice/tester.retailPrice)*100) | number:0}}%)</strong></h5>
+                        <h5 class="text-right text-danger">You Save <strong>${{product.retailPrice-product.supplyPrice | number:2}} ({{((product.supplyPrice/product.retailPrice)*100) | number:0}}%)</strong></h5>
                     </div>
                 </div>
                 <div class="row">
-                    <h4>Options Available</h4>
                     <form name="myForm">
-                        <!-- <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                            <div class="form-group">
-                                <div class="colors-share">
-                                    <div class="color-types">
-                                        <div class="checkbox-buttons">
-                                            <ul class="list-inline" ng-repeat="option in tester.optionSet.options | filter:{name:'color'}">
-                                                <li ng-repeat="color in otion">
-                                                    <input id="color{{color.name}}" name="colorOption" type="radio"><label for="color{{color.name}}" class="grey"> </label>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="" ng-repeat="option in tester.optionSet.options">
-                                    <label class="sr-only">Available {{option.name}}</label>
-                                    <select class="form-control" name="options" ng-model="item.options">
-                                        <option value="{{optionVar}}" ng-repeat="optionVar in option.variations">{{optionVar}}</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div> -->
                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                             <div class="form-group">
-                                <div class="" ng-repeat="option in tester.optionSet.options">
-                                    <label class="sr-only">Available {{option.name}}</label>
-                                    <select class="form-control" name="options" ng-model="item.options">
-                                        <option value="{{optionVar}}" ng-repeat="optionVar in option.variations">{{optionVar}}</option>
+                                <div class="" ng-repeat="option in options" ng-init="optionNumber = $index">
+                                    <label>Available {{option.name}}s</label>
+                                    <select class="form-control" name="itemOptions[{{option.name}}]" ng-model="itemOptions.options[optionNumber]" ng-options="optionVar.value disable when optionVar.disabled for optionVar in option.variations track by optionVar.value">
+                                        <option value="">-- choose {{option.name}} --</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                             <div class="form-group">
-                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                    <label>Quantity: </label>
-                                </div>
-                                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                    <input class="form-control" type="number" value="{{tester.minQuantity}}" min="{{tester.minQuantity}}" max="{{tester.maxQuantity}}" ng-model="item.quantity"/>
-                                </div>
+                                <label>Quantity</label>
+                                <input class="form-control" type="number" value="{{product.minQuantity}}" min="{{product.minQuantity}}" max="{{product.maxQuantity}}" ng-model="item.quantity"/>
                             </div>
                         </div>
                     </form>
@@ -122,14 +98,19 @@
                 </div>
                 <div class="row container-fluid">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <p>{{tester.description}}</p>
+                        <div ng-switch on="item.description === undefined">
+                            <div ng-switch-when="false">
+                                <p>{{item.description}}</p>
+                            </div>
+                            <div ng-switch-default>
+                                <p>{{product.description}}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-
                 <div class="available">
                     <ul>
-                        <li><span>Units in Stock: </span>{{tester.stockQuantity}}</li>
+                        <li><span>Units in Stock: </span>{{product.stockQuantity}}</li>
                     </ul>
                 </div>
             </div>
@@ -139,20 +120,34 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <uib-tabset justified="true">
-                    <uib-tab heading="Item Details">{{tester.description}}</uib-tab>
+
+                    <!-- <uib-tab heading="Item Details">{{product.description}}</uib-tab> -->
+
+                    <uib-tab heading="Item Details">
+                        <div class="product-tab-set" ng-switch on="item.description === undefined">
+                            <div ng-switch-when="false">
+                                {{item.description}}
+                            </div>
+                            <div ng-switch-default>
+                                {{product.description}}
+                            </div>
+                        </div>
+                    </uib-tab>
                     <uib-tab heading="Customer Reviews">
-                        {{tester.modified}}
+                        {{product.modified}}
                     </uib-tab>
                     <uib-tab heading="Q & A">
-                        {{tester.shippingType}}
+                        {{product.shippingType}}
                     </uib-tab>
                     <uib-tab heading="Return & Exchange">
-                        {{tester.msrp}}
+                        {{product.msrp}}
                     </uib-tab>
                 </uib-tabset>
             </div>
         </div>
     </section>
 </div>
+
+<footer ng-include="'templates/include/footer.html'"></footer>
 
 

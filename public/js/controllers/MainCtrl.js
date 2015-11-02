@@ -6,12 +6,16 @@ angular.module('gwazoo.controllers')
 
     //Check session and initialize cart
     $scope.session = Cookies.getSession();
-    $scope.cartCount = Cookies.getCartCount();
+    $scope.cartCount = function() {
+        var cartCount = 0;
+        cartCount = Cookies.getCartCount();
+        // console.log(cartCount);
+        return cartCount; 
+    }
 
     $scope.logout = function() {
         Cookies.clearAllCookies();
         $scope.session = null;
-        $scope.cartCount = 0;
         Account.logout()
         .then(function () {
             $scope.user = null;
@@ -37,21 +41,21 @@ angular.module('gwazoo.controllers')
         });
     };
 
-    // CART HELPERS
-    $scope.add = function (productId) {
-        Cookies.add(productId);
-        $scope.cartCount = Cookies.getCartCount();
-    };
-    $scope.remove = function (productId) {
-        Cookies.remove(productId);
-        $scope.cartCount = Cookies.getCartCount();
-    };
-    $scope.clear = function () {
-        Cookies.clear();
-    };
-    $scope.get = function () {
-        console.log(Cookies.getCart());
-    }
+    // // CART HELPERS
+    // $scope.add = function (productId) {
+    //     Cookies.add(productId);
+    //     $scope.cartCount = Cookies.getCartCount();
+    // };
+    // $scope.remove = function (productId) {
+    //     Cookies.remove(productId);
+    //     $scope.cartCount = Cookies.getCartCount();
+    // };
+    // $scope.clear = function () {
+    //     Cookies.clear();
+    // };
+    // $scope.get = function () {
+    //     console.log(Cookies.getCart());
+    // }
 
     // NAVIGATION
     Products.getCategories()
@@ -60,7 +64,7 @@ angular.module('gwazoo.controllers')
     });
 }])
 
-.controller('MainCtrl.Modal', function($scope, $modalInstance, $location, Cookies, Account) {
+.controller('MainCtrl.Modal', function($scope, $modalInstance, $location, Cookies, Account, Products) {
     $scope.login = function(userLogin) {
         Account.login(userLogin)
         .then(function (user) {
@@ -72,6 +76,7 @@ angular.module('gwazoo.controllers')
                     var newCart = {};
                     newCart.products = cart;
                     newCart.username = user.username;
+                    newCart.products = Products.initMerge(cart);
                     console.log("MainCTRL", newCart);
                     Cookies.setCart(newCart);
                     return Cookies.getCartCount();
@@ -86,6 +91,7 @@ angular.module('gwazoo.controllers')
                     var newCart = {};
                     newCart.products = cart;
                     newCart.username = user.username;
+                    newCart.products = Products.initMerge(cart);
                     console.log("MainCTRL:", newCart);
                     Cookies.setCart(newCart);
                     return Cookies.getCartCount();

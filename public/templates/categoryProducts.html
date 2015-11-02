@@ -1,3 +1,5 @@
+<header ng-include="'templates/include/header.html'"></header>
+
 <section class="page-header container"> <!-- page header -->
     <h1>{{category}}</h1>
 </section>
@@ -55,7 +57,7 @@
                 <img ng-src="{{image}}" style="width: 150px;">
             </div>
             <div class="col-md-5">
-                <span><h4><a href="#">{{product.name}}</a></h4></span>
+                <span><h4><a ng-href="product/{{product.sku}}/{{product.id}}">{{product.name}}</a></h4></span>
                 </br>
                 </br>
                 </br>
@@ -66,11 +68,11 @@
                 <div>
                     STARS / DESCRIPTIONS
                 </div>
-                <div ng-click="add(product.id)">Add To Cart</div>
-                <div ng-click="remove(product.id)">Remove From Cart</div>
-                <div ng-click="clear()">Clear Cart</div>
-                <div ng-click="get()">View Cart</div>
             </div>
-        </div><!-- /. container -->
-    </div><!-- /. search results -->    
-</section><!-- /. container --> <!-- /. page content -->
+        </div>
+    </div>
+</section>
+
+<footer ng-include="'templates/include/footer.html'"></footer>
+
+

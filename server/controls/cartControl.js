@@ -63,8 +63,15 @@ module.exports = {
     },
     update: function (req, res) {
         CartItem.cleanup(req.user.username).then(function () {
-            User.updateCart(req.user.username, req.body).then(function (cart) {
-                res.json(cart);
+            User.updateCart(req.user.username, req.body).then(function () {
+                CartItem.get(req.user.username)
+                    .then(function (result){
+                        res.json(result);
+                }, function (err) {
+                    res.status(500).json({
+                        message: "Database error: " + err
+                    });
+                });
             }, function (err) {
                 res.status(500).json({
                     message: "Database error: " + err

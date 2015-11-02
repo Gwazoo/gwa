@@ -1,6 +1,8 @@
+<header ng-include="'templates/include/header.html'"></header>
+
 <div class="container">
     <div class="row checkout_head">
-        <h2>Checkout (<span><a href="/cart">4 items</a></span>)</h2>
+        <h2>Checkout (<span><a ui-sref="cart">{{cartCount}} items</a></span>)</h2>
     </div>
     <br>
     <div class="row">
@@ -99,5 +101,7 @@
         </div>
     </div>
 </div>
+
+<footer ng-include="'templates/include/footer.html'"></footer>
 
 

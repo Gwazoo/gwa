@@ -22,7 +22,11 @@ var CartItem = {
     },
     get: function (username) {
         return new Promise(function (resolve, reject) {
-            CartItemModel.getAll(username, {index: "username"}).getJoin({product: true}).run()
+            CartItemModel.getAll(username, {index: "username"}).getJoin({product: {
+                    _apply: function(sequence) {
+                        return sequence.getJoin({product: true});
+                    }
+            }}).run()
             .then(function (result) {
                 if (result) {
                     resolve(result);
