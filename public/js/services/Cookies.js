@@ -50,12 +50,11 @@ angular.module('gwazoo.services')
     this.clear = function () {
         var cart = this.getCart();
 
-        if (cart !== null) {
+        if (cart !== null || cart !== undefined) {
             cart.products = [];
             updateDb(cart).then(function (newCart) {
-                cart = newCart;
+                return setCart(cart);
             });
-            return setCart(cart);
         }
     };
 
@@ -78,8 +77,6 @@ angular.module('gwazoo.services')
             }
         }
         updateDb(cart).then(function (newCart) {
-            cart.products = newCart;
-            setCart(cart);
             deferred.resolve(setCart(cart));
         });
         return deferred.promise;
@@ -89,12 +86,19 @@ angular.module('gwazoo.services')
         var deferred = $q.defer();
         var cart = this.getCart();
 
+        var index = getProductIndex(cart.products, item.product.id);
+        if (index === -1) {
+            deferred.reject();
+        } else {
+            cart.products[index].quantity = item.quantity;
+            cart.products[index].modified = new Date();
+        }
+    
         updateDb(cart).then(function (newCart) {
-            cart.products = newCart;
-            setCart(cart);
             deferred.resolve(setCart(cart));
         });
         return deferred.promise;
+
     };
 
     this.remove = function (productId) {
@@ -169,6 +173,7 @@ angular.module('gwazoo.services')
     };
 
     function updateDb(cart) {
+        // console.log(cart);
         var deferred = $q.defer();
         if (cart.username !== "") {
             console.log("Sending update...");

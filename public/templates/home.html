@@ -90,7 +90,7 @@
     </section>
 
     <section class="page_content container row"> <!-- 2nd block -->
-        <div class="main_left col-xs-12 col-sm-12 col-md-3 col-lg-3"> <!-- left -->
+        <div class="main_left col-xs-12 col-sm-12 col-md-3 col-lg-3 pull-left"> <!-- left -->
             <div class="main_category">
                 <ul>
                     <h3><i class="fa fa-caret-right"></i> Browse All Categories</h3>
@@ -126,7 +126,7 @@
             </div>
         </div>
 
-        <div class="main_right col-xs-12 col-sm-12 col-md-9 col-lg-9">
+        <div class="main_right col-xs-12 col-sm-12 col-md-9 col-lg-9 pull-right">
             <h3 class="text-capitalize"><i class="fa fa-caret-right"></i> Trending Items</h3>
             <div class="section_group parent">
                 <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child" ng-repeat="product in products | limitTo: 8"> <!-- NG-REPEAT THROUGH TOP PRODUCTS RESTRICT TO 8 ITEMS. BORDER & BORDER-RADIUS -->
@@ -145,7 +145,7 @@
                 </div>
             </div>
         </div>
-        <div class="main_right col-xs-12 col-sm-12 col-md-9 col-lg-9">
+        <div class="main_right col-xs-12 col-sm-12 col-md-9 col-lg-9 pull-right">
             <h3 class="text-capitalize"><i class="fa fa-caret-right"></i> Recommendations for You</h3>
                 <div class="section_group parent">
                 <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child" ng-repeat="product in products | limitTo: 4"> <!-- NG-REPEAT THROUGH SIMILAR PRODUCTS RESTRICT TO 4 ITEMS. BORDER & BORDER-RADIUS -->
@@ -164,7 +164,7 @@
                 </div>
             </div>
         </div>
-        <div class="main_right col-xs-12 col-sm-12 col-md-9 col-lg-9 col-md-offset-3 col-lg-offset-3">
+        <div class="main_right col-xs-12 col-sm-12 col-md-9 col-lg-9 pull-right">
             <h3 class="text-capitalize"><i class="fa fa-caret-right"></i> Recently viewed items</h3>
             <div class="section_group parent">
                 <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 child" ng-repeat="product in products | limitTo: 4"> <!-- NG-REPEAT THROUGH RECENTLY VIEWED RESTRICT TO 4 ITEMS. -->
