@@ -1,7 +1,7 @@
 'use strict';
 angular.module('gwazoo.controllers')
 
-.controller('SignupCtrl', ['$scope', '$rootScope', '$location', 'Account', 'Cookies', function($scope, $rootScope, $location, Account, Cookies) {
+.controller('SignupCtrl', ['$scope', '$rootScope', '$location', 'Account', 'Cookies', 'Subdomain', function($scope, $rootScope, $location, Account, Cookies, Subdomain) {
 	$scope.register = function (userData) {
 		console.log(userData);
 		var cart = Cookies.getCart();
@@ -32,6 +32,8 @@ angular.module('gwazoo.controllers')
                 $scope.check = err;  //DEBUG
         });
     };
+
+    $scope.subdomain = Subdomain.get();
 }]);
 
 
