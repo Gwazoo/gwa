@@ -72,7 +72,8 @@
 	}
 	.navbar-inverse .navbar-nav>li>a{
 		color:white;
-		font-size:20px;
+		font-size:25px;
+		font-family: 'Yanone Kaffeesatz', sans-serif;
 	}
 	.navbar-inverse .navbar-toggle .icon-bar{
 		background-color: #565656;
@@ -109,14 +110,161 @@
 	.banner_text > a:hover{
 		background-color:#4ac75e;
 	}
+	.item img{
+		width:100%;
+	}
+	#myCarousel .thumbnail {
+	margin-bottom: 0;
+}
+.carousel-control.left, .carousel-control.right {
+	background-image:none !important;
+}
+.carousel-control {
+	color:#fff;
+	top:34%;
+	color:#FD8730;
+	bottom:auto;
+	padding-top:4px;
+	width:30px;
+	height:30px;
+	text-shadow:none;
+	opacity:1;
+}
+.carousel-control:hover {
+	color: #d9534f;
+}
+.carousel-control.left, .carousel-control.right {
+	background-image:none !important;
+}
+.carousel-control.right {
+	left:auto;
+	right:-32px;
+}
+.carousel-control.left {
+	right:auto;
+	left:-32px;
+}
+.main_trend_indi{
+	bottom:-30px;
+}
+.main_trend_indi li {
+	border-radius:0;
+	width:10px;
+	height:10px;
+	background:#ccc;
+	border:1px solid #ccc;
+}
+.main_trend_indi .active {
+	width:12px;
+	height:12px;
+	background:#FD8730;
+	border-color:#FD8730;
+}
+.main_well{
+	background-color:transparent;
+	border:none;
+	box-shadow: none;
+	-webkit-box-shadow:none;
+}
 /* end of main banner */
 
 /* page content */
 	/* 1st block */
+	h1{
+		font-family: 'Yanone Kaffeesatz', sans-serif;
+	}
+	h2{
+		font-family: 'Yanone Kaffeesatz', sans-serif;
+	}
+	h3{
+		font-family: 'Yanone Kaffeesatz', sans-serif;
+	}
+	.main_pre{
+		margin-top:35px;
+	}
 	.first_block{
 		padding:2em 0;
 		background-color:#EFEFEF;
 		height:260px; /* remove this after carousel */
+	}
+	.main_firstrow{
+		margin-bottom: 70px;
+	}
+	.main_trending{
+		background-color: #F2FFF6;
+	}
+	.main_trending h1{
+		font-family: 'Yanone Kaffeesatz', sans-serif; 
+	}
+	.main_recom{
+		margin-top: 75px;
+	}
+	.main_seasonal{
+		margin-top:75px;
+	}
+	.main_seasonal img{
+		width:100%;
+	}
+	.main_seasonal_cate{
+		display:flex;
+		align-items:flex-end;
+		text-align: center;
+	}
+	.main_seasonal_cate a{
+		color:black;
+		font-weight: bold;
+	}
+	.main_seasonal_cate a:hover{
+		text-decoration: none;
+		color:#FD8730;
+	}
+	.main_seasonal_cate_button div{
+		margin-top:35px;
+		text-align: center;
+	}
+	.main_seasonal_cate_button a{
+		background-color:#FD8730;
+		border:none;
+		border-radius: 0px;
+		font-size: 20px;
+		color:white;
+	}
+	.main_seasonal_cate_button a:hover{
+		background-color:#feb47e;
+		color: white;
+	}
+	.main_seasonal_cate_button a:focus{
+		background-color:#feb47e;
+		color:white;
+	}
+	.main_popular_cate{
+		margin-top:75px;
+		margin-bottom: 50px;
+	}
+	.main_popular_cate .row{
+		display: flex;
+		align-items:flex-end;
+	}
+	.main_popular_cate li{
+		list-style: none;
+	}
+	.main_popular_cate li a{
+		color:black;
+	}
+	.main_popular_cate li a:hover{
+		text-decoration: none;
+		color:#FD8730;
+	}
+	.main_popular_cate div{
+		padding-left: 20px;
+		padding-right: 20px;
+		padding-bottom: 10px;
+	}
+	.main_popular_cate img{
+		width:100%;
+	}
+	.main_popular_cate h1{
+		margin-bottom: 30px;
 	}
 
 	/* 2nd block */
@@ -237,7 +385,8 @@
 footer {
 	margin-top: 5%;
 	padding:3% 0;
-	border-top: 1px solid #dfdfdf;
+	border-top: 10px solid #FD8730;
+	background-color: #333;
 }
 /* right */
 footer ul li {
@@ -254,7 +403,15 @@ footer ul li a:hover, footer p a:hover {
 	text-decoration: none;
 	color: #37b34a;
 }
-
+footer p{
+	color:white;
+}
+footer p a{
+	color:white;
+}
+footer ul li a{
+	color:white;
+}
 /* end of footer */
 
 
