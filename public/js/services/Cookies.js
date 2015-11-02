@@ -87,7 +87,7 @@ angular.module('gwazoo.services')
 
     this.update = function (item) {
         var deferred = $q.defer();
-        var cart = this.setCart();
+        var cart = this.getCart();
 
         updateDb(cart).then(function (newCart) {
             cart.products = newCart;
