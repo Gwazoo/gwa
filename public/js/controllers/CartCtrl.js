@@ -38,8 +38,8 @@ angular.module('gwazoo.controllers')
         }
         Cookies.update(item).then(function(cart) {
             $scope.$parent.cartCount = Cookies.getCartCount();
-            // $scope.cart = cart;
         });
+        // $scope.cart = cart;
     }
 }]);
 

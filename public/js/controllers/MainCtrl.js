@@ -16,7 +16,6 @@ angular.module('gwazoo.controllers')
     $scope.logout = function() {
         Cookies.clearAllCookies();
         $scope.session = null;
-        $scope.cartCount = 0;
         Account.logout()
         .then(function () {
             $scope.user = null;
