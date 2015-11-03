@@ -79,41 +79,41 @@ angular.module('gwazoo', ['gwazoo.controllers', 'gwazoo.services', 'ngAnimate', 
             }
         })
         .state('account.orders', {
-            url: '/order-history',
+            url: '/orders',
             views: {
               'content': {
-                templateUrl: './templates/admin/order-history.html',
+                templateUrl: './templates/admin/orders.html',
                 controller: 'DashboardCtrl'
               }
             }
         })
-        .state('account.pending', {
-            url: '/orders-pending',
-            views: {
-              'content': {
-                templateUrl: './templates/admin/orders-pending.html',
-                controller: 'DashboardCtrl'
-              }
-            }
-        })
-        .state('account.shipped', {
-            url: '/orders-shipped',
-            views: {
-              'content': {
-                templateUrl: './templates/admin/orders-shipped.html',
-                controller: 'DashboardCtrl'
-              }
-            }
-        })
-        .state('account.forms', {
-            url: '/forms',
-            views: {
-              'content': {
-                templateUrl: './templates/admin/forms.html',
-                controller: 'DashboardCtrl'
-              }
-            }
-        })
+        // .state('account.pending', {
+        //     url: '/orders-pending',
+        //     views: {
+        //       'content': {
+        //         templateUrl: './templates/admin/orders-pending.html',
+        //         controller: 'DashboardCtrl'
+        //       }
+        //     }
+        // })
+        // .state('account.shipped', {
+        //     url: '/orders-shipped',
+        //     views: {
+        //       'content': {
+        //         templateUrl: './templates/admin/orders-shipped.html',
+        //         controller: 'DashboardCtrl'
+        //       }
+        //     }
+        // })
+        // .state('account.forms', {
+        //     url: '/forms',
+        //     views: {
+        //       'content': {
+        //         templateUrl: './templates/admin/forms.html',
+        //         controller: 'DashboardCtrl'
+        //       }
+        //     }
+        // })
         .state('account.profile', {
             url: '/profile',
             views: {
