@@ -2,62 +2,64 @@
 
 <div class="container">
     <div class="row checkout_head">
-        <h2>Checkout (<span><a ui-sref="cart">4 items</a></span>)</h2>
+        <h2>Checkout (<span><a ui-sref="cart">{{ cartCount() }} item<span ng-if="cartCount() > 1">s</span></a></span>)</h2>
     </div>
     <br>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 checkout_content">
             <section class="row child-base">
-                <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                     <h5 class="text-capitalize"><strong>1 shipping address</strong></h5>
                 </div>
-                <div class="col-xs-8 col-sm-8 col-md-7 col-lg-7">
-                    <address class="text-capitalize">
-                        {{user.name}}callum poole<br>
-                        {{user.address.street}}4923 ryan road<br>
-                        Rapid City{{user.address.city}}, {{user.address.state}}SD {{user.address.zip}}57702<br>
+                <div class="col-xs-8 col-sm-8 col-md-6 col-lg-6">
+                    <address ng-if="shippingAddress" class="text-capitalize">
+                        {{shippingAddress.name}}<br>
+                        {{shippingAddress.street}}<br>
+                        {{shippingAddress.city}}, {{shippingAddress.state}} {{shippingAddress.postalCode}}<br>
                     </address>
                 </div>
-                <div class="col-xs-4 col-sm-4 col-md-2 col-lg-3">
-                    <button class="btn btn-default btn-xs btn-block text-capitalize">change</button>
+                <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3">
+                    <button ng-if="user.addresses" class="btn btn-primary btn-xs btn-block" ng-click="addressChangeModal()">Change Address</button>
+                    <button ng-if="!user.addresses" class="btn btn-primary btn-xs btn-block" ng-click="addressAddModal()">Add Address</button>
                 </div>
             </section> <!-- PUT A BORDER-BOTTOM ON THIS SECTION -->
             <section class="row child-base">
-                <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                     <h5 class="text-capitalize"><strong>2 payment method</strong></h5>
                 </div>
-                <div class="col-xs-8 col-sm-8 col-md-7 col-lg-7">
-                    <P><strong class="text-capitalize">{{user.cardType}}debit card </strong>ending in {{user.cardNumber}}4865</P>
-                    <p><strong class="text-capitalize">billing address: </strong>{{user.billingOption}}same as shipping address. <a href="#billingAddressModal">Change</a></p>
+                <div class="col-xs-8 col-sm-8 col-md-6 col-lg-6">
+                    <P><strong class="text-capitalize">{{user.cardType}}debit card </strong>ending in {{ user.cardNumber }}4865</P>
+                    <p><strong class="text-capitalize">billing address: </strong>{{ user.billingOption }}same as shipping address. <a href="#billingAddressModal" ng-click="billingAddressModal()">Change</a></p>
                 </div>
-                <div class="col-xs-4 col-sm-4 col-md-2 col-lg-3">
-                    <button class="btn btn-default btn-xs btn-block text-capitalize" ng-click="">change</button>
+                <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3">
+                    <button ng-if="user.address" class="btn btn-primary btn-xs btn-block" ng-click="paymentUpdateModal()">Update Payment Info</button>
+                    <button ng-if="!user.address" class="btn btn-primary btn-xs btn-block" ng-click="paymentAddModal()">Add Payment Info</button>
                 </div>
             </section> <!-- PUT A BORDER-BOTTOM ON THIS SECTION -->
             <section class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <h5 class="text-capitalize"><strong>3 review items</strong></h5>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 checkout_review"> <!-- PUT A BORDER AROUND THIS DIV (WITH BORDER-RADIUS) NG-REPEAT(ng-repeat="items in cart") -->
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 checkout_review" ng-repeat="product in cart.products"> <!-- PUT A BORDER AROUND THIS DIV (WITH BORDER-RADIUS) NG-REPEAT(ng-repeat="items in cart") -->
                     <div class="row">
                         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                            <img src="{{product.image}}"/><img style="max-width: 100%;" src="/img/preview-small-img4.png"/> <!-- MAYBE MAKE THE HEIGHT STANDARD SO THEY WILL EITHER GO FULL WIDTH OF COLUMN OR MAX-HEIGHT -->
+                            <img src="{{product.product.images[0].large.url}}" class="thumbnail" style="max-width: 100%;" /><!-- MAYBE MAKE THE HEIGHT STANDARD SO THEY WILL EITHER GO FULL WIDTH OF COLUMN OR MAX-HEIGHT -->
                         </div>
                         <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 checkout_details">
-                            <h5><strong>{{product.name}}Everest Multiple Pocket Waist Pack, Black, One Size</strong></h5>
-                            <p><strong class="text-danger">${{product.price}}11.45</strong></p>
-                            <p><strong>Quantity: </strong>{{product.quantity}}</p>
+                            <h5><strong>{{ product.product.name }}</strong></h5>
+                            <p><strong class="text-danger">{{ product.product.retailPrice*product.quantity | currency }}</strong></p>
+                            <p><strong>Quantity: </strong>{{ product.quantity }}</p>
                         </div>
                         <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-                            <h6 class="text-capitalization"><strong>Choose your delivery option:</strong></h6>
-                            <p><span class="text-uppercase">standard: </span><strong>{{delivery.starteDate}}Friday, October 30, 2015 -<br>
-                            {{delivery.endDate}}Saturday, October 31, 2015</strong></p>
+                            <h6 class="text-capitalize"><strong>Choose your delivery option:</strong></h6>
+                            <p><span class="text-uppercase">standard: </span><strong class="text-capitalize">{{ delivery.starteDate }} -<br>
+                            {{ delivery.endDate }}</strong></p>
                         </div>
                     </div>
                 </div>
             </section>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 checkout_fixed pull-right"> <!-- PUT A BORDER AROUND THIS DIV (WITH BORDER-RADIUS) AND MAKE IT SCROLL WITH THE PAGE -->
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 checkout_fixed pull-right" style="border:1px solid lightgray; border-radius:10px;"> <!-- PUT A BORDER AROUND THIS DIV (WITH BORDER-RADIUS) AND MAKE IT SCROLL WITH THE PAGE -->
             <section class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <button class="btn btn-warning btn-md btn-block text-capitalize">place your order</button>
@@ -73,7 +75,7 @@
                     <h4>Order Summary</h4>
                     <div class="parent-row">
                         <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 checkout_summary">
-                            <p>Items ({{cart.quantity}}2):</p>
+                            <p>Items ({{ cartCount() }}):</p>
                             <p>Shipping & Handling:</p>
                             <br>
                             <p>Total before tax:</p>
@@ -81,11 +83,11 @@
                             <br>
                         </div>
                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 checkout_breakdown">
-                            <p class="text-right">${{cart.price}}122.51</p>
-                            <p class="text-right checkout_shipping">${{shipping.price}}9.00</p> <!-- PUT A BORDER-BOTTOM ON THIS SECTION -->
+                            <p class="text-right">{{ cartTotal() | currency }}</p>
+                            <p class="text-right checkout_shipping">{{ shippingTotal() | currency}}</p> <!-- PUT A BORDER-BOTTOM ON THIS SECTION -->
                             <br>
-                            <p class="text-right">${{cart.subTotal}}131.51</p>
-                            <p class="text-right">${{tax}}0.00</p>
+                            <p class="text-right">{{ cartSubTotal() | currency }}</p>
+                            <p class="text-right">{{ tax() | currency }}</p>
                         </div>
                     </div> <!-- PUT A BORDER-BOTTOM ON THIS SECTION -->
                     <div class="row checkout_total">
@@ -93,7 +95,7 @@
                             <h4 class="red"><strong class="text-danger">Order Total:</strong></h4>
                         </div>
                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                            <h4 class="text-right"><strong class="text-danger">${{cart.subTotal}}131.51</strong></h4>
+                            <h4 class="text-right"><strong class="text-danger">{{ grandTotal() | currency }}</strong></h4>
                         </div>
                     </div>
                 </div>

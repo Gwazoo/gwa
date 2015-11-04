@@ -1,9 +1,9 @@
 'use strict';
 angular.module('gwazoo.controllers')
 
-.controller('CartCtrl', ['$scope', '$rootScope', 'Cookies', 'Products', function($scope, $rootScope, Cookies, Products) {
+.controller('CartCtrl', ['$scope', '$rootScope', '$uibModal', 'Cookies', 'Products', function($scope, $rootScope, $uibModal, Cookies, Products) {
     $scope.cart = Cookies.getCart();
-    // console.log($scope.cart);
+    // console.log($scope.cart.products);
     $scope.user = Cookies.getSession();
     // console.log($scope.user);
     $scope.$parent.cartCount = Cookies.getCartCount();
@@ -28,11 +28,26 @@ angular.module('gwazoo.controllers')
         }
         return total;
     };
+    $scope.shippingTotal = function() {
+        var total = 0;
+        for (var i = 0; i < $scope.cart.products.length; i++) {
+            var product = $scope.cart.products[i];
+            // console.log($scope.cart.products[i]);
+            total += Math.round(product.product.shippingPrice);
+        }
+        return total;
+    };
+    $scope.cartCount = function() {
+        var cartCount = 0;
+        cartCount = Cookies.getCartCount();
+        // console.log(cartCount);
+        return cartCount; 
+    }
     $scope.clearCart = function () {
         $scope.cart = Cookies.clear();
     };
     $scope.updateCartItem = function(item) {
-        console.log(item);
+        // console.log(item);
         if(item.quantity === undefined) {
             item.quantity = 1;
         }
@@ -40,7 +55,58 @@ angular.module('gwazoo.controllers')
             $scope.$parent.cartCount = Cookies.getCartCount();
         });
         // $scope.cart = cart;
-    }
-}]);
+    };
+    $scope.cartSubTotal = function() {
+        var subTotal = 0;
+        subTotal = $scope.cartTotal() + $scope.shippingTotal();
+        return subTotal;
+    };
+    $scope.tax = function() {
+        var tax = 0;
+        // tax = $scope.cartSubTotal() + $scope.tax();
+        // console.log(tax);
+        return tax;
+    };
+    $scope.grandTotal = function() {
+        var grandTotal = 0;
+        grandTotal = $scope.cartSubTotal() + $scope.tax();
+        // console.log(grandTotal);
+        return grandTotal;
+    };
+
+// MODAL HELPERS
+    $scope.addressAddModal = function() {
+        var modalInstance = $uibModal.open({
+            templateUrl : 'templates/modals/addAddressModal.html',
+            controller : 'CartCtrl.Modal',
+            scope : $scope
+        });
+
+        modalInstance.result.then(function(userAddresses) {
+            // console.log(userAddresses);
+            $scope.shippingAddress = userAddresses;
+        }, function() {
+        });
+    };
+}])
+
+.controller('CartCtrl.Modal', function($scope, $modalInstance, $location, Cookies, Account, Products) {
+    $scope.addAddress = function(userAddress) {
+        console.log(userAddress);
+        Account.addAddress(userAddress)
+        .then(function (userAddresses) {
+            // console.log(userAddresses);
+            $modalInstance.close(userAddresses);
+        }).catch(function (err) {
+            $scope.error = 'ERROR ERROR ERROR';
+        });
+    };
+
+    $scope.cancel = function() {
+        $scope.user.addresses = null;
+        $scope.error = null;
+        $modalInstance.dismiss();
+    };
+});
 
 

@@ -71,7 +71,7 @@ angular.module('gwazoo.services')
 			deferred.reject(err);
 		});
 		return deferred.promise;
-	}
+	};
 
 	this.updatePassword = function (passwordObj) {
 		var deferred = $q.defer();
@@ -85,7 +85,24 @@ angular.module('gwazoo.services')
 			deferred.reject(err);
 		});
 		return deferred.promise;
-	}
+	};
+
+    this.addAddress = function (address) {
+        console.log(address);
+        var deferred = $q.defer();
+        $http({
+            method: 'POST',
+            url: '/api/user/addresses', 
+            data: address
+        }).success(function (res) {
+            console.log(res);
+            deferred.resolve(res);
+        }).error(function (err) {
+            console.log(err);
+            deferred.reject(err);
+        });
+        return deferred.promise;
+    };
 });
 
 

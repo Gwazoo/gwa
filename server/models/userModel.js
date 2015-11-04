@@ -97,6 +97,12 @@ var UserModel = {
                 reject(Error(err));
             });
         });
+    },
+    updateAddresses: function (userAddress) {
+        console.log(userAddress);
+        // return new Promise(function (resolve, reject) {
+        //     User.get(userAddress).
+        // })
     }
 };
 

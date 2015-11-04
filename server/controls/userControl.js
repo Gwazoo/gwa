@@ -189,5 +189,17 @@ module.exports = {
     },
     updatePassword: function (req, res) {
 
+    },
+    addAddresses: function (req, res) {
+        console.log(req);
+        userModel.updateAddresses(req.body)
+                .then(function (user) {
+                    console.log(user);
+                    res.send(user);
+                }, function (err) {
+                    res.status(500).json({
+                        message: "Database error. User address not saved."
+                    });
+                });
     }
 };

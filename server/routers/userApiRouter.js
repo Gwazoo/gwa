@@ -28,6 +28,9 @@ userRouter.post('/update/email', UserApi.updateEmail);
 userRouter.post('/update/password', UserApi.updatePassword);
 
 
+userRouter.post('/addresses', UserApi.addAddresses);
+
+
 userRouter.delete('/delete', UserApi.isAuthed, UserApi.delete);
 
 

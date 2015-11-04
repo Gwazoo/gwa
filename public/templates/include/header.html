@@ -11,9 +11,9 @@
             </div>
             <div class="head_right col-xs-12 col-md-3" align="right">
                 <ul>
-                    <li ng-show="!session"><a href="#" ng-click="loginModal()">Login</a></li>
-                    <li ng-show="!session"><a href="/register">Register</a></li>
-                    <li ng-show="session" class="dropdown">
+                    <li ng-if="!session"><a href="#" ng-click="loginModal()">Login</a></li>
+                    <li ng-if="!session"><a href="/register">Register</a></li>
+                    <li ng-if="session" class="dropdown">
                         <a href="#" class="dropdown-toggle text-capitalize" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{session.firstName}}'s Account <span class="caret"></span></a>
                         <ul class="dropdown-menu"> 
                             <li><a ui-sref="account.admin">Settings</a></li>
@@ -49,7 +49,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shop <span class="caret"></span></a>
                         <ul class="dropdown-menu">  <!-- NG_REPEAT THROUGHT THESE -->
-                            <li ng-repeat="category in categories"><a ng-href="/category/{{category.slug}}/{{category.id}}">{{category.name}}</a></li>
+                            <li ng-repeat="category in categories | orderBy:'name'"><a ng-href="/category/{{category.slug}}/{{category.id}}">{{category.name}}</a></li>
                         </ul>
                     </li>
                     <li><a href="/category/{{category.slug}}">beauty</a></li>
