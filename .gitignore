@@ -7,5 +7,6 @@ server/util/mailer.js
 /nbproject/private/
 /nbproject/project.xml
 /nbproject/project.properties
-server/util/thinky.js
 rethinkdb_data/
+backup.tar.gz
+server/util/thinky.js
