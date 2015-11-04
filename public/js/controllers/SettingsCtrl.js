@@ -4,58 +4,40 @@ angular.module('gwazoo.controllers')
 .controller('SettingsCtrl', ['$scope', '$rootScope', '$location', 'formlyVersion', 'Account', 'Orders', function($scope, $rootScope, $location, formlyVersion, Account, Orders) {
 // FORMLY TESTING
     var vm = this;
-    // funcation assignment
-    vm.onSubmit = onSubmit;
-
-    // variable assignment
-    vm.env = getEnv();
-    vm.model = {};
-    vm.options = {formState: {}};
-    vm.fields = getFields();
-    vm.originalFields = angular.copy(vm.fields);
-
-    // function definition
-    function getFields() {
-      // return your fields here
-      return [
+    vm.password = {};
+    vm.passwordFields = [
         {
-          key: 'firstInput',
-          type: 'input',
-          templateOptions: {
-            label: 'Input',
-            placeholder: 'Formly is terrific!'
-          },
-          expressionProperties: {
-            'templateOptions.label': 'model[options.key] || "Input"'
-          }
+            key: 'oldPassword',
+            type: 'input',
+            templateOptions: {
+                type: 'password',
+                label: 'Old Password',
+                placeholder: 'Old Password',
+                required: true
+            }
         },
         {
-          key: 'text',
-          type: 'checkbox',
-          templateOptions: {
-            label: 'Hidden box'
-          },
-          hideExpression: '!model.firstInput'
+            key: 'newPassword',
+            type: 'input',
+            templateOptions: {
+                type: 'password',
+                label: 'New Password',
+                placeholder: 'New Password',
+                required: true
+            }
+        },
+        {
+            key: 'confirmPassword',
+            type: 'input',
+            templateOptions: {
+                type: 'password',
+                label: 'Confirm Password',
+                placeholder: 'Confirm Password',
+                required: true
+            }
         }
-      ];
-    }
+    ];
 
-
-    function onSubmit() {
-      vm.options.updateInitialValue();
-      alert(JSON.stringify(vm.model), null, 2);
-    }
-
-    function getEnv() {
-      return {
-        angularVersion: angular.version.full,
-        formlyVersion: formlyVersion
-      };
-    }
-
-
-
-    
 	// $scope.email = {};
 	// $scope.email.prevEmail = "";
 	// $scope.email.newEmail = "";

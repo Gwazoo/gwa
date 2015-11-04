@@ -6,6 +6,8 @@ angular.module('gwazoo.controllers')
     // console.log($scope.cart);
     $scope.user = Cookies.getSession();
     // console.log($scope.user);
+    $scope.checkoutCart = Cookies.getDbCart();
+    console.log($scope.checkoutCart);
     $scope.$parent.cartCount = Cookies.getCartCount();
 
     $scope.range = function(min, max) {
@@ -28,6 +30,12 @@ angular.module('gwazoo.controllers')
         }
         return total;
     };
+    $scope.cartCount = function() {
+        var cartCount = 0;
+        cartCount = Cookies.getCartCount();
+        // console.log(cartCount);
+        return cartCount; 
+    }
     $scope.clearCart = function () {
         $scope.cart = Cookies.clear();
     };
@@ -40,7 +48,7 @@ angular.module('gwazoo.controllers')
             $scope.$parent.cartCount = Cookies.getCartCount();
         });
         // $scope.cart = cart;
-    }
+    };
 }]);
 
 
