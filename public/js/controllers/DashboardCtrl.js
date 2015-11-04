@@ -101,7 +101,6 @@ angular.module('gwazoo.controllers')
 			$scope.subSubCat = val.children;
 		}
 	});
-
 }]);
 
 
