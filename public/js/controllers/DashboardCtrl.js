@@ -39,24 +39,87 @@ angular.module('gwazoo.controllers')
      * 4. The array is used to batch update the product with the image urls
      */
 	$scope.addProduct = function (productInfo, files) {
-		if (files.flow.files.length === 0) {
-			console.log("You must add an image before uploading a product.");
-		} else {
-			productInfo.categories.push($scope.categories.mainCat.id);
+		// if (files.flow.files.length === 0) {
+		// 	console.log("You must add an image before uploading a product.");
+		// } else {
+			// productInfo.categories.push($scope.categories.mainCat.id);
 			// productInfo.categories.push($scope.categories.subCat.id);
 			// productInfo.categories.push($scope.categories.subSubCat.id);
 			
-			Products.addProduct(productInfo)
+			var testProduct = {
+			    vendor: "Sky Vendor",
+			    name: "Air Jordan's",
+			    description: "The World's Best Athletic Shoe. Ever", // Full description
+			    shortDescription: "Basketball Shoe", // Short description for display on search pages
+			    supplyPrice: "5.00", // The price we pay for it
+			    retailPrice: "10.00", // The price we sell the product for
+			    shippingPrice: "flat", // Flat rate shipping price
+			    shippingType: "2.50", // Free Shipping, Flat Rate Shipping, Calculated Shipping
+			    msrp: "15.00", // Suggested Retail Price
+			    stockQuantity: 25, // Amount of product in stock
+			    minQuantity: 1, // Minimum quantity to add to cart
+			    maxQuantity: 10, // Maximum quantity to add to cart
+			    sku: "123456", // Vendor's SKU for the product
+			    images: [{
+			            small: {
+			                url: "http://www.wufashion.com/sport/wp-content/uploads/2015/01/nike-air-jordans-12.jpg",
+			                isPrimary: true
+			            },
+			            large: {
+			                url: "http://www.wufashion.com/sport/wp-content/uploads/2015/01/nike-air-jordans-12.jpg"
+			            }
+			    }],
+			    additionalInfo: [{ // Array of Objects that contain key and value
+			            name: "Additional Info: Name", // Additional Info Key
+			            value: "Additional Info: Value" // Additional Info Value
+			    }],
+			    isActive: true,
+			    categories: {
+			        id: '8332f4ef-e262-43ea-86be-dd17afc1ffbe',
+			        name: 'Clothing, Shoes & Jewelry' 
+				},
+				items: {
+			        additionalInfo: { // Array of Objects that contain key and value
+			            name: "Additional Info: Name", // Additional Info Key
+			            value: "Additional Info: Value" // Additional Info Value
+			    	},
+			        description: 'Blue Nikes',
+			        images: [{
+			            small: {
+			                url: "http://www.wufashion.com/sport/wp-content/uploads/2015/01/nike-air-jordans-12.jpg",
+			                isPrimary: true
+			            },
+			            large: {
+			                url: "http://www.wufashion.com/sport/wp-content/uploads/2015/01/nike-air-jordans-12.jpg"
+			            }
+			    	}],
+			        isActive: true,
+			        maxQuantity: 10,
+			        minQuantity: 1,
+			        name: 'Blue Nike',
+			        options: {
+			        	"size": 11,
+			        	"color": "blue"
+			        },
+			        shortDescription: 'Blue Nike',
+			        sku: '654321',
+			        stockQuantity: 20,
+			        vendor: 'Sky Vendor' 
+			    },
+				optionSet: "Air Jord's"
+			};
+
+			Products.addProduct(testProduct)
 			.then(function (productObj) {
-				$scope.product = [];
-				console.log("productObj:", productObj);
-				$scope.product.id = productObj.id;
-				$scope.upload();
-				$scope.success = 'Your product was successfully added!';
+				// $scope.product = [];
+				// console.log("productObj:", productObj);
+				// $scope.product.id = productObj.id;
+				// $scope.upload();
+				// $scope.success = 'Your product was successfully added!';
 			}).catch(function (err) {
 				$scope.error = 'There seems to be a problem with adding your product.';
 			});
-		}
+		// }
 	};
 
 	$scope.files = {};

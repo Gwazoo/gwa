@@ -108,7 +108,7 @@ angular.module('gwazoo.services')
         var itemObj = {};
         allOptions.forEach(function (option) {
             var variations = [];
-            if(optionCount !== 0) {
+            if(optionCount !== 0) {  //for every option other than the first
                 option.variations.forEach(function (variation) {
                     variation.disabled = true;
                     selectedOptions.forEach(function (selectedOption) {
@@ -129,12 +129,12 @@ angular.module('gwazoo.services')
                     type: option.type,
                     variations: variations
                 };
-            } else {
+            } else {  //Add first option to array
                 filteredOptions[optionCount] = option;
             }
             optionCount++;
         });
-        //console.log(filteredOptions);
+        console.log(filteredOptions);
         deferred.resolve({options: filteredOptions, item: itemObj});
         return deferred.promise;
     };
