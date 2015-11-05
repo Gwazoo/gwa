@@ -37,7 +37,7 @@ angular.module('gwazoo.controllers')
         }
         return total;
     };
-    $scope.cartCount = function() {
+    $scope.cartCount = function () {
         var cartCount = 0;
         cartCount = Cookies.getCartCount();
         // console.log(cartCount);
@@ -46,7 +46,7 @@ angular.module('gwazoo.controllers')
     $scope.clearCart = function () {
         $scope.cart = Cookies.clear();
     };
-    $scope.updateCartItem = function(item) {
+    $scope.updateCartItem = function (item) {
         // console.log(item);
         if(item.quantity === undefined) {
             item.quantity = 1;
@@ -56,18 +56,18 @@ angular.module('gwazoo.controllers')
         });
         // $scope.cart = cart;
     };
-    $scope.cartSubTotal = function() {
+    $scope.cartSubTotal = function () {
         var subTotal = 0;
         subTotal = $scope.cartTotal() + $scope.shippingTotal();
         return subTotal;
     };
-    $scope.tax = function() {
+    $scope.tax = function () {
         var tax = 0;
         // tax = $scope.cartSubTotal() + $scope.tax();
         // console.log(tax);
         return tax;
     };
-    $scope.grandTotal = function() {
+    $scope.grandTotal = function () {
         var grandTotal = 0;
         grandTotal = $scope.cartSubTotal() + $scope.tax();
         // console.log(grandTotal);
@@ -75,16 +75,17 @@ angular.module('gwazoo.controllers')
     };
 
 // MODAL HELPERS
-    $scope.addressAddModal = function() {
+    $scope.addressAddModal = function () {
         var modalInstance = $uibModal.open({
             templateUrl : 'templates/modals/addAddressModal.html',
             controller : 'CartCtrl.Modal',
             scope : $scope
         });
 
-        modalInstance.result.then(function(userAddresses) {
-            // console.log(userAddresses);
-            $scope.shippingAddress = userAddresses;
+        modalInstance.result.then(function (user) {
+            console.log(user);
+            // var user = Cookies.getSession();
+            // $scope.shippingAddress = user.addresses;
         }, function() {
         });
     };
@@ -92,11 +93,15 @@ angular.module('gwazoo.controllers')
 
 .controller('CartCtrl.Modal', function($scope, $modalInstance, $location, Cookies, Account, Products) {
     $scope.addAddress = function(userAddress) {
+        var user = user;
+        var newAddresses = userAddress;
         console.log(userAddress);
+        // var shippingAddress = user['addresses'].push(newAddresses);
+        // user['addresses'].push(newAddresses)
         Account.addAddress(userAddress)
-        .then(function (userAddresses) {
-            // console.log(userAddresses);
-            $modalInstance.close(userAddresses);
+        .then(function (resUser) {
+            console.log(resUser);
+            $modalInstance.close(resUser);
         }).catch(function (err) {
             $scope.error = 'ERROR ERROR ERROR';
         });

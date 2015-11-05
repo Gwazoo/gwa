@@ -9,16 +9,16 @@ var User = thinky.createModel("users", {
     username: type.string().regex('[A-Za-z0-9](?:[A-Za-z0-9\-]{0,61}[A-Za-z0-9])').min(5).max(25).required(), // Username needs to begin and end with an alphanumeric character, but can contain dashes
     email: type.string().email().required(),
     password: type.string().required(), // Salted hashed password
+    // addresses: [{
+    //     name: type.string(),
+    //     address1: type.string(),
+    //     address2: type.string(),
+    //     postalCode: type.number(),
+    //     state: type.string(),
+    //     country: type.string()
+    // }],
     firstName: type.string(),
     lastName: type.string(),
-    addresses: [{// Array of address objects
-            name: type.string(),
-            address1: type.string(),
-            address2: type.string(),
-            postalCode: type.number(),
-            state: type.string(),
-            country: type.string()
-        }],
     type: type.string().default('member'), // This is probably going to be an ID to a user types table
     isActive: type.boolean().default(true), // So we can disable users
     created: type.date().default(r.now()), // When the account was created
@@ -65,6 +65,7 @@ var UserModel = {
             bcrypt.hash(userObj.password, salt, null, function (err, hash) {
                 userObj.password = hash;
                 var newUser = new User(userObj);
+                newUser.addresses = [];
 
                 newUser.saveAll({cart: true})
                 .then(function (user) {
@@ -85,7 +86,7 @@ var UserModel = {
     updateCart: function (username, products) {
         return new Promise(function (resolve, reject) {
             User.get(username).getJoin({cart: true}).run()
-            .then(function (user){
+            .then(function (user) {
                 user.cart = products;
                 user.saveAll({cart: true})
                 .then(function (result) {
@@ -97,12 +98,6 @@ var UserModel = {
                 reject(Error(err));
             });
         });
-    },
-    updateAddresses: function (userAddress) {
-        console.log(userAddress);
-        // return new Promise(function (resolve, reject) {
-        //     User.get(userAddress).
-        // })
     }
 };
 

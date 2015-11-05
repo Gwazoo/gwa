@@ -10,9 +10,9 @@ angular.module('gwazoo.services')
 			method: 'POST',
 			url: '/api/user/auth', 
 			data: loginObj
-		}).success(function(user) {
+		}).success(function (user) {
 			deferred.resolve(user);
-		}).error(function(err) {
+		}).error(function (err) {
 			console.log(err);
 			deferred.reject(err);
 		});
@@ -25,7 +25,7 @@ angular.module('gwazoo.services')
 			method: 'POST',
 			url: '/api/user/create', 
 			data: userObj
-		}).success(function(user) {
+		}).success(function (user) {
 			deferred.resolve(user);
 		}).error(function (err) {
 			console.log("Err", err);
@@ -53,7 +53,7 @@ angular.module('gwazoo.services')
 		$http({
 			method: 'GET',
 			url: '/api/user/logout'
-		}).success(function(res) {
+		}).success(function (res) {
 			deferred.resolve();
 		});
 		return deferred.promise;
@@ -94,10 +94,10 @@ angular.module('gwazoo.services')
             method: 'POST',
             url: '/api/user/addresses', 
             data: address
-        }).success(function (res) {
-            console.log(res);
-            deferred.resolve(res);
-        }).error(function (err) {
+        }).then(function successCallback(user) {
+            console.log(user);
+            deferred.resolve(user);
+        }).then(function errorCallback(err) {
             console.log(err);
             deferred.reject(err);
         });
