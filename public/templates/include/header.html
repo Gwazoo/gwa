@@ -11,9 +11,9 @@
             </div>
             <div class="head_right col-xs-12 col-md-3" align="right">
                 <ul>
-                    <li ng-show="!session"><a href="#" ng-click="loginModal()">Login</a></li>
-                    <li ng-show="!session"><a href="/register">Register</a></li>
-                    <li ng-show="session" class="dropdown">
+                    <li ng-if="!loggedIn" ng-cloak><a href="#" ng-click="loginModal()">Login</a></li>
+                    <li ng-if="!loggedIn" ng-cloak><a href="/register">Register</a></li>
+                    <li ng-if="loggedIn || loggedIn == null" ng-cloak class="dropdown">
                         <a href="#" class="dropdown-toggle text-capitalize" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{session.firstName}}'s Account <span class="caret"></span></a>
                         <ul class="dropdown-menu"> 
                             <li><a ui-sref="account.admin">Settings</a></li>
