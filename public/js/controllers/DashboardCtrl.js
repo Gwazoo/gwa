@@ -47,66 +47,67 @@ angular.module('gwazoo.controllers')
 			// productInfo.categories.push($scope.categories.subSubCat.id);
 			
 			var testProduct = {
-			    vendor: "Sky Vendor",
-			    name: "Air Jordan's",
-			    description: "The World's Best Athletic Shoe. Ever", // Full description
-			    shortDescription: "Basketball Shoe", // Short description for display on search pages
-			    supplyPrice: "5.00", // The price we pay for it
-			    retailPrice: "10.00", // The price we sell the product for
-			    shippingPrice: "flat", // Flat rate shipping price
-			    shippingType: "2.50", // Free Shipping, Flat Rate Shipping, Calculated Shipping
-			    msrp: "15.00", // Suggested Retail Price
-			    stockQuantity: 25, // Amount of product in stock
-			    minQuantity: 1, // Minimum quantity to add to cart
-			    maxQuantity: 10, // Maximum quantity to add to cart
-			    sku: "123456", // Vendor's SKU for the product
-			    images: [{
-			            small: {
-			                url: "http://www.wufashion.com/sport/wp-content/uploads/2015/01/nike-air-jordans-12.jpg",
-			                isPrimary: true
-			            },
-			            large: {
-			                url: "http://www.wufashion.com/sport/wp-content/uploads/2015/01/nike-air-jordans-12.jpg"
-			            }
-			    }],
-			    additionalInfo: [{ // Array of Objects that contain key and value
-			            name: "Additional Info: Name", // Additional Info Key
-			            value: "Additional Info: Value" // Additional Info Value
-			    }],
-			    isActive: true,
-			    categories: {
-			        id: '8332f4ef-e262-43ea-86be-dd17afc1ffbe',
-			        name: 'Clothing, Shoes & Jewelry' 
+				categories:['8332f4ef-e262-43ea-86be-dd17afc1ffbe'],
+				motherProduct:
+				{
+				    vendor: "Sky Vendor",
+				    name: "Air Jordan's",
+				    description: "The World's Best Athletic Shoe. Ever", // Full description
+				    shortDescription: "Basketball Shoe", // Short description for display on search pages
+				    supplyPrice: "5.00", // The price we pay for it
+				    retailPrice: "10.00", // The price we sell the product for
+				    shippingPrice: "flat", // Flat rate shipping price
+				    shippingType: "2.50", // Free Shipping, Flat Rate Shipping, Calculated Shipping
+				    msrp: "15.00", // Suggested Retail Price
+				    stockQuantity: 25, // Amount of product in stock
+				    minQuantity: 1, // Minimum quantity to add to cart
+				    maxQuantity: 10, // Maximum quantity to add to cart
+				    sku: "123456", // Vendor's SKU for the product
+				    images: [{
+				            small: {
+				                url: "http://www.wufashion.com/sport/wp-content/uploads/2015/01/nike-air-jordans-12.jpg",
+				                isPrimary: true
+				            },
+				            large: {
+				                url: "http://www.wufashion.com/sport/wp-content/uploads/2015/01/nike-air-jordans-12.jpg"
+				            }
+				    }],
+				    additionalInfo: [{ // Array of Objects that contain key and value
+				            name: "Additional Info: Name", // Additional Info Key
+				            value: "Additional Info: Value" // Additional Info Value
+				    }],
+				    isActive: true,
+
+				    items: [{
+				        additionalInfo: [{ // Array of Objects that contain key and value
+				            name: "Additional Info: Name", // Additional Info Key
+				            value: "Additional Info: Value" // Additional Info Value
+				    	}],
+				        description: 'Blue Nikes',
+				        images: [{
+				            small: {
+				                url: "http://www.wufashion.com/sport/wp-content/uploads/2015/01/nike-air-jordans-12.jpg",
+				                isPrimary: true
+				            },
+				            large: {
+				                url: "http://www.wufashion.com/sport/wp-content/uploads/2015/01/nike-air-jordans-12.jpg"
+				            }
+				    	}],
+				        isActive: true,
+				        maxQuantity: 10,
+				        minQuantity: 1,
+				        name: 'Blue Nike',
+				        options: {
+				        	size: "medium",
+				        	color: "blue"
+				        },
+				        shortDescription: 'Blue Nike',
+				        sku: '654321',
+				        stockQuantity: 20,
+				        vendor: 'Sky Vendor' 
+				    }]
 				},
-				items: {
-			        additionalInfo: { // Array of Objects that contain key and value
-			            name: "Additional Info: Name", // Additional Info Key
-			            value: "Additional Info: Value" // Additional Info Value
-			    	},
-			        description: 'Blue Nikes',
-			        images: [{
-			            small: {
-			                url: "http://www.wufashion.com/sport/wp-content/uploads/2015/01/nike-air-jordans-12.jpg",
-			                isPrimary: true
-			            },
-			            large: {
-			                url: "http://www.wufashion.com/sport/wp-content/uploads/2015/01/nike-air-jordans-12.jpg"
-			            }
-			    	}],
-			        isActive: true,
-			        maxQuantity: 10,
-			        minQuantity: 1,
-			        name: 'Blue Nike',
-			        options: {
-			        	"size": 11,
-			        	"color": "blue"
-			        },
-			        shortDescription: 'Blue Nike',
-			        sku: '654321',
-			        stockQuantity: 20,
-			        vendor: 'Sky Vendor' 
-			    },
-				optionSet: "Air Jord's"
+				optionSet: "9c9f100f-b775-4a8f-9ac9-611581e1da02"
 			};
 
 			Products.addProduct(testProduct)

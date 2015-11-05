@@ -15,6 +15,7 @@ var CategoryModel = thinky.createModel("categories", {
 CategoryModel.hasMany(CategoryModel, "children", "id", "parentId");
 CategoryModel.belongsTo(CategoryModel, "parent", "parentId", "id");
 
+
 // Categories Model
 var Category = {
     create: function (data) {
@@ -42,6 +43,17 @@ var Category = {
                 .then(function (result) {
                     cb(null, result);
                 });
+    },
+    getCategory: function(id) {
+        return new Promise(function (resolve, reject) {
+            CategoryModel.get(id).run()
+                    .then(function (result) {
+                        resolve(result);
+                    }, function (err) {
+                        console.log(err);
+                        reject(Error("Error retrieving category: " + err));
+                    });
+        });
     },
     getProducts: function (id) {
         return new Promise(function (resolve, reject) {
