@@ -29,6 +29,7 @@ angular.module('gwazoo.controllers')
         console.log("item:", result);
         if (result.optionSets !== false) {
             var options = [];
+            console.log(result);
             result.optionSets.options.forEach(function (option){
                 var variations = [];
                 option.variations.forEach(function (variation) {
