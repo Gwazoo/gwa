@@ -4,7 +4,7 @@ angular.module('gwazoo.services')
 .service('Account', function ($q, $http, $location, $rootScope, $uibModal) {
 	var user = '';
 
-	this.login = function(loginObj) {
+	this.login = function (loginObj) {
 		var deferred = $q.defer();
 		$http({
 			method: 'POST',
@@ -18,6 +18,19 @@ angular.module('gwazoo.services')
 		});
 		return deferred.promise;
 	};
+
+	this.isLoggedIn = function () {
+		var deferred = $q.defer();
+		$http({
+			method: 'GET',
+			url: '/api/user/isLoggedIn',
+		}).success(function (isLoggedIn) { //boolean
+			deferred.resolve(isLoggedIn);
+		}).error(function (err) {
+			deferred.reject(err);
+		});
+		return deferred.promise;
+	}
 
 	this.register = function (userObj) {
 		var deferred = $q.defer();

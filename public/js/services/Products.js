@@ -101,23 +101,29 @@ angular.module('gwazoo.services')
     };
     
     this.getProductOptions = function (allOptions, selectedOptions, product) {
+        //allOptions is the optionSet object (all options with their variations) 
+        //selectedOptions is an object containing all the currently selected options
+        //product is the parent product object
         var deferred = $q.defer();
-        var filteredOptions = [];
-        var optionCount = 0;
-        var productCount = 0;
-        var itemObj = {};
-        allOptions.forEach(function (option) {
-            var variations = [];
+        var filteredOptions = [];  //holds all the options (after disabling where appropriate)
+        var optionCount = 0;  //overall option loop control
+        var itemObj = {};  //initialized object to hold new SKU (aka 'item')
+        allOptions.forEach(function (option) {  //loop through each option in the optionSet
+            var variations = [];  //initialized array for holding all variations (subsets of options, ie "small", "medium", "large")
             if(optionCount !== 0) {  //for every option other than the first
-                option.variations.forEach(function (variation) {
-                    variation.disabled = true;
-                    selectedOptions.forEach(function (selectedOption) {
-                        if(selectedOption !== null) {
-                            product.items.forEach(function (item) {
-                                if (item.options[selectedOption.name].toLowerCase() === selectedOption.value.toLowerCase() && item.options[selectedOption.name].toLowerCase() !== item.options[option.name].toLowerCase() && variation.value.toLowerCase() === item.options[option.name].toLowerCase()) {
-                                    variation.disabled = false;
+                option.variations.forEach(function (variation) {  //loop through each variation
+                    variation.disabled = true;  //disable every variation by default
+                    selectedOptions.forEach(function (selectedOption) {  //loop through the selected options
+                        if(selectedOption !== null) {  //check to make sure the option is valid
+                            product.items.forEach(function (item) {  //loop through each item (SKU) attached to the parent product
+                                if (item.options[selectedOption.name].toLowerCase() === selectedOption.value.toLowerCase() 
+                                    && item.options[selectedOption.name].toLowerCase() !== item.options[option.name].toLowerCase() 
+                                    && variation.value.toLowerCase() === item.options[option.name].toLowerCase()) {
+                                    //if the item's (SKU) attribute matches the selected option (ie if the SKU is white and the user chose white)
+                                    //Shortcircuit AND (fails if above is false)
+                                    //
+                                    variation.disabled = false;  //enable the option
                                     itemObj = overrideProductInfo(product, item);
-                                    productCount++;
                                 }
                             });
                         }

@@ -1,10 +1,13 @@
 var productModel = require('./../models/productModel.js').productModel;
 var product = require('./../models/productModel.js').product;
 var categoryModel = require('./../models/categoryModel.js').categoryModel;
+var category = require('./../models/categoryModel.js').category;
 var optionSetModel = require('./../models/optionModel.js').optionSetModel;
+var optionSet = require('./../models/optionModel.js').optionSet;
 
-productModel.hasAndBelongsToMany(categoryModel, 'categories', 'id', 'id');
-productModel.belongsTo(optionSetModel, "optionSets", "optionSetId", "id");
+// optionSetModel.hasMany(productModel, "products", "id", "optionSetId");
+
+
 
 module.exports = {
     /*

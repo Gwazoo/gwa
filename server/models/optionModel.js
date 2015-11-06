@@ -1,4 +1,5 @@
 var thinky = require('./../util/thinky');
+var productModel = require('./productModel.js');
 var r = thinky.r;
 var type = thinky.type;
 
@@ -18,6 +19,7 @@ var OptionModel = thinky.createModel("options", {
 });
 
 OptionSetModel.hasAndBelongsToMany(OptionModel, "options", "id", "id");
+OptionModel.hasAndBelongsToMany(OptionSetModel, "optionSets", "id", "id");
 
 var Option = {
     create: function (username, option) {
@@ -43,6 +45,15 @@ var OptionSet = {
             newOptionSet.options = options;
             newOptionSet.saveAll().then(function (optionSet) {
                 resolve(optionSet);
+            }, function (err) {
+                reject(err);
+            });
+        });
+    },
+    getOptionSet: function (id) {
+        return new Promise(function (resolve, reject) {
+            OptionSetModel.get(id).run().then(function (result) {
+                resolve(result);
             }, function (err) {
                 reject(err);
             });

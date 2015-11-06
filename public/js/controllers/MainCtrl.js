@@ -4,6 +4,24 @@ angular.module('gwazoo.controllers')
 .controller('MainCtrl', ['$scope', '$location', '$uibModal', '$templateCache', 'Account', 'Cookies', 'Products', function($scope, $location, $uibModal, $templateCache, Account, Cookies, Products) {
     $scope.date = new Date();
 
+    if (Cookies.getSession()) {
+        $scope.loggedIn = true;
+    } else {
+        $scope.loggedIn = false;
+    }
+
+    Account.isLoggedIn()
+    .then(function (isLoggedIn) {  //boolean
+        if (isLoggedIn) {
+            $scope.loggedIn = true;
+        } else {
+            $scope.loggedIn = false;
+            if (Cookies.getSession()) {
+                Cookies.clearAllCookies();
+            }
+        }
+    });
+
     //Check session and initialize cart
     $scope.session = Cookies.getSession();
     $scope.cartCount = function() {
@@ -18,6 +36,7 @@ angular.module('gwazoo.controllers')
         $scope.session = null;
         Account.logout()
         .then(function () {
+            $scope.loggedIn = false;
             $scope.user = null;
             $location.path('/').replace();
         })

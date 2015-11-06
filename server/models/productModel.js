@@ -1,5 +1,7 @@
 'use strict';
 var thinky = require('./../util/thinky');
+var categoryModel = require('./categoryModel.js').categoryModel;
+var optionSetModel = require('./optionModel.js').optionSetModel;
 var r = thinky.r;
 var type = thinky.type;
 
@@ -19,7 +21,8 @@ var ProductModel = thinky.createModel("products", {
     minQuantity: type.number(), // Minimum quantity to add to cart
     maxQuantity: type.number(), // Maximum quantity to add to cart
     sku: type.string(), // Vendor's SKU for the product
-    parentSku: type.string(), // Vendor's SKU for the product's parent product
+    parentId: type.string(), // Vendor's SKU for the product's parent product
+    optionSetId: type.string(),
     images: [{
             small: {
                 url: type.string(),
@@ -40,21 +43,28 @@ var ProductModel = thinky.createModel("products", {
     modified: type.date().default(r.now())
 });
 
+ProductModel.hasMany(ProductModel, "items", "id", "parentId");
+ProductModel.belongsTo(ProductModel, "motherProduct", "parentId", "id");
+ProductModel.hasAndBelongsToMany(categoryModel, 'categories', 'id', 'id');
+ProductModel.belongsTo(optionSetModel, "optionSets", "optionSetId", "id");
+
 var Product = {
     create: function (data) {
         return new Promise(function (resolve, reject) {
-            var categories = data.categories;
-            data.categories = null;
-            var product = new ProductModel(data);
-            product.categories = categories;
+            var product = new ProductModel(data.motherProduct);
             product.validate();
-            product.saveAll({categories: true, optionSet: true, product: true, items: true})
+            product.categories = data.categories;
+
+            
+            product.saveAll({items: true, motherProduct: true, categories: true})
                     .then(function (result) {
-                        console.log("Product: ", result);
+                        console.log('succeed');
                         resolve(result);
                     }, function (err) {
+                        console.log(err);
                         reject(Error("Error saving product: " + err));
                     });
+
         });
     },
     getProduct: function (id) {
@@ -145,8 +155,6 @@ var Product = {
     }
 };
 
-ProductModel.hasMany(ProductModel, "items", "id", "parentId");
-ProductModel.belongsTo(ProductModel, "product", "parentId", "id");
 
 module.exports.product = Product;
 module.exports.productModel = ProductModel;
