@@ -21,7 +21,9 @@
     "angular-bootstrap": "~0.14.2",
     "angular-ui-router": "~0.2.15",
     "angular-ui-router-styles": "~0.0.6",
-    "angular-morris-chart": "~1.1.0"
+    "angular-morris-chart": "~1.1.0",
+    "angular-formly": "~7.3.2",
+    "angular-formly-templates-bootstrap": "~6.1.5"
   },
   "resolutions": {
     "angular": "1.4.7"

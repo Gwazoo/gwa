@@ -49,7 +49,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shop <span class="caret"></span></a>
                         <ul class="dropdown-menu">  <!-- NG_REPEAT THROUGHT THESE -->
-                            <li ng-repeat="category in categories"><a ng-href="/category/{{category.slug}}/{{category.id}}">{{category.name}}</a></li>
+                            <li ng-repeat="category in categories | orderBy:'name'"><a ng-href="/category/{{category.slug}}/{{category.id}}">{{category.name}}</a></li>
                         </ul>
                     </li>
                     <li><a href="/category/{{category.slug}}">beauty</a></li>

@@ -1,0 +1,63 @@
+<!-- ADD SHIPPING ADDRESS MODAL -->
+    <div class="modal-header">
+        <h3>Add Shipping Address</h3>
+    </div>
+    <form name="shipping" class="form-horizontal" ng-submit="addAddress(address)">
+        <div class="modal-body">
+            <div class="form-group" ng-class="{ 'has-error': shipping.address-name.$invalid }">
+                <label for="shippingName" class="sr-only control-label">Name</label>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <input type="name" class="form-control" name="address-name" ng-model="address.name" placeholder="Name" autofocus required>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error': shipping.address-street.$invalid }">
+                <label for="shippingStreet" class="sr-only control-label">Street Address</label>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <input type="address-line1" class="form-control" name="address-street" ng-model="address.address1" placeholder="Street Address" required>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error': shipping.address-city.$invalid }">
+                <label for="shippingCity" class="sr-only control-label">City</label>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <input type="address-line2" class="form-control" name="address-city" ng-model="address.address2" placeholder="City" required>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error': shipping.address-state.$invalid }">
+                <label for="shippingState" class="sr-only control-label">State</label>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <input type="address-state" class="form-control" name="address-state" ng-model="address.state" placeholder="State" required>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error': shipping.address-country.$invalid }">
+                <label for="shippingCountry" class="sr-only control-label">Contry</label>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <input type="country" class="form-control" name="address-country" ng-model="address.country" placeholder="Country" required>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error': shipping.address-code.$invalid }">
+                <label for="shippingPostalCode" class="sr-only control-label">Postal Code</label>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <input type="postal-code" class="form-control" name="address-code" ng-model="address.postalCode" placeholder="Postal Code" required>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <button type="button" class="btn btn-danger btn-sm btn-block" ng-click="cancel()">Cancel</button>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <button type="submit" class="btn btn-success btn-sm btn-block">Submit</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- address: [{// Array of address objects
+            name: type.string(),
+            address1: type.string(),
+            address2: type.string(),
+            postalCode: type.number(),
+            state: type.string(),
+            country: type.string()
+        }], -->

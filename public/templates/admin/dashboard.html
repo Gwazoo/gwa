@@ -11,17 +11,17 @@
         </div>
 <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
-            <li class="dropdown" ng-show="'session.type === vendor'">
+            <!-- <li class="dropdown" ng-show="'session.type === vendor'">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
                 <ul class="dropdown-menu alert-dropdown">
                     <li ng-repeat="order in orders"><a ui-sref="account.pending/:id" class="text-capitalize">{{order.name}}grey shirt <span class="badge pull-right">{{order.quantity}}3</span></a></li> <!-- ng-repeat="order in orders" -->
-                    <li><a href="#">{{order.name}}pink shirt <span class="badge pull-right">{{order.quantity}}6</span></a></li>
+                    <!-- <li><a href="#">{{order.name}}pink shirt <span class="badge pull-right">{{order.quantity}}6</span></a></li>
                     <li><a href="#">{{order.name}}blue shirt <span class="badge pull-right">{{order.quantity}}2</span></a></li>
                     <li><a href="#">{{order.name}}marron shirt <span class="badge pull-right">{{order.quantity}}20</span></a></li>
                     <li class="divider"></li>
                     <li><a ui-sref="account.pending">View All</a></li>
                 </ul>
-            </li>
+            </li> -->
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{session.firstName}} {{session.lastName}} <b class="caret"></b></a>
                 <ul class="dropdown-menu">
@@ -37,13 +37,14 @@
             <ul class="nav navbar-nav side-nav">
                 <li ui-sref-active="active"><a ui-sref="account.admin"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a></li>
                 <li ui-sref-active="active"><a ui-sref="account.product"><i class="fa fa-fw fa-list-alt"></i> Product</a></li>
-                <li><a href="#" data-toggle="collapse" data-target="#orders"><i class="fa fa-fw fa-sign-in"></i> Orders <i class="fa fa-fw fa-caret-down"></i></a>
+                <li ui-sref-active="active"><a ui-sref="account.orders"><i class="fa fa-fw fa-table"></i> Orders</a></li>
+                <!-- <li><a href="#" data-toggle="collapse" data-target="#orders"><i class="fa fa-fw fa-sign-in"></i> Orders <i class="fa fa-fw fa-caret-down"></i></a>
                     <ul id="orders" class="collapse">
                         <li ui-sref-active="active"><a ui-sref="account.pending"><i class="fa fa-fw fa-table"></i> Pending Orders</a></li>
                         <li ui-sref-active="active"><a ui-sref="account.shipped"><i class="fa fa-fw fa-check-square-o"></i> Shipped Orders</a></li>
                         <li ui-sref-active="active"><a ui-sref="account.orders"><i class="fa fa-fw fa-history"></i> Order History</a></li>
                     </ul>
-                </li>
+                </li> -->
             </ul>
         </div>
     </nav>

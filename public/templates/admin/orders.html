@@ -1,0 +1,252 @@
+<section id="wrapper">
+    <div id="page-wrapper" style="min-height: 905px;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <h1 class="page-header">Order History <small>all orders not pending or shipped</small></h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <h2>Pending Orders</h2>
+                        </div>
+                    </div>
+                    <div class="panel panel-warning container-fluid"> <!-- ng-repeat="order in orders | filter: {status: 'pending'}" -->
+                        <div class="panel-heading row">
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                <small>TOTAL</small>
+                                <small>{{order.total | currency}}$507.45</small>
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                <small>SHIP TO</small><br>
+                                <small class="text-capitalize"><a href="#" tooltip-placement="bottom" uib-tooltip="{{order.shippAddress}}address here">{{order.shipAddress.name}}Jan Jon</a></small>
+                            </div>
+                            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                                <div class="text-right panel-title">
+                                    <small>ORDER # {{order.id}}1594-84-65784</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <small class="text-capitalize">ORDERED: {{order.date}} october 23, 2015</small>
+                                    <h4 class="text-capitalize"><strong>Estimated Delivery: {{order.delivered}}oct 30, 2015</strong></h4>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                    <div class="row">
+                                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                            <img src="{{product.image}}"/><img style="max-width: 100%;" src="/img/preview-small-img2.png"/>
+                                        </div>
+                                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                            <h5>{{product.name}}Everest Multiple Pocket Waist Pack, Black, One Size</h5>
+                                            <p class="text-danger">{{product.price | currency}}$507.45</p>
+                                            <p>Quantity: {{product.quantity}}1</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                    <!-- <button class="btn btn-sm btn-block btn-danger">Cancel Order</button> -->
+                                    <button class="btn btn-sm btn-block btn-default">Review Item</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <h2>Shipped Orders</h2>
+                        </div>
+                    </div>
+                    <div class="panel panel-info container-fluid"> <!-- ng-repeat="order in orders | filter: {status: 'shipped'}" -->
+                        <div class="panel-heading row">
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                <small>TOTAL</small>
+                                <small>{{order.total | currency}}$507.45</small>
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                <small>SHIP TO</small><br>
+                                <small class="text-capitalize"><a href="#" tooltip-placement="bottom" uib-tooltip="{{order.shippAddress}}address here">{{order.shipAddress.name}}Jan Jon</a></small>
+                            </div>
+                            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                                <div class="text-right panel-title">
+                                    <small>ORDER # {{order.id}}1594-84-65784</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <small class="text-capitalize">ORDERED: {{order.date}} october 23, 2015</small>
+                                    <h4 class="text-capitalize"><strong>Estimated Delivery: {{order.delivered}}oct 30, 2015</strong></h4>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                    <div class="row">
+                                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                            <img src="{{product.image}}"/><img style="max-width: 100%;" src="/img/preview-small-img2.png"/>
+                                        </div>
+                                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                            <h5>{{product.name}}Everest Multiple Pocket Waist Pack, Black, One Size</h5>
+                                            <p class="text-danger">{{product.price | currency}}$507.45</p>
+                                            <p>Quantity: {{product.quantity}}1</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                    <button class="btn btn-sm btn-block btn-default">Review Item</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <h2>Order History</h2>
+                        </div>
+                    </div>
+                    <div class="panel panel-success container-fluid"> <!-- ng-repeat="order in orders | filter: {status: 'history'}" -->
+                        <div class="panel-heading row">
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                <small>TOTAL</small>
+                                <small>{{order.total | currency}}$507.45</small>
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                <small>SHIP TO</small><br>
+                                <small class="text-capitalize"><a href="#" tooltip-placement="bottom" uib-tooltip="{{order.shippAddress}}address here">{{order.shipAddress.name}}Jan Jon</a></small>
+                            </div>
+                            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                                <div class="text-right panel-title">
+                                    <small>ORDER # {{order.id}}1594-84-65784</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <small class="text-capitalize">ORDERED: {{order.date}} october 23, 2015</small>
+                                    <h4 class="text-capitalize"><strong>Delivery: {{order.delivered}}oct 29, 2015</strong></h4>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                    <div class="row">
+                                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                            <img src="{{product.image}}"/><img style="max-width: 100%;" src="/img/preview-small-img2.png"/>
+                                        </div>
+                                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                            <h5>{{product.name}}Everest Multiple Pocket Waist Pack, Black, One Size</h5>
+                                            <p class="text-danger">{{product.price | currency}}$507.45</p>
+                                            <p>Quantity: {{product.quantity}}1</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                    <button class="btn btn-sm btn-block btn-warning">Return Item</button>
+                                    <button class="btn btn-sm btn-block btn-default">Review Item</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="panel panel-success container-fluid">
+                        <div class="panel-heading row">
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                <small>TOTAL</small>
+                                <small>{{order.total | currency}}$507.45</small>
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                <small>SHIP TO</small><br>
+                                <small class="text-capitalize"><a href="#" tooltip-placement="bottom" uib-tooltip="{{order.shippAddress}}address here">{{order.shipAddress.name}}Jan Jon</a></small>
+                            </div>
+                            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                                <div class="text-right panel-title">
+                                    <small>ORDER # {{order.id}}1594-84-65784</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <small class="text-capitalize">ORDERED: {{order.date}} october 23, 2015</small>
+                                    <h4 class="text-capitalize"><strong>Delivery: {{order.delivered}}oct 29, 2015</strong></h4>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                    <div class="row">
+                                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                            <img src="{{product.image}}"/><img style="max-width: 100%;" src="/img/preview-small-img2.png"/>
+                                        </div>
+                                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                            <h5>{{product.name}}Everest Multiple Pocket Waist Pack, Black, One Size</h5>
+                                            <p class="text-danger">{{product.price | currency}}$507.45</p>
+                                            <p>Quantity: {{product.quantity}}1</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                    <button class="btn btn-sm btn-block btn-warning">Return Item</button>
+                                    <button class="btn btn-sm btn-block btn-default">Review Item</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-success container-fluid">
+                        <div class="panel-heading row">
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                <small>TOTAL</small>
+                                <small>{{order.total | currency}}$507.45</small>
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                <small>SHIP TO</small><br>
+                                <small class="text-capitalize"><a href="#" tooltip-placement="bottom" uib-tooltip="{{order.shippAddress}}address here">{{order.shipAddress.name}}Jan Jon</a></small>
+                            </div>
+                            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                                <div class="text-right panel-title">
+                                    <small>ORDER # {{order.id}}1594-84-65784</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <small class="text-capitalize">ORDERED: {{order.date}} october 23, 2015</small>
+                                    <h4 class="text-capitalize"><strong>Delivery: {{order.delivered}}oct 29, 2015</strong></h4>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                    <div class="row">
+                                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                            <img src="{{product.image}}"/><img style="max-width: 100%;" src="/img/preview-small-img2.png"/>
+                                        </div>
+                                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                            <h5>{{product.name}}Everest Multiple Pocket Waist Pack, Black, One Size</h5>
+                                            <p class="text-danger">{{product.price | currency}}$507.45</p>
+                                            <p>Quantity: {{product.quantity}}1</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                    <button class="btn btn-sm btn-block btn-warning">Return Item</button>
+                                    <button class="btn btn-sm btn-block btn-default">Review Item</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
