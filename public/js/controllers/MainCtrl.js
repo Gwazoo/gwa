@@ -120,7 +120,7 @@ angular.module('gwazoo.controllers')
                 });
             }
             Cookies.createSession(user);
-            $location.path('/account').replace();
+            // $location.path('/account').replace();
             $modalInstance.close(cartCount);
         }).catch(function (err) {
             $scope.error = 'Either your username or password did not match our records. Please try again.';

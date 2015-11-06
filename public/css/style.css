@@ -1,3 +1,11 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+  margin-bottom: 160px;
+}
+
 .label-as-badge {
     border-radius: 1em;
 }
@@ -175,6 +183,8 @@
 	-webkit-box-shadow:none;
 }
 /* end of main banner */
+
+
 
 /* page content */
 	/* 1st block */
@@ -391,10 +401,13 @@
 
 /* footer */
 footer {
-	margin-top: 5%;
-	padding:3% 0;
-	border-top: 10px solid #FD8730;
-	background-color: #333;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 85px;
+    padding:1% 0;
+    border-top: 10px solid #FD8730;
+    background-color: #333;
 }
 /* right */
 footer ul li {

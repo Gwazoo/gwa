@@ -25,11 +25,11 @@ angular.module('gwazoo.controllers')
     
     Products.getProduct($stateParams.id)
     .then(function (result) {
-        console.log("product:", result);
-        console.log("item:", result);
+        // console.log("product:", result);
+        // console.log("item:", result);
         if (result.optionSets !== false) {
             var options = [];
-            console.log(result);
+            // console.log(result);
             result.optionSets.options.forEach(function (option){
                 var variations = [];
                 option.variations.forEach(function (variation) {
@@ -44,7 +44,7 @@ angular.module('gwazoo.controllers')
                     variations: variations
                 });
             });
-            console.log("$scope.options:", options);
+            // console.log("$scope.options:", options);
             $scope.options = options;
             $scope.product = result;
             $scope.item = result;
@@ -55,7 +55,7 @@ angular.module('gwazoo.controllers')
     $scope.$watchCollection('itemOptions.options', function (val, oldVal) {
         //val is current option name and value, oldVal is previous option name and value
         if (val !== oldVal && val !== undefined) {  //if a new valid option is selected
-            console.log(val);
+            // console.log(val);
             Products.getProductOptions($scope.options, val, $scope.product)
             .then(function (result) {
                 $scope.options = result.options;

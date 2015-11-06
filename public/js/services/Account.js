@@ -107,11 +107,9 @@ angular.module('gwazoo.services')
             method: 'POST',
             url: '/api/user/addresses', 
             data: address
-        }).then(function successCallback(user) {
-            console.log(user);
-            deferred.resolve(user);
-        }).then(function errorCallback(err) {
-            console.log(err);
+        }).success(function (res) {
+            deferred.resolve(res);
+        }).error(function (err) {
             deferred.reject(err);
         });
         return deferred.promise;
