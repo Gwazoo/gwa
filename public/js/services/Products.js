@@ -140,7 +140,7 @@ angular.module('gwazoo.services')
             }
             optionCount++;
         });
-        console.log(filteredOptions);
+        // console.log(filteredOptions);
         deferred.resolve({options: filteredOptions, item: itemObj});
         return deferred.promise;
     };
