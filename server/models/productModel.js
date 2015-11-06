@@ -54,7 +54,6 @@ var Product = {
             var product = new ProductModel(data.motherProduct);
             product.validate();
             product.categories = data.categories;
-            product.optionSetId = data.optionSet;
 
             
             product.saveAll({items: true, motherProduct: true, categories: true})

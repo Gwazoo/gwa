@@ -4,20 +4,33 @@ angular.module('gwazoo.services')
 .service('Account', function ($q, $http, $location, $rootScope, $uibModal) {
 	var user = '';
 
-	this.login = function(loginObj) {
+	this.login = function (loginObj) {
 		var deferred = $q.defer();
 		$http({
 			method: 'POST',
 			url: '/api/user/auth', 
 			data: loginObj
-		}).success(function(user) {
+		}).success(function (user) {
 			deferred.resolve(user);
-		}).error(function(err) {
+		}).error(function (err) {
 			console.log(err);
 			deferred.reject(err);
 		});
 		return deferred.promise;
 	};
+
+	this.isLoggedIn = function () {
+		var deferred = $q.defer();
+		$http({
+			method: 'GET',
+			url: '/api/user/isLoggedIn',
+		}).success(function (isLoggedIn) { //boolean
+			deferred.resolve(isLoggedIn);
+		}).error(function (err) {
+			deferred.reject(err);
+		});
+		return deferred.promise;
+	}
 
 	this.register = function (userObj) {
 		var deferred = $q.defer();
@@ -25,7 +38,7 @@ angular.module('gwazoo.services')
 			method: 'POST',
 			url: '/api/user/create', 
 			data: userObj
-		}).success(function(user) {
+		}).success(function (user) {
 			deferred.resolve(user);
 		}).error(function (err) {
 			console.log("Err", err);
@@ -53,7 +66,7 @@ angular.module('gwazoo.services')
 		$http({
 			method: 'GET',
 			url: '/api/user/logout'
-		}).success(function(res) {
+		}).success(function (res) {
 			deferred.resolve();
 		});
 		return deferred.promise;
@@ -94,10 +107,10 @@ angular.module('gwazoo.services')
             method: 'POST',
             url: '/api/user/addresses', 
             data: address
-        }).success(function (res) {
-            console.log(res);
-            deferred.resolve(res);
-        }).error(function (err) {
+        }).then(function successCallback(user) {
+            console.log(user);
+            deferred.resolve(user);
+        }).then(function errorCallback(err) {
             console.log(err);
             deferred.reject(err);
         });

@@ -8,6 +8,15 @@ var userRouter = Express.Router();
 userRouter.get('/', UserApi.getAll);  //DEBUG METHOD ONLY
 
 
+userRouter.get('/isLoggedIn', function (req, res) {
+	if (req.user) {
+		res.send(true);
+	} else {
+		res.send(false);
+	}
+})
+
+
 userRouter.post('/auth', Passport.authenticate('local'), function (req, res) {  //signup url
     return res.status(200).json(req.user);
 });
