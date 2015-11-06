@@ -1,72 +1,29 @@
 <header ng-include="'templates/include/header.html'"></header>
 
-<section class="page-header container"> <!-- page header -->
-    <h1>{{category}}</h1>
+<section class="page-header container">
+    <h1>{{ category }}</h1>
 </section>
-<section class="container"> <!-- page content -->
-    <div class="narrow_search col-lg-2"> <!-- left menu -->
-        <h3>Narrow your search</h3>
-        <ul class="expand_cat">
-            <li><a href="#"><span>Digital Music ></span></a>
-                <ul>
-                    <li><a href="#">Dance & Electronic</a></li>
-                    <li><a href="#">House Music</a></li>
-                    <li><a href="#">R&B</a></li>
-                </ul>
-            </li>
-            <li><a href="#"><span>Health & Personal Care ></span></a>
-                <ul>
-                    <li><a href="#">Breath Sprays</a></li>
-                    <li><a href="#">Personal Care Products</a></li>
-                    <li><a href="#">Toothpaste</a></li>
-                </ul>
-            </li>
-            <li><a href="#"><span>Professional Dental Supplies ></span></a>
-                <ul>
-                    <li><a href="#">Toothpastes</a></li>
-                </ul>
-            </li>
-            <li><a href="#"><span>Apps & Games ></span></a>
-                <ul>
-                    <li><a href="#">Magazine Apps</a></li>
-                    <li><a href="#">Music Apps</a></li>
-                    <li><a href="#">Communication Apps</a></li>
-                </ul>
-            </li>
-            <li class="collapse" id="seeall">
-                <ul id="collapse_ul">
-                    <li><a href="#">Electronics ></a></li>
-                        <ul>
-                            <li>Something</li>
-                        </ul>
-                    <li><a href="#">Toys & Games ></a></li>
-                        <ul>
-                            <li>Something</li>
-                        </ul>
-                    <li><a href="#">Toys & Games ></a></li>
-                        <ul>
-                            <li>Something</li>
-                        </ul>
-                </ul>
-            <li><input type="button" id="collapsible" class="filter_collapse btn" data-toggle="collapse" data-target="#seeall" value="See all departments »"></input></li>
-        </ul>
-    </div><!-- /. left menu -->
-    <div class="search_results col-lg-10">
-        <div class="row" ng-repeat="product in products track by product.id">
-            <div class="col-md-2">
-                <img ng-src="{{image}}" style="width: 150px;">
-            </div>
-            <div class="col-md-5">
-                <span><h4><a ng-href="product/{{product.sku}}/{{product.id}}">{{product.name}}</a></h4></span>
-                </br>
-                </br>
-                </br>
-                <del>${{product.price}}</del>
-                <span><h5>${{product.salePrice}}</h5></span>
-            </div>
-            <div class="col-md-5">
-                <div>
-                    STARS / DESCRIPTIONS
+<section class="container">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 search_results">
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3" ng-repeat="product in products track by product.id" style="border:1px solid lightgray; border-radius:10px;">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <img ng-src="{{ product.images[0].large.url }}" style="width: 100%;">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <h4><a ng-href="product/{{product.sku}}/{{product.id}}">{{ product.name }}</a></h4>
+                        <p><del>{{ product.msrp | currency }}</del></p>
+                        <p>{{ product.retailPrice | currency }}</p>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right">
+                        <h4>Sku #{{ product.sku }}</h4>
+                        <p>{{ product.shortDescription }}</p>
+                        <uib-rating ng-model="product.rate" max="5" readonly="true" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three','four','five']" aria-labelledby="default-rating" ></uib-rating>
+                        <!-- <p>{{ product.rate }}</p> -->
+                    </div>
                 </div>
             </div>
         </div>
