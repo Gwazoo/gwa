@@ -110,6 +110,8 @@ angular.module('gwazoo.controllers')
 				}
 			};
 
+			
+
 			Products.addProduct(testProduct)
 			.then(function (productObj) {
 				// $scope.product = [];
