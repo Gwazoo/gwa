@@ -13,7 +13,7 @@ var OptionSetModel = thinky.createModel("optionSets", {
 
 var OptionModel = thinky.createModel("options", {
     name: type.string(), // Name of the option. IE: 'Size' or 'Color'
-    variations: type.array(), // Variations. IE 'Red, Blue, Green'
+    variations: [type.string()], // Variations. IE 'Red, Blue, Green'
     type: type.string(), // For Gwazoo defined templates and helpers. IE 'color', 'select', 'customtext'
     username: type.string()
 });
