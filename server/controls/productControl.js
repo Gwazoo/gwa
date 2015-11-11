@@ -18,7 +18,19 @@ module.exports = {
      * @returns {Obj} JSON with status message.
      */
     prodCreate: function (req, res) {
-        product.create(req.body)
+        // optionSet.create(req.body.options)
+        //         .then(function (result) {
+        //             req.body.motherProduct.optionSetId = result.optionSetId;
+        //             product.create(req.body.motherProduct)
+        //                     .then(function (result) {
+        //                         res.json(result);
+        //                     }, function (err) {
+        //                         res.status(500).json({
+        //                             message: "Database error. Product not created."
+        //                         });
+        //                     });
+        //         }) 
+        product.create(req.body.motherProduct)
                 .then(function (result) {
                     res.json(result);
                 }, function (err) {
