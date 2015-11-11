@@ -54,9 +54,9 @@ var Product = {
             var product = new ProductModel(data.motherProduct);
             product.validate();
             product.categories = data.categories;
-
+            // console.log(product);
             
-            product.saveAll({items: true, motherProduct: true, categories: true})
+            product.saveAll({items: true, motherProduct: true, categories: true, optionSets: true})
                     .then(function (result) {
                         resolve(result);
                     }, function (err) {

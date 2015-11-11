@@ -104,9 +104,9 @@ angular.module('gwazoo.controllers')
 				        shortDescription: 'Blue Nike',
 				        sku: '654321',
 				        stockQuantity: 20,
-				        vendor: 'Sky Vendor',
-				        optionSet: "9c9f100f-b775-4a8f-9ac9-611581e1da02"
-				    }]
+				        vendor: 'Sky Vendor'
+				    }],
+				    optionSetId: "9c9f100f-b775-4a8f-9ac9-611581e1da02"
 				}
 			};
 
