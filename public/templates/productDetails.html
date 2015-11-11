@@ -50,7 +50,7 @@
                         <h5>Retail Price:</h5>
                     </div>
                     <div class="col-xs-9 col-sm-9 col-md-10 col-lg-10">
-                        <h5><s class="text-muted">${{product.retailPrice}}</s></h5>
+                        <h5><s class="text-muted">${{product.msrp}}</s></h5>
                     </div>
                 </div>
                 <div class="row">
@@ -58,11 +58,11 @@
                         <h5>Price:</h5>
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-5 col-lg-5">
-                        <h5><strong>${{product.supplyPrice}}</strong></h5>
-                        <input type="hidden" ng-model="item.supplyPrice" value="{{product.supplyPrice}}">
+                        <h5><strong>${{product.retailPrice}}</strong></h5>
+                        <input type="hidden" ng-model="item.retailPrice" value="{{product.retailPrice}}">
                     </div>
                     <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-                        <h5 class="text-right text-danger">You Save <strong>${{product.retailPrice-product.supplyPrice | number:2}} ({{((product.supplyPrice/product.retailPrice)*100) | number:0}}%)</strong></h5>
+                        <h5 class="text-right text-danger">You Save <strong>${{product.msrp-product.retailPrice | number:2}} ({{((product.retailPrice/product.msrp)*100) | number:0}}%)</strong></h5>
                     </div>
                 </div>
                 <div class="row">

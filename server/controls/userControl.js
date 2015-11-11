@@ -189,5 +189,27 @@ module.exports = {
     },
     updatePassword: function (req, res) {
 
+    },
+    addAddresses: function (req, res) {
+        r.connect(thinky._config, function (err, connection) {
+            if (err) throw err;
+            r.table('users').get(req.user.username).update({
+                addresses: r.row('addresses').append(req.body)
+            }).run(connection, function (err, result) {
+                if (err) throw err;
+                res.json(result)
+            });
+        });
+    },
+    deleteAddress: function (req, res) {
+        r.connect(thinky._config, function (err, connection) {
+            if (err) throw err;
+            r.table('users').get(req.user.username).update({
+                addresses: r.row('addresses').deleteAt(req.body.index)  //index of selected address
+            }).run(connection, function (err, result) {
+                if (err) throw err;
+                res.json(result)
+            });
+        });
     }
 };
