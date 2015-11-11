@@ -58,7 +58,6 @@ var Product = {
             
             product.saveAll({items: true, motherProduct: true, categories: true})
                     .then(function (result) {
-                        console.log('succeed');
                         resolve(result);
                     }, function (err) {
                         console.log(err);
