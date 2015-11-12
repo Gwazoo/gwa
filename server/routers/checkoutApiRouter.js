@@ -5,6 +5,13 @@ var checkoutRouter = Express.Router();
 
 
 //path => /api/checkout
-checkoutRouter.post('/', CheckoutApi.makePayment);
+// checkoutRouter.post('/', CheckoutApi.makePayment);
+
+checkoutRouter.post('/', CheckoutApi.authPayment);
+
+
+checkoutRouter.post('/charge', CheckoutApi.chargePayment);
+
+
 
 module.exports = checkoutRouter;

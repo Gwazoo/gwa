@@ -5,6 +5,10 @@ html {
 body {
   margin-bottom: 160px;
 }
+/* global */
+a img:hover{
+	opacity: 0.8;
+}
 
 .label-as-badge {
     border-radius: 1em;
@@ -18,7 +22,7 @@ body {
 
 
 /* header */
-	.row > div > a > img{
+	.logo a img{
 		max-width:100%;
 	}
 	header{
@@ -78,10 +82,17 @@ body {
 
 
 /* main navigation */
+	.navbar{
+		min-height:0px;
+	}
 	.navbar-inverse{
 		background-color:#37b34a;
 		border:none;
 		border-radius: 0px;
+	}
+	.navbar-toggle .icon-bar{
+		height:1px;
+		margin-top:-5px;
 	}
 	.navbar-nav>li:hover{
 		background-color:#37b34a;
@@ -92,16 +103,28 @@ body {
 		font-family: 'Yanone Kaffeesatz', sans-serif;
 	}
 	.navbar-inverse .navbar-toggle .icon-bar{
-		background-color: #565656;
+		background-color: white;
 	}
 	.navbar-inverse .navbar-toggle{
-		border-color:gray;
+		border-color:white;
 	}
 	.navbar-inverse .navbar-toggle:focus, .navbar-inverse .navbar-toggle:hover{
 		background-color:transparent;
 	}
 	.navbar-inverse .navbar-collapse{
 		border-color:#D7D7D7;
+	}
+	.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover{
+		background-color: #4ac75d;
+	}
+	.navbar-inverse .navbar-nav .open .dropdown-menu>li>a{
+		color:white;
+	}
+	.navbar-inverse .navbar-nav .open .dropdown-menu>li:hover{
+		opacity:0.7;
+	}
+	.main_shopdrop{
+		background-color:#37B34A;
 	}
 /* end of navigation */
 
@@ -458,6 +481,7 @@ footer ul li a{
 	.banner_text a{
 		font-size:13px;
 	}
+
 }
 
 @media only screen and (max-width: 1400px) {
@@ -474,10 +498,21 @@ footer ul li a{
 }
 
 @media only screen and (max-width:992px) {
-	.row > div > a > img{
-		max-width:40%;
+	.logo{
+		background-color: black;
+		margin-left:0px;
+		margin-right:0px;
+		background-color:#f6f6f6;
+		border-bottom:1px solid #d4d4d4;
+		margin-top:0px;
 	}
-
+	.logo a img{
+		max-width: 40%;
+	}
+	header{
+		margin-top:0px;
+		margin-bottom: 10px;
+	}
 	.main_banner{
 		padding:0% 0 2%;
 	}
@@ -495,8 +530,30 @@ footer ul li a{
 	.footer_left{
 		text-align: center;
 	}
+	.head_right{
+		margin-top:0px;
+	}
 
 
+}
+@media only screen and (max-width: 520px){
+	.main_pre{
+		margin-top:5px;
+		font-size:10px;
+	}
+	.main_pre img{
+		width:150%;
+	}
+	.main_pre>div{
+		padding-left:0px;
+		padding-right:0px;
+	}
+	.head_right{
+		font-size: 10px;
+	}
+	header{
+		margin-bottom: 0px;
+	}
 }
 @media only screen and (max-width: 480px) {
 
