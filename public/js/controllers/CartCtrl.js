@@ -5,7 +5,9 @@ angular.module('gwazoo.controllers')
     $scope.cart = Cookies.getCart();
     // console.log($scope.cart.products);
     $scope.user = Cookies.getSession();
-    // console.log($scope.user);
+    console.log($scope.user);
+    $scope.address = $scope.user.addresses[0];
+    console.log($scope.address);
     $scope.$parent.cartCount = Cookies.getCartCount();
 
     $scope.range = function(min, max) {
@@ -83,21 +85,20 @@ angular.module('gwazoo.controllers')
         });
 
         modalInstance.result.then(function (user) {
-            console.log(user);
+            // console.log(user);
             // var user = Cookies.getSession();
-            // $scope.shippingAddress = user.addresses;
+            // $scope.shippingAddress = user.addresses[0];
+            // console.log($scope.shippingAddress);
         }, function() {
         });
     };
 }])
 
-.controller('CartCtrl.Modal', function($scope, $modalInstance, $location, Cookies, Account, Products) {
+.controller('CartCtrl.Modal', function($scope, $modalInstance, Account) {
     $scope.addAddress = function(userAddress) {
         var user = user;
         var newAddresses = userAddress;
         console.log(userAddress);
-        // var shippingAddress = user['addresses'].push(newAddresses);
-        // user['addresses'].push(newAddresses)
         Account.addAddress(userAddress)
         .then(function (resUser) {
             console.log(resUser);

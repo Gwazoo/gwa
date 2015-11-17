@@ -12,15 +12,15 @@
                     <h5 class="text-capitalize"><strong>1 shipping address</strong></h5>
                 </div>
                 <div class="col-xs-8 col-sm-8 col-md-6 col-lg-6">
-                    <address ng-if="shippingAddress" class="text-capitalize">
-                        {{shippingAddress.name}}<br>
-                        {{shippingAddress.street}}<br>
-                        {{shippingAddress.city}}, {{shippingAddress.state}} {{shippingAddress.postalCode}}<br>
+                    <address class="text-capitalize">
+                        {{ address.name }}<br>
+                        {{ address.address1 }}<br>
+                        {{ address.address2 }}, {{ address.state }} {{ address.postalCode }}
                     </address>
                 </div>
                 <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3">
-                    <button ng-if="user.addresses" class="btn btn-primary btn-xs btn-block" ng-click="addressChangeModal()">Change Address</button>
-                    <button ng-if="!user.addresses" class="btn btn-primary btn-xs btn-block" ng-click="addressAddModal()">Add Address</button>
+                    <button ng-if="user.addresses.length > 0" class="btn btn-primary btn-xs btn-block" ng-click="addressChangeModal()">Change Address</button>
+                    <button ng-if="user.addresses.length <= 0" class="btn btn-primary btn-xs btn-block" ng-click="addressAddModal()">Add Address</button>
                 </div>
             </section> <!-- PUT A BORDER-BOTTOM ON THIS SECTION -->
             <section class="row child-base">
@@ -28,8 +28,55 @@
                     <h5 class="text-capitalize"><strong>2 payment method</strong></h5>
                 </div>
                 <div class="col-xs-8 col-sm-8 col-md-6 col-lg-6">
-                    <P><strong class="text-capitalize">{{user.cardType}}debit card </strong>ending in {{ user.cardNumber }}4865</P>
-                    <p><strong class="text-capitalize">billing address: </strong>{{ user.billingOption }}same as shipping address. <a href="#billingAddressModal" ng-click="billingAddressModal()">Change</a></p>
+                    <form name="shipping" class="form-horizontal" ng-submit="addAddress(address)">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="card-number" class="sr-only control-label">Card Number</label>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <input type="cc-number" class="form-control" name="card-number" ng-model="card.number" placeholder="Card Number" required>
+                                </div>
+                            </div>
+                            <div class="form-group pull-right">
+                                <label for="card-exp-month" class="sr-only control-label">Expiration Date</label>
+                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                    <input type="cc-exp-month" class="form-control" name="card-exp-month" ng-model="card.expMonth" placeholder="MM" required>
+                                </div>
+                                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                    <input type="cc-exp-year" class="form-control" name="card-exp-year" ng-model="card.expYear" placeholder="YY" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="card-code" class="sr-only control-label">Security Code</label>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <input type="cc-csc" class="form-control" name="card-code" ng-model="card.code" placeholder="csc" required>
+                                </div>
+                            </div>
+                            <!-- <div class="form-group" ng-class="{ 'has-error': shipping.address-country.$invalid }">
+                                <label for="shippingCountry" class="sr-only control-label">Contry</label>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <input type="country" class="form-control" name="address-country" ng-model="address.country" placeholder="Country" required>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error': shipping.address-code.$invalid }">
+                                <label for="shippingPostalCode" class="sr-only control-label">Postal Code</label>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <input type="postal-code" class="form-control" name="address-code" ng-model="address.postalCode" placeholder="Postal Code" required>
+                                </div>
+                            </div> -->
+                        </div>
+                        <div class="modal-footer">
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <button type="button" class="btn btn-danger btn-sm btn-block" ng-click="cancel()">Cancel</button>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <button type="submit" class="btn btn-success btn-sm btn-block">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- <P><strong class="text-capitalize">{{user.cardType}}debit card </strong>ending in {{ user.cardNumber }}4865</P> -->
+                    <!-- <p><strong class="text-capitalize">billing address: </strong>{{ user.billingOption }}same as shipping address. <a href="#billingAddressModal" ng-click="billingAddressModal()">Change</a></p> -->
                 </div>
                 <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3">
                     <button ng-if="user.address" class="btn btn-primary btn-xs btn-block" ng-click="paymentUpdateModal()">Update Payment Info</button>
@@ -104,6 +151,6 @@
     </div>
 </div>
 
-<footer ng-include="'templates/include/footer.html'"></footer>
+<footer class="navbar navbar-fixed-bottom" ng-include="'templates/include/footer.html'"></footer>
 
 

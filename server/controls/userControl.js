@@ -196,6 +196,7 @@ module.exports = {
             r.table('users').get(req.user.username).update({
                 addresses: r.row('addresses').append(req.body)
             }).run(connection, function (err, result) {
+                console.log(result);
                 if (err) throw err;
                 res.json(result)
             });
