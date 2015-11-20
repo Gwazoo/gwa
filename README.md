@@ -4,7 +4,9 @@
 ```
 ├── .gitignore
 ├── .bowerrc
+├── bower.json
 ├── gulpfile.js
+├── karma.conf.js
 ├── package.json
 ├── README.md
 ├── server.js
@@ -14,6 +16,7 @@
 │   │   ├── main.css
 │   │   ├── reset.css
 │   │   ├── 404.css
+│   │   ├── ...
 │   │   
 │   ├── img
 │   │   ├── logo.png
@@ -21,22 +24,50 @@
 │   │
 │   ├── js
 │   │   ├── app.js
+│   │   ├── fixed.js
 │   │   ├── controllers.js
 │   │   ├── services.js
+│   │   ├── controllers
+│   │   │   ├── CartCtrl.js
+│   │   │   ├── CategoryCtrl.js
+│   │   │   ├── DashboardCtrl.js
+│   │   │   ├── ...
+│   │   │
+│   │   ├── services
+│   │   │   ├── Account.js
+│   │   │   ├── Cart.js
+│   │   │   ├── Cookies.js
+│   │   │   ├── ...
+│   │   │
+│   │   ├── vendor
+│   │   │   ├── jquery.openCarousel.js
+│   │   │   ├── ...
+│   │
+│   ├── libs
+│   │   ├── angular
+│   │   ├── ...
 │   │
 │   ├── templates
 │   │   ├── dashboard.html
+│   │   ├── ...
 │   
 ├── server
 │   ├── controls
 │   │   ├── userControl.js
 │   │   ├── apiControl.js
+│   │   ├── ...
 │   │   
 │   ├── models
 │   │   ├── userModel.js
+│   │   ├── ...
+│   │   
+│   ├── routers
+│   │   ├── userApiRouter.js
+│   │   ├── ...
 │   │
 │   ├── util
 │   │   ├── thinky.js
+│   │   ├── ...
 ```
 
 ## Resources
